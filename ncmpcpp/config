@@ -1,0 +1,45 @@
+mpd_host = localhost
+mpd_port = 53000
+mpd_connection_timeout = 5
+mpd_music_dir = ~/musics
+mpd_crossfade_time = 5
+
+audio_output {
+       type            "fifo"
+       name            "Visualizer feed"
+       path            "/tmp/mpd.fifo"
+       format          "48000:16:2"
+}
+
+visualizer_fifo_path = /tmp/mpd.fifo
+visualizer_in_stereo = yes
+visualizer_sync_interval = "10" 
+visualizer_type = spectrum
+visualizer_look = "∙▋"
+autocenter_mode = "yes"
+song_list_format = " $4%a $5//$8 %t"
+song_status_format = " $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
+browser_sort_mode = name
+browser_sort_format = {%a - }{%t}|{%f} {(%l)}
+song_columns_list_format = "(5)[]{} (22)[red]{a} (20)[white]{t|f} (49)[blue]{b} (4)[red]{l}"
+now_playing_prefix = "$b$2⟩$3⟩ "
+now_playing_suffix = "$8$/b"
+progressbar_look = "▀▀ "
+progressbar_elapsed_color = red
+header_visibility = no 
+titles_visibility = no 
+follow_now_playing_lyrics = yes
+allow_for_physical_item_deletion = yes
+ask_before_clearing_playlists = no 
+clock_display_seconds = yes
+display_bitrate = yes
+mouse_support = yes
+tags_separator = " | "
+external_editor = vim 
+colors_enabled = yes
+empty_tag_color = cyan
+main_window_color = green 
+main_window_highlight_color = green 
+progressbar_color = black
+statusbar_color = blue   
+visualizer_color = red   

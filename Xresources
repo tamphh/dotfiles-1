@@ -1,0 +1,103 @@
+# copy in ~/.Xresources
+!-------------------------------------------
+! XFT Settings
+     
+Xft.autohint: false 
+Xft.hintstyle:  hintfull 
+Xft.lcdfilter: lcddefault
+Xft.hinting: true 
+Xft.antialias: true 
+Xft.rgba:  rgb
+Xft.dpi: 96 
+
+!-------------------------------------------
+! URXVT - Settings
+
+URxvt*depth:                        32
+URxvt*internalBorder:               4
+URxvt*dynamicColors:                on
+URxvt*urgentOnBell:                 true
+URxvt*borderLess:                   false
+URxvt*scrollBar:                    false
+URxvt*cursorBlink:                  true
+URxvt*cursorUnderline:              true
+URxvt*cursorColor:                  #ffffff
+URxvt*scrollColor:                  #151515
+URxvt*underlineURLs:                true
+URxvt*letterSpace:                  0
+
+URxvt.keysym.C-c:   perl:clipboard:copy
+URxvt.keysym.C-p:   perl:clipboard:paste
+
+! Disable perl
+URxvt.perl-ext:                 
+URxvt.perl-ext-common:      
+
+URxvt*font: xft:Tamsyn:style=Regular:pixelsize=16
+URxvt*boldFont: xft:Tamsyn:style=Bold:pixelsize=16
+!URxvt*font: xft:NanumGothic:style=Regular:pixelsize=14
+!URxvt*boldFont: xft:NanumGothic:style=Bold:pixelsize=14
+ 
+!--------------------------------------------
+! URxvt Colors
+
+URxvt.colorIT:                       #87af5f
+URxvt.colorBD:                       #d7d7d7
+URxvt.colorUL:                       #BF1E2D
+
+
+!--------------------------------------------
+! General Colors
+
+*background:    #202121
+*foreground:    #bdbdbd
+
+! Black
+*color0:    #27282c
+! DarkRed 
+*color1:    #ae4c5c
+! DarkGreen 
+*color2:    #487b63 
+! DarkYellow
+*color3:    #858377
+! DarkBlue   
+*color4:    #406571 
+! DarkMagenta
+*color5:    #7a5e6a 
+! DarkCyan
+*color6:    #3f6265
+! Gray
+*color7:    #aeaeae
+! DarkGray
+*color8:    #6c6375 
+! Red | LighRed
+*color9:    #b65359  
+! Green | LightGreen
+*color10:    #6faf92  
+! Yellow | LightYellow
+*color11:    #f5f0ca 
+! Blue | LightBlue
+*color12:    #adc9dc
+! Magenta | LightMagenta
+*color13:    #bf8ccc  
+! Cyan | LightCyan
+*color14:    #80c5c6 
+! White
+*color15:    #fefefe 
+
+!-------------------------------------------
+! Man pages colors
+
+*VT100.colorBDMode:                  true
+*VT100.colorBD:                      red
+*VT100.colorULMode:                  true
+*VT100.colorUL:                      magenta
+*VT100.veryBoldColors:               6
+
+!-------------------------------------------
+!
+xclock*majorColor:                  #9a875f
+xclock*minorColor:                  #9a875f
+xclock*minuteColor:                 #9a875f
+xclock*hourColor:                   #9a875f
+xclock*secondColor:                 #9a875f
