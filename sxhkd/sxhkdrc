@@ -1,0 +1,120 @@
+#
+# bspwm hotkeys
+# copy in ~/.config/sxhkd/sxhkdrc
+
+super + alt + Escape
+	/usr/bin/bspc quit
+
+super + t
+	bspc node -l above
+
+super + b
+	bspc node -B
+
+super + {s,f}
+	bspc node -t {floating,fullscreen}
+
+# Focus The Next/Previous Node
+super + {_,shift + }c
+	bspc node -f {next,prev}
+
+# Focus The Next/Previous Desktop
+super + bracket{left,right}
+	bspc desktop -f {prev,next}
+
+# 
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+#
+# Focus/Swap
+#
+
+# Focus The Node In The Given Direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+super + {comma,period}
+	bspc node -C {backward,forward}
+
+
+#
+# Preselect
+#
+
+# Preselect The Direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# Cancel Selection For The Focused Node
+super + ctrl + space
+   bspc node -p cancel
+
+super + ctrl + {1-9}
+	/usr/bin/bspc window -r 0.{1-9}
+
+# focus The Older Or Newer Node In The Focus History
+super + {o,i}
+   bspc wm -h off; \
+   bspc node {older,newer} -f; \
+   bspc wm -h on
+
+# Focus or Send to the given desktop
+super + {_,shift + }{ampersand,eacute,quotedbl,apostrophe,parenleft,minus}
+	bspc {desktop -f,node -d} '^{1-6}'
+
+# Focus
+~button1
+	bspc pointer -g focus
+
+# Start move/resize
+super + button{1-3}
+	; bspc pointer -g {move,resize_side,resize_corner}
+
+# End Move/Risize
+super + @button{1-3}
+	bspc pointer -u
+
+super + z
+    bspc node -k
+
+#
+# wm independent hotkeys
+#
+
+# Terminal Emulator
+super + Return
+	urxvt
+
+# Program Launcher
+super + space
+   gmrun
+
+# Reload Funtions
+super + Escape
+   pkill -USR1 -x sxhkd
+
+# Custom action
+alt + shift + d
+    mpc del 0
+
+mod5 + F9
+    xbacklight -inc 5
+
+mod5 + F8
+    xbacklight -dec 5
+
+alt + ctrl + {Up,Down}
+    mpc volume {+,-}3
+
+alt + ctrl + {Left,Right}
+    mpc {prev,next}
+
+mod5 + w
+    /usr/bin/vivaldi
+
+mod5 + {f,m,n}
+    urxvtc -e {ranger,mutt,ncmpcpp}
+
+mod5 + twosuperior
+    mpc {pause,play}
