@@ -12,4 +12,4 @@
 </p>
 
 Current Desktop:
-![Alt text](https://raw.github.com/szorfein/dotfiles/master/screenshot.png "Screenshot")
+![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")
