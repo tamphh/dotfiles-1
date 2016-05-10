@@ -1,4 +1,5 @@
 #! /bin/sh
+## Copy me in ~/.xinitrc
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap

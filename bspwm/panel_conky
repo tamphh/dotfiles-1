@@ -1,0 +1,26 @@
+short_units yes
+background yes
+out_to_console yes
+out_to_x no
+update_interval 2
+mpd_port 53000
+
+TEXT
+S${cpu cpu0 0, 80} ${cpu cpu1 0, 80} \
+${freq_g 1}GHz \
+${mem}\
+${execi 2 /home/ivy/.config/bspwm/conky_icon}\
+${if_existing /sys/class/net/br0/operstate up}Eth \
+${upspeed br0} | ${totalup br0} - ${downspeed br0} | ${totaldown br0}\
+${endif}\
+${if_existing /sys/class/net/wlp2s0/operstate up}Wif \
+${upspeed wlp2s0} | ${totalup wlp2s0} - ${downspeed wlp2s0} | ${totaldown wlp2s0}\
+${endif}\
+${execi 2 /home/ivy/.config/bspwm/conky_icon}\
+${if_mpd_playing}\
+${mpd_status} \
+${mpd_smart 8} \
+${mpd_bitrate}Kbps\
+${endif}\
+${execi 2 /home/ivy/.config/bspwm/conky_icon}\
+${time %H:%M %d/%m/%y}
