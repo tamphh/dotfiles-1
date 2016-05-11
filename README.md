@@ -3,13 +3,15 @@
 <h3>requirements for bspwm...</h3>
 
 <p>
-+ rxvt-unicode - virtual terminal
-+ mpc - control music behing sxhkd
-+ gmrun - for run programs
-+ conky - info tool 
-+ hsetroot - for set wallpaper
-+ compton - minimal shadows / transparency of windows
++ rxvt-unicode - virtual terminal <br />
++ mpc - control music behing sxhkd <br />
++ gmrun - for run programs <br />
++ conky - info tool <br />
++ hsetroot - for set wallpaper <br />
++ compton - minimal shadows / transparency of windows <br />
 </p>
 
-Current Desktop:
+<p>
+Current Desktop: <br />
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")
+</p>
