@@ -11,7 +11,5 @@
 + compton - minimal shadows / transparency of windows <br />
 </p>
 
-<p>
 Current Desktop: 
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")
-</p>
