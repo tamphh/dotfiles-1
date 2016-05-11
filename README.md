@@ -12,6 +12,6 @@
 </p>
 
 <p>
-Current Desktop: <br />
+Current Desktop: 
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")
 </p>
