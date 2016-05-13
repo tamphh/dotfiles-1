@@ -1,0 +1,75 @@
+ignore *
+unignore from: subject to cc date x-mailer x-url user-agent
+hdr_order date from to cc subject
+
+# Mailbox
+set mbox_type=Maildir
+set folder="~/.mails"
+set spoolfile="+Gmail/INBOX"
+set header_cache="~/.mutt/cache"
+
+# Personal
+set realname='...'
+set signature="~/.mutt/signature"
+
+# Sending
+set envelope_from=yes
+set sendmail_wait = -1
+set sendmail="/usr/bin/msmtp"
+
+# Basic
+set timeout=3
+set wait_key=no
+set delete
+set pipe_decode
+set mailcap_path="~/.mutt/mailcap"
+set use_domain=no
+set user_agent=no
+set sleep_time=0
+
+# Composing
+set edit_headers=yes
+set fast_reply
+set askcc
+
+# HTML Message
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+# Printint
+
+# PGP
+set pgp_sign_as = 57388311
+set crypt_use_gpgme = yes
+set crypt_replyencrypt = yes
+set crypt_replysign = yes
+set crypt_replysignencrypted = yes
+set crypt_verify_sig = yes
+set pgp_auto_decode = yes
+
+# Status Bar
+set status_chars=" *%A"
+set status_format="───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Index view
+set date_format="%d-%m-%Y %H:%M"
+set index_format="[%Z] %D %-20.20F %s"
+set sort=threads
+set sort_aux=reverse-last-date-received
+set uncollapse_jump
+
+# Pager View
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop
+
+unset help
+
+source ~/.mutt/colors
+source ~/.mutt/mailboxes
+
+folder-hook Gmail/*  source ~/.mutt/accounts/gmail
+folder-hook Sheet/*     source ~/.mutt/accounts/sheet
+folder-hook Work/*     source ~/.mutt/accounts/work
+
+source ~/.mutt/accounts/gmail
