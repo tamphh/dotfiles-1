@@ -1,0 +1,105 @@
+# aliases: ############################################################
+{{alias}}
+
++crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
+-crunch-all-cookies = -crunch-incoming-cookies -crunch-outgoing-cookies
+ allow-all-cookies  = -crunch-all-cookies -session-cookies-only -filter{content-cookies}
+ allow-popups       = -filter{all-popups} -filter{unsolicited-popups}
++block-as-image     = +block{Blocked image request.} +handle-as-image
+-block-as-image     = -block
+
+fragile     = -block -crunch-all-cookies -filter -fast-redirects -hide-referer -prevent-compression
+shop        = -crunch-all-cookies allow-popups
+
+myfilters   = +filter{html-annoyances} +filter{js-annoyances} +filter{all-popups}\
+              +filter{webbugs} +filter{banners-by-size}
+
+allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}
+
+## end aliases ########################################################
+#######################################################################
+
+# Begin examples: #####################################################
+{ allow-all-cookies }
+
+{ -filter{all-popups} }
+
+{ -filter }
+
+{ +block{Nasty ads.} }
+www.example.com/nasty-ads/sponsor.gif
+
+{ +block{Pownded } }
+.oclaserver.
+.facebook.
+.mgid.
+.liveinternet.
+.ebz.
+.tradeadexchange.
+.decantation.science
+.ad6media.
+.pub2srv.
+.google-analytics.
+.pubdirecte.
+.pagefair.
+.adikteev.
+.adcash.
+.ad-center.
+.wwwpromoter.
+.science.
+.chromestatus.
+.tradeadexchange.
+.festivalnikon.
+.friendlyduck.
+.easy-tk.
+.oopt.
+.venturead.
+.clicks4ads.
+.taboola.
+.googletagservices.
+.googlesyndication.
+.amazonaws.
+animate.adobe.com
+.snw.
+.snv.
+.filesdock.
+.viralture.
+.brightonc*.
+.exclusive*.
+.downloatransfer.
+.greatwork*.
+.wall*atm.
+.xyz*.
+.adsb*.
+.youradexchange.
+.millionaires-dreams.
+.104.197.10.88.
+.stream*.
+.*reward*.
+.expert-*.
+.*klnk*.
+.*optionscops.
+.vidbliss.
+.wingetbook.
+.xb11*.
+.*promo*.
+
+{ +block-as-image }
+.friendly*.
+.doubleclick.net
+ar.atwola.com/
+
+{ fragile }
+.dotshare.it
+.deviantart.
+.codeschool.
+
+{ allow-ads }
+#.sourceforge.net
+#.slashdot.org
+#.osdn.net
+
+{ +set-image-blocker{blank} }
+
+{+block{Facebook "like" and similar tracking URLs.}}
+www.facebook.com/(extern|plugins)/(login_status|like(box)?|activity|fan)\.php
