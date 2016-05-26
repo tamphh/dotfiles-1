@@ -33,7 +33,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/bin:/usr/lib64/node_modules:$PATH
 
 # You may need to manually set your language environment
-export LANG=fr_FR.UTF-8
+# export LANG=en_US.UTF-8
 export EDITOR='vim'
 
 #source <(envoy -p)

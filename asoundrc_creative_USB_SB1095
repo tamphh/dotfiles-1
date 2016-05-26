@@ -1,3 +1,6 @@
+## COPY ME INTO /var/lib/mpd/asoundrc
+## OR ~/.asoundrc
+
 defaults.pcm.rate_converter "speexrate_medium"
 
 pcm.!default {
