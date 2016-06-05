@@ -7,14 +7,16 @@ set mbox_type=Maildir
 set folder="~/.mails"
 set spoolfile="+Gmail/INBOX"
 set header_cache="~/.mutt/cache"
+set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
 
 # Personal
-set realname='...'
+set realname='<your name>'
 set signature="~/.mutt/signature"
 
 # Sending
 set envelope_from=yes
 set sendmail_wait = -1
+set send_charset="utf-8"
 set sendmail="/usr/bin/msmtp"
 
 # Basic
@@ -63,7 +65,21 @@ set pager_index_lines = 10
 set pager_context = 3
 set pager_stop
 
+set forward_format = "Fwd: %s"
+set forward_quote
+set reply_to
+set reverse_name
+set include
+set tilde
+set mime_forward = ask-no
+
 unset help
+unset confirmappend
+unset mark_old
+unset markers
+unset record
+unset sort_re
+unset wait_key
 
 source ~/.mutt/colors
 source ~/.mutt/mailboxes

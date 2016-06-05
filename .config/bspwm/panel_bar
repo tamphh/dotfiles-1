@@ -1,22 +1,18 @@
 #! /bin/sh
-#
-# Example panel for lemonbar
 
-source $HOME/.config/bspwm/panel_colors
-source $HOME/.config/bspwm/panel_config
+source $(dirname $0)/config
 
 num_mon=$(bspc query -M | wc -l)
 
 while read -r line ; do
-	case $line in
-		S*)
-			# clock output
-			#sys="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
-			sys="%{B$COLOR_SYS_BG} ${line#?} %{B-}"
-			;;
+    case $line in
+        S*)
+            # clock output
+            sysR="${line#?}"
+            ;;
 		T*)
 			# xtitle output
-			title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} $PANEL_WM_NAME %{B-}%{F-}"
+            sysL="${line#?}"
 			;;
 		W*)
 			# bspwm's state
@@ -32,60 +28,66 @@ while read -r line ; do
 						case $item in
 							m*)
 								# monitor
-								FG=$COLOR_MONITOR_FG
-								BG=$COLOR_MONITOR_BG
+                                FG=${WHITE}
+                                BG=${BG}
 								;;
 							M*)
 								# focused monitor
-								FG=$COLOR_FOCUSED_MONITOR_FG
-								BG=$COLOR_FOCUSED_MONITOR_BG
+                                FG=${WHITE}
+                                BG=${BG}
 								;;
 						esac
-						wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc monitor -f ${name}:} ${name} %{A}%{B-}%{F-}"
+                        wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc monitor -f ${name}:} ${name} %{A}%{B-}%{F-}"
 						;;
 					[fFoOuU]*)
 						case $item in
 							f*)
 								# free desktop
-								FG=$COLOR_FREE_FG
-								BG=$COLOR_FREE_BG
+                                FG=${WHITE}
+                                IC=${CNONE}
+                                BG=${BG}
 								;;
 							F*)
 								# focused free desktop
-								FG=$COLOR_FOCUSED_FREE_FG
-								BG=$COLOR_FOCUSED_FREE_BG
+                                FG=${RED}
+                                IC=${CNONE}
+                                BG=${BG}
 								;;
 							o*)
 								# occupied desktop
-								FG=$COLOR_OCCUPIED_FG
-								BG=$COLOR_OCCUPIED_BG
+                                FG=${CYAN}
+                                IC=${CFULL}
+                                BG=${BG}
 								;;
 							O*)
 								# focused occupied desktop
-								FG=$COLOR_FOCUSED_OCCUPIED_FG
-								BG=$COLOR_FOCUSED_OCCUPIED_BG
+                                FG=${RED2}
+                                IC=${CFULL}
+                                BG=${BG}
 								;;
 							u*)
 								# urgent desktop
-								FG=$COLOR_URGENT_FG
-								BG=$COLOR_URGENT_BG
+                                FG=${WHITE2}
+                                BG=${RED}
+                                IC=${CNONE}
 								;;
 							U*)
 								# focused urgent desktop
-								FG=$COLOR_FOCUSED_URGENT_FG
-								BG=$COLOR_FOCUSED_URGENT_BG
+                                FG=${BLACK}
+                                BG=${RED}
+                                IC=${CNONE}
 								;;
 						esac
-						wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} ${name} %{A}%{B-}%{F-}"
+                        wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} $(printf '%b' $IC) %{A}%{B-}%{F-}"
 						;;
 					[LTG]*)
 						# layout, state and flags
-						wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} ${name} %{B-}%{F-}"
+                        wm="${wm}%{F${YELLOW}}%{B${BLACK}} ${name} %{B-}%{F-}"
 						;;
 				esac
 				shift
 			done
 			;;
 	esac
-	printf "%s\n" "%{l}${title}%{c}${wm}%{r}${sys}"
+	printf "%s\n" "%{l}${sysL}%{c}${wm}%{r}${sysR}"
 done
