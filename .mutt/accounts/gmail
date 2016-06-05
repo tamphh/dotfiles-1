@@ -1,0 +1,6 @@
+set sendmail        = "/usr/bin/msmtp -a gmail"
+set spoolfile       = "+Gmail/INBOX"
+set from            = "gmail@gmail.com"
+set mbox            = "+Gmail/archive"
+set postponed       = "+Gmail/drafts"
+set record          = "+Gmail/sent"
