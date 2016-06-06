@@ -4,11 +4,14 @@
 
 <p>
 + rxvt-unicode - virtual terminal <br />
++ mpd - music program <br />
 + mpc - control music behing sxhkd <br />
 + gmrun - for run programs <br />
-+ conky - info tool <br />
++ lemonbar - top bar <br />
++ siji font - print icon into lemonbar <br />
 + hsetroot - for set wallpaper <br />
 + compton - minimal shadows / transparency of windows <br />
++ xdo - small utility to perform elementary actions on windows<br />
 </p>
 
 Current Desktop: 
