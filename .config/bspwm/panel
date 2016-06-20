@@ -50,7 +50,7 @@ bspc subscribe |\
 
     volume() {
         local ic=$(pIcon ${RED2} ${CVOLUME})
-        local cmd=$(mpc volume | awk '{print $2}' | cut -c -1)
+        local cmd=$(mpc volume | awk '{FS=":"}{print $2}' | sed -e 's/\%//g')
         local cmd+="$SEP%$SEP"
         local clr=$(pText ${YELLOW} "${cmd}")
         echo ${ic}$SEP${clr}
@@ -80,7 +80,7 @@ bspc subscribe |\
     }
 
     mail() {
-        local gmaildir=/home/ivy/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
+        local gmaildir=/home/<user>/.mails/\[Gmail\].All\ Mail/new
         local ic=$(pIcon ${RED2} ${CMAIL})
         local count=0
         if [[ ! -n $(ls "${gmaildir}") ]]; then
