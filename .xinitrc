@@ -37,7 +37,6 @@ fi
 
 autossh_own &
 urxvtd -q -o -f
-setxkbmap -model microsoft -layout fr -variant oss_latin9
 xsetroot -cursor_name left_ptr &
 wmname LG3D
 hsetroot -fill images/code-programming-no-talk.jpg

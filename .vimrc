@@ -132,6 +132,8 @@ map <F3> :NERDTreeToggle<CR>
 
 "" Found https://github.com/jamessan/vim-gnupg
 "" Config http://pig-monkey.com/2013/04/password-management-vim-gnupg/
+"" For copy password into clipboard to Gnome or Qt apps, 
+"" u need have version <= 2.5, superior version doesn't work for me
 "" Some Keymaps for GPG
 imap <C-V> <ESC>"+gpa
 nmap <leader>y "+yE
@@ -141,6 +143,13 @@ vmap <leader>y "+y
 if has("autocmd")
     let GPGPreferArmor=1
     let GPGPreferSign=1
+
+    augroup GnuPGExtra
+        " Set extra file options.
+        autocmd BufReadCmd,FileReadCmd *.\(gpg\|asc\|pgp\) call SetGPGOptions()
+        " Automatically close unmodified files after inactivity.
+        autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
+    augroup END
 
     function SetGPGOptions()
         set filetype=gpgpass

@@ -52,6 +52,20 @@ source ~/.keychain/$HOST-sh-gpg
 
 export PASSWD=~/.passwords
 
+buildfile() {
+    if [[ "$1" == *.* ]]; then
+        echo $1
+    else
+        if [ -e "$1" ]; then
+            echo $1
+        elif [ -e "$1".gpg ]; then
+            echo "$1".gpg
+        else 
+            echo "$1".txt
+        fi
+    fi
+}
+
 pw() {
    cd "$PASSWD"
    if [ ! -z "$1" ]; then
