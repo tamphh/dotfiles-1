@@ -13,7 +13,7 @@ function check_dir_permission()
       exit 1
    fi
    if [[ $perm > 700 ]]; then
-      echo "WARM permission trop élevée, plz change to 700"
+      echo "WARM file unsecure, permission must be set to 700"
    fi
 }
 
@@ -26,12 +26,14 @@ function if_file_exist()
    fi
 }
 
+# Follow the exemple in password directory for it work
+# password must be at 3rd place :)
 function extract_pass()
 {
-   local snipe=$(gpg2 --no-tty -qd $FILE_GPG \
-      | awk 'BEGIN {{RS="}"} {FS="\n"}} {print $1 $2 $3 $4 $5 $6}' \
-         | grep $WORD \
-         | awk '{print $5}')
+   local snipe=$(gpg2 --no-tty -qd $FILE_GPG |\
+       awk "/$WORD/{getline;getline;print}" |\
+       awk '!($0 in a){a[$0];print}' |\
+       awk '{print $2}')
    echo $snipe
 }
 

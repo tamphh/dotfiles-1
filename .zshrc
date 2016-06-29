@@ -1,5 +1,3 @@
-# copy in ~/.zshrc
-#
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 #export WINEDLLOVERRIDES='winemenubuilder.exe=d'
@@ -10,20 +8,24 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="nanotech"
 
+# Bindkey fr
+bindkey "\e[2~"  yank
+bindkey "\e[3~"  delete-char
+bindkey "\e[1~"  beginning-of-line
+bindkey "\e[4~"  end-of-line
+bindkey "\e[5~"  up-line-or-history
+bindkey "\e[6~"  down-line-or-history
+
 # Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias wk='cd ~/projects/satie-viewer/'
 alias satie='GTK_THEME=Adwaita:dark ~/bin/satie'
-alias metasploitable='qemu-system-i386 --enable-kvm -cpu host -net nic,macaddr=00:11:22:33:44:55 ~/virtual\ machine/Metasploitable/Metasploitable.vmdk'
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+alias metasploitable='qemu-system-x86_64 --enable-kvm -cpu host -net nic,macaddr=52:54:22:00:11:22 ~/virtual\ machine/Metasploitable/Metasploitable.vmdk'
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git git-prompt)
 
 source $ZSH/oh-my-zsh.sh
@@ -31,22 +33,23 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH=$HOME/bin:/usr/lib64/node_modules:$PATH
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=fr_FR.UTF-8
 export EDITOR='vim'
 
 #source <(envoy -p)
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/id_ed25519"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 unset GREP_OPTIONS
 test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || \
     eval "$(dircolors -b)" 
 
 export GPG_TTY=$(tty)
-
+#keychain --agents "ssh,gpg" id_ed25519 0x63CBFF51DD6C3FA6
 #source ~/.keychain/$HOST-sh
 source ~/.keychain/$HOST-sh-gpg
 
