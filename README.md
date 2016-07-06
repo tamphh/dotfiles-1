@@ -14,5 +14,7 @@
 + xdo - small utility to perform elementary actions on windows<br />
 </p>
 
+###If you have trouble for install it: follow this [tuto](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)
+
 Current Desktop: 
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")
