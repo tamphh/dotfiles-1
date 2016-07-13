@@ -88,7 +88,7 @@ super + Return
 
 # Program Launcher
 super + space
-   gmrun
+   rofi -show run
 
 # Reload Funtions
 super + Escape

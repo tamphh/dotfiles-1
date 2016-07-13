@@ -136,7 +136,9 @@ map <F3> :NERDTreeToggle<CR>
 "" u need have version <= 2.5, superior version doesn't work for me
 "" Some Keymaps for GPG
 imap <C-V> <ESC>"+gpa
+" Copy in normal mode
 nmap <leader>y "+yE
+" Copy in visual mode
 vmap <leader>y "+y
 
 "" Vim GPG
@@ -153,7 +155,9 @@ if has("autocmd")
 
     function SetGPGOptions()
         set filetype=gpgpass
-        set updatetime=60000
+        set noswapfile
+        set viminfo=
+        set updatetime=40000
         set foldmethod=marker
         set foldclose=all
         set foldopen=insert

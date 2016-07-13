@@ -35,7 +35,9 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-autossh_own &
+# Script for make ssh tunnel, need enable keychain
+#autossh_own &
+
 urxvtd -q -o -f
 xsetroot -cursor_name left_ptr &
 wmname LG3D

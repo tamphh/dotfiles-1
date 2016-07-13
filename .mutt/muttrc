@@ -2,6 +2,8 @@ ignore *
 unignore from: subject to cc date x-mailer x-url user-agent
 hdr_order date from to cc subject
 
+set copy=no
+
 # Mailbox
 set mbox_type=Maildir
 set folder="~/.mails"
@@ -12,6 +14,7 @@ set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
 # Personal
 set realname='<your name>'
 set signature="~/.mutt/signature"
+set hidden_host=yes
 
 # Sending
 set envelope_from=yes

@@ -6,7 +6,7 @@
 + rxvt-unicode - virtual terminal <br />
 + mpd - music program <br />
 + mpc - control music behing sxhkd <br />
-+ gmrun - for run programs <br />
++ rofi - for run programs <br />
 + lemonbar - top bar <br />
 + siji font - print icon into lemonbar <br />
 + hsetroot - for set wallpaper <br />
