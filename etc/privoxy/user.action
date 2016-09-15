@@ -1,4 +1,3 @@
-# aliases: ############################################################
 {{alias}}
 
 +crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
@@ -16,10 +15,6 @@ myfilters   = +filter{html-annoyances} +filter{js-annoyances} +filter{all-popups
 
 allow-ads   = -block -filter{banners-by-size} -filter{banners-by-link}
 
-## end aliases ########################################################
-#######################################################################
-
-# Begin examples: #####################################################
 { allow-all-cookies }
 
 { -filter{all-popups} }
@@ -40,7 +35,6 @@ www.example.com/nasty-ads/sponsor.gif
 .dec*.science
 .ad[0-9]*.
 .pub[0-9]?*.
-.google-ana*.
 .pagefair.
 .*teev*.
 .*cash*.
@@ -54,7 +48,6 @@ www.example.com/nasty-ads/sponsor.gif
 .venturead.
 .*click*.
 .*taboo*.
-.google{syn,tag}*.
 .amazonaws.
 .adobe.
 .snw.
@@ -93,10 +86,19 @@ ar.atwola.com/
 .deviantart.
 .codeschool.
 
+{ shop }
+192.168.1.1
+192.168.2.1
+.amazon.
+.ldlc.
+.materiel.
+
+{ +block{google fck.} }
+.googlesyndication.
+.googleadservices.
+.googletagservices.
+
 { allow-ads }
-#.sourceforge.net
-#.slashdot.org
-#.osdn.net
 
 { +set-image-blocker{blank} }
 
