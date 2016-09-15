@@ -1,13 +1,13 @@
 !-------------------------------------------
 ! XFT Settings
      
-Xft.autohint: false 
+Xft.antialias:  true 
+Xft.autohint:   false 
+Xft.dpi:        118
+Xft.hinting:    true 
 Xft.hintstyle:  hintfull 
-Xft.lcdfilter: lcddefault
-Xft.hinting: true 
-Xft.antialias: true 
-Xft.rgba:  rgb
-Xft.dpi: 96 
+Xft.lcdfilter:  lcddefault
+Xft.rgba:       rgb
 
 !-------------------------------------------
 ! URXVT - Settings
@@ -23,19 +23,21 @@ URxvt*cursorUnderline:              true
 URxvt*cursorColor:                  #ffffff
 URxvt*scrollColor:                  #151515
 URxvt*underlineURLs:                true
-URxvt*letterSpace:                  0
 
-URxvt.keysym.C-c:   perl:clipboard:copy
-URxvt.keysym.C-p:   perl:clipboard:paste
+! with NanumGothic
+! URxvt*letterSpace:                  -6 
+
+! with tamsyn
+URxvt*letterSpace:                  0 
 
 ! Disable perl
-URxvt.perl-ext:                 
-URxvt.perl-ext-common:      
+!URxvt.perl-ext:                 
+!URxvt.perl-ext-common: 
 
 URxvt*font: xft:Tamsyn:style=Regular:pixelsize=16
 URxvt*boldFont: xft:Tamsyn:style=Bold:pixelsize=16
-!URxvt*font: xft:NanumGothic:style=Regular:pixelsize=14
-!URxvt*boldFont: xft:NanumGothic:style=Bold:pixelsize=14
+!URxvt*font: xft:NanumGothic:style=Regular:pixelsize=13
+!URxvt*boldFont: xft:NanumGothic:style=Bold:pixelsize=13
  
 !--------------------------------------------
 ! URxvt Colors
@@ -44,45 +46,44 @@ URxvt.colorIT:                       #87af5f
 URxvt.colorBD:                       #d7d7d7
 URxvt.colorUL:                       #BF1E2D
 
-
 !--------------------------------------------
 ! General Colors
 
-*background:    #202121
-*foreground:    #bdbdbd
+*background:    #1a1815
+*foreground:    #c1b683
 
 ! Black
-*color0:    #27282c
+*color0:    #393c2f
 ! DarkRed 
-*color1:    #ae4c5c
+*color1:    #9f3a3a
 ! DarkGreen 
-*color2:    #487b63 
+*color2:    #477B56 
 ! DarkYellow
-*color3:    #858377
+*color3:    #bca976
 ! DarkBlue   
-*color4:    #406571 
+*color4:    #3d84a2
 ! DarkMagenta
-*color5:    #7a5e6a 
+*color5:    #674a5f 
 ! DarkCyan
-*color6:    #3f6265
+*color6:    #318187
 ! Gray
-*color7:    #aeaeae
+*color7:    #eae9cd
 ! DarkGray
-*color8:    #6c6375 
+*color8:    #696b4f 
 ! Red | LighRed
-*color9:    #b65359  
+*color9:    #c25454
 ! Green | LightGreen
-*color10:    #6faf92  
+*color10:    #528c42  
 ! Yellow | LightYellow
-*color11:    #f5f0ca 
+*color11:    #e4dfb8 
 ! Blue | LightBlue
-*color12:    #adc9dc
+*color12:    #53807a
 ! Magenta | LightMagenta
-*color13:    #bf8ccc  
+*color13:    #a48d83
 ! Cyan | LightCyan
-*color14:    #80c5c6 
+*color14:    #7cdcd9 
 ! White
-*color15:    #fefefe 
+*color15:    #f7f5e8 
 
 !-------------------------------------------
 ! Man pages colors
@@ -94,9 +95,22 @@ URxvt.colorUL:                       #BF1E2D
 *VT100.veryBoldColors:               6
 
 !-------------------------------------------
-!
+! xclock
+
 xclock*majorColor:                  #9a875f
 xclock*minorColor:                  #9a875f
 xclock*minuteColor:                 #9a875f
 xclock*hourColor:                   #9a875f
 xclock*secondColor:                 #9a875f
+
+!-------------------------------------------
+! rofi
+
+rofi.lines:                         6
+rofi.color-enabled:                 true
+rofi.separator-style:               solid
+rofi.width:                         39
+rofi.color-normal:                  #141414,#965965,#141414,#9f3a3a,#a7a7a7
+rofi.color-active:                  #141414,#e4dfb8,#141414,#e4dfb8,#a7a7a7
+rofi.color-urgent:                  #141414,#7cdcd9,#141414,#7cdcd9,#a7a7a7
+rofi.color-window:                  #141414,#9c3a3a,#1e2529
