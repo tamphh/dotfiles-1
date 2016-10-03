@@ -5,7 +5,7 @@
 <p>
 + rxvt-unicode - virtual terminal <br />
 + mpd - music program <br />
-+ mpc - control music behing sxhkd <br />
++ mpc - control music behind sxhkd <br />
 + rofi - for run programs <br />
 + lemonbar - top bar <br />
 + siji font - print icon into lemonbar <br />

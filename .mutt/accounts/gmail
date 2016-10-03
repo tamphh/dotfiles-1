@@ -8,6 +8,6 @@ set record          = "+Gmail/sent"
 
 # Personal
 set realname="..."
-set signature=""
+set signature="+@ ..."
 my_hdr From: name name@gmail.com
-my_hdr Organization: ...
+my_hdr Organization: Github for now.

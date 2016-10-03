@@ -1,6 +1,6 @@
 ignore *
-unignore from: subject to cc date x-mailer x-url user-agent
-hdr_order date from to cc subject
+unignore from: to: cc: date: subject:
+hdr_order from: to: cc: date: subject:
 
 set copy=no
 
@@ -8,19 +8,15 @@ set copy=no
 set mbox_type=Maildir
 set folder="~/.mails"
 set spoolfile="+Gmail/INBOX"
-set header_cache="~/.mutt/cache"
 set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
 
 # Personal
-set realname='<your name>'
-set signature="~/.mutt/signature"
 set hidden_host=yes
 
 # Sending
 set envelope_from=yes
 set sendmail_wait = -1
 set send_charset="utf-8"
-set sendmail="/usr/bin/msmtp"
 
 # Basic
 set timeout=3
@@ -31,9 +27,10 @@ set mailcap_path="~/.mutt/mailcap"
 set use_domain=no
 set user_agent=no
 set sleep_time=0
+set menu_scroll
 
 # Composing
-set edit_headers=yes
+set edit_headers
 set fast_reply
 set askcc
 
@@ -44,13 +41,12 @@ alternative_order text/plain text/enriched text/html
 # Printint
 
 # PGP
+set pgp_use_gpg_agent = yes
 set pgp_sign_as = 57388311
-set crypt_use_gpgme = yes
+set pgp_timeout = 3600
+set crypt_autosign = yes
 set crypt_replyencrypt = yes
-set crypt_replysign = yes
-set crypt_replysignencrypted = yes
-set crypt_verify_sig = yes
-set pgp_auto_decode = yes
+source ~/.mutt/gpg # source file from /usr/share/doc/mutt/samples/gpg.rc
 
 # Status Bar
 set status_chars=" *%A"
@@ -62,6 +58,8 @@ set index_format="[%Z] %D %-20.20F %s"
 set sort=threads
 set sort_aux=reverse-last-date-received
 set uncollapse_jump
+set strict_threads
+set thorough_search
 
 # Pager View
 set pager_index_lines = 10
@@ -84,6 +82,8 @@ unset record
 unset sort_re
 unset wait_key
 
+bind compose p pgp-menu # menu for encrypt or not mail
+
 source ~/.mutt/colors
 source ~/.mutt/mailboxes
 
@@ -91,4 +91,4 @@ folder-hook Gmail/*  source ~/.mutt/accounts/gmail
 folder-hook Sheet/*     source ~/.mutt/accounts/sheet
 folder-hook Work/*     source ~/.mutt/accounts/work
 
-source ~/.mutt/accounts/gmail
+source ~/.mutt/accounts/gmail # default account
