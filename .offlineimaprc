@@ -15,6 +15,7 @@ localfolders = ~/.mails/gmail
 
 [Repository Remote]
 type = Gmail
+auth_mechanisms = LOGIN
 remoteuser = user@gmail.com     
 remotepasseval = get_pass()
 transporttunnel = ssh user@host openssl s_client -connect host:39902 -CApath .certs -quiet

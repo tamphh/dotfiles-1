@@ -1,4 +1,4 @@
-<p>Some example are on <a href="http://dotshare.it/~szorfein/">dotshare.it</a></p>
+<p>Some example are on <a href="http://dotshare.it/~szorfein/dots/">dotshare.it</a></p>
 
 <h3>requirements for bspwm...</h3>
 
