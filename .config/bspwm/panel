@@ -20,44 +20,44 @@ bspc subscribe |\
 # Top left
 {
     getName() {
-        local ic=$(pIcon ${RED2} ${CSTART})
+        local ic=$(pIcon ${RED2} ${GENTOO})
         local cmd=$(uname -n)
         local clr=$(pText ${WHITE2} "${cmd}")
-        echo ${ic}$SEP${clr}
+        echo "${ic} ${clr}"
     }
 
     panelMusic() {
-        local icp=$(pAction $WHITE2 $RED "mpc prev &>/dev/null" ${CPREV})
-        local icn=$(pAction $WHITE2 $RED "mpc next &>/dev/null" ${CNEXT})
-        local icpl=$(pAction $WHITE2 $RED "mpc play &>/dev/null" ${CPLAY})
-        local icpa=$(pAction $WHITE2 $RED "mpc pause &>/dev/null" ${CPAUS})
-        echo "$icp $icn $icpl $icpa"
+        local prev=$(pAction $WHITE2 $RED "mpc prev &>/dev/null" ${CPREV})
+        local pause=$(pAction $WHITE2 $RED "mpc pause &>/dev/null" ${CPAUS})
+        local play=$(pAction $WHITE2 $RED "mpc play &>/dev/null" ${CPLAY})
+        local next=$(pAction $WHITE2 $RED "mpc next &>/dev/null" ${CNEXT})
+        echo "${prev} ${pause} ${play} ${next}"
     }
 
     music() {
-        local ic=$(pIcon ${RED2} ${CSOUND})
+        local icon=$(pIcon ${RED2} ${CSOUND})
         local status=$(mpc current)
-        if [ "$status" != "" ] ; then
+        if [ "$status" ] ; then
             local artist=$(mpc -f %artist% current)
             local musicname=$(mpc -f %title% current)
-            local clr1=$(pText ${BLUE2} "${artist}")
+            local clr1=$(pText ${BLUE2} "${artist:0:20}")
             local clr2=$(pText ${CYAN2} "${musicname:0:20}")
-            echo ${ic}$SEP${clr1}$SEP${clr2}
+            echo "${icon} ${clr1} ${clr2}"
         else
-            echo ${ic}$SEP%{F${RED}}No Sound%{F-}
+            echo "${icon} %{F${RED}}No Sound%{F-}"
         fi
     }
 
     volume() {
-        local ic=$(pIcon ${RED2} ${CVOLUME})
-        local cmd=$(mpc volume | awk '{FS=":"}{print $2}' | sed -e 's/\%//g')
-        local cmd+="$SEP%$SEP"
+        local icon=$(pIcon ${RED2} ${CVOLUME})
+        local cmd=$(mpc volume | awk '{print $2}' | cut -d '%' -f 1)
+        local cmd+=" %"
         local clr=$(pText ${YELLOW} "${cmd}")
-        echo ${ic}$SEP${clr}
+        echo "${icon} ${clr}"
     }
 
     while :; do
-        echo "T$(getName)$SEP$(panelMusic)$SEP$(music)$SEP$(volume)"
+        echo "T$(getName) $(panelMusic) $(music) $(volume)"
         sleep 5
     done
 
@@ -66,37 +66,40 @@ bspc subscribe |\
 # Top Right
 {
     getDay() {
-        local ic=$(pIcon ${RED} ${CTIME})
+        local icon=$(pIcon ${RED} ${CTIME})
         local cmd=$(date '+%A %d %b')
         local clr=$(pText ${GREEN2} "${cmd}")
-        echo ${ic}$SEP${clr}
+        echo "${icon} ${clr}"
     }
 
     clock() {
-        local ic=$(pIcon ${RED2} ${CCLOCK})
+        local icon=$(pIcon ${RED2} ${CCLOCK})
         local cmd=$(date +%H:%M)
         local clr=$(pText ${YELLOW} "${cmd}")
-        echo ${ic}$SEP${clr}
+        echo "${icon} ${clr}"
     }
 
     mail() {
-        local gmaildir=/home/<user>/.mails/\[Gmail\].All\ Mail/new
-        local ic=$(pIcon ${RED2} ${CMAIL})
+        local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
+        local icon=$(pIcon ${RED2} ${CMAIL})
         local count=0
         if [[ ! -n $(ls "${gmaildir}") ]]; then
             count=0
         else
             count=$(ls -1 "${gmaildir}" | wc -l)
         fi
-        echo ${ic}$SEP${count}
+        echo "${icon} ${count}"
     }
 
     net() {
-        local ic=$(pIcon ${RED2} ${CNET})
-        local dev=$(ip route | grep link | awk '{print $3}')
-        local clr=$(pText ${CYAN2} "${dev}")
-        echo ${ic}$SEP${clr}
-    }
+        local _GETIWL=$(/sbin/iwgetid -r)
+        local _GETETH=$(ip a | grep "state UP" | awk '{ORS=""}{print $2}' | cut -d ':' -f 1)
+        local _status=${_GETIWL:-$_GETETH}
+        local _status2=${_status:-Down}
+        local icon=$(pIcon ${RED2} ${CNET})
+
+        echo "${icon} $(pText ${CYAN2} ${_status2})"
+    } 
 
     energy() {
         local ac=/sys/class/power_supply/AC/online
@@ -117,31 +120,38 @@ bspc subscribe |\
         else
             batCap="wttf"
         fi
-        echo "$(pIcon ${RED2} $icon)$SEP$(pText ${WHITE} ${batCap})"
+        echo "$(pIcon ${RED2} $icon) $(pText ${WHITE} ${batCap})"
     }
 
     ram() {
-        local ic=$(pIcon ${RED2}} ${CRAM})
+        local icon=$(pIcon ${RED2} ${CRAM})
         local cmd=$(free -m | grep Mem | awk '{print $3}')
+        cmd+=" Mb"
         local clr=$(pText ${MAGENTA2} "${cmd}")
-        echo ${ic}$SEP${clr}
+        echo "${icon} ${clr}"
     }
 
+    # Cpu List Load, number of Process and actual MHz frequency.
     cpu() {
-        local ic=$(pIcon ${RED2} ${CCPU})
-        local cmd=$(cat /proc/loadavg | awk '{print $1}')
-        cmd+=$SEP$(cat /proc/cpuinfo | grep -i mhz |awk '{ORS=" "}{print $4}'| sed -e 's/.000//g')
+        local icon=$(pIcon ${RED2} ${CCPU})
+        local cmd="$(cat /proc/loadavg | awk '{print $1}')"
+        local cmd+=" $(cat /proc/loadavg | awk '{print $4}')"
+        local cmd+=" $(cat /proc/cpuinfo| grep MHz | awk '{ORS=" "}{print $4}' | sed -e 's/.000//g' | cut -f 1)"
+
         local clr=$(pText ${WHITE} "${cmd}")
-        echo ${ic}$SEP${clr}
+        echo "${icon} ${clr}"
     }
 
+    # On archlinux, change cmd=$(pacman -Ql | wc -l), or remove it complety.
     package() {
+        local icon=$(pIcon ${RED2} ${CPACK})
         local cmd=$(equery list "*" | wc -l)
-        echo $(pIcon ${RED2} ${CPACK})$SEP$(pText ${YELLOW2} "${cmd}")
+        local clr=$(pText ${YELLOW2} "${cmd}")
+        echo "${icon} ${clr}"
     }
 
     while :; do
-        echo "S$(package)$SEP$(cpu)$SEP$(ram)$SEP$(energy)$SEP$(net)$SEP$(mail)$SEP$(clock)$SEP$(getDay)"
+        echo "S$(package) $(cpu) $(ram) $(energy) $(net) $(mail) $(clock) $(getDay)"
         sleep 5
     done
 
@@ -149,6 +159,7 @@ bspc subscribe |\
 
 $(dirname $0)/panel_bar < "$PANEL_FIFO" | lemonbar \
     -a 32 \
+    -n "$WM_NAME" \
     -g x$HEIGHT \
     -f "$FONT" \
     -f "$FONT_ICON" \
