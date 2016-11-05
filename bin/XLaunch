@@ -1,7 +1,8 @@
 #! /bin/sh
 
 # If not test before launch X, cause Permission and multiple error !
-if [ -S /tmp/bspwm_1_0-socket ]; then rm /tmp/bspwm*; fi
+# It usefull only if /tmp dir is not tmpfs type.
+[ -S "/tmp/bspwm_1_0-socket" ] && rm /tmp/bspwm*
 
 if [ -z "$XDG_VTNR" ]; then
   xinit -- :1 -nolisten tcp "$@"

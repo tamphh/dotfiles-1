@@ -20,28 +20,28 @@ bspc subscribe |\
 # Top left
 {
     getName() {
-        local ic=$(pIcon ${RED2} ${GENTOO})
+        local ic=$(pIcon ${BG} ${GENTOO})
         local cmd=$(uname -n)
-        local clr=$(pText ${WHITE2} "${cmd}")
-        echo "${ic} ${clr}"
+        local clr=$(pText ${BG} "${cmd}")
+        echo " ${ic} ${clr}"
     }
 
     panelMusic() {
-        local prev=$(pAction $WHITE2 $RED "mpc prev &>/dev/null" ${CPREV})
-        local pause=$(pAction $WHITE2 $RED "mpc pause &>/dev/null" ${CPAUS})
-        local play=$(pAction $WHITE2 $RED "mpc play &>/dev/null" ${CPLAY})
-        local next=$(pAction $WHITE2 $RED "mpc next &>/dev/null" ${CNEXT})
-        echo "${prev} ${pause} ${play} ${next}"
+        local prev=$(pAction $WHITE2 $BG "mpc prev &>/dev/null" ${CPREV})
+        local pause=$(pAction $WHITE2 $BG "mpc pause &>/dev/null" ${CPAUS})
+        local play=$(pAction $WHITE2 $BG "mpc play &>/dev/null" ${CPLAY})
+        local next=$(pAction $WHITE2 $BG "mpc next &>/dev/null" ${CNEXT})
+        echo "${prev}${pause}${play}${next}"
     }
 
     music() {
-        local icon=$(pIcon ${RED2} ${CSOUND})
+        local icon=$(pIcon ${YELLOW} ${CSOUND})
         local status=$(mpc current)
         if [ "$status" ] ; then
             local artist=$(mpc -f %artist% current)
             local musicname=$(mpc -f %title% current)
-            local clr1=$(pText ${BLUE2} "${artist:0:20}")
-            local clr2=$(pText ${CYAN2} "${musicname:0:20}")
+            local clr1=$(pText ${BG} "${artist:0:20}")
+            local clr2=$(pText ${BG} "${musicname:0:20}")
             echo "${icon} ${clr1} ${clr2}"
         else
             echo "${icon} %{F${RED}}No Sound%{F-}"
@@ -49,11 +49,13 @@ bspc subscribe |\
     }
 
     volume() {
-        local icon=$(pIcon ${RED2} ${CVOLUME})
+        local icon=$(pIcon ${YELLOW} ${CVOLUME})
         local cmd=$(mpc volume | awk '{print $2}' | cut -d '%' -f 1)
         local cmd+=" %"
-        local clr=$(pText ${YELLOW} "${cmd}")
-        echo "${icon} ${clr}"
+        local clr=$(pText ${BLACK2} "${cmd}")
+        local plus=$(pAction $WHITE2 $BG "mpc volume +4 &>/dev/null" ${VPLUS})
+        local minus=$(pAction $WHITE2 $BG "mpc volume -3 &>/dev/null" ${VMINUS})
+        echo "${icon} ${clr} ${plus}${minus}"
     }
 
     while :; do
@@ -66,29 +68,31 @@ bspc subscribe |\
 # Top Right
 {
     getDay() {
-        local icon=$(pIcon ${RED} ${CTIME})
+        local icon=$(pIcon ${YELLOW} ${CTIME})
         local cmd=$(date '+%A %d %b')
-        local clr=$(pText ${GREEN2} "${cmd}")
+        local clr=$(pText ${BLACK2} "${cmd}")
         echo "${icon} ${clr}"
     }
 
     clock() {
-        local icon=$(pIcon ${RED2} ${CCLOCK})
+        local icon=$(pIcon ${YELLOW} ${CCLOCK})
         local cmd=$(date +%H:%M)
-        local clr=$(pText ${YELLOW} "${cmd}")
+        local clr=$(pText ${BG} "${cmd}")
         echo "${icon} ${clr}"
     }
 
+    # Need change here !
     mail() {
-        local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
-        local icon=$(pIcon ${RED2} ${CMAIL})
+        local gmaildir=/home/<user>/mails/<user>/new
+        local prog=$(pAction $WHITE2 $BG "urxvtc -e mutt" ${CMAIL})
+        local icon=$(pIcon ${YELLOW} ${CMAIL})
         local count=0
         if [[ ! -n $(ls "${gmaildir}") ]]; then
             count=0
         else
             count=$(ls -1 "${gmaildir}" | wc -l)
         fi
-        echo "${icon} ${count}"
+        echo "${prog} ${count}"
     }
 
     net() {
@@ -96,9 +100,9 @@ bspc subscribe |\
         local _GETETH=$(ip a | grep "state UP" | awk '{ORS=""}{print $2}' | cut -d ':' -f 1)
         local _status=${_GETIWL:-$_GETETH}
         local _status2=${_status:-Down}
-        local icon=$(pIcon ${RED2} ${CNET})
+        local icon=$(pIcon ${YELLOW} ${CNET})
 
-        echo "${icon} $(pText ${CYAN2} ${_status2})"
+        echo "${icon} $(pText ${BG} ${_status2})"
     } 
 
     energy() {
@@ -120,33 +124,33 @@ bspc subscribe |\
         else
             batCap="wttf"
         fi
-        echo "$(pIcon ${RED2} $icon) $(pText ${WHITE} ${batCap})"
+        echo "$(pIcon ${YELLOW} $icon) $(pText ${BLACK} ${batCap})"
     }
 
     ram() {
-        local icon=$(pIcon ${RED2} ${CRAM})
+        local icon=$(pIcon ${YELLOW} ${CRAM})
         local cmd=$(free -m | grep Mem | awk '{print $3}')
         cmd+=" Mb"
-        local clr=$(pText ${MAGENTA2} "${cmd}")
+        local clr=$(pText ${BG} "${cmd}")
         echo "${icon} ${clr}"
     }
 
     # Cpu List Load, number of Process and actual MHz frequency.
     cpu() {
-        local icon=$(pIcon ${RED2} ${CCPU})
+        local icon=$(pIcon ${YELLOW} ${CCPU})
         local cmd="$(cat /proc/loadavg | awk '{print $1}')"
         local cmd+=" $(cat /proc/loadavg | awk '{print $4}')"
         local cmd+=" $(cat /proc/cpuinfo| grep MHz | awk '{ORS=" "}{print $4}' | sed -e 's/.000//g' | cut -f 1)"
 
-        local clr=$(pText ${WHITE} "${cmd}")
+        local clr=$(pText ${BLACK2} "${cmd}")
         echo "${icon} ${clr}"
     }
 
     # On archlinux, change cmd=$(pacman -Ql | wc -l), or remove it complety.
     package() {
-        local icon=$(pIcon ${RED2} ${CPACK})
+        local icon=$(pIcon ${YELLOW} ${CPACK})
         local cmd=$(equery list "*" | wc -l)
-        local clr=$(pText ${YELLOW2} "${cmd}")
+        local clr=$(pText ${BLACK2} "${cmd}")
         echo "${icon} ${clr}"
     }
 
@@ -163,8 +167,8 @@ $(dirname $0)/panel_bar < "$PANEL_FIFO" | lemonbar \
     -g x$HEIGHT \
     -f "$FONT" \
     -f "$FONT_ICON" \
-    -F "$FG" \
-    -B "$BG" | sh | while read line; do eval "$line"; done &
+    -F "$BG" \
+    -B "$FG" | sh | while read line; do eval "$line"; done &
 
 wid=$(xdo id -a "$WM_NAME")
 tries_left=20

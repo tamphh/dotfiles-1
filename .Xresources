@@ -1,9 +1,9 @@
 !-------------------------------------------
-! XFT Settings
+! XFT Settings gre
      
 Xft.antialias:  true 
 Xft.autohint:   false 
-Xft.dpi:        118
+Xft.dpi:        96
 Xft.hinting:    true 
 Xft.hintstyle:  hintfull 
 Xft.lcdfilter:  lcddefault
@@ -13,77 +13,62 @@ Xft.rgba:       rgb
 ! URXVT - Settings
 
 URxvt*depth:                        32
-URxvt*internalBorder:               4
+URxvt*internalBorder:               3
 URxvt*dynamicColors:                on
 URxvt*urgentOnBell:                 true
 URxvt*borderLess:                   false
 URxvt*scrollBar:                    false
 URxvt*cursorBlink:                  true
 URxvt*cursorUnderline:              true
-URxvt*cursorColor:                  #ffffff
+URxvt*cursorColor:                  #080708
 URxvt*scrollColor:                  #151515
 URxvt*underlineURLs:                true
-
-! with NanumGothic
-! URxvt*letterSpace:                  -6 
-
-! with tamsyn
-URxvt*letterSpace:                  0 
 
 ! Disable perl
 !URxvt.perl-ext:                 
 !URxvt.perl-ext-common: 
 
-URxvt*font: xft:Tamsyn:style=Regular:pixelsize=16
-URxvt*boldFont: xft:Tamsyn:style=Bold:pixelsize=16
-!URxvt*font: xft:NanumGothic:style=Regular:pixelsize=13
-!URxvt*boldFont: xft:NanumGothic:style=Bold:pixelsize=13
+URxvt*font: -*-dina-medium-r-*-*-*-100-*-*-*-*-*-*
+URxvt*italic: -*-dina-medium-i-*-*-*-100-*-*-*-*-*-* 
  
 !--------------------------------------------
 ! URxvt Colors
 
-URxvt.colorIT:                       #87af5f
-URxvt.colorBD:                       #d7d7d7
-URxvt.colorUL:                       #BF1E2D
+URxvt.colorIT:                       #00bb00
+URxvt.colorBD:                       #aa0000
+URxvt.colorUL:                       #552939
 
 !--------------------------------------------
 ! General Colors
 
-*background:    #1a1815
-*foreground:    #c1b683
+*background:    #e2eee0 
+*foreground:    #3d3e44
+*.cursorColor:  #2a2a20
 
-! Black
-*color0:    #393c2f
-! DarkRed 
-*color1:    #9f3a3a
-! DarkGreen 
-*color2:    #477B56 
-! DarkYellow
-*color3:    #bca976
-! DarkBlue   
-*color4:    #3d84a2
-! DarkMagenta
-*color5:    #674a5f 
-! DarkCyan
-*color6:    #318187
-! Gray
-*color7:    #eae9cd
-! DarkGray
-*color8:    #696b4f 
-! Red | LighRed
-*color9:    #c25454
-! Green | LightGreen
-*color10:    #528c42  
-! Yellow | LightYellow
-*color11:    #e4dfb8 
-! Blue | LightBlue
-*color12:    #53807a
-! Magenta | LightMagenta
-*color13:    #a48d83
-! Cyan | LightCyan
-*color14:    #7cdcd9 
-! White
-*color15:    #f7f5e8 
+!black
+*color0: #666661
+*color8: #7F7F7a
+!red
+*color1: #992e2e
+*color9: #b23636
+!green
+*color2: #4c3226
+*color10: #664233
+!yellow
+*color3: #a67c53
+*color11: #bf8f60
+!blue
+*color4: #4c7399
+*color12: #5986b2
+!magenta
+*color5:  #552939
+*color13: #663144
+!cyan
+*color6: #266868
+*color14:  #4a949c
+!white
+*color7:  #34302d
+*color15: #4c4742
 
 !-------------------------------------------
 ! Man pages colors
@@ -91,7 +76,7 @@ URxvt.colorUL:                       #BF1E2D
 *VT100.colorBDMode:                  true
 *VT100.colorBD:                      red
 *VT100.colorULMode:                  true
-*VT100.colorUL:                      magenta
+*VT100.colorUL:                      cyan   
 *VT100.veryBoldColors:               6
 
 !-------------------------------------------
@@ -110,7 +95,8 @@ rofi.lines:                         6
 rofi.color-enabled:                 true
 rofi.separator-style:               solid
 rofi.width:                         39
-rofi.color-normal:                  #141414,#965965,#141414,#9f3a3a,#a7a7a7
-rofi.color-active:                  #141414,#e4dfb8,#141414,#e4dfb8,#a7a7a7
-rofi.color-urgent:                  #141414,#7cdcd9,#141414,#7cdcd9,#a7a7a7
-rofi.color-window:                  #141414,#9c3a3a,#1e2529
+! rofi state:                        'bg'     'fg'   'bgalt' 'hlbg' 'hlfg'
+rofi.color-normal:                  #e2eee0,#3d3e44,#e4e4e4,#4e2f36,#888688
+rofi.color-active:                  #e2eee0,#3d3e44,#e4e4e4,#4e2f36,#888688
+rofi.color-urgent:                  #e2eee0,#3d3e44,#e4e4e4,#4e2f36,#888688
+rofi.color-window:                  #e2eee0,#3d3e44,#e4e4e4

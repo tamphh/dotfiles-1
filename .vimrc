@@ -1,8 +1,3 @@
-" Maintainer: szorfein <szorfein@gmail.com>
-" inspired by: Bram Moolenaar <Bram@vim.org>
-"
-" copy me into ~/.vimrc
-
 "" exec pathogen for launch some plugins
 "" found here https://github.com/tpope/vim-pathogen
 execute pathogen#infect()
@@ -15,9 +10,17 @@ set nocompatible
 set backspace=indent,eol,start
 
 set nobackup		" do not keep a backup file, use versions instead
+set nowritebackup
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
+set incsearch		" do incremental searching
+
+" file encryption for file save of buffer contents
+set cryptmethod=blowfish
+
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -27,6 +30,7 @@ map Q gq
 inoremap <C-U> <C-G>u<C-U>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
+" If i enable it, i can't copy anything in clipboard with rxvt-unicode...
 if has('mouse')
   set mouse=a
 endif
@@ -113,8 +117,9 @@ set foldenable
 set foldmethod=manual
 
 "" Custom Color
-colorscheme nerv
+colorscheme heavendark
 
+"" NERDTree Configuration
 "" Found https://github.com/scrooloose/nerdtree
 "" NERDTree Configuration
 let NERDTreeChDirMode = 2
@@ -123,41 +128,41 @@ let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$','\.bak$', '\~$']
 let NERDTreeShowBookmarks = 1
 let NERDTree_tabs_focus_on_files=1
 let NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let NERDTreeWinSize = 26
+let NERDTreeWinSize = 20
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 map <F3> :NERDTreeToggle<CR>
 
-"" Found https://github.com/jamessan/vim-gnupg
-"" Config http://pig-monkey.com/2013/04/password-management-vim-gnupg/
-"" For copy password into clipboard to Gnome or Qt apps, 
-"" u need have version <= 2.5, superior version doesn't work for me
+let mapleader=","
+
 "" Some Keymaps for GPG
 imap <C-V> <ESC>"+gpa
-" Copy in normal mode
+" Copy in Normal mode
 nmap <leader>y "+yE
 " Copy in visual mode
 vmap <leader>y "+y
 
-"" Vim GPG
+"" Vim GPG, copy to clipboard work only with gnupg.vim <= 2.5 for me
+"" plugin here: http://www.vim.org/scripts/script.php?script_id=3645
+"" wiki here http://pig-monkey.com/2013/04/password-management-vim-gnupg/
 if has("autocmd")
-    let GPGPreferArmor=1
-    let GPGPreferSign=1
+    let g:GPGPreferArmor=1
+    let g:GPGPreferSign=1
 
     augroup GnuPGExtra
         " Set extra file options.
-        autocmd BufReadCmd,FileReadCmd *.\(gpg\|asc\|pgp\) call SetGPGOptions()
+        autocmd BufReadCmd,FileReadCmd '*.\(gpg\|asc\|pgp\)' call SetGPGOptions()
         " Automatically close unmodified files after inactivity.
-        autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
+        autocmd CursorHold '*.\(gpg\|asc\|pgp\)' quit
     augroup END
 
     function SetGPGOptions()
         set filetype=gpgpass
         set noswapfile
         set viminfo=
-        set updatetime=40000
+        set updatetime=30000
         set foldmethod=marker
         set foldclose=all
         set foldopen=insert

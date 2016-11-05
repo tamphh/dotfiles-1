@@ -6,26 +6,31 @@ FONT_ICON="-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"
 WM_NAME="Bspwm"
 
 # icons
-GENTOO="\ue00f"
+GENTOO="\ue0a0"
 ARCH="\ue00e"
 CSTART="\ue00d"
 CSOUND="\ue04d"
-CVOLUME="\ue11b"
+CVOLUME="\ue204"
 CMAIL="\ue070"
 CRAM="\ue19a"
 CCPU="\ue021"
 CNET="\ue04b"
 CWIFI="\ue222"
-CFULL="\ue056"
-CNONE="\ue0e6"
-CCLOCK="\ue016"
+# Time
 CTIME="\ue018"
 CPACK="\ue1b7"
+CCLOCK="\ue016"
+# panel center
+CNONE="\ue001"
+CFULL="\ue000"
 # icons panel music
 CPREV="\ue055"
 CNEXT="\ue05b"
 CPLAY="\ue058"
 CPAUS="\ue059"
+# icon volume
+VPLUS="\ue06c"
+VMINUS="\ue06d"
 # battery or AC
 BAT100="\ue254"
 BAT70="\ue252"
