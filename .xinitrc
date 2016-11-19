@@ -28,7 +28,7 @@ fi
 # Script for make ssh tunnel, need enable keychain
 #autossh_own &
 
-urxvtd -q -o -f
+# urxvtd -q -o -f
 xsetroot -cursor_name left_ptr &
 wmname LG3D
 # hsetroot -fill <wallpaper>

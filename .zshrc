@@ -1,16 +1,11 @@
-# Work with oh-my-zsh
-# download here if your distro doesn't have that
-# https://github.com/robbyrussell/oh-my-zsh.git
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 #export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
+# Themes in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="random"
+ZSH_THEME="jnrowe"
 
 # Bindkey fr
 #bindkey "\e[2~"  yank
@@ -20,26 +15,33 @@ ZSH_THEME="random"
 #bindkey "\e[5~"  up-line-or-history
 #bindkey "\e[6~"  down-line-or-history
 
-# Fix bug .... with meteor
-#alias meteor='LC_ALL=en_US.UTF-8 meteor'
-
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
+# Plugin list in ~/.oh-my-zsh/plugins
 plugins=(git git-prompt)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-export PATH=$HOME/bin:$PATH
-export PASSWD=~/.passwords
-export GPG_TTY=$(tty)
+export PATH=$HOME/bin:/usr/lib64/node_modules:$PATH
 export EDITOR='vim'
+export GNUPGHOME="$HOME/.gnupg"
+export SSH_KEY_PATH="~/.ssh/ssh_key"
+export GPG_TTY=$(tty)
+export PASSWD=~/.passwords
 
-# You may need to manually set your language environment
-#export LANG=fr_FR.UTF-8
-#export LC_COLLATE="C"
+# With Zsh and Termite
+if [[ $TERM == xterm-termite ]] ; then
+    . /etc/profile.d/vte-2.91.sh
+    __vte_osc7
+fi
+
+# With Bash and Termite
+#if [[ $TERM == xterm-termite ]]; then
+#    . /etc/profile.d/vte-2.91.sh
+#    __vte_prompt_command
+#fi
 
 test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || \
     eval "$(dircolors -b)" 

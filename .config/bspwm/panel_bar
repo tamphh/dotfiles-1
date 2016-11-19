@@ -43,42 +43,42 @@ while read -r line ; do
 						case $item in
 							f*)
 								# free desktop
-                                FG=${BLACK}
+                                FG=${MAGENTA}
                                 IC=${CNONE}
                                 BG=${BG}
 								;;
 							F*)
 								# focused free desktop
-                                FG=${RED}
+                                FG="#ac8e8e"
                                 IC=${CNONE}
                                 BG=${BG}
 								;;
 							o*)
 								# occupied desktop
-                                FG=${CYAN}
+                                FG=${GREEN}
                                 IC=${CFULL}
                                 BG=${BG}
 								;;
 							O*)
 								# focused occupied desktop
-                                FG=${RED2}
+                                FG="#ac8e8e"
                                 IC=${CFULL}
                                 BG=${BG}
 								;;
 							u*)
 								# urgent desktop
-                                FG=${MAGENTA}
+                                FG=${GREEN2}
                                 IC=${CNONE}
                                 BG=${BG}
 								;;
 							U*)
 								# focused urgent desktop
-                                FG=${MAGENTA}
+                                FG=${RED2}
                                 IC=${CFULL}
                                 BG=${BG}
 								;;
 						esac
-                        wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} $(printf '%b' $IC) %{A}%{B-}%{F-}"
+                        wm="${wm}%{F${FG}}%{B${BLACK}}%{A:bspc desktop -f ${name}:} $(printf '%b' $IC) %{A}%{B-}%{F-}"
 						;;
 					[LTG]*)
 						# layout, state and flags

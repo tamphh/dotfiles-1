@@ -1,4 +1,3 @@
-## Copy me in ~/.dircolors
 # Configuration file for dircolors, a utility to help you set the
 # LS_COLORS environment variable used by GNU ls with the --color option.
 # Copyright (C) 1996-2014 Free Software Foundation, Inc.
@@ -63,6 +62,7 @@ TERM xterm-256color
 TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
+TERM xterm-termite
 # Below are the color init strings for the basic file types. A color init
 # string consists of one or more of the following numeric codes:
 # Attribute codes:
@@ -74,24 +74,24 @@ TERM xterm-debian
 #NORMAL 00 # no color code at all
 #FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
-DIR 40;31;1 # directory
-LINK 01;36 # symbolic link. (If you set this to 'target' instead of a
+DIR 01;37;41 # directory
+LINK 07;36 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
-FIFO 40;33 # pipe
+FIFO 01;37 # pipe
 SOCK 01;35 # socket
 DOOR 01;35 # door
-BLK 40;33;01 # block device driver
-CHR 40;33;01 # character device driver
-ORPHAN 40;31;01 # symlink to nonexistent file, or non-stat'able file
-SETUID 37;41 # file that is setuid (u+s)
-SETGID 30;43 # file that is setgid (g+s)
-CAPABILITY 30;41 # file with capability
-STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 31;47 # dir that is other-writable (o+w) and not sticky
-STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
+BLK 01;34 # block device driver
+CHR 01;34 # character device driver
+ORPHAN 31;01 # symlink to nonexistent file, or non-stat'able file
+SETUID 05;36;04 # file that is setuid (u+s)
+SETGID 05;35;04 # file that is setgid (g+s)
+CAPABILITY 07;37 # file with capability
+STICKY_OTHER_WRITABLE 07;04 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 30 # dir that is other-writable (o+w) and not sticky
+STICKY 37;04 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 01;32
+EXEC 01;34
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
 # (and any comments you want to add after a '#')
@@ -147,53 +147,53 @@ EXEC 01;32
 .cab 01;31
 
 # image formats
-.jpg 01;32
-.jpeg 01;32
-.gif 01;32
-.bmp 01;32
-.pbm 01;32
-.pgm 01;32
-.ppm 01;32
-.tga 01;32
-.xbm 01;32
-.xpm 01;32
-.tif 01;32
-.tiff 01;32
-.png 01;32
-.svg 01;32
-.svgz 01;32
-.mng 01;32
-.pcx 01;32
-.mov 01;32
-.mpg 01;32
-.mpeg 01;32
-.m2v 01;32
-.webm 01;32
-.ogm 01;32
-.m4v 01;32
-.mp4v 01;32
-.vob 01;32
-.qt 01;32
-.nuv 01;32
-.wmv 01;32
-.asf 01;32
-.rm 01;32
-.rmvb 01;32
-.flc 01;32
-.fli 01;32
-.flv 01;32
-.gl 01;32
-.dl 01;32
-.xcf 01;32
-.xwd 01;32
-.yuv 01;32
-.cgm 01;32
-.emf 01;32
+.jpg 01;37
+.jpeg 01;37
+.gif 01;37
+.bmp 01;37
+.pbm 01;37
+.pgm 01;37
+.ppm 01;37
+.tga 01;37
+.xbm 01;37
+.xpm 01;37
+.tif 01;37
+.tiff 01;37
+.png 01;37
+.svg 01;37
+.svgz 01;37
+.mng 01;37
+.pcx 01;37
+.mov 01;37
+.mpg 01;37
+.mpeg 01;37
+.m2v 01;37
+.webm 01;37
+.ogm 01;37
+.m4v 01;37
+.mp4v 01;37
+.vob 01;37
+.qt 01;37
+.nuv 01;37
+.wmv 01;37
+.asf 01;37
+.rm 01;37
+.rmvb 01;37
+.flc 01;37
+.fli 01;37
+.flv 01;37
+.gl 01;37
+.dl 01;37
+.xcf 01;37
+.xwd 01;37
+.yuv 01;37
+.cgm 01;37
+.emf 01;37
 
 # movie formats
-.avi 01;33
-.mkv 01;33
-.mp4 01;33
+.avi 01;30
+.mkv 01;30
+.mp4 01;30
 
 # audio formats
 .aac 01;34
@@ -210,30 +210,33 @@ EXEC 01;32
 .wav 01;34
 
 # torrents
-.torrent 01;35
+.torrent 08;30
 
 # documents
 .pdf 01;36
 .doc 01;36
 
 # web formats
-.php 40;31;01
-.css 40;32;01
-.html 40;33;01
-.js 40;34;01
-.xml 40;35;01
-.ejs 40;36;01
+.php 31
+.html 32
+.ejs 32
+.js 33
+.ts 33
+.xml 06
+.sass 34
+.scss 34
+.css 34
 
 # source code
-.c 1;31
-.h 1;32
-.py 1;33
-.sh 1;34
-.zsh 1;34
-.ksh 1;34
+.c 01;36
+.h 01;36
+.py 01;31
+.sh 01;31
+.zsh 01;35
+.ksh 01;35
 
 # crypted file
-.gpg 4;31;01
-.asc 4;32;01
-.crt 4;33;01
-.pem 4;34;01
+.gpg 31;05
+.asc 33;06
+.crt 35;05
+.pem 34;05

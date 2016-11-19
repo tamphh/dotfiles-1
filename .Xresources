@@ -20,55 +20,59 @@ URxvt*borderLess:                   false
 URxvt*scrollBar:                    false
 URxvt*cursorBlink:                  true
 URxvt*cursorUnderline:              true
-URxvt*cursorColor:                  #080708
+URxvt*cursorColor:                  #737077
 URxvt*scrollColor:                  #151515
 URxvt*underlineURLs:                true
+
+! with tamsyn
+!URxvt*letterSpace:                  0.3 
 
 ! Disable perl
 !URxvt.perl-ext:                 
 !URxvt.perl-ext-common: 
 
-URxvt*font: -*-dina-medium-r-*-*-*-100-*-*-*-*-*-*
-URxvt*italic: -*-dina-medium-i-*-*-*-100-*-*-*-*-*-* 
+URxvt*font: -*-dina-medium-r-*-*-*-90-*-*-*-*-*-*
+URxvt*italic: -*-dina-medium-*-*-*-*-90-*-*-*-*-*-*
+URxvt*boldFont: -*-dina-bold-r-*-*-*-90-*-*-*-*-*-*
  
 !--------------------------------------------
 ! URxvt Colors
 
-URxvt.colorIT:                       #00bb00
-URxvt.colorBD:                       #aa0000
-URxvt.colorUL:                       #552939
+URxvt.colorIT:                       #b291af
+URxvt.colorBD:                       #6f6776
+URxvt.colorUL:                       #e9cfd3
 
 !--------------------------------------------
 ! General Colors
 
-*background:    #e2eee0 
-*foreground:    #3d3e44
+*background:    #101011
+*foreground:    #ac8e8e
 *.cursorColor:  #2a2a20
 
 !black
-*color0: #666661
-*color8: #7F7F7a
+*color0: #24181c
+*color8: #49393f
 !red
-*color1: #992e2e
-*color9: #b23636
+*color1: #551c2c
+*color9: #782e43
 !green
-*color2: #4c3226
-*color10: #664233
+*color2: #396248
+*color10: #578c6a
 !yellow
-*color3: #a67c53
-*color11: #bf8f60
+*color3: #b3873d
+*color11: #cba360
 !blue
-*color4: #4c7399
-*color12: #5986b2
+*color4: #4b5f84
+*color12: #6b7993
 !magenta
-*color5:  #552939
-*color13: #663144
+*color5:  #6a394f
+*color13: #87556b
 !cyan
-*color6: #266868
-*color14:  #4a949c
+*color6: #384752
+*color14:  #4f6373
 !white
-*color7:  #34302d
-*color15: #4c4742
+*color7:  #b0a9ab
+*color15: #dfd9db
 
 !-------------------------------------------
 ! Man pages colors
@@ -94,9 +98,9 @@ xclock*secondColor:                 #9a875f
 rofi.lines:                         6
 rofi.color-enabled:                 true
 rofi.separator-style:               solid
-rofi.width:                         39
+rofi.width:                         34
 ! rofi state:                        'bg'     'fg'   'bgalt' 'hlbg' 'hlfg'
-rofi.color-normal:                  #e2eee0,#3d3e44,#e4e4e4,#4e2f36,#888688
-rofi.color-active:                  #e2eee0,#3d3e44,#e4e4e4,#4e2f36,#888688
-rofi.color-urgent:                  #e2eee0,#3d3e44,#e4e4e4,#4e2f36,#888688
-rofi.color-window:                  #e2eee0,#3d3e44,#e4e4e4
+rofi.color-normal:                  #101011,#ac8e8e,#101011,#24181c,#49393f
+rofi.color-active:                  #101011,#ac8e8e,#101011,#24181c,#49393f
+rofi.color-urgent:                  #101011,#ac8e8e,#101011,#24181c,#49393f
+rofi.color-window:                  #101011,#ac8e8e,#101011
