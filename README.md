@@ -1,14 +1,17 @@
-<p>Some example are on <a href="http://dotshare.it/~szorfein/dots/">dotshare.it</a></p>
+***Some works:***
+* on [dotshare.it](http://dotshare.it/~szorfein/dots/)
+* on [Reddit](https://www.reddit.com/user/szorfein)
 
-<h3>requirements for bspwm...</h3>
+## Requirements for bspwm...
 
 <p>
-+ rxvt-unicode - virtual terminal <br />
++ termite - virtual terminal <br />
 + mpd - music program <br />
 + mpc - control music behind sxhkd <br />
 + rofi - for run programs <br />
 + lemonbar - top bar <br />
 + siji font - print icon into lemonbar <br />
++ Noto font for GTK app & Monoid for terminal <br/>
 + hsetroot - for set wallpaper <br />
 + compton - minimal shadows / transparency of windows <br />
 + xdo - small utility to perform elementary actions on windows<br />

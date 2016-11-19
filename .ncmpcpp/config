@@ -3,7 +3,6 @@ mpd_port = 6600
 mpd_connection_timeout = 5
 mpd_music_dir = ~/musics
 mpd_crossfade_time = 5
-
 user_interface = "alternative"
 
 alternative_header_first_line_format = "$(12)─┤ $b$(2)%a$(end)$/b ├─$(end)"
@@ -12,15 +11,15 @@ alternative_ui_separator_color = 14
 
 color1 = 2
 color2 = 14
-main_window_highlight_color = yellow
-main_window_color = 4
+main_window_highlight_color = magenta
+main_window_color = 6
 
 # visualizer
 visualizer_fifo_path = /tmp/mpd.fifo
 visualizer_in_stereo = yes
 visualizer_sync_interval = "30" 
 visualizer_type = "wave_filled"
-visualizer_color = 246,245,244,243,242,241,240,239,238,237,236,235
+visualizer_color = 24,24,24,24,24,24,24,23,23,23,23,23
 visualizer_look = "|○"
 
 autocenter_mode = "yes"
@@ -28,7 +27,7 @@ song_list_format = " $4%a $5//$8 %t"
 song_status_format = " $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
 browser_sort_mode = name
 browser_sort_format = {%a - }{%t}|{%f} {(%l)}
-song_columns_list_format = "(3)[]{} (22)[magenta]{a} (20)[white]{t|f} (53)[black]{b|D} (4)[yellow]{l}"
+song_columns_list_format = "(8)[]{} (22)[magenta]{a} (20)[white]{t|f} (40)[black]{b|D} (4)[black]{l}"
 now_playing_prefix = "$b$2>$6> "
 now_playing_suffix = "$8$/b"
 progressbar_look = "──━"
