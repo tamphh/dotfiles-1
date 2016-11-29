@@ -1,6 +1,7 @@
 ***Some works:***
 * on [dotshare.it](http://dotshare.it/~szorfein/dots/)
-* on [Reddit](https://www.reddit.com/user/szorfein)
+* on [Reddit](https://www.reddit.com/user/szorfein/submitted/)
+* on [Imgur](https://darkfoot.imgur.com/)
 
 ## Requirements for bspwm...
 
