@@ -1,31 +1,39 @@
-## COPY ME INTO /var/lib/mpd/asoundrc
-## OR ~/.asoundrc
+# For Gentoo Install dependencies:
+# tap-plugins swh-plugins libsamplerate ladspa-bs2b ladspa-cmt caps-plugins
+
+# For list plugin available for ladspa:
+# listplugins
+# analyseplugin cmt
 
 defaults.pcm.rate_converter "speexrate_medium"
 
 pcm.!default {
    type plug
-   slave.pcm "softvol"
+   slave.pcm "dmixed"
+   device 0
 }
 
 ctl.!default {
    type hw
-   card Pro 
+   card Pro
+   device 0
 }
 
 ctl.softvol {
    type hw
    card Pro
+   device 0
 }
 
 pcm.softvol {
    type softvol
    slave {
-      pcm "dmixed" 
+      pcm "dmixed" # or try headphones, upmix_20to51 or upmix_21to51
    }
    control {
       name "Master"
       card Pro
+      device 0
    }
 }
 
@@ -33,16 +41,17 @@ pcm.dmixed {
    type asym
    playback.pcm {
       type dmix
-      ipc_key 5678293 # or 1024 make volume more HIGH 
+      ipc_key 5678293
       ipc_perm 0660
       ipc_gid audio
       ipc_key_add_uid 0   
       slave {
-         channels 6 # 6 = 5.1 channel
-         period_size 512 # 512
-         buffer_size 4096 # 16384
+         # 2 for stream, 6 for surround51, 8 for surround71
+         channels 6
+         period_size 512 # 4096
+         buffer_size 4096 # 131072
          pcm {
-            format S16_LE # S32_LE does not work
+            format S16_LE
             rate 48000
             nonblock true
             type hw 
@@ -52,22 +61,7 @@ pcm.dmixed {
          }
       }
    }
-}
-
-pcm.dsnooper {
-   type dsnoop
-   ipc_key 5678293
-   slave {
-      pcm "hw:0"
-      channels 2
-      #period_size 4096
-      #buffer_size 131072
-      rate 48000
-   }
-   bindings {
-      0 0
-      1 1
-   }
+   capture.pcm "dsnoop"
 }
 
 pcm.!surround20 {
@@ -86,46 +80,42 @@ pcm.!surround51 {
 }
 
 pcm.ch51dup {
-   slave.pcm "dmixed"
+   slave.pcm "surround51"
    slave.channels 6
-   type route
-# ttable A.B G
-   # where A - input channel
-   # B - output channel
-   # G - Volume Gain ( 1.0 = original )
+   type plug 
 
    # Front
    ttable.0.0 0.5
    ttable.1.1 0.5
 
    # Rear
-   ttable.2.4 2
-   ttable.3.5 2
+   ttable.2.2 0.5
+   ttable.3.5 0.5
 
-   # Front left/right to center 
-   ttable.0.4 1
-   ttable.1.5 1
+   # Center
+   ttable.4.4 1
 
-   # Center = 4
-   ttable.4.2 0.5
+   # LFE
+   ttable.5.5 1
+
+   # Front Left/Right to Center
+   ttable.0.4 0.5
+   ttable.1.4 0.5
+
+   # Front Left/Right to Rear
    ttable.0.2 0.5
-   ttable.1.2 0.5
-
-   # LFE (channel 5 = subwoofer )
-   ttable.5.3 1
-   # Front to LFE 
-   ttable.0.3 0.5
    ttable.1.3 0.5
 }
 
+# https://forums.gentoo.org/viewtopic-p-4528619.html#4528619
 pcm.lowpass_21to21 {
    type ladspa
    slave.pcm upmix_21to51
-   path "/usr/lib/ladspa"
+   path "/usr/lib64/ladspa"
    channels 3
    plugins {
       0 {
-         id 1098 # Identity (audio) from cmt
+         id 1098 # Identity (audio) (1098/identity_audio)
          policy duplicate
          input.bindings.0 "Input";
          output.bindings.0 "Output";
@@ -138,7 +128,6 @@ pcm.lowpass_21to21 {
          input {
             controls [ 200 ]
          }
-
       }
       2 {
          id 1052 # High-pass filter front right
@@ -150,68 +139,84 @@ pcm.lowpass_21to21 {
          }
       }
       3 {
-         id 1903 ## Low-pass filter 
+         id 1051 ## Low-pass filter 
          policy none
          input.bindings.2 "Input";
          output.bindings.2 "Output";
          input {
-            controls [ 300 2 ]
+            controls [ 200 ]
          }
       }
    }
 }
 
-#speaker-test
+# speaker-test headphone 3 channel ( sound system 2.0 )
 pcm.upmix_20to51 {
    type plug
    slave.pcm "lowpass_21to21"
    slave.channels 3
    ttable {
-       0.0     1       # left channel 
-       1.1     1       # right channel 
-       0.2     0.5     # mix left and right ... 
-       1.2     0.5     # ... channel for subwoofer 
-   } 
-}
-
-pcm.upmix_21to51 {
-   type plug
-   slave.pcm "dmixed"
-   #slave.pcm "softvol"
-   slave.channels 6
-   ttable {
-      0.0 1    # in channel 0, out-channel 0, 100% volume
-      1.1 1    # in clannel 1, out-channel 1, 100% volume
-      0.2 1    # Rear left
-      1.3 1    # Rear right
-      
-      # Front Left/Right to chenter
-      # Imbalenced, would normaly be 0.5 each
-      0.4 0.5  # 
-      1.4 0.5
-
-      # Subwoofer, More powerfull to compensate for bass-removal from other speaker
-      2.5 2
+      0.0 1.2  # Left
+      1.1 1    # Right
+      2.2 1    # mix left and right
+      3.3 1    # channel for subwoofer
    }
 }
+
+# 6 channel here ( sound system 5.1 )
+pcm.upmix_21to51 {
+   type plug
+   slave.pcm "surround51"
+   slave.channels 6
+   ttable {
+      0.0     1       # front left
+      1.1     1       # front right
+      0.4     2       # rear left
+      1.5     2       # rear right
+# Front left/right to center
+      0.2     0.5
+      1.2     0.5
+# Subwoofer, more powerful to compensate for bass-removal from other speakers
+      2.5     2
+   }
+}
+
+# analyseplugin bs2b
 pcm.bs2b {
    type ladspa
-   path "/usr/lib/ladspa"
-   channels 3
+   path "/usr/lib64/ladspa"
    plugins {
       0 {
-         id 4221
+         id 4221 # Bauer stereophonic-to-binaural (4221/bs2b)
          input {
-            controls [ 700 6 ]
+            controls [ 725 6 ]
          }
       }
    }
    slave.pcm "surround20"
 }
+
+# alternative to bs2b
+# analyseplugin caps | grep -A14 Narrow
+pcm.narrower {
+   type ladspa
+   path "/usr/lib64/ladspa"
+   plugins {
+      0 {
+         id 2595 # Narrower - Stereo image width reduction"
+         input {
+            controls [ 0 0.50 ]
+         }
+      }
+   }
+   slave.pcm "surround20"
+}
+
 pcm.headphones {
-   type rate
+   type rate 
    slave {
-      pcm "plug:bs2b"
+      #pcm "plug:bs2b"
+      pcm "plug:narrower"
       rate 48000
    }
 }
