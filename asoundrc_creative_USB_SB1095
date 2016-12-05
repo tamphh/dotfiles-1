@@ -32,9 +32,21 @@ pcm.primal {
     capture.pcm "dsnoop"
 }
 
+# Enable control in alsamixer
+# Source: http://www.alsa-project.org/main/index.php/Matrix:Module-usb-audio
+pcm.softvol {
+    type softvol
+    slave.pcm "primal"
+    control {
+        name "Master"
+        card Pro
+    }
+}
+
+# speaker-test -Dplug:default -l1 -c2 -twav
 pcm.!default {
     type plug
-    slave.pcm "primal"
+    slave.pcm "softvol"
 }
 
 pcm.!surround20 {
@@ -58,11 +70,29 @@ pcm.narrower {
     slave.pcm "surround20"
 }
 
+# source: http://bs2b.sourceforge.net/
+# listplugins
+# analyseplugin bs2b
+pcm.bs2b {
+    type ladspa
+    path "/usr/lib/ladspa"
+    plugins {
+        0 {
+            id 4221
+            input {
+                controls [ 700 6 ]
+            }
+        }
+    }
+    slave.pcm "surround20"
+}
+
 # speaker-test -Dplug:headphones -c2 -t1 -twav
 pcm.headphones {
     type rate
     slave {
-        pcm "plug:narrower"
+        pcm "plug:bs2b"
+        #pcm "plug:narrower"
         rate 48000
     }
     converter "samplerate_medium"
