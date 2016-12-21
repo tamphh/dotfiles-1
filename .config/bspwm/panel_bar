@@ -49,19 +49,19 @@ while read -r line ; do
 								;;
 							F*)
 								# focused free desktop
-                                FG="#ac8e8e"
+                                FG="#846774"
                                 IC=${CNONE}
                                 BG=${BG}
 								;;
 							o*)
 								# occupied desktop
-                                FG=${GREEN}
+                                FG="#678b7b"
                                 IC=${CFULL}
                                 BG=${BG}
 								;;
 							O*)
 								# focused occupied desktop
-                                FG="#ac8e8e"
+                                FG="#846774"
                                 IC=${CFULL}
                                 BG=${BG}
 								;;
@@ -78,7 +78,7 @@ while read -r line ; do
                                 BG=${BG}
 								;;
 						esac
-                        wm="${wm}%{F${FG}}%{B${BLACK}}%{A:bspc desktop -f ${name}:} $(printf '%b' $IC) %{A}%{B-}%{F-}"
+                        wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} $(printf '%b' $IC) %{A}%{B-}%{F-}"
 						;;
 					[LTG]*)
 						# layout, state and flags

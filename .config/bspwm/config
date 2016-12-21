@@ -1,7 +1,18 @@
 #! /bin/sh
 
-HEIGHT=24
-FONT="-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
+
+# -*-fixed-medium-*-*-*-10-*-*-*-*-*-*-*
+# -*-dina-medium-*-*-*-*-90-*-*-*-*-*-*
+# -*-dina-bold-r-*-*-*-90-*-*-*-*-*-*
+# -*-marathonmod-*-*-*-*-14-*-*-*-*-*-*-*
+#-*-tewii-*-*-*-*-*-*-*-*-*-*-*-*
+# -*-marathon-medium-*-*-*-*-*-*-*-*-*-*-*
+# -*-marathon-bold-*-*-*-*-*-*-*-*-*-*-*
+# -*-marathon-*-*-*-*-*-*-*-*-*-*-*-*
+ 
+HEIGHT=26
+#FONT="-*-fixed-medium-*-*-*-10-*-*-*-*-*-*-*"
+FONT="-*-dina-medium-r-*-*-10-*-*-*-*-*-*-*"
 FONT_ICON="-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"
 WM_NAME="Bspwm"
 
@@ -40,9 +51,14 @@ BAT15="\ue24e"
 BAT7="\ue24c"
 CAC="\ue215"
 
-# $(pAction ${fg} ${bg} ${command} ${whatprint})
+# $(pAction ${fg} ${bg} ${${command} ${whatprint})
 pAction() {
     echo "%{F$1}%{B$2}%{A:$3:}$(printf '%b' $4)%{A}%{B-}%{F-}"
+}
+
+# $(pActionUnderline ${fg} ${bg} ${underline} ${${command} ${whatprint})
+pActionUnderline() {
+    echo "%{F$1}%{B$2}%{U$3}%{+u}%{A:$4:}$(printf '%b' $5)%{A}%{-u}%{B-}%{F-}"
 }
 
 # $(pIcon ${color} ${icon})
@@ -50,9 +66,19 @@ pIcon() {
     echo "%{F$1}$(printf '%b' $2)%{F-}"
 }
 
+# $(pIconUnderline ${color} ${color_underline} ${icon})
+pIconUnderline() {
+    echo "%{F$1}%{U$2}%{+u}$(printf '%b' $3)%{-u}%{F-}"
+}
+
 # $(pText ${color} ${text})
 pText() {
     echo "%{F$1}$2%{F-}"
+}
+
+# $(pTextUnderline ${color} ${color_underline} ${text})
+pTextUnderline() {
+    echo "%{F$1}%{U$2}%{+u}$3%{-u}%{F-}"
 }
 
 getXresColor() {

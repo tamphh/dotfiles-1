@@ -31,9 +31,16 @@ URxvt*underlineURLs:                true
 !URxvt.perl-ext:                 
 !URxvt.perl-ext-common: 
 
+!URxvt*font: xft:Tamsyn:style=Regular:pixelsize=16
 URxvt*font: -*-dina-medium-r-*-*-*-90-*-*-*-*-*-*
 URxvt*italic: -*-dina-medium-*-*-*-*-90-*-*-*-*-*-*
 URxvt*boldFont: -*-dina-bold-r-*-*-*-90-*-*-*-*-*-*
+!URxvt*font: -*-marathonmod-*-*-*-*-14-*-*-*-*-*-*-*
+!Urxvt*font: -*-tewii-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*font: -*-marathon-medium-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*boldFont: -*-marathon-bold-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*boldFont: -*-marathon-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*boldFont: xft:Tamsyn:style=Bold:pixelsize=16
  
 !--------------------------------------------
 ! URxvt Colors
@@ -45,8 +52,8 @@ URxvt.colorUL:                       #e9cfd3
 !--------------------------------------------
 ! General Colors
 
-*background:    #101011
-*foreground:    #ac8e8e
+*background:    #23232d
+*foreground:    #7c7c7e
 *.cursorColor:  #2a2a20
 
 !black
@@ -97,10 +104,10 @@ xclock*secondColor:                 #9a875f
 
 rofi.lines:                         6
 rofi.color-enabled:                 true
-rofi.separator-style:               solid
-rofi.width:                         34
-! rofi state:                        'bg'     'fg'   'bgalt' 'hlbg' 'hlfg'
-rofi.color-normal:                  #101011,#ac8e8e,#101011,#24181c,#49393f
-rofi.color-active:                  #101011,#ac8e8e,#101011,#24181c,#49393f
-rofi.color-urgent:                  #101011,#ac8e8e,#101011,#24181c,#49393f
-rofi.color-window:                  #101011,#ac8e8e,#101011
+rofi.separator-style:               none 
+rofi.width:                         40
+! rofi state:                          'bg'  'fg'  'bgalt'  'hlbg'  'hlfg'
+rofi.color-normal:                  argb:0016141a, #9e9f9a, argb:00101011, #2f2938, #f8f8f2
+rofi.color-urgent:                  argb:0016141a, #9e9f9a, argb:00101011, #2f2938, #f8f8f2
+rofi.color-active:                  argb:0016141a, #9e9f9a, argb:00101011, #2f2938, #a6e22a
+rofi.color-window:                  argb:ce16141a, #111111, #000000

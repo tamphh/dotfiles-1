@@ -17,4 +17,7 @@ bspc config presel_feedback_color   ${BG}
 
 bspc monitor -d i ii iii iv vi vii
 
+bspc rule -a sxiv follow=off state=flaoting 
+bspc rule -a mpv follow=off state=floating
+
 $(dirname $0)/panel &
