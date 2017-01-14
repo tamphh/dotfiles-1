@@ -116,8 +116,8 @@ set expandtab
 set foldenable
 set foldmethod=manual
 
-"" Custom Color
-colorscheme space
+"" Custom Color here: https://github.com/szorfein/darkest-space
+colorscheme darkest-space
 
 "" NERDTree Configuration
 "" Found https://github.com/scrooloose/nerdtree

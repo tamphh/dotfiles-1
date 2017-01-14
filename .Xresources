@@ -70,7 +70,7 @@ URxvt.colorUL:                       #e9cfd3
 *color11: #cba360
 !blue
 *color4: #4b5f84
-*color12: #6b7993
+*color12: #6d8996
 !magenta
 *color5:  #6a394f
 *color13: #87556b
@@ -107,7 +107,7 @@ rofi.color-enabled:                 true
 rofi.separator-style:               none 
 rofi.width:                         40
 ! rofi state:                          'bg'  'fg'  'bgalt'  'hlbg'  'hlfg'
-rofi.color-normal:                  argb:0016141a, #9e9f9a, argb:00101011, #2f2938, #f8f8f2
-rofi.color-urgent:                  argb:0016141a, #9e9f9a, argb:00101011, #2f2938, #f8f8f2
-rofi.color-active:                  argb:0016141a, #9e9f9a, argb:00101011, #2f2938, #a6e22a
-rofi.color-window:                  argb:ce16141a, #111111, #000000
+rofi.color-normal:                  argb:00101019, #9e9f9a, argb:00101019, #213c4f, #f8f8f2
+rofi.color-urgent:                  argb:00101019, #9e9f9a, argb:00101019, #213c4f, #f8f8f2
+rofi.color-active:                  argb:00101019, #9e9f9a, argb:00101019, #213c4f, #a6e22a
+rofi.color-window:                  argb:ce101019, #111111, #000000

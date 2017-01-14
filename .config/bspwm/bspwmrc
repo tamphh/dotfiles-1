@@ -13,7 +13,7 @@ bspc config gapless_monocle         true
 bspc config focus_by_distance       true
 bspc config history_aware_focus     true
 bspc config focus_follows_pointer   true
-bspc config presel_feedback_color   ${BG}
+bspc config presel_feedback_color   "#12181d"
 
 bspc monitor -d i ii iii iv vi vii
 

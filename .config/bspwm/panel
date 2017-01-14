@@ -20,9 +20,9 @@ bspc subscribe |\
 # Top left
 {
     getName() {
-        local ic=$(pIconUnderline ${BLACK2} ${GREEN} ${GENTOO})
+        local ic=$(pIconUnderline ${WHITE2} ${BLUE2} ${GENTOO})
         local cmd="$(uname -n)"
-        local clr=$(pTextUnderline ${WHITE} ${GREEN} " ${cmd}")
+        local clr=$(pTextUnderline ${WHITE} ${BLUE} " ${cmd}")
         echo " ${ic}${clr}"
     }
 
@@ -35,7 +35,7 @@ bspc subscribe |\
     }
 
     music() {
-        local icon=$(pIconUnderline ${RED2} ${BLUE} ${CSOUND})
+        local icon=$(pIconUnderline ${RED} ${BLUE2} ${CSOUND})
         local stat="$(mpc status | grep \# | awk '{print $1}')"
         local artist=$(mpc -f %artist% current)
         local musicname=$(mpc -f %title% current)
@@ -46,17 +46,17 @@ bspc subscribe |\
         elif [ "${stat}" ] && [ "${stat}" = "[paused]" ] ; then
             cmd=" Paused >> ${artist:0:10} - ${musicname:0:15}"
         else
-            cmd="No Sound"
+            cmd=" No Sound"
         fi
         
         echo "${icon}$(pTextUnderline ${WHITE} ${BLUE} "${cmd}")"
     }
 
     volume() {
-        local icon=$(pIcon ${CYAN2} ${CVOLUME})
+        local icon=$(pIcon ${RED} ${CVOLUME})
         local volume="$(mpc volume | awk '{print $2}')"
         [[ -z ${volume%?} ]] && volume='100%'
-        local clr=$(pText ${MAGENTA2} "${volume}")
+        local clr=$(pText "#685667" "${volume}")
         local plus=$(pAction $FG $BG "mpc volume +4 &>/dev/null" ${VPLUS})
         local minus=$(pAction $FG $BG "mpc volume -3 &>/dev/null" ${VMINUS})
 
@@ -73,23 +73,23 @@ bspc subscribe |\
 # Top Right
 {
     getDay() {
-        local icon=$(pIconUnderline ${BLACK2} ${GREEN} ${CTIME})
+        local icon=$(pIconUnderline ${RED} ${BLUE2} ${CTIME})
         local cmd=" $(date '+%A %d %b')" 
-        local clr=$(pTextUnderline ${WHITE} ${GREEN} "${cmd}")
+        local clr=$(pTextUnderline ${WHITE} ${BLUE} "${cmd}")
         echo "${icon}${clr}"
     }
 
     clock() {
-        local icon=$(pIcon ${GREEN2} ${CCLOCK})
+        local icon=$(pIcon ${RED} ${CCLOCK})
         local cmd=$(date +%H:%M)
         local clr=$(pText ${FG} "${cmd}")
         echo "${icon} ${clr}"
     }
 
     mail() {
-        local gmaildir=/home/user/mails/Gmail-User/\[Gmail\].All\ Mail/new
+        local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
         local prog=$(pAction $FG $BG "termite -e mutt" ${CMAIL})
-        local icon=$(pIcon ${CYAN} ${CMAIL})
+        local icon=$(pIcon ${RED} ${CMAIL})
         local count=0
         if [[ ! -n $(ls "${gmaildir}") ]]; then
             count=0
@@ -104,8 +104,8 @@ bspc subscribe |\
         local _GETETH=$(ip a | grep "state UP" | awk '{ORS=""}{print $2}' | cut -d ':' -f 1)
         local _status=${_GETIWL:-$_GETETH}
         local _status2="${_status:-Down}"
-        local icon="$(pIconUnderline ${CYAN2} ${MAGENTA2} ${CNET})"
-        local cmd=$(pTextUnderline ${WHITE} ${MAGENTA2} " ${_status2}")
+        local icon="$(pIconUnderline ${RED} ${BLUE2} ${CNET})"
+        local cmd=$(pTextUnderline ${WHITE} ${BLUE} " ${_status2}")
 
         echo "${icon}${cmd}"
     } 
@@ -129,11 +129,11 @@ bspc subscribe |\
         else
             batCap="wttf"
         fi
-        echo "$(pIcon ${CYAN2} $icon) $(pText ${MAGENTA} ${batCap})"
+        echo "$(pIcon ${RED} $icon) $(pText "#685667" ${batCap})"
     }
 
     ram() {
-        local icon=$(pIcon ${CYAN} ${CRAM})
+        local icon=$(pIcon ${RED} ${CRAM})
         local cmd=$(free -m | grep Mem | awk '{print $3}')
         cmd+=" Mb"
         local clr=$(pText ${FG} "${cmd}")
@@ -142,12 +142,12 @@ bspc subscribe |\
 
     # Cpu List Load, number of Process and actual MHz frequency.
     cpu() {
-        local icon=$(pIconUnderline ${GREEN} ${MAGENTA} ${CCPU})
+        local icon=$(pIconUnderline ${RED} ${BLUE2} ${CCPU})
         local cmd=" $(cat /proc/loadavg | awk '{print $1}')"
         local cmd+=" $(cat /proc/loadavg | awk '{print $4}')"
         local cmd+=" $(cat /proc/cpuinfo| grep MHz | awk '{ORS=" "}{print $4}' | sed -e 's/.000//g' | cut -f 1)"
 
-        local clr=$(pTextUnderline ${WHITE} ${MAGENTA} "${cmd}")
+        local clr=$(pTextUnderline ${WHITE} ${BLUE} "${cmd}")
         echo "${icon}${clr}"
     }
 
@@ -175,7 +175,7 @@ $(dirname $0)/panel_bar < "$PANEL_FIFO" | lemonbar \
     -f "$FONT" \
     -f "$FONT_ICON" \
     -F "$FG" \
-    -B "$BG" | sh | while read line; do eval "$line"; done &
+    -B "#101E29" | sh | while read line; do eval "$line"; done &
 
 wid=$(xdo id -a "$WM_NAME")
 tries_left=20

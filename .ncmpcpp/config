@@ -1,5 +1,5 @@
 mpd_host = localhost
-mpd_port = 53000
+# mpd_port = 53000
 mpd_connection_timeout = 5
 mpd_music_dir = /home/izsha/musics
 mpd_crossfade_time = 5
@@ -9,24 +9,21 @@ alternative_header_first_line_format = "$(12)─┤ $b$(2)%a$(end)$/b ├─$(en
 alternative_header_second_line_format = "$(14)%t (%y)$(end)"
 alternative_ui_separator_color = magenta
 
-color1 = 2
-color2 = 14
-main_window_highlight_color = magenta
-main_window_color = 6
+main_window_color = 217
 
 # visualizer
 visualizer_fifo_path = /tmp/mpd.fifo
 visualizer_in_stereo = yes
 visualizer_sync_interval = "30" 
 visualizer_type = "wave_filled"
-visualizer_color = 109    
+visualizer_color = 109
 visualizer_look = "|○"
 
 autocenter_mode = "yes"
 song_list_format = "{$8%a $1⠂ $2}{%t}"
 song_status_format = "$8%t $1on $2%b $1by $8%a$1"
 browser_sort_mode = name
-browser_sort_format = {%a - }{%t}|{%f} {(%l)}
+browser_sort_format = "{%a - }{%t}|{%f} {(%l)}"
 song_columns_list_format = "(31)[97]{f} (15)[74]{a} (21)[232]{t|f} (31)[111]{b|D} (1)[169]{l}"
 now_playing_prefix = " $b$2>$6> "
 now_playing_suffix = "$8$/b"
@@ -47,6 +44,4 @@ tags_separator = " | "
 external_editor = vim 
 colors_enabled = yes
 empty_tag_color = cyan
-#main_window_color = green 
-#main_window_highlight_color = green 
 statusbar_color = blue   

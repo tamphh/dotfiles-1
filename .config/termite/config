@@ -39,7 +39,7 @@ foreground =    #ac8e8e
 background =    #101011
 
 # 20% background transparency (requires a compositor)
-background = rgba(22, 20, 26, 0.84)
+background = rgba(10, 10, 19, 0.70)
 
 # if unset, will reverse foreground and background
 highlight = #2f2f2f
@@ -59,7 +59,7 @@ color3 = #b3873d
 color11 = #cba360
 # Blue
 color4 = #4b5f84
-color12 = #6b7993
+color12 = #6d8996
 # Magenta
 color5 =  #6a394f
 color13 = #87556b

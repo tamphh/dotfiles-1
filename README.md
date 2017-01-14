@@ -5,18 +5,17 @@
 
 ## Requirements for bspwm...
 
-<p>
-+ termite - virtual terminal <br />
-+ mpd - music program <br />
-+ mpc - control music behind sxhkd <br />
-+ rofi - for run programs <br />
-+ lemonbar - top bar <br />
-+ siji font - print icon into lemonbar <br />
-+ Noto font for GTK app & Monoid for terminal <br/>
-+ hsetroot - for set wallpaper <br />
-+ compton - minimal shadows / transparency of windows <br />
-+ xdo - small utility to perform elementary actions on windows<br />
-</p>
++ termite - virtual terminal
++ mpd - music program
++ mpc - control music behind sxhkd
++ rofi - for run programs
++ lemonbar - top bar
++ siji font - print icon into lemonbar
++ Noto font for GTK app & Monoid for terminal
++ hsetroot - for set wallpaper
++ compton - minimal shadows / transparency of windows
++ xdo - small utility to perform elementary actions on windows
++ wallpaper - [alien](http://i.imgur.com/eBgIvk0.jpg)
 
 ###If you have trouble for install it: follow this [tuto](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)
 

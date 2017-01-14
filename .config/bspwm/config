@@ -10,14 +10,14 @@
 # -*-marathon-bold-*-*-*-*-*-*-*-*-*-*-*
 # -*-marathon-*-*-*-*-*-*-*-*-*-*-*-*
  
-HEIGHT=26
+HEIGHT=27
 #FONT="-*-fixed-medium-*-*-*-10-*-*-*-*-*-*-*"
 FONT="-*-dina-medium-r-*-*-10-*-*-*-*-*-*-*"
 FONT_ICON="-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"
 WM_NAME="Bspwm"
 
 # icons
-GENTOO="\ue0a0"
+GENTOO="\ue1ec"
 ARCH="\ue00e"
 CSTART="\ue00d"
 CSOUND="\ue04d"
@@ -32,8 +32,8 @@ CTIME="\ue018"
 CPACK="\ue1b7"
 CCLOCK="\ue016"
 # panel center
-CNONE="\ue001"
-CFULL="\ue000"
+CNONE="\ue0c0"
+CFULL="\ue0c1"
 # icons panel music
 CPREV="\ue055"
 CNEXT="\ue05b"
@@ -88,7 +88,7 @@ getXresColor() {
 # colors
 BLACK="$(getXresColor color0)"
 BLACK2="$(getXresColor color8)"
-RED="$(getXresColor color1)"
+RED="#76a1af"
 RED2="$(getXresColor color9)"
 GREEN="$(getXresColor color2)"
 GREEN2="$(getXresColor color10)"
@@ -96,8 +96,8 @@ YELLOW="$(getXresColor color3)"
 YELLOW2="$(getXresColor color11)"
 BLUE="$(getXresColor color4)"
 BLUE2="$(getXresColor color12)"
-MAGENTA="$(getXresColor color5)"
-MAGENTA2="$(getXresColor color13)"
+MAGENTA="#3c293c"
+MAGENTA2="#7d7a92"
 CYAN="$(getXresColor color6)"
 CYAN2="$(getXresColor color14)" 
 WHITE="$(getXresColor color7)"
