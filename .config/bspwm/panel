@@ -175,7 +175,7 @@ $(dirname $0)/panel_bar < "$PANEL_FIFO" | lemonbar \
     -f "$FONT" \
     -f "$FONT_ICON" \
     -F "$FG" \
-    -B "#101E29" | sh | while read line; do eval "$line"; done &
+    -B "#ab101E29" | sh | while read line; do eval "$line"; done &
 
 wid=$(xdo id -a "$WM_NAME")
 tries_left=20
