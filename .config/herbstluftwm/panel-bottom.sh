@@ -3,14 +3,14 @@
 source $(dirname $0)/config
 
 monitor=${1:-0}
-herbstclient pad $monitor ${HEIGHT}
+herbstclient pad $monitor 0 0 ${HEIGHT} 0
 
 getName() {
     local cmd=$(pText ${WHITE} "$(uname -n)")
     echo $cmd
 }
 
-function ram() {
+ram() {
     local cmd=$(pText ${WHITE} "$(free -m | grep Mem | awk '{print $3}')")
     echo $cmd
 }
@@ -64,6 +64,6 @@ function ram() {
         printf "%s\n" "%{l}${sysL}%{c}${wm}%{r}${sysR}"
     done
 } | lemonbar \
-    -g x${HEIGHT} -u 3 -B ${BG} -F ${FG} -f "${FONT}" -f "${FONT_ICON}" |\
+    -g x${HEIGHT} -u 3 -B ${BG} -F ${FG} -f "${FONT}" -f "${FONT_ICON}" -b|\
     sh &
 wait 
