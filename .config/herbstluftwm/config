@@ -5,7 +5,7 @@ FONT="-*-dina-medium-r-*-*-10-*-*-*-*-*-*-*"
 FONT_ICON="-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"
 
 # icons
-GENTOO="\ue1ec"
+GENTOO="\ue00f"
 ARCH="\ue00e"
 CSTART="\ue00d"
 CSOUND="\ue04d"
@@ -15,6 +15,7 @@ CRAM="\ue19a"
 CCPU="\ue021"
 CNET="\ue04b"
 CWIFI="\ue222"
+WIFI_STR="\ue02d"
 # Time
 CTIME="\ue018"
 CPACK="\ue1b7"

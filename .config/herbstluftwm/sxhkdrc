@@ -12,11 +12,11 @@ super + control + q
 
 # handle panels and reloading
 super + shift + r
-    herbstclient reload
+    pkill -USR1 -x sxhkd; pkill panel; herbstclient reload
 
 # close windows
-super + z
-    herbstclient close_or_remove
+super + w
+    herbstclient close
 
 # kill panel properly and quit
 super + shift + q
@@ -37,11 +37,11 @@ super + shift + {Left,Down,Up,Right,h,j,k,l}
     herbstclient shift {left,down,up,right,left,down,up,right
 
 # window splitting
-super + {w,q,e}
+super + {z,q,e}
     herbstclient split {bottom 0.5,right 0.5, explode}
 
 # resizing frames
-ctrl + alt + {h,j,k,l}
+super + ctrl + {h,j,k,l}
     herbstclient resize {left +0.01,down +0.01,up +0.01,right +0.01}
                                      
 # cycle through tags
