@@ -52,7 +52,7 @@ URxvt.colorUL:                       #e9cfd3
 !--------------------------------------------
 ! General Colors
 
-*background:    #23232d
+*background:    #050408
 *foreground:    #7c7c7e
 *.cursorColor:  #2a2a20
 
@@ -107,7 +107,7 @@ rofi.color-enabled:                 true
 rofi.separator-style:               none 
 rofi.width:                         40
 ! rofi state:                          'bg'  'fg'  'bgalt'  'hlbg'  'hlfg'
-rofi.color-normal:                  argb:00101019, #9e9f9a, argb:00101019, #213c4f, #f8f8f2
-rofi.color-urgent:                  argb:00101019, #9e9f9a, argb:00101019, #213c4f, #f8f8f2
-rofi.color-active:                  argb:00101019, #9e9f9a, argb:00101019, #213c4f, #a6e22a
-rofi.color-window:                  argb:ce101019, #111111, #000000
+rofi.color-normal:                  argb:ee121215, #9e9f9a, argb:00121215, #3f3354, #f8f8f2
+rofi.color-urgent:                  argb:ee121215, #9e9f9a, argb:00121215, #3f3354, #f8f8f2
+rofi.color-active:                  argb:ee121215, #9e9f9a, argb:00121215, #3f3354, #a6e22a
+rofi.color-window:                  argb:ee121215, #111111, #000000

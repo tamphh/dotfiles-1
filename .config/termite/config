@@ -32,14 +32,13 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-cursor = #382b2f
-cursor_foreground = #ac8e8e
+cursor = #545454
+cursor_foreground = #a5a5bc
 foreground =    #ac8e8e
 #foreground_bold = #ffffff
-background =    #101011
 
 # 20% background transparency (requires a compositor)
-background = rgba(10, 10, 19, 0.70)
+background = rgba(12, 12, 15, 0.90)
 
 # if unset, will reverse foreground and background
 highlight = #2f2f2f

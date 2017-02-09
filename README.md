@@ -15,9 +15,9 @@
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
-+ wallpaper - [alien](http://i.imgur.com/eBgIvk0.jpg)
++ wallpaper - [Imgur](http://i.imgur.com/08hNoV3.jpg)
 
 ###If you have trouble for install it: follow this [tuto](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)
 
-Current Desktop: 
+Current Desktop: (with Herbstluftwm)
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")

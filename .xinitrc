@@ -36,4 +36,8 @@ compton &
 # redshift &
 
 ### BSPWM
-exec bspwm-launch
+#exec bspwm-launch
+
+### Herbstluftwm
+exec herbstluftwm --locked
+

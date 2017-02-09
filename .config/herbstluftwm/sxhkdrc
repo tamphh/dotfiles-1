@@ -16,7 +16,7 @@ super + shift + r
 
 # close windows
 super + w
-    herbstclient close
+    herbstclient close_and_remove
 
 # kill panel properly and quit
 super + shift + q
@@ -46,8 +46,11 @@ super + ctrl + {h,j,k,l}
                                      
 # cycle through tags
 super + {Tab,Tab}
-    {tagswitch.sh next,tagswitch.sh prev}
+    herbstclient spawn tagswitch.sh {next, prev}
 
+super + p
+    herbstclient spawn swap auto 
+    
 # layouting
 super + {r,s,shift+f,shift+m,shift+p}
     herbstclient {remove,floating toggle, fullscreen toggle, pseudotile toggle}

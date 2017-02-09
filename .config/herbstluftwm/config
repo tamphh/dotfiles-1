@@ -1,11 +1,11 @@
 #! /bin/sh
 
-HEIGHT=24
+HEIGHT=23
 FONT="-*-dina-medium-r-*-*-10-*-*-*-*-*-*-*"
 FONT_ICON="-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"
 
 # icons
-GENTOO="\ue00f"
+GENTOO="\ue1ec"
 ARCH="\ue00e"
 CSTART="\ue00d"
 CSOUND="\ue04d"
@@ -16,13 +16,14 @@ CCPU="\ue021"
 CNET="\ue04b"
 CWIFI="\ue222"
 WIFI_STR="\ue02d"
+CIP=" ++ "
 # Time
 CTIME="\ue018"
 CPACK="\ue1b7"
 CCLOCK="\ue016"
 # panel center
-CNONE="\ue0c0"
-CFULL="\ue0c1"
+CNONE="\ue190"
+CFULL="\ue0e6"
 # icons panel music
 CPREV="\ue055"
 CNEXT="\ue05b"
@@ -75,7 +76,7 @@ getXresColor() {
 }
 
 # colors
-BG="$(getXresColor background)"
+BG="#ee121215"
 FG="$(getXresColor foreground)"
 BLACK="$(getXresColor color0)"
 BLACK2="$(getXresColor color8)"
