@@ -65,7 +65,6 @@ hc set window_gap -3
 hc set frame_padding 16
 hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 0
-hc pad ${HEIGHT} 11 ${HEIGHT} 11
 
 hc set frame_transparent_width 0
 hc set frame_active_opacity 1

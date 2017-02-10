@@ -2,6 +2,8 @@
 
 source $(dirname $0)/config
 monitor=${1:-0}
+herbstclient pad $monitor ${HEIGHT} 11 ${HEIGHT} 11
+
 set -f 
 
 getName() {
@@ -33,7 +35,7 @@ clock() {
 }
 
 mail() {
-    local gmaildir=/home/<username>/.mails/Gmail/\[Gmail\].All\ Mail/new
+    local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
     local cmd=$(pAction ${BLACK2} ${BG} "herbstclient spawn termite -e mutt" ${CMAIL})
     local count=0
     if [[ ! -n $(ls "${gmaildir}") ]]; then
