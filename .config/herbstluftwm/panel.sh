@@ -35,7 +35,7 @@ clock() {
 }
 
 mail() {
-    local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
+    local gmaildir=/home/<username>/.mails/Gmail/\[Gmail\].All\ Mail/new
     local cmd=$(pAction ${BLACK2} ${BG} "herbstclient spawn termite -e mutt" ${CMAIL})
     local count=0
     if [[ ! -n $(ls "${gmaildir}") ]]; then
@@ -98,11 +98,14 @@ energy() {
             esac
             wm="$wm%{F$FAG} $(printf '%b' ${IC}) %{F-}"
         done
-        echo "W$(getName) $(getMyIp)"
         echo "A${wm}"
+        sleep 0.1 || break
+    done &
+    while :; do
+        echo "W$(getName) $(getMyIp)"
         echo "R$(energy) $(mail) $(getDay) $(clock)"
-        sleep 0.4
-    done 
+        sleep 1 || break
+    done &
 }|{
     while read -r line ; do 
         cmd=( $line )
