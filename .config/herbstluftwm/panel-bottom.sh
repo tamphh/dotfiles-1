@@ -70,7 +70,7 @@ ram() {
         echo "W$(music) $(volume)"
         echo "A$(cpu) $(ram)"
         echo "R$(wifi_str) $(net)" 
-        sleep 0.4
+        sleep 1
     done
 }|{
     while read -r line ; do

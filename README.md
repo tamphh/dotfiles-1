@@ -1,7 +1,7 @@
 ***Some works:***
 * on [dotshare.it](http://dotshare.it/~szorfein/dots/)
 * on [Reddit](https://www.reddit.com/user/szorfein/submitted/)
-* on [Imgur](https://szorfein.imgur.com/)
+* on [Imgur](https://szorfein1.imgur.com/)
 
 ## Requirements for bspwm...
 
@@ -12,7 +12,7 @@
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
-+ wallpaper - [Imgur](http://i.imgur.com/08hNoV3.jpg)
++ wallpaper - [Imgur](http://imgur.com/PkmNwoR)
 
 ## Requirements for lemonbar
 
