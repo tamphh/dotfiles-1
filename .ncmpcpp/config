@@ -1,12 +1,12 @@
 mpd_host = localhost
-# mpd_port = 53000
+# mpd_port = 6600
 mpd_connection_timeout = 5
-mpd_music_dir = /home/izsha/musics
+mpd_music_dir = /home/user/musics
 mpd_crossfade_time = 5
 user_interface = "alternative"
 
-alternative_header_first_line_format = "$(12)─┤ $b$(2)%a$(end)$/b ├─$(end)"
-alternative_header_second_line_format = "$(14)%t (%y)$(end)"
+alternative_header_first_line_format = $b$1$aqqu$/a$4 {%t}|{%f} $1$atqq$/a$6$/b
+alternative_header_second_line_format = {{$2$b%a$/b$9}{ - $5%b$9}{ ($4%y$9)}}|{%D}
 alternative_ui_separator_color = magenta
 
 main_window_color = 217
@@ -45,3 +45,4 @@ external_editor = vim
 colors_enabled = yes
 empty_tag_color = cyan
 statusbar_color = blue   
+volume_color = default

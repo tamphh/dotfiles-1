@@ -1,11 +1,10 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-#export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
 # Themes in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="jnrowe"
+ZSH_THEME="sunrise"
 
 # Bindkey fr
 #bindkey "\e[2~"  yank
@@ -24,7 +23,7 @@ plugins=(git git-prompt)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH=$HOME/bin:/usr/lib64/node_modules:$PATH
+export PATH=$HOME/bin:$PATH
 export EDITOR='vim'
 export GNUPGHOME="$HOME/.gnupg"
 export SSH_KEY_PATH="~/.ssh/ssh_key"
@@ -45,6 +44,17 @@ fi
 
 test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || \
     eval "$(dircolors -b)" 
+
+# man page with less
+man() {
+    LESS_TERMCAP_md=$'\e[01;35m' \
+        LESS_TERMCAP_me=$'\e[0m' \
+        LESS_TERMCAP_se=$'\e[0m' \
+        LESS_TERMCAP_so=$'\e[01;31;31m' \
+        LESS_TERMCAP_ue=$'\e[0m' \
+        LESS_TERMCAP_us=$'\e[00;36m' \
+        command man "$@"
+}
 
 buildfile() {
     if [[ "$1" == *.* ]]; then

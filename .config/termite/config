@@ -34,40 +34,41 @@ filter_unmatched_urls = true
 [colors]
 cursor = #545454
 cursor_foreground = #a5a5bc
-foreground =    #ac8e8e
+foreground =    #9aa8a9
 #foreground_bold = #ffffff
 
 # 20% background transparency (requires a compositor)
-background = rgba(12, 12, 15, 0.90)
+background = rgba(00, 04, 05, 0.56)
 
 # if unset, will reverse foreground and background
 highlight = #2f2f2f
 
 # colors from color0 to color254 can be set
 # Black
-color0 = #24181c
-color8 = #49393f
+color0 = #071b1e
+color8 = #405155
 # Red
-color1 = #551c2c
-color9 = #782e43
+color1 = #62394c
+color9 = #875157
 # Green
-color2 = #396248
-color10 = #578c6a
+color2 = #34776d
+color10 = #619d8e
 # Yellow
-color3 = #b3873d
-color11 = #cba360
+color3 = #d1aa54
+color11 = #f6d586
 # Blue
-color4 = #4b5f84
-color12 = #6d8996
+color4 = #2f4653
+color12 = #5b7681
 # Magenta
-color5 =  #6a394f
-color13 = #87556b
+color5 =  #403248
+color13 = #644d5e
 # Cyan
-color6 = #384752
-color14 =  #4f6373
+color6 = #276f7b
+color14 = #67a0a5
 # White
-color7 =  #b0a9ab
-color15 = #dfd9db
+color7 =  #bccecd
+color15 = #f9fffd
+
 
 [hints]
 #font = Monospace 12

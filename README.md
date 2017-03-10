@@ -3,16 +3,16 @@
 * on [Reddit](https://www.reddit.com/user/szorfein/submitted/)
 * on [Imgur](https://szorfein1.imgur.com/)
 
-## Requirements for bspwm...
+## Requirements for this desktop...
 
 + termite - virtual terminal
 + rofi - for run programs
 + lemonbar - top bar
-+ Noto font for GTK app & Monoid for terminal
++ monoid for terminal
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
-+ wallpaper - [Imgur](http://imgur.com/PkmNwoR)
++ wallpaper - [Imgur](http://i.imgur.com/L8iFcs7.jpg)
 
 ## Requirements for lemonbar
 

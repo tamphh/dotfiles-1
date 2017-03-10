@@ -7,35 +7,35 @@ herbstclient pad $monitor ${HEIGHT} 11 ${HEIGHT} 11
 set -f 
 
 getName() {
-    local icon=$(pIconUnderline ${WHITE} ${BLUE2} ${GENTOO})
+    local icon=$(pIconUnderline ${WHITE} ${RED2} ${GENTOO})
     local cmd="$(uname -n)"
-    local cmdEnd=$(pTextUnderline ${WHITE} ${BLUE} " ${cmd}")
+    local cmdEnd=$(pTextUnderline ${WHITE} ${RED} " ${cmd}")
     echo " ${icon}${cmdEnd}"
 }
 
 getMyIp() {
     local icon=$(pIcon ${YELLOW} ${CIP})
-    local cmd="$(curl -s https://4.ifcfg.me/)"
+    local cmd="$(curl -s https://ifcfg.me/)"
     local cmdEnd=$(pText ${WHITE} "${cmd}")
     echo " ${icon} ${cmdEnd} ${icon}"
 }
 
 getDay() {
-    local icon=$(pIconUnderline ${BLACK2} ${BLUE2} ${CTIME})
+    local icon=$(pIconUnderline ${BLACK2} ${BLACK2} ${CTIME})
     local cmd=" $(date '+%A %d %b')" 
-    local cmdEnd=$(pTextUnderline ${WHITE} ${BLUE} "${cmd}")
+    local cmdEnd=$(pTextUnderline ${WHITE} ${BLACK} "${cmd}")
     echo "${icon}${cmdEnd}"
 }
 
 clock() {
     local icon=$(pIcon ${BLACK2} ${CCLOCK})
     local cmd=$(date +%H:%M)
-    local cmdEnd=$(pText ${WHITE} "${cmd}")
+    local cmdEnd=$(pText ${FG} "${cmd}")
     echo "${icon} ${cmdEnd}"
 }
 
 mail() {
-    local gmaildir=/home/<username>/.mails/Gmail/\[Gmail\].All\ Mail/new
+    local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
     local cmd=$(pAction ${BLACK2} ${BG} "herbstclient spawn termite -e mutt" ${CMAIL})
     local count=0
     if [[ ! -n $(ls "${gmaildir}") ]]; then

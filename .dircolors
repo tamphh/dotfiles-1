@@ -232,11 +232,11 @@ EXEC 01;34
 .h 01;36
 .py 01;31
 .sh 01;31
-.zsh 01;35
+.zsh 01;38
 .ksh 01;35
 
 # crypted file
-.gpg 31;05
+.gpg 03;02
 .asc 33;06
 .crt 35;05
 .pem 34;05
