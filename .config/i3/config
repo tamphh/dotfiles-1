@@ -1,0 +1,28 @@
+bindsym Mod4+space exec /usr/bin/rofi -show run
+bindsym Mod4+Return exec /usr/bin/termite
+
+bindsym Mod4+1 workspace i
+bindsym Mod4+2 workspace ii
+bindsym Mod4+3 workspace iii
+bindsym Mod4+4 workspace iv
+bindsym Mod4+5 workspace v
+bindsym Mod4+6 workspace vi
+bindsym Mod4+Tab workspace back_and_forth
+
+#gaps inner 15
+#gaps outer 0
+
+bindsym Mod4+Shift+C reload
+bindsym Mod4+Shift+R restart
+bindsym Mod4+Shift+E exit
+
+bindsym Mod1+Ctrl+Up exec mpc volume +2
+bindsym Mod1+Ctrl+Down exec mpc volume -2
+
+bar {
+  i3bar_command ~/.config/i3/panel-top.sh
+}
+
+bar {
+  i3bar_command ~/.config/i3/panel-bottom.sh
+}
