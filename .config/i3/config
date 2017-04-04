@@ -1,28 +1,75 @@
-bindsym Mod4+space exec /usr/bin/rofi -show run
-bindsym Mod4+Return exec /usr/bin/termite
+#
+# Settings
+#
 
-bindsym Mod4+1 workspace i
-bindsym Mod4+2 workspace ii
-bindsym Mod4+3 workspace iii
-bindsym Mod4+4 workspace iv
-bindsym Mod4+5 workspace v
-bindsym Mod4+6 workspace vi
-bindsym Mod4+Tab workspace back_and_forth
+font -*-dina-medium-r-*-*-8-*-*-*-*-*-*-*
 
-#gaps inner 15
-#gaps outer 0
+set $ws1 i
+set $ws2 ii
+set $ws3 iii
+set $ws4 iv
+set $ws5 v
+set $ws6 vi
+
+gaps inner 15
+gaps outer 0
+
+#                         border  bg      text    indicat child_border
+client.focused            #383838 #170c18 #BBBBBB #4F4F4F #170c18
+client.focused_inactive   #1A1A1A #0d010d #424242 #121212 #0d010d
+client.unfocused          #030706 #0d010d #4F4F4F #4F4F4F #0d010d
+client.urgent             #1A1A1A #0d010d #a5a5a5 #1A1A1A #0d010d
+client.background         #121212
+
+#
+# Shortcut
+#
 
 bindsym Mod4+Shift+C reload
 bindsym Mod4+Shift+R restart
 bindsym Mod4+Shift+E exit
+bindsym Mod4+Z kill
 
+bindsym Mod4+1 workspace $ws1
+bindsym Mod4+2 workspace $ws2
+bindsym Mod4+3 workspace $ws3
+bindsym Mod4+4 workspace $ws4
+bindsym Mod4+5 workspace $ws5
+bindsym Mod4+6 workspace $ws6
+bindsym Mod4+Tab workspace back_and_forth
+
+bindsym Mod4+Shift+1 move container to workspace $ws1
+bindsym Mod4+Shift+2 move container to workspace $ws2
+bindsym Mod4+Shift+3 move container to workspace $ws3
+bindsym Mod4+Shift+4 move container to workspace $ws4
+bindsym Mod4+Shift+5 move container to workspace $ws5
+bindsym Mod4+Shift+6 move container to workspace $ws6
+
+#
+# Personal Shortcut
+#
+
+bindsym Mod4+space exec /usr/bin/rofi -show run
+bindsym Mod4+Return exec /usr/bin/termite
 bindsym Mod1+Ctrl+Up exec mpc volume +2
 bindsym Mod1+Ctrl+Down exec mpc volume -2
 
-bar {
-  i3bar_command ~/.config/i3/panel-top.sh
-}
+#
+# Wm Layout
+# 
 
-bar {
-  i3bar_command ~/.config/i3/panel-bottom.sh
-}
+# xprop command for find class name
+for_window [class="Lxappearance"] floating enable
+for_window [class="Sxiv"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="XFontSel"] floating enable
+for_window [class="Gimp"] floating enable
+
+assign [class="Gimp"] → $ws5
+
+#
+# Exec
+#
+
+exec_always --no-startup-id killall lemonbar; sh ~/.config/i3/panel-top.sh &
+exec_always --no-startup-id killall lemonbar; sh ~/.config/i3/panel-bottom.sh &
