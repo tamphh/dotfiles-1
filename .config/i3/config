@@ -11,11 +11,13 @@ set $ws4 iv
 set $ws5 v
 set $ws6 vi
 
+set $mod Mod4
+
 gaps inner 15
 gaps outer 0
 
 #                         border  bg      text    indicat child_border
-client.focused            #383838 #170c18 #BBBBBB #4F4F4F #170c18
+client.focused            #383838 #0e0d0e #BBBBBB #4F4F4F #0e0d0e
 client.focused_inactive   #1A1A1A #0d010d #424242 #121212 #0d010d
 client.unfocused          #030706 #0d010d #4F4F4F #4F4F4F #0d010d
 client.urgent             #1A1A1A #0d010d #a5a5a5 #1A1A1A #0d010d
@@ -25,34 +27,55 @@ client.background         #121212
 # Shortcut
 #
 
-bindsym Mod4+Shift+C reload
-bindsym Mod4+Shift+R restart
-bindsym Mod4+Shift+E exit
-bindsym Mod4+Z kill
+bindsym $mod+Shift+C reload
+bindsym $mod+Shift+R restart
+bindsym $mod+Shift+E exit
+bindsym $mod+Z kill
 
-bindsym Mod4+1 workspace $ws1
-bindsym Mod4+2 workspace $ws2
-bindsym Mod4+3 workspace $ws3
-bindsym Mod4+4 workspace $ws4
-bindsym Mod4+5 workspace $ws5
-bindsym Mod4+6 workspace $ws6
-bindsym Mod4+Tab workspace back_and_forth
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+Tab workspace back_and_forth
 
-bindsym Mod4+Shift+1 move container to workspace $ws1
-bindsym Mod4+Shift+2 move container to workspace $ws2
-bindsym Mod4+Shift+3 move container to workspace $ws3
-bindsym Mod4+Shift+4 move container to workspace $ws4
-bindsym Mod4+Shift+5 move container to workspace $ws5
-bindsym Mod4+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym Ctrl+$mod+l split h
+bindsym Ctrl+$mod+j split v
+
+bindsym $mod+s floating toggle
 
 #
 # Personal Shortcut
 #
 
-bindsym Mod4+space exec /usr/bin/rofi -show run
-bindsym Mod4+Return exec /usr/bin/termite
+bindsym $mod+space exec /usr/bin/rofi -show run
+bindsym $mod+Return exec /usr/bin/termite
+
 bindsym Mod1+Ctrl+Up exec mpc volume +2
 bindsym Mod1+Ctrl+Down exec mpc volume -2
+bindsym Mod1+Ctrl+Left exec mpc prev
+bindsym Mod1+Ctrl+Right exec mpc next
+bindsym Mod1+Shift+d exec mpc del 0
+
+bindsym Mod5+F7 exec pkill -USR1 redshift
+bindsym Mod5+F8 exec xbacklight -dec 1 
+bindsym Mod5+F9 exec xbacklight -inc 2 
+#bindsym Mod5+f exec termite -e ranger
+#bindsym Mod5+n exec termite -e ncmpcpp
+#bindsym Mod5+ exec \"vivaldi -incognito --proxy-server=\"http://localhost:39901\" --host-resolver-rules=\"MAP * 0.0.0.0,EXCLUDE localhost\"\"
 
 #
 # Wm Layout
@@ -60,7 +83,7 @@ bindsym Mod1+Ctrl+Down exec mpc volume -2
 
 # xprop command for find class name
 for_window [class="Lxappearance"] floating enable
-for_window [class="Sxiv"] floating enable
+for_window [class="Sxiv|feh"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="XFontSel"] floating enable
 for_window [class="Gimp"] floating enable
