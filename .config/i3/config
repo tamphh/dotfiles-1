@@ -13,8 +13,11 @@ set $ws6 vi
 
 set $mod Mod4
 
-gaps inner 15
+gaps inner 20
 gaps outer 0
+
+for_window [class="^.*"] border normal 0
+for_window [class=".*"] title_format " >_ %title "
 
 #                         border  bg      text    indicat child_border
 client.focused            #383838 #0e0d0e #BBBBBB #4F4F4F #0e0d0e
@@ -57,6 +60,23 @@ bindsym Ctrl+$mod+j split v
 
 bindsym $mod+s floating toggle
 
+mode "resize" {
+    bindsym Left resize shrink width 1 px or 1 ppt
+    bindsym Up resize grow height 1 px or 1 ppt
+    bindsym Down resize shrink height 1 px or 1 ppt
+    bindsym Right resize grow width 1 px or 1 ppt
+
+    bindsym h resize shrink width 1 px or 1 ppt
+    bindsym k resize grow height 1 px or 1 ppt
+    bindsym j resize shrink height 1 px or 1 ppt
+    bindsym l resize grow width 1 px or 1 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
 #
 # Personal Shortcut
 #
@@ -87,6 +107,7 @@ for_window [class="Sxiv|feh"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="XFontSel"] floating enable
 for_window [class="Gimp"] floating enable
+for_window [class="Zathura"] floating enable
 
 assign [class="Gimp"] → $ws5
 
