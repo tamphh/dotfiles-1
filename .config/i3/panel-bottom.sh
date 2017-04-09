@@ -16,7 +16,7 @@ mkfifo "$PANEL_FIFO"
 source $(dirname $0)/config_bar
 
 music() {
-    local icon=$(pIcon ${BLACK2} ${CSOUND})
+    local icon=$(pIcon ${GREEN} ${CSOUND})
     local stat="$(mpc status | grep \# | awk '{print $1}')"
     local artist=$(mpc -f %artist% current)
     local musicname=$(mpc -f %title% current)
@@ -30,11 +30,11 @@ music() {
         cmd=" No Sound"
     fi
 
-    echo "${icon}$(pText ${FG} "${cmd}")"
+    echo "${icon}$(pText ${WHITE} "${cmd}")"
 }
 
 volume() {
-    local icon=$(pIcon ${BLACK2} ${CVOLUME})
+    local icon=$(pIcon ${GREEN} ${CVOLUME})
     local cmd="$(mpc volume | awk '{print $2}')"
     [[ -z ${volume%?} ]] && volume='100%'
     local clr=$(pText ${FG} "${cmd}")
@@ -46,33 +46,33 @@ net() {
     local _GETETH=$(ip a | grep "state UP" | awk '{ORS=""}{print $2}' | cut -d ':' -f 1)
     local _status=${_GETIWL:-$_GETETH}
     local _status2="${_status:-Down}"
-    local icon="$(pIcon ${BLACK2} ${CNET})"
-    local cmd=$(pText ${FG} " ${_status2}")
+    local icon="$(pIcon ${GREEN} ${CNET})"
+    local cmd=$(pText ${WHITE} " ${_status2}")
 
     echo "${icon}${cmd}"
 } 
 
 wifi_str() {
-    local _icon=$(pIcon ${BLACK2} ${WIFI_STR})
+    local _icon=$(pIcon ${GREEN} ${WIFI_STR})
     local _cmd=$(/sbin/iwconfig 2>/dev/null | grep "Link Quality" | cut -d "=" -f 2 | awk '{print $1}')
     echo "${_icon} ${_cmd}"
 }
 
 cpu() {
-    local icon=$(pIcon ${BLACK2} ${CCPU})
+    local icon=$(pIcon ${GREEN} ${CCPU})
     local cmd=" $(cat /proc/loadavg | awk '{print $1}')"
     local cmd+=" $(cat /proc/loadavg | awk '{print $4}')"
     local cmd+=" $(cat /proc/cpuinfo| grep MHz | awk '{ORS=" "}{print $4}' | sed -e 's/.000//g' | cut -f 1)"
 
-    local clr=$(pText ${FG} "${cmd}")
+    local clr=$(pText ${WHITE} "${cmd}")
     echo "${icon}${clr}"
 }
 
 ram() {
-    local icon=$(pIcon ${BLACK2} ${CRAM})
+    local icon=$(pIcon ${GREEN} ${CRAM})
     local cmd=$(free -m | grep Mem | awk '{print $3}')
     cmd+=" Mb"
-    local clr=$(pText ${FG} "${cmd}")
+    local clr=$(pText ${WHITE} "${cmd}")
     echo "${icon} ${clr}"
 }
 
@@ -119,6 +119,6 @@ while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
     tries_left=$((tries_left - 1))
 done
 
-[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+[ -n "$wid" ] && xdo above -t "$(xdo id -N I3Bottom -n root | sort | head -n 1)" "$wid"
 
 wait

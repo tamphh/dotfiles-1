@@ -24,23 +24,9 @@ URxvt*cursorColor:                  #737077
 URxvt*scrollColor:                  #151515
 URxvt*underlineURLs:                true
 
-! with tamsyn
-!URxvt*letterSpace:                  0.3 
-
-! Disable perl
-!URxvt.perl-ext:                 
-!URxvt.perl-ext-common: 
-
-!URxvt*font: xft:Tamsyn:style=Regular:pixelsize=16
 URxvt*font: -*-dina-medium-r-*-*-*-90-*-*-*-*-*-*
 URxvt*italic: -*-dina-medium-*-*-*-*-90-*-*-*-*-*-*
 URxvt*boldFont: -*-dina-bold-r-*-*-*-90-*-*-*-*-*-*
-!URxvt*font: -*-marathonmod-*-*-*-*-14-*-*-*-*-*-*-*
-!Urxvt*font: -*-tewii-*-*-*-*-*-*-*-*-*-*-*-*
-!URxvt*font: -*-marathon-medium-*-*-*-*-*-*-*-*-*-*-*
-!URxvt*boldFont: -*-marathon-bold-*-*-*-*-*-*-*-*-*-*-*
-!URxvt*boldFont: -*-marathon-*-*-*-*-*-*-*-*-*-*-*-*
-!URxvt*boldFont: xft:Tamsyn:style=Bold:pixelsize=16
  
 !--------------------------------------------
 ! URxvt Colors
@@ -52,34 +38,34 @@ URxvt.colorUL:                       #e9cfd3
 !--------------------------------------------
 ! General Colors
 
-*background:    #000405
+*background:    #0f0a13
 *foreground:    #9aa8a9
-*.cursorColor:  #2a2a20
+*.cursorColor:  #4a3139
 
-!black
-*color0: #071b1e
-*color8: #405155
-!!red
-*color1: #62394c
-*color9: #875157
-!!green
-*color2: #34776d
-*color10: #619d8e
-!!yellow
-*color3: #d1aa54
-*color11: #f6d586
-!!blue
-*color4: #2f4653
-*color12: #5b7681
-!!magenta
-*color5:  #403248
-*color13: #644d5e
-!!cyan
-*color6: #276f7b
-*color14:  #67a0a5
-!!white
-*color7:  #bccecd
-*color15: #f9fffd
+! Black
+*color0: #1c0c18
+*color8: #1a1e31
+! Red
+*color1: #873e54
+*color9: #bc3962
+! Green
+*color2: #2a5b6f
+*color10: #67808c
+! Yellow
+*color3: #d83746
+*color11: #fc5d7f
+! Blue
+*color4: #3e3a4d
+*color12: #685589
+! Magenta
+*color5:  #422138
+*color13: #8b4779
+! Cyan
+*color6: #164569
+*color14: #38718d
+! White
+*color7:  #d4b9d7
+*color15: #fbdeff
 
 
 !-------------------------------------------
@@ -109,10 +95,10 @@ rofi.separator-style:               none
 rofi.width:                         40
 ! rofi state:                          'bg'     'fg'     'bgalt'     'hlbg'    'hlfg'
 ! Color scheme for normal row
-rofi.color-normal:                  argb:00000000, #6a8582, argb:00000000, #000405,#e1ede3
+rofi.color-normal:                  argb:00000000, #8b4779, argb:00000000, #16101b,#ffffff
 ! Color scheme for urgent row
-rofi.color-urgent:                  argb:00000000, #6a8582, argb:00000000, #000405,#e1ede3
+rofi.color-urgent:                  argb:00000000, #8b4779, argb:00000000, #16101b,#ffffff
 ! Color scheme for active row
-rofi.color-active:                  argb:00000000, #6a8582, argb:00000000, #000405,#e1ede3
+rofi.color-active:                  argb:00000000, #8b4779, argb:00000000, #16101b,#ffffff
 ! Color scheme window
-rofi.color-window:                  argb:99000405, #000,#6a8582
+rofi.color-window:                  argb:ee0f0a13, #000,#fbdeff

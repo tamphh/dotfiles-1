@@ -30,14 +30,14 @@ getMyIp() {
 }
 
 getDay() {
-    local icon=$(pIconUnderline ${BLACK2} ${BLACK2} ${CTIME})
+    local icon=$(pIconUnderline ${GREEN} ${BLACK2} ${CTIME})
     local cmd=" $(date '+%A %d %b')" 
     local cmdEnd=$(pTextUnderline ${WHITE} ${BLACK} "${cmd}")
     echo "${icon}${cmdEnd}"
 }
 
 clock() {
-    local icon=$(pIcon ${BLACK2} ${CCLOCK})
+    local icon=$(pIcon ${GREEN} ${CCLOCK})
     local cmd=$(date +%H:%M)
     local cmdEnd=$(pText ${FG} "${cmd}")
     echo "${icon} ${cmdEnd}"
@@ -45,7 +45,7 @@ clock() {
 
 mail() {
     local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
-    local cmd=$(pAction ${BLACK2} ${BG} "herbstclient spawn termite -e mutt" ${CMAIL})
+    local cmd=$(pAction ${GREEN} ${BG} "i3 'exec termite -e mutt'" ${CMAIL})
     local count=0
     if [[ ! -n $(ls "${gmaildir}") ]]; then
         count=0
@@ -74,24 +74,16 @@ energy() {
     else
         batCap="wttf"
     fi
-    echo "$(pIcon ${BLACK2} $icon) $(pText "#685667" ${batCap})"
+    echo "$(pIcon ${GREEN} $icon) $(pText "#685667" ${batCap})"
 }
 
 ws() {
     local cmd=$(i3-msg -t get_outputs | sed 's/.*"current_workspace":"\([^"]*\)".*/\1/')
-    local icon=$(pIcon ${BLACK2} " >> " )
-    local icon2=$(pIcon ${BLACK2} " << " )
+    local icon=$(pIcon ${GREEN} " >> " )
+    local icon2=$(pIcon ${GREEN} " << " )
     local cmdEnd=$(pText ${FG} "${cmd}")
     echo "${icon} ${cmdEnd} ${icon2}"
 }
-
-#workspace() {
-    #list_workspace = $(i3-msg -t get_outputs, for i in thisCommand)
-    #get_current_workspace = $(i3-msg -t get_outputs | grep current_workspace)
-    #get_workspace_full_1 = $(i3-msg -t get_outputs | grep active)
-    #get_workspace_full_2 = $(i3-msg -t get_workspaces | grep name)
-    #i3-msg -t get_workspaces | awk -v RS=',"' -F: '/^name/ {print $2}' | sed -e 's/\"/''/g' 
-#}
 
 {
     while :; do
@@ -134,6 +126,6 @@ while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
     tries_left=$((tries_left - 1))
 done
 
-[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+[ -n "$wid" ] && xdo above -t "$(xdo id -N I3Top -n root | sort | head -n 1)" "$wid"
 
 wait

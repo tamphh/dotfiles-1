@@ -11,14 +11,14 @@ class Default(ColorScheme):
             return default_colors
 
         elif context.in_browser:
-            fg = 248
+            fg = green
             if context.selected:
                 attr = reverse
             else:
                 attr = normal
 
         if context.empty or context.error:
-            fg = 108
+            fg = yellow
             attr = bold
         if context.media:
             if context.image:
@@ -30,13 +30,13 @@ class Default(ColorScheme):
             if context.document:
                 fg = 107
             else:
-                fg = 96 
+                fg = white
         if context.container:
             attr != bold
             fg = 169
         if context.directory:
             attr != bold
-            fg = 108
+            fg = 73    
         elif context.executable and not \
                 any ((context.media, context.container,
                     context.fifo, context.socket)):

@@ -39,5 +39,7 @@ compton &
 #exec bspwm-launch
 
 ### Herbstluftwm
-exec herbstluftwm --locked
+#exec herbstluftwm --locked
 
+### i3
+exec i3
