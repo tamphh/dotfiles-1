@@ -159,7 +159,7 @@ EXEC 01;34
 .xpm 01;37
 .tif 01;37
 .tiff 01;37
-.png 01;37
+.png 01;38
 .svg 01;37
 .svgz 01;37
 .mng 01;37
@@ -191,14 +191,14 @@ EXEC 01;34
 .emf 01;37
 
 # movie formats
-.avi 01;30
-.mkv 01;30
-.mp4 01;30
+.avi 01;39
+.mkv 01;39
+.mp4 01;39
 
 # audio formats
 .aac 01;34
 .au 01;34
-.flac 01;34
+.flac 01;33
 .m4a 01;34
 .mid 01;34
 .midi 01;34
@@ -220,23 +220,26 @@ EXEC 01;34
 .php 31
 .html 32
 .ejs 32
-.js 33
-.ts 33
+.yml 37
+.js 01;33
+.ts 01;37
 .xml 06
-.sass 34
-.scss 34
-.css 34
+.md 33
+.sass 01;31
+.scss 01;32
+.css 01;35
 
 # source code
-.c 01;36
+.c 01;31;5;240
 .h 01;36
 .py 01;31
 .sh 01;31
+.rb 01;33
 .zsh 01;38
 .ksh 01;35
 
 # crypted file
-.gpg 03;02
-.asc 33;06
-.crt 35;05
-.pem 34;05
+.gpg 00;38;5;166
+.asc 00;38;5;166
+.crt 00;38;5;166
+.pem 00;38;5;166
