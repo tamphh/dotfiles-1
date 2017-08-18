@@ -20,10 +20,10 @@ for_window [class="^.*"] border normal 0
 for_window [class=".*"] title_format " >_ %title "
 
 #                         border  bg      text    indicat child_border
-client.focused            #383838 #0e0d0e #BBBBBB #4F4F4F #0e0d0e
-client.focused_inactive   #1A1A1A #0d010d #424242 #121212 #0d010d
-client.unfocused          #030706 #0d010d #4F4F4F #4F4F4F #0d010d
-client.urgent             #1A1A1A #0d010d #a5a5a5 #1A1A1A #0d010d
+client.focused            #232323 #181818 #bdb8c1 #4F4F4F #0e0d0e
+client.focused_inactive   #1A1A1A #181818 #424242 #121212 #0d010d
+client.unfocused          #030706 #181818 #4F4F4F #4F4F4F #0d010d
+client.urgent             #1A1A1A #181818 #a5a5a5 #1A1A1A #0d010d
 client.background         #121212
 
 #
