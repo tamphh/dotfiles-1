@@ -15,12 +15,12 @@
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
-+ wallpaper - [Imgur](http://i.imgur.com/weYSXtX.jpg)
++ wallpaper - [Imgur](https://i.imgur.com/sWA6CJ3.jpg)
 
 ## Requirements for lemonbar
 
 + dina font
-+ curl - used for print your IP
++ curl - used for get your IP address
 + siji font - print icon into lemonbar
 + mpd - music program
 + mpc - control music behind sxhkd
