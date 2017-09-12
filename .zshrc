@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Themes in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="kolo"
+ZSH_THEME="dstufft"
 
 # Bindkey fr
 #bindkey "\e[2~"  yank
@@ -29,6 +29,8 @@ export GNUPGHOME="$HOME/.gnupg"
 export SSH_KEY_PATH="~/.ssh/ssh_key"
 export GPG_TTY=$(tty)
 export PASSWD=~/.passwords
+export _JAVA_AWT_WM_NONREPARENTING=1
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/var/tmp
 
 # With Zsh and Termite
 if [[ $TERM == xterm-termite ]] ; then
@@ -47,12 +49,13 @@ test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || \
 
 # man page with less
 man() {
-    LESS_TERMCAP_md=$'\e[01;35m' \
+    LESS_TERMCAP_mb=$'\e[0;31m' \
+        LESS_TERMCAP_md=$'\e[01;35m' \
         LESS_TERMCAP_me=$'\e[0m' \
         LESS_TERMCAP_se=$'\e[0m' \
         LESS_TERMCAP_so=$'\e[01;31;31m' \
         LESS_TERMCAP_ue=$'\e[0m' \
-        LESS_TERMCAP_us=$'\e[00;36m' \
+        LESS_TERMCAP_us=$'\e[0;36m' \
         command man "$@"
 }
 
@@ -78,7 +81,12 @@ pw() {
    fi
 }
 
+# Function for upload file to https://transfer.sh/
+# Use : $ transfer hello.txt
 transfer() { 
+    torIp=127.0.0.1
+    torPort=9050
+
     if [ $# -eq 0 ]; then 
         echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; 
         return 1; 
@@ -86,9 +94,9 @@ transfer() {
     tmpfile=$( mktemp -t transferXXX ); 
     if tty -s; then
         basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); 
-        curl --socks5-hostname 127.0.0.1:51248 --retry 3 --connect-timeout 60 --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; 
+        curl --socks5-hostname ${torIp}:${torPort} --retry 3 --connect-timeout 60 --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; 
     else 
-        curl --socks5-hostname 127.0.0.1:51248 --retry 3 --connect-timeout 60 --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; 
+        curl --socks5-hostname ${torIp}:${torPort} --retry 3 --connect-timeout 60 --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; 
     fi;
     cat $tmpfile; 
     rm -f $tmpfile; 

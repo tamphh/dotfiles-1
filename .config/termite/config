@@ -33,47 +33,47 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-cursor = #4a3139
-cursor_foreground = #873e54
-foreground = #b7a8b8
+cursor = #515e71
+cursor_foreground =  #28292c
+foreground = #e1f0e4
 #foreground_bold = #1c5879
-#background = #171717
+#background = #1e2832
 
 # 20% background transparency (requires a compositor)
-background = rgba(23,23,23,0.99)
+background = rgba(30,40,50,0.99)
 
 # if unset, will reverse foreground and background
-highlight = #101010
+highlight = #25313c
 
 # colors from color0 to color254 can be set
 
 # black
-color0= #383838
-color8= #1a1e31
+color0= #353e47
+color8= #59626b
 
 # red
-color1= #5f2021
-color9= #8b3238
+color1= #675665
+color9= #927a90
 
 # Green
-color2= #605a5a
-color10= #96898a
+color2= #3a6469
+color10= #5a9295
 
 # Yellow
-color3= #d886ca
-color11= #e7a6e6
+color3= #a5b0aa
+color11= #e1f0e4
 
 # Blue
-color4 = #51437a
-color12 = #74669f
+color4 = #515e71
+color12 = #6e7f99
 
 # Magenta
-color5 =  #702053
-color13 = #b8629c
+color5 =  #635d73
+color13 = #81779d
 
 # Cyan
-color6 = #3e6a6a
-color14 = #519693
+color6 = #2b908c
+color14 = #3bc7bc
 
 # White
 color7=  #bdb8c1

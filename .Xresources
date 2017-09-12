@@ -39,7 +39,7 @@ URxvt.colorUL:                       #e9cfd3
 ! General Colors
 
 ! maybe need full path here
-#include "~/.colors/git"
+#include "~/.colors/luna"
 
 !-------------------------------------------
 ! Man pages colors

@@ -76,7 +76,7 @@ getXresColor() {
 }
 
 # colors
-BG="#de121215"
+BG="$(getXresColor background)"
 FG="$(getXresColor foreground)"
 BLACK="$(getXresColor color0)"
 BLACK2="$(getXresColor color8)"

@@ -16,36 +16,36 @@ mkfifo "$PANEL_FIFO"
 source $(dirname $0)/config_bar
 
 getName() {
-    local icon=$(pIconUnderline ${WHITE} ${RED2} ${GENTOO})
+    local icon=$(pIcon ${FG} ${GENTOO})
     local cmd="$(uname -n)"
-    local cmdEnd=$(pTextUnderline ${WHITE} ${RED} " ${cmd}")
-    echo " ${icon}${cmdEnd}"
+    local cmdEnd=$(pText ${WHITE} "${cmd}")
+    echo "${icon} ${cmdEnd}"
 }
 
 getMyIp() {
-    local icon=$(pIcon ${YELLOW} ${CIP})
+    local icon=$(pIcon ${CYAN} ${CIP})
     local cmd="$(curl -s https://ifcfg.me/)"
-    local cmdEnd=$(pText ${WHITE} "${cmd}")
+    local cmdEnd=$(pText ${FG} "${cmd}")
     echo " ${icon} ${cmdEnd} ${icon}"
 }
 
 getDay() {
-    local icon=$(pIconUnderline ${GREEN} ${BLACK2} ${CTIME})
+    local icon=$(pIcon ${MAGENTA} ${CTIME})
     local cmd=" $(date '+%A %d %b')" 
-    local cmdEnd=$(pTextUnderline ${WHITE} ${BLACK} "${cmd}")
+    local cmdEnd=$(pText ${WHITE} "${cmd}")
     echo "${icon}${cmdEnd}"
 }
 
 clock() {
-    local icon=$(pIcon ${GREEN} ${CCLOCK})
+    local icon=$(pIcon ${MAGENTA} ${CCLOCK})
     local cmd=$(date +%H:%M)
-    local cmdEnd=$(pText ${FG} "${cmd}")
+    local cmdEnd=$(pText ${FG} ${cmd})
     echo "${icon} ${cmdEnd}"
 }
 
 mail() {
     local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
-    local cmd=$(pAction ${GREEN} ${BG} "i3 'exec termite -e mutt'" ${CMAIL})
+    local cmd=$(pAction ${BLUE} ${BG} "i3 'exec termite -e mutt'" ${CMAIL})
     local count=0
     if [[ ! -n $(ls "${gmaildir}") ]]; then
         count=0
@@ -74,13 +74,13 @@ energy() {
     else
         batCap="wttf"
     fi
-    echo "$(pIcon ${GREEN} $icon) $(pText "#685667" ${batCap})"
+    echo "$(pIcon ${MAGENTA} $icon) $(pText ${WHITE} ${batCap})"
 }
 
 ws() {
     local cmd=$(i3-msg -t get_outputs | sed 's/.*"current_workspace":"\([^"]*\)".*/\1/')
-    local icon=$(pIcon ${GREEN} " >> " )
-    local icon2=$(pIcon ${GREEN} " << " )
+    local icon=$(pIcon ${YELLOW} " >* " )
+    local icon2=$(pIcon ${YELLOW} " *< " )
     local cmdEnd=$(pText ${FG} "${cmd}")
     echo "${icon} ${cmdEnd} ${icon2}"
 }
@@ -112,7 +112,7 @@ ws() {
                 sysR="${line#?}"
                 ;;
         esac
-        printf "%s\n" "%{l}${sysL}%{c}${sysC}%{r}${sysR}"
+        printf "%s\n" "%{l} ${sysL}%{c}${sysC}%{r}${sysR} "
     done
 } < "$PANEL_FIFO" | lemonbar \
     -g x${HEIGHT} -u 2 -B ${BG} -F ${FG} -f "${FONT}" -f "${FONT_ICON}" | sh &
