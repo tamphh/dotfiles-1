@@ -26,7 +26,8 @@
 + mpc - control music behind sxhkd
 + iw - for look AP (iwgetid - iwconfig)
 
-### If you have trouble for install bspwm: follow this [wiki](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)
+### If you have trouble for install bspwm: follow this [wiki](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)  
+### If you have trouble for install i3-gaps: follow this [wiki](https://github.com/szorfein/dotfiles/wiki/i3-gaps)
 
 Current Desktop: ([i3-gaps](https://github.com/Airblader/i3))
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")
