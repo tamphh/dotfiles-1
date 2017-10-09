@@ -7,7 +7,6 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-#font = Monoid 8    
 font = Iosevka Term Medium 9
 scrollback_lines = 10000
 search_wrap = true
@@ -34,46 +33,46 @@ filter_unmatched_urls = true
 
 [colors]
 cursor = #515e71
-cursor_foreground =  #28292c
-foreground = #e1f0e4
-#foreground_bold = #1c5879
-#background = #1e2832
+cursor_foreground = #28292c
+foreground = #a6d1e2
+#foreground_bold = #d5f1f4
+background = #0a0317
 
 # 20% background transparency (requires a compositor)
-background = rgba(30,40,50,0.99)
+#background = rgba(.8,.4,5.9,.99)
 
 # if unset, will reverse foreground and background
-highlight = #25313c
+highlight = #2d425d
 
 # colors from color0 to color254 can be set
 
 # black
-color0= #353e47
-color8= #59626b
+color0= #322c41
+color8= #504664
 
 # red
-color1= #675665
-color9= #927a90
+color1= #832757
+color9= #a1386e
 
 # Green
-color2= #3a6469
-color10= #5a9295
+color2= #2a5d7c
+color10= #39779c
 
 # Yellow
-color3= #a5b0aa
-color11= #e1f0e4
+color3= #f2b97d
+color11= #fdca95
 
 # Blue
-color4 = #515e71
-color12 = #6e7f99
+color4 = #2a2b86
+color12 = #393ba2
 
 # Magenta
-color5 =  #635d73
-color13 = #81779d
+color5 =  #553481
+color13 = #6b43a1
 
 # Cyan
-color6 = #2b908c
-color14 = #3bc7bc
+color6 = #3b7693
+color14 = #4f8caa
 
 # White
 color7=  #bdb8c1

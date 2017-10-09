@@ -15,7 +15,7 @@
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
-+ wallpaper - [Imgur](https://i.imgur.com/sWA6CJ3.jpg)
++ wallpaper - [Imgur](https://imgur.com/chmcGFO.jpg)
 
 ## Requirements for lemonbar
 
@@ -26,8 +26,10 @@
 + mpc - control music behind sxhkd
 + iw - for look AP (iwgetid - iwconfig)
 
-### If you have trouble for install bspwm: follow this [wiki](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)  
-### If you have trouble for install i3-gaps: follow this [wiki](https://github.com/szorfein/dotfiles/wiki/i3-gaps)
+### Troubleshoot
+
++ Install on bspwm: [wiki](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)  
++ i3-gaps: [wiki](https://github.com/szorfein/dotfiles/wiki/i3-gaps)
 
 Current Desktop: ([i3-gaps](https://github.com/Airblader/i3))
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")

@@ -4,12 +4,12 @@
 
 font -*-dina-medium-r-*-*-8-*-*-*-*-*-*-*
 
-set $ws1 i
-set $ws2 ii
-set $ws3 iii
-set $ws4 iv
-set $ws5 v
-set $ws6 vi
+set $ws1 mail
+set $ws2 web
+set $ws3 code
+set $ws4 media
+set $ws5 gimp
+set $ws6 focus
 
 set $mod Mod4
 
@@ -20,10 +20,10 @@ for_window [class="^.*"] border normal 0
 for_window [class=".*"] title_format " >_ %title "
 
 #                         border  bg      text    indicat child_border
-client.focused            #232323 #232f3b #d0f3eb #4F4F4F #212a33
-client.focused_inactive   #1A1A1A #232f3b #536d73 #121212 #212a33
-client.unfocused          #030706 #232f3b #636d73 #4F4F4F #212a33
-client.urgent             #1A1A1A #232f3b #a5a5a5 #1A1A1A #212a33
+client.focused            #221535 #221535 #d0f3eb #4F4F4F #212a33
+client.focused_inactive   #1d122d #1d122d #536d73 #121212 #212a33
+client.unfocused          #160e22 #160e22 #636d73 #4F4F4F #241637
+client.urgent             #21051d #080312 #a5a5a5 #1A1A1A #212a33
 client.background         #1b2026
 
 #

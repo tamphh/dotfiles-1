@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Themes in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="dstufft"
+ZSH_THEME="af-magic"
 
 # Bindkey fr
 #bindkey "\e[2~"  yank

@@ -23,7 +23,7 @@ getName() {
 }
 
 getMyIp() {
-    local icon=$(pIcon ${CYAN} ${CIP})
+    local icon=$(pIcon ${MAGENTA2} ${CIP})
     local cmd="$(curl -s https://ifcfg.me/)"
     local cmdEnd=$(pText ${FG} "${cmd}")
     echo " ${icon} ${cmdEnd} ${icon}"
@@ -79,8 +79,8 @@ energy() {
 
 ws() {
     local cmd=$(i3-msg -t get_outputs | sed 's/.*"current_workspace":"\([^"]*\)".*/\1/')
-    local icon=$(pIcon ${YELLOW} " >* " )
-    local icon2=$(pIcon ${YELLOW} " *< " )
+    local icon=$(pIcon ${CYAN} " >* " )
+    local icon2=$(pIcon ${CYAN} " *< " )
     local cmdEnd=$(pText ${FG} "${cmd}")
     echo "${icon} ${cmdEnd} ${icon2}"
 }
