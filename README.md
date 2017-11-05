@@ -15,7 +15,8 @@
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
-+ wallpaper - [Imgur](https://imgur.com/chmcGFO.jpg)
++ xhost - dependencies for Xorg
++ wallpaper - [Imgur](https://i.imgur.com/IZbtbnH.jpg)
 
 ## Requirements for lemonbar
 

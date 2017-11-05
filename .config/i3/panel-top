@@ -22,11 +22,19 @@ getName() {
     echo "${icon} ${cmdEnd}"
 }
 
+# requiert permission from sudo with NOPASSWD !
+# example from /etc/sudoers : ADMINS ALL=(ALL) NOPASSWD: /bin/systemctl restart tor
+torButton() {
+    local cmd="sudo systemctl restart tor"
+    local _cmd=$(pAction ${WHITE2} ${RED} "${cmd}" ${TOR})
+    echo  "$_cmd"
+}
+
 getMyIp() {
     local icon=$(pIcon ${MAGENTA2} ${CIP})
     local cmd="$(curl -s https://ifcfg.me/)"
     local cmdEnd=$(pText ${FG} "${cmd}")
-    echo " ${icon} ${cmdEnd} ${icon}"
+    echo "${icon} ${cmdEnd} ${icon}"
 }
 
 getDay() {
@@ -43,8 +51,9 @@ clock() {
     echo "${icon} ${cmdEnd}"
 }
 
+# Need path or your email directory
 mail() {
-    local gmaildir=/home/izsha/.mails/Gmail-Szorfein/\[Gmail\].All\ Mail/new
+    local gmaildir=/home/user/.mails/Gmail/\[Gmail\].All\ Mail/new
     local cmd=$(pAction ${BLUE} ${BG} "i3 'exec termite -e mutt'" ${CMAIL})
     local count=0
     if [[ ! -n $(ls "${gmaildir}") ]]; then
@@ -92,7 +101,9 @@ ws() {
     done > "$PANEL_FIFO" &
 
     while :; do
-        echo "W$(getName) $(getMyIp)"
+        # Uncomment line bellow if you have TOR and delete other line start with 'W'.
+        # echo "W$(getName)  $(torButton) $(getMyIp)"
+        echo "W$(getName)  $(getMyIp)"
         echo "R$(energy) $(mail) $(getDay) $(clock)"
         sleep 1 || break
     done > "$PANEL_FIFO" &

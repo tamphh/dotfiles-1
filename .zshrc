@@ -2,9 +2,8 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # Themes in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="af-magic"
+# Optionally, you can set ZSH_THEME="random" to find new theme.
+ZSH_THEME="clean"
 
 # Bindkey fr
 #bindkey "\e[2~"  yank

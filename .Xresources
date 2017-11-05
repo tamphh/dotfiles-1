@@ -39,7 +39,7 @@ URxvt.colorUL:                       #e9cfd3
 ! General Colors
 
 ! maybe need full path here
-#include "~/.colors/galactic"
+#include "~/.colors/dragon"
 
 !-------------------------------------------
 ! Man pages colors
@@ -62,7 +62,10 @@ xclock*secondColor:                 #9a875f
 !-------------------------------------------
 ! rofi
 
-rofi.lines:                         6
+rofi.lines:                         2
 rofi.color-enabled:                 true
 rofi.separator-style:               none 
-rofi.width:                         40
+rofi.width:                         33
+rofi.line-padding:                  6
+rofi.hide-scrollbar:                True
+rofi.columns:                       2

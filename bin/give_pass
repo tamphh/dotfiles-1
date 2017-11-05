@@ -1,6 +1,5 @@
 #! /bin/sh
 
-PASSWD=~/.passwords
 FILE="${1:?Need File}"
 FILE_GPG="$PASSWD/$FILE.gpg"
 WORD=${2:?Need keyword}

@@ -18,7 +18,7 @@ class Default(ColorScheme):
                 attr = normal
 
         if context.empty or context.error:
-            fg = yellow
+            fg = magenta
             attr = bold
         if context.media:
             if context.image:

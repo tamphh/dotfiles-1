@@ -20,11 +20,11 @@ for_window [class="^.*"] border normal 0
 for_window [class=".*"] title_format " >_ %title "
 
 #                         border  bg      text    indicat child_border
-client.focused            #221535 #221535 #d0f3eb #4F4F4F #212a33
-client.focused_inactive   #1d122d #1d122d #536d73 #121212 #212a33
-client.unfocused          #160e22 #160e22 #636d73 #4F4F4F #241637
-client.urgent             #21051d #080312 #a5a5a5 #1A1A1A #212a33
-client.background         #1b2026
+client.focused            #101110 #151515 #8d928f #4F4F4F #101110
+client.focused_inactive   #101110 #121312 #6c777a #121212 #101110
+client.unfocused          #101110 #121312 #6c777a #4F4F4F #101107
+client.urgent             #101110 #1f1515 #6c777a #1A1A1A #1f1515
+client.background         #101110
 
 #
 # Shortcut
@@ -91,6 +91,9 @@ bindsym Mod1+Ctrl+Right exec mpc next
 bindsym Mod1+Shift+d exec mpc del 0
 
 bindsym Mod5+F7 exec pkill -USR1 redshift
+# If xbackight doesn't work, use our script brightness [+-]2 
+# bindsym Mod5+F8 exec xbacklight -dec 2 
+# bindsym Mod5+F9 exec xbacklight -inc 2 
 bindsym Mod5+F8 exec xbacklight -dec 2 
 bindsym Mod5+F9 exec xbacklight -inc 2 
 #bindsym Mod5+f exec termite -e ranger
@@ -108,8 +111,10 @@ for_window [class="mpv"] floating enable
 for_window [class="XFontSel"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="Zathura"] floating enable
+for_window [class="Vivaldi-stable"] border pixel 1 
 
 assign [class="Gimp"] → $ws5
+assign [class="Vivaldi-stable"] → $ws2
 
 #
 # Exec

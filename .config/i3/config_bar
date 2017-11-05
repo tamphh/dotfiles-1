@@ -17,6 +17,7 @@ CNET="\ue04b"
 CWIFI="\ue222"
 WIFI_STR="\ue02d"
 CIP=" ++ "
+TOR="\ue1f7"
 # Time
 CTIME="\ue018"
 CPACK="\ue1b7"
@@ -72,7 +73,7 @@ pTextUnderline() {
 }
 
 getXresColor() {
-   echo "$( xrdb -query | grep $1: | grep -oE '#[a-zA-Z0-9]{6}' | cut -c 1- )"
+   echo "$( xrdb -query | grep $1: | grep -oE '#[a-zA-Z0-9]{6}' | cut -c 1- | sed -e 's/#/#FF/g' )"
 }
 
 # colors

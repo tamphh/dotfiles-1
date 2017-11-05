@@ -11,7 +11,7 @@ font = Iosevka Term Medium 9
 scrollback_lines = 10000
 search_wrap = true
 #icon_name = terminal
-#geometry = 640x480
+geometry = 520x340
 
 # "system", "on" or "off"
 cursor_blink = system
@@ -32,51 +32,51 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-cursor = #515e71
+cursor = #313533
 cursor_foreground = #28292c
-foreground = #a6d1e2
+foreground = #6d787b
 #foreground_bold = #d5f1f4
-background = #0a0317
+background = #101110
 
 # 20% background transparency (requires a compositor)
 #background = rgba(.8,.4,5.9,.99)
 
 # if unset, will reverse foreground and background
-highlight = #2d425d
+highlight = #212322
 
 # colors from color0 to color254 can be set
 
 # black
-color0= #322c41
-color8= #504664
+color0= #171917
+color8= #262826
 
 # red
-color1= #832757
-color9= #a1386e
+color1= #665059
+color9= #744b5a
 
 # Green
-color2= #2a5d7c
-color10= #39779c
+color2= #58625a
+color10= #5e6b61
 
 # Yellow
-color3= #f2b97d
-color11= #fdca95
+color3= #616258
+color11= #6d6d66
 
 # Blue
-color4 = #2a2b86
-color12 = #393ba2
+color4 = #6c7179
+color12 = #7e838c
 
 # Magenta
-color5 =  #553481
-color13 = #6b43a1
+color5 =  #666069
+color13 = #7a7080
 
 # Cyan
-color6 = #3b7693
-color14 = #4f8caa
+color6 = #5c7176
+color14 = #67878c
 
 # White
-color7=  #bdb8c1
-color15= #ebcbde
+color7=  #7c8b8e
+color15= #98a7aa
 
 [hints]
 #font = Monospace 12
@@ -88,5 +88,3 @@ padding = 4
 #border = #3f3f3f
 #border_width = 0.5
 #roundness = 2.0
-
-# vim: ft=dosini cms=#%s
