@@ -38,8 +38,8 @@ URxvt.colorUL:                       #e9cfd3
 !--------------------------------------------
 ! General Colors
 
-! maybe need full path here
-#include "~/.colors/dragon"
+! Need full path here
+#include "/home/user/.colors/dragon"
 
 !-------------------------------------------
 ! Man pages colors

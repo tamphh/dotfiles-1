@@ -1,4 +1,6 @@
 # Path to your oh-my-zsh installation.
+# To install it:
+# git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 
 # Themes in ~/.oh-my-zsh/themes/

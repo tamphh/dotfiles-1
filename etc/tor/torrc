@@ -1,0 +1,30 @@
+# Torrc inspirate by:
+# https://wiki.gentoo.org/wiki/Tor
+
+User Tor
+PIDFile /var/run/tor/tor.pid
+Log notice stdout
+
+CircuitBuildTimeout 30
+NumEntryGuards 6
+KeepalivePeriod 60
+NewCircuitPeriod 15
+
+# Performance
+AvoidDiskWrites 1
+NumCPUs 2
+
+# More protection 
+Sandbox 1
+
+# Stream isolation
+# default
+SocksPort 127.0.0.1:9050
+# gpg client
+SocksPort 127.0.0.1:9100
+# privoxy
+SocksPort 127.0.0.1:9150
+
+# if ssh (hidden service)
+HiddenServiceDir /var/lib/tor/hidden_service/ssh
+HiddenServicePort 22 127.0.0.1:22
