@@ -20,11 +20,11 @@ for_window [class="^.*"] border normal 0
 for_window [class=".*"] title_format " >_ %title "
 
 #                         border  bg      text    indicat child_border
-client.focused            #101110 #151515 #8d928f #4F4F4F #101110
-client.focused_inactive   #101110 #121312 #6c777a #121212 #101110
-client.unfocused          #101110 #121312 #6c777a #4F4F4F #101107
-client.urgent             #101110 #1f1515 #6c777a #1A1A1A #1f1515
-client.background         #101110
+client.focused            #231417 #2c2c2c #848474 #4F4F4F #101110
+client.focused_inactive   #231417 #272727 #636357 #121212 #101110
+client.unfocused          #231417 #292929 #68685b #4F4F4F #101107
+client.urgent             #23181a #4a3d31 #6c777a #1A1A1A #1f1515
+client.background         #231417
 
 #
 # Shortcut
@@ -91,9 +91,9 @@ bindsym Mod1+Ctrl+Right exec mpc next
 bindsym Mod1+Shift+d exec mpc del 0
 
 bindsym Mod5+F7 exec pkill -USR1 redshift
-# If xbackight doesn't work, use our script brightness [+-]2 
-# bindsym Mod5+F8 exec xbacklight -dec 2 
-# bindsym Mod5+F9 exec xbacklight -inc 2 
+# If xbackight doesn't work, install 'acpilight'
+bindsym Mod5+F8 exec xbacklight -dec 2 
+bindsym Mod5+F9 exec xbacklight -inc 2 
 bindsym Mod5+F8 exec xbacklight -dec 2 
 bindsym Mod5+F9 exec xbacklight -inc 2 
 #bindsym Mod5+f exec termite -e ranger

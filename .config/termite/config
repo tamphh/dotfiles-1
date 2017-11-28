@@ -32,59 +32,51 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-cursor = #313533
+cursor = #2d4944
 cursor_foreground = #28292c
-foreground = #6d787b
+foreground = #c0b99c
 #foreground_bold = #d5f1f4
-background = #101110
+#background = #142320
 
-# 20% background transparency (requires a compositor)
-#background = rgba(.8,.4,5.9,.99)
+# background transparency (requires a compositor)
+background = rgba(20,35,32,.99)
 
 # if unset, will reverse foreground and background
-highlight = #212322
+highlight = #1a302c
 
 # colors from color0 to color254 can be set
 
 # black
-color0= #171917
-color8= #262826
+color0= #21312e
+color8= #1a2f2b
 
 # red
-color1= #665059
-color9= #744b5a
+color1= #824f2c
+color9= #8e5f3f
 
 # Green
-color2= #58625a
-color10= #5e6b61
+color2= #4a6544
+color10= #597154
 
 # Yellow
-color3= #616258
-color11= #6d6d66
+color3= #9b8f5f
+color11= #aca074
 
 # Blue
-color4 = #6c7179
-color12 = #7e838c
+color4 = #4f4e56
+color12 = #61606e
 
 # Magenta
-color5 =  #666069
-color13 = #7a7080
+color5 =  #5f4646
+color13 = #715353
 
 # Cyan
-color6 = #5c7176
-color14 = #67878c
+color6 = #356153
+color14 = #4a7e6e
 
 # White
-color7=  #7c8b8e
-color15= #98a7aa
+color7=  #9e928f
+color15= #b7aba7
 
 [hints]
-#font = Monospace 12
-#foreground:    #ac8e8e
-#background:    #101011
-#active_foreground = #e68080
-#active_background = #3f3f3f
 padding = 4
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0

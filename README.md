@@ -16,7 +16,7 @@
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ wallpaper - [Imgur](https://i.imgur.com/IZbtbnH.jpg)
++ wallpaper - [Imgur](https://i.imgur.com/HUTDnXB.jpg)
 
 ## Requirements for lemonbar
 

@@ -18,7 +18,7 @@ method = ncurses
 style = stereo
 
 [color]
-foreground = magenta
+foreground = cyan
 
 [smoothing]
 

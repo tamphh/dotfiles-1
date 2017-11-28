@@ -112,17 +112,9 @@ ram() {
         printf "%s\n" "%{l}${sysL}%{c}${wm}%{r}${sysR}"
     done
 } < "$PANEL_FIFO" | lemonbar \
-    -g x${HEIGHT} -u 2 -B ${BG} -F ${FG} -f "${FONT}" -f "${FONT_ICON}" -b | sh &
+    -n ${PANEL_WM} -g x${HEIGHT} -u 2 -B ${BG} -F ${FG} -f "${FONT}" -f "${FONT_ICON}" -b | sh &
 
-wid=$(xdo id -a "$PANEL_WM")
-tries_left=20
-
-while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
-    sleep 0.05
-    wid=$(xdo id -a "$PANEL_WM")
-    tries_left=$((tries_left - 1))
-done
-
-[ -n "$wid" ] && xdo above -t "$(xdo id -N I3Bottom -n root | sort | head -n 1)" "$wid"
+wid=$(xdo id -m -a "$PANEL_WM")
+xdo above -t "$(xdo id -N I3Bottom -n root | sort | head -n 1)" "$wid"
 
 wait

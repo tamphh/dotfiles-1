@@ -3,9 +3,16 @@
 # git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 
+# ruby & rails for development to /home
+# need: mkdir -p ~/.gems/bin
+# export GEM_HOME=/home/user/.gems
+# export GEM_PATH=/home/user/.gems:/usr/lib64/ruby/gems/2.3.0/gems/
+# export PATH=$PATH:/home/user/.gems/bin
+# export RB_USER_INSTALL='true'
+
 # Themes in ~/.oh-my-zsh/themes/
 # Optionally, you can set ZSH_THEME="random" to find new theme.
-ZSH_THEME="clean"
+ZSH_THEME="mrtazz"
 
 # Bindkey fr
 #bindkey "\e[2~"  yank

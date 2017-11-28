@@ -32,6 +32,7 @@ fi
 xsetroot -cursor_name left_ptr &
 wmname LG3D
 # hsetroot -fill <wallpaper>
+hsetroot -contrast 1.04 -fill images/cyberpunk-gas-masks-girl-green-eyes-sci-fi-science-fiction-f.jpg
 compton &
 # redshift &
 
