@@ -1,0 +1,18 @@
+#! /bin/sh
+
+#
+# Eg of script for redirect local connection over a SSH tunnel with autossh tools
+#
+
+host=$(uname -n)
+user=${USER:?}
+
+AUTOSSH_GATETIME=0
+
+# Web: web browser must be configure for use proxy port localhost:39901
+# redirect to privoxy on port 8118
+/usr/bin/autossh -M 0 -NL 39901:localhost:8118 -o TCPKeepAlive=yes $user@$host &
+
+# Mail: use local port 39902
+# redirect to imap.google:993
+/usr/bin/autossh -M 0 -NL 39902:64.233.184.109:993 -o TCPKeepAlive=yes $user@$host &
