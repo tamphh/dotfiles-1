@@ -18,7 +18,9 @@ method = ncurses
 style = stereo
 
 [color]
-foreground = blue
+gradient = 1
+gradient_color_1 = '#582e88'
+gradient_color_2 = '#0d5d7a'
 
 [smoothing]
 

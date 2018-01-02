@@ -14,17 +14,17 @@ set $ws6 focus
 set $mod Mod4
 
 gaps inner 18
-gaps outer 32
+gaps outer 33
 
 for_window [class="^.*"] border normal 0
 for_window [class=".*"] title_format " >_ %title "
 
 #                         border  bg      text    indicat child_border
-client.focused            #231417 #281d2a #848474 #4F4F4F #101110
-client.focused_inactive   #231417 #141d24 #636357 #121212 #101110
-client.unfocused          #231417 #17212a #68685b #4F4F4F #101107
-client.urgent             #23181a #4a3d31 #6c777a #1A1A1A #1f1515
-client.background         #231417
+client.focused            #000000 #0a0b10 #848474 #4F4F4F #000000
+client.focused_inactive   #000000 #0a0b10 #636357 #121212 #000000
+client.unfocused          #000000 #0a0b10 #68685b #4F4F4F #000000
+client.urgent             #000000 #0a0b10 #6c777a #1A1A1A #000000
+client.background         #0a0b10
 
 #
 # Shortcut
@@ -108,12 +108,12 @@ for_window [class="Sxiv|feh"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="XFontSel"] floating enable
 for_window [class="Gimp"] floating enable
-#for_window [class="Zathura"] floating enable
+for_window [class="Abiword"] floating enable
+for_window [class="Zathura"] floating enable
 for_window [class="Vivaldi-stable"] border pixel 1 
 
 assign [class="Vivaldi-stable"] → $ws2
 assign [class="Gimp"] → $ws5
-assign [class="Zathura"] → $ws4
 
 #
 # Exec

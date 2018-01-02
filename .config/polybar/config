@@ -8,47 +8,98 @@ secondary = ${xrdb:color13}
 alert = ${xrdb:color9}
 
 [bar/top]
-dpi = 135
-width = 98%
-height = 40
-offset-x = 1%
-offset-y = 4
-fixed-center = true
-bottom = false
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 0
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 2
-padding-right = 2
-
-module-margin-left = 0
-module-margin-right = 2
-
-font-0 = NotoSans-Regular:size=6;2
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = "Material Icons:antialias=false:size=9;5"
-
-modules-left = hostname tor ip mpd
+dpi = 133
+monitor = "eDP-1"
+include-file = ~/.config/polybar/top-bar
+modules-left = hostname tor ip mpd volume
 modules-center = i3
-modules-right = volume mail memory cpu temperature battery wlan eth date
+modules-right = mail memory cpu temperature battery wlan eth date lock
 
-wm-restack = i3
-override-redirect = true
+[bar/bottom]
+dpi = 133
+monitor = "eDP-1"
+include-file = ~/.config/polybar/bottom-bar
+modules-left = torDaemon dnsDaemon firewallDaemon
+modules-center = webbrowser wallpapers tchat wireshark
+modules-right = uptime last
 
-cursor-click = pointer
-cursor-scroll = ns-resize
+[module/lock]
+type = custom/text
+content = " "
+content-foreground = ${colors.alert}
+click-left = i3lock -i ~/images/i3lock-gentoo-1366.png -e
 
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
+[module/uptime]
+type = custom/script
+exec = uptime|awk '{print $2 " " $3 " " $4 " " $5 " " $6}'|cut -d ',' -f -2
+interval = 5
+format-prefix=" "
+format-prefix-foreground = ${colors.primary}
+format-foreground = ${colors.secondary}
 
+[module/last]
+type = custom/script
+exec = last -s yesterday |head -n1 | awk '{print $1 " " $2 " " $6 " " $7 " " $8 " " $9}'
+interval = 5
+format-prefix = " "
+format-prefix-foreground = ${colors.primary}
+format-foreground = ${colors.secondary}
+
+[module/wallpapers]
+type = custom/text
+content = " "
+content-foreground = ${colors.secondary}
+click-left = feh --draw-tinted -x -g 640x480 -B black -D 2.0 ~/images
+
+[module/webbrowser]
+type = custom/text
+content = " "
+content-foreground = ${colors.primary}
+click-left = vivaldi --proxy-server='phaeton:39901' --host-resolver-rules='MAP * 0.0.0.0 , EXCLUDE localhost' -incognito
+
+[module/tchat]
+type = custom/text
+content = " "
+content-foreground = ${colors.primary}
+click-left = termite -e weechat &
+
+[module/wireshark]
+type = custom/text
+content = " "
+content-foreground = ${colors.secondary}
+click-left = wireshark-gtk &
+
+[module/torDaemon]
+type = custom/script
+exec = ~/.config/polybar/status tor
+interval = 4
+format = <label>
+format-padding = 4
+format-foreground = ${colors.secondary}
+format-prefix= " "
+format-prefix-foreground = ${colors.primary}
+
+[module/dnsDaemon]
+type = custom/script
+exec = ~/.config/polybar/status dnscrypt-proxy
+interval = 4
+format = <label>
+format-padding = 4
+format-foreground = ${colors.secondary}
+format-prefix= " "
+format-prefix-foreground = ${colors.primary}
+
+[module/firewallDaemon]
+type = custom/script
+exec = ~/.config/polybar/status nftables
+interval = 4
+format = <label>
+format-padding = 4
+format-foreground = ${colors.secondary}
+format-prefix= " "
+format-prefix-foreground = ${colors.primary}
+
+[module/bspwm]
 [module/bspwm]
 type = internal/bspwm
 
@@ -60,7 +111,7 @@ label-focused-padding = 2
 label-occupied = %icon%
 label-occupied-padding = 2
 
-label-urgent = %icon%!
+label-urgent = %icon%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
@@ -108,7 +159,6 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 type = custom/script
 interval = 2
 format = "<label> "
-format-prefix = " "
 format-prefix-foreground = ${colors.primary}
 exec = echo "$(curl --limit-rate 1k -s https://ifcfg.me)" || echo ""
 
@@ -140,13 +190,14 @@ click-left = "sudo systemctl restart tor"
 [module/mpd]
 type = internal/mpd
 host = 127.0.0.1
-port = 53000
-format-online = <icon-prev> <icon-pause> <icon-play> <icon-next> 
+port = 6600
+format-online = <icon-prev> <icon-pause> <icon-play> <icon-next> <label-song>
 
 icon-prev = 
 icon-play = 
 icon-pause = 
 icon-next = 
+label-song = %{F#7a1B54}   %{F-} %{F#215d76}%artist:0:20% %{F-} %{F#B8eadb}*%{F-} %{F#602976} %title:0:32% %{F-}
 
 toggle-on-foreground = ${colors.primary}
 toggle-off-foreground = ${colors.secondary}
@@ -173,16 +224,15 @@ label = %percentage_used%%
 type = internal/network
 interface = wlp2s0
 interval = 3.0
-
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
 label-connected = "%essid% -> %{F#aca074}%signal% %{F-}"
 
-format-disconnected = offline
+;format-disconnected = offline
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected = %ifname% disconnected
+label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -193,7 +243,7 @@ ramp-signal-foreground = ${colors.secondary}
 
 [module/eth]
 type = internal/network
-interface = br0
+interface = enp1s0f2
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -211,7 +261,7 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date = " %d-%m-%Y"
+date = " %A %d %b %Y"
 date-alt = " %d-%m-%Y"
 
 time = %H:%M
@@ -254,7 +304,6 @@ ramp-capacity-foreground = ${colors.foreground-alt}
 
 animation-charging-0 = 
 animation-charging-1 = 
-;animation-charging-2 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 

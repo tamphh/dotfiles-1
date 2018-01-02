@@ -25,7 +25,7 @@ function if_file_exist()
    fi
 }
 
-# Follow the exemple in password directory for it work
+# Must follow the example from ~/.passwords/ex_password
 # password must be at 3rd place :)
 function extract_pass()
 {

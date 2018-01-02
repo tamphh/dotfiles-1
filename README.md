@@ -17,16 +17,17 @@
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ wallpaper - [g+](https://plus.google.com/photos/photo/103351806729237673609/6494561877526017298)
++ [wallpaper](https://s18.postimg.org/nikcm6p6x/devushka-art-profil-chernyy-fon.jpg)
 
-## Requirements for lemonbar
+## Requirements for lemonbar || polybar
 
 + material-icons & noto sans
 + curl - used for retrieve IP address
 + mpd - music server
 + mpc - music client
 + iw - for look AP (iwgetid - iwconfig)
-+ tor (optionnal), remove from `~/.config/polybar/config` if no need.
++ i3lock (optionnal)
++ tor (optionnal), you have to uncomment module from `~/.config/polybar/config` if need.
 
 ### Troubleshoot
 
