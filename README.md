@@ -8,16 +8,16 @@
 
 ## Requirements for this desktop...
 
-+ i3-gaps
++ spectrwm
 + termite - virtual terminal
 + rofi - for run programs
-+ polybar - top bar
++ polybar - top | bottom bar
 + iosevka - font for terminal app.
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ [wallpaper](https://s18.postimg.org/nikcm6p6x/devushka-art-profil-chernyy-fon.jpg)
++ [wallpaper](https://www.goodfon.com/wallpaper/firewatch-game-forest-sunset-artwork-moon-sky-kumo-cloud-nig.html)
 
 ## Requirements for lemonbar || polybar
 
@@ -27,12 +27,12 @@
 + mpc - music client
 + iw - for look AP (iwgetid - iwconfig)
 + i3lock (optionnal)
-+ tor (optionnal), you have to uncomment module from `~/.config/polybar/config` if need.
++ tor (optionnal)
 
 ### Troubleshoot
 
 + Install on bspwm: [wiki](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)  
 + i3-gaps: [wiki](https://github.com/szorfein/dotfiles/wiki/i3-gaps)
 
-Current Desktop: ([i3-gaps](https://github.com/Airblader/i3))
+Current Desktop: ([spectrwm](https://github.com/conformal/spectrwm)
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")

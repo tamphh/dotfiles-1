@@ -8,6 +8,7 @@ dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
 font = Iosevka Term Medium 9
+#font = scientifica Regular 12
 scrollback_lines = 10000
 search_wrap = true
 #icon_name = terminal
@@ -23,7 +24,7 @@ cursor_shape = underline
 browser = vivaldi
 
 # set size hints for the window
-#size_hints = false
+# size_hints = true
 
 # Hide links that are no longer valid in url select overlay mode
 filter_unmatched_urls = true
@@ -34,53 +35,52 @@ filter_unmatched_urls = true
 [colors]
 cursor = #2d4944
 cursor_foreground = #28292c
-foreground = #c9aeb1
+foreground = #b2eff2
 #foreground_bold = #d5f1f4
-#background = #08070c
-#background = #08080d
+background = #06002c
 
 # 20% background transparency (requires a compositor)
-background = rgba(8,8,13,0.99)
+#background = rgba(8,8,13,0.99)
 
 # if unset, will reverse foreground and background
-highlight = #1d282f
+highlight = #12174d
 
 # colors from color0 to color254 can be set
 
 # black
-color0= #2a2934
-color8= #462f6f
+color0= #0e133f
+color8= #12174d
 
 # red
-color1= #611f54
-color9= #792368
+color1= #94207d
+color9= #a72799
 
 # Green
-color2= #3e4f48
-color10= #456257
+color2= #07947d
+color10= #11ab92
 
 # Yellow
-color3= #dea88c
-color11= #ffd3d4
+color3= #cfae67
+color11= #d9ba76
 
 # Blue
-color4 = #2f2d63
-color12 = #3a3783
+color4 = #114189
+color12 = #15538c
 
 # Magenta
-color5 =  #492472
-color13 = #582e88
+color5 =  #5b0f83
+color13 = #652098
 
 # Cyan
-color6 = #0b4c64
-color14 = #0d5d7a
+color6 = #60bbc4
+color14 = #7fd0cf
 
 # White
-color7=  #b09197
-color15= #d6c6c6
+color7=  #d1f7f7
+color15= #f8fefe
 
 [hints]
-#font = Monospace 12
+#font = scientifica Regular 11
 #foreground:    #ac8e8e
 #background:    #101011
 #active_foreground = #e68080

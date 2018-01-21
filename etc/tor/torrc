@@ -28,3 +28,11 @@ SocksPort 127.0.0.1:9150
 # if ssh (hidden service)
 HiddenServiceDir /var/lib/tor/hidden_service/ssh
 HiddenServicePort 22 127.0.0.1:22
+
+# ControlPort
+ControlPort 9051
+# For ControlPort, add auth method with password, set a hash value with command: 
+# tor --hash-password "password"
+#HashedControlPassword <setHashedValue>
+
+# Get bridge at https://bridges.torproject.org/
