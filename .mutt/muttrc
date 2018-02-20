@@ -42,11 +42,14 @@ alternative_order text/plain text/enriched text/html
 
 # PGP
 set pgp_use_gpg_agent = yes
-set pgp_sign_as = 57388311
+set pgp_sign_as = 0xlong_key_id_forsign
+set pgp_self_encrypt_as = 0xlong_key_id_forencrypt
 set pgp_timeout = 3600
 set crypt_autosign = yes
-set crypt_replyencrypt = yes
-source ~/.mutt/gpg # source file from /usr/share/doc/mutt/samples/gpg.rc
+set crypt_replysignencrypted = yes
+set crypt_verify_sig = yes
+# copy file from /usr/share/doc/mutt/samples/gpg.rc
+source ~/.mutt/gpg.rc
 
 # Status Bar
 set status_chars=" *%A"
@@ -55,6 +58,8 @@ set status_format="───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%
 # Index view
 set date_format="%d-%m-%Y %H:%M"
 set index_format="[%Z] %D %-20.20F %s"
+# i use other program for check mail
+set mail_check = 0
 set sort=threads
 set sort_aux=reverse-last-date-received
 set uncollapse_jump
@@ -82,7 +87,8 @@ unset record
 unset sort_re
 unset wait_key
 
-bind compose p pgp-menu # menu for encrypt or not mail
+# menu for encrypt or not mail
+bind compose p pgp-menu
 
 source ~/.mutt/colors
 source ~/.mutt/mailboxes

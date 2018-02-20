@@ -16,3 +16,7 @@ AUTOSSH_GATETIME=0
 # Mail: use local port 39902
 # redirect to imap.google:993
 /usr/bin/autossh -M 0 -NL 39902:64.233.184.109:993 -o TCPKeepAlive=yes $user@$host &
+
+# Tor with gnupg keyserver 
+# search default on port 9050, if you use an another port, you must use a tunnel
+# /usr/bin/autossh -M 0 -NL 9050:localhost:${tor} -o TCPKeepAlive=yes $user@$host &
