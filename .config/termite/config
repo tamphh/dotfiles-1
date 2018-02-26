@@ -7,85 +7,62 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Iosevka Term Medium 9
-#font = scientifica Regular 12
-scrollback_lines = 10000
+font = Iosevka Term 8
+#font = scientifica 11
+scrollback_lines = 100
 search_wrap = true
-#icon_name = terminal
 geometry = 520x340
-
-# "system", "on" or "off"
 cursor_blink = system
-
-# "block", "underline" or "ibeam"
 cursor_shape = underline 
-
-# $BROWSER is used by default if set, with xdg-open as a fallback
 browser = vivaldi
-
-# set size hints for the window
-# size_hints = true
-
-# Hide links that are no longer valid in url select overlay mode
+#size_hints = true
 filter_unmatched_urls = true
-
-# emit escape sequences for extra modified keys
-#modify_other_keys = false
 
 [colors]
 cursor = #2d4944
-cursor_foreground = #28292c
-foreground = #b2eff2
+cursor_foreground = #6a605c
+foreground = #dcd1c0
 #foreground_bold = #d5f1f4
-background = #06002c
+#background = #0a050f
 
 # 20% background transparency (requires a compositor)
-#background = rgba(8,8,13,0.99)
+background = rgba(10,5,15,.95)
 
 # if unset, will reverse foreground and background
-highlight = #12174d
+highlight = #3b3633
 
 # colors from color0 to color254 can be set
 
 # black
-color0= #0e133f
-color8= #12174d
+color0= #141c23
+color8= #1d2730
 
 # red
-color1= #94207d
-color9= #a72799
+color1= #994c42
+color9= #af5245
 
 # Green
-color2= #07947d
-color10= #11ab92
+color2 = #65835b
+color10 = #759769
 
 # Yellow
-color3= #cfae67
-color11= #d9ba76
+color3= #cfb881
+color11= #e5ca8c
 
 # Blue
-color4 = #114189
-color12 = #15538c
+color4 = #4b536b
+color12 = #596483
 
 # Magenta
-color5 =  #5b0f83
-color13 = #652098
+color5 =  #572557
+color13 = #6a2771
 
 # Cyan
-color6 = #60bbc4
-color14 = #7fd0cf
+color6 = #509288
+color14 = #5f9890
 
 # White
-color7=  #d1f7f7
-color15= #f8fefe
+color7=  #a79e88
+color15= #bcb299
 
 [hints]
-#font = scientifica Regular 11
-#foreground:    #ac8e8e
-#background:    #101011
-#active_foreground = #e68080
-#active_background = #3f3f3f
-padding = 4
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0

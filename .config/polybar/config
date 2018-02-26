@@ -1,11 +1,11 @@
 [colors]
-background = #000f0126
-background-alt = #ff0f0126
-foreground = #8ce2fb
-foreground-alt = #99e6fa
-primary = #114189
-secondary = #802d79 
-alert = ${xrdb:color9}
+background = #ab0a050f
+background-alt = #00383e3c
+foreground = ${xrdb:foreground}
+foreground-alt = ${xrdb:color7}
+primary = ${xrdb:color4}
+secondary = ${xrdb:color5}
+alert = ${xrdb:color1}
 
 [bar/top]
 monitor = "eDP-1"
@@ -13,15 +13,13 @@ dpi = 133
 include-file = ~/.config/polybar/top-bar
 modules-left = hostname tor ip mpd volume
 modules-center = date
-modules-right = mail memory cpu temperature battery wlan eth lock
+modules-right = mail wlan eth memory battery lock
 
 [bar/bottom]
 monitor = "eDP-1"
 dpi = 133
 include-file = ~/.config/polybar/bottom-bar
-;modules-left = torDaemon dnsDaemon firewallDaemon
 modules-center = uptime webbrowser wallpapers tchat wireshark dnsDaemon
-;modules-right = uptime last
 
 [module/lock]
 type = custom/text
@@ -33,8 +31,6 @@ click-left = i3lock -i ~/images/bgi3lock.png -e
 type = custom/script
 exec = uptime|awk '{print $2 " " $3 " " $4 " " $5 " " $6}'|cut -d ',' -f -2
 interval = 5
-format-padding = 2
-format-prefix=" "
 format-suffix="  "
 format-suffix-foreground = ${colors.foreground}
 format-prefix-foreground = ${colors.primary}
@@ -44,7 +40,7 @@ format-foreground = ${colors.secondary}
 type = custom/text
 content = " "
 content-foreground = ${colors.secondary}
-click-left = feh --draw-tinted -x -g 640x480 -B black -D 2.0 ~/images
+click-left = feh -d --draw-tinted -x -g 640x480 -B black -D 2.0 ~/images
 
 [module/webbrowser]
 type = custom/text
@@ -56,7 +52,7 @@ click-left = vivaldi_sec &
 type = custom/text
 content = " "
 content-foreground = ${colors.primary}
-click-left = termite -e weechat &
+click-left = termite --name=weechat -e weechat &
 
 [module/wireshark]
 type = custom/text
@@ -154,6 +150,7 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 type = custom/script
 interval = 2
 format = "<label> "
+format-prefix = "ip: "
 format-prefix-foreground = ${colors.primary}
 exec = echo "$(curl --limit-rate 1k -s https://ifcfg.me)"
 exec-if = dig gentoo.org @127.0.0.1
@@ -187,7 +184,7 @@ click-left = "sudo systemctl restart tor"
 type = internal/mpd
 host = 127.0.0.1
 port = 53000
-format-online = <icon-prev> <icon-pause> <icon-play> <icon-next> <label-song>
+format-online = <icon-prev> <icon-pause> <icon-play> <icon-next>
 
 icon-prev = 
 icon-play = 
@@ -211,7 +208,7 @@ label = %percentage%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "mem: "
 format-prefix-foreground = ${colors.secondary}
 format-underline = #4bffdc
 label = %percentage_used%%
@@ -220,13 +217,10 @@ label = %percentage_used%%
 type = internal/network
 interface = wlp2s0
 interval = 3.0
-format-connected = <ramp-signal> <label-connected>
+format-connected = <label-connected>
 format-connected-underline = #9f78e1
-label-connected = "%essid% -> %{F#aca074}%signal% %{F-}"
+label-connected = "%{F#a03377}wlan:%{F-} %essid% - %{F#aca074}%signal%% %{F-}"
 
-;format-disconnected = offline
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %ifname% disconnected
 label-disconnected-foreground = ${colors.foreground-alt}
 
@@ -248,10 +242,6 @@ format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
 format-disconnected = 
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
@@ -260,8 +250,6 @@ date = " %A %d %b %Y"
 date-alt = " %d-%m-%Y"
 time = %H:%M
 time-alt = %H:%M:%S
-format-prefix = " "
-format-prefix-foreground = ${colors.secondary}
 format-underline = #0a6cf5
 format-foreground = ${colors.foreground-alt}
 label = %time% %date%
@@ -270,7 +258,7 @@ label = %time% %date%
 type = custom/script
 interval = 2
 format = "<label> "
-format-prefix = " "
+format-prefix = "vol: "
 format-prefix-foreground = ${colors.primary}
 exec = echo "$(mpc volume | awk '{print $2}')"
 
@@ -286,7 +274,7 @@ format-charging-underline = #ffb52a
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
+format-full-prefix = "bat: "
 format-full-prefix-foreground = ${colors.primary}
 format-full-underline = ${self.format-charging-underline}
 

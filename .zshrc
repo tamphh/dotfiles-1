@@ -12,7 +12,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Themes in ~/.oh-my-zsh/themes/
 # Optionally, you can set ZSH_THEME="random" to find new theme.
-ZSH_THEME="skaro"
+ZSH_THEME="nebirhos"
 
 # Bindkey fr
 #bindkey "\e[2~"  yank
@@ -81,6 +81,8 @@ buildfile() {
     fi
 }
 
+# Usage to create new password file:
+# pw newpass.gpg
 pw() {
    cd "$PASSWD"
    if [ ! -z "$1" ]; then

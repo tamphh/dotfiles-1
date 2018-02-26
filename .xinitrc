@@ -31,16 +31,21 @@ fi
 # urxvtd -q -o -f
 xsetroot -cursor_name left_ptr &
 wmname LG3D
-# hsetroot -fill <wallpaper>
-hsetroot -contrast 1.04 -fill images/cyberpunk-gas-masks-girl-green-eyes-sci-fi-science-fiction-f.jpg
+hsetroot -fill images/wallpaper.jpg
 compton &
 # redshift &
 
-### BSPWM
+## BSPWM
 #exec bspwm-launch
 
-### Herbstluftwm
+## Herbstluftwm
 #exec herbstluftwm --locked
 
-### i3
-exec i3
+## i3
+#exec i3
+
+## spactrwm
+# exec spectrwm 2> /tmp/spectrwm.log
+
+## subtle
+exec subtle 2> /tmp/subtle.log
