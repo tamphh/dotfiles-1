@@ -21,9 +21,8 @@ screen 1 do
   bottom [ ]
 end
 
-# Example for a second screen:
 #screen 2 do
-#  top    [ :views, :title, :spacer ]
+#  top    [ ]
 #  bottom [ ]
 #end
 
@@ -45,11 +44,11 @@ end
 #
 
 # Left - Right
-gravity :l_side, [ 3, 8, 47, 85 ]
-gravity :r_side, [ 50, 8, 47, 85 ]
+gravity :l_side, [ 2, 9, 47, 86 ]
+gravity :r_side, [ 50, 9, 48, 86 ]
 
 # Center
-gravity :ct, [ 4, 10, 92, 81 ]
+gravity :ct, [ 2, 9, 96, 86 ]
 gravity :ct66, [ 25, 25, 50, 50 ]
 
 # Gimp
@@ -215,10 +214,10 @@ end
 
 ## programs on view console
 gravity :pp, [ 33, 9, 34, 19 ]
-gravity :we, [ 4, 13, 28, 73 ]
+gravity :we, [ 4, 13, 28, 77 ]
 gravity :mu, [ 68, 13, 28, 39 ]
-gravity :ca, [ 68, 52, 28, 33 ]
-gravity :ma, [ 33, 30, 34, 60 ]
+gravity :ca, [ 68, 52, 28, 38 ]
+gravity :ma, [ 33, 30, 34, 65 ]
 
 tag "pwd" do
     match "pwd"
@@ -246,11 +245,11 @@ tag "mail" do
 end
 
 ## programs on view dev 
-gravity :d1, [ 2, 9, 29, 85 ]
+gravity :d1, [ 2, 9, 29, 86 ]
 gravity :d2, [ 32, 9, 32, 42 ]
 gravity :d3, [ 65, 9, 33, 42 ]
-gravity :d4, [ 32, 52, 32, 42 ]
-gravity :d5, [ 65, 52, 33, 42 ]
+gravity :d4, [ 32, 52, 32, 43 ]
+gravity :d5, [ 65, 52, 33, 43 ]
 
 tag "code_1" do
   match "code-1"

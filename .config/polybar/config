@@ -1,8 +1,8 @@
 [colors]
-background = #ab0a050f
-background-alt = #00383e3c
+background = #ed10181a
+background-alt = #000a050f
 foreground = ${xrdb:foreground}
-foreground-alt = ${xrdb:color7}
+foreground-alt = ${xrdb:foreground}
 primary = ${xrdb:color4}
 secondary = ${xrdb:color5}
 alert = ${xrdb:color1}
@@ -11,140 +11,102 @@ alert = ${xrdb:color1}
 monitor = "eDP-1"
 dpi = 133
 include-file = ~/.config/polybar/top-bar
-modules-left = hostname tor ip mpd volume
-modules-center = date
-modules-right = mail wlan eth memory battery lock
+modules-left = hostname tor ip mpd volume uptime
+modules-center = date menu-apps
+modules-right = mail reloadDns dnsDaemon wlan eth memory battery lock
 
 [bar/bottom]
-monitor = "eDP-1"
-dpi = 133
-include-file = ~/.config/polybar/bottom-bar
-modules-center = uptime webbrowser wallpapers tchat wireshark dnsDaemon
 
 [module/lock]
 type = custom/text
-content = " "
+content =  
 content-foreground = ${colors.alert}
+content-background = ${colors.background}
+content-padding = 2
 click-left = i3lock -i ~/images/bgi3lock.png -e
 
 [module/uptime]
 type = custom/script
 exec = uptime|awk '{print $2 " " $3 " " $4 " " $5 " " $6}'|cut -d ',' -f -2
 interval = 5
-format-suffix="  "
-format-suffix-foreground = ${colors.foreground}
+format-prefix="   "
 format-prefix-foreground = ${colors.primary}
-format-foreground = ${colors.secondary}
-
-[module/wallpapers]
-type = custom/text
-content = " "
-content-foreground = ${colors.secondary}
-click-left = feh -d --draw-tinted -x -g 640x480 -B black -D 2.0 ~/images
-
-[module/webbrowser]
-type = custom/text
-content = " "
-content-foreground = ${colors.primary}
-click-left = vivaldi_sec &
-
-[module/tchat]
-type = custom/text
-content = " "
-content-foreground = ${colors.primary}
-click-left = termite --name=weechat -e weechat &
-
-[module/wireshark]
-type = custom/text
-content = " "
-content-foreground = ${colors.secondary}
-click-left = wireshark-gtk &
+format-foreground = ${colors.foreground}
+format-padding = 2
+format-background = ${colors.background}
 
 [module/torDaemon]
 type = custom/script
 exec = ~/.config/polybar/status tor
 interval = 4
 format = <label>
-format-padding = 4
-format-foreground = ${colors.secondary}
-format-prefix= " "
-format-prefix-foreground = ${colors.primary}
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-prefix= " "
+format-padding = 1
+format-prefix-foreground = ${colors.alert}
+
+[module/reloadDns]
+type = custom/text
+content =  
+content-foreground = ${colors.alert}
+content-padding = 1
+content-background = ${colors.background}
+; need into /etc/sudoers line bellow to work
+; username ALL=(ALL) NOPASSWD: /bin/sh /home/izsha/bin/fix_dnscrypt.sh
+click-left = "sudo sh ~/bin/fix_dnscrypt.sh"
 
 [module/dnsDaemon]
 type = custom/script
 exec = ~/.config/polybar/status dnscrypt-proxy
 interval = 4
 format = <label>
-format-foreground = ${colors.primary}
-format-prefix= "  "
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-padding = 1
 
-format-prefix-foreground = ${colors.foreground}
+[module/menu-apps]
+type = custom/menu
+expand-right = true
+menu-0-0 = Browser
+menu-0-0-exec = menu-open-1
+menu-0-1 = Pentest
+menu-0-1-exec = menu-open-2
+menu-0-2 = Multimedia 
+menu-0-2-exec = menu-open-3
 
-[module/firewallDaemon]
-type = custom/script
-exec = ~/.config/polybar/status nftables
-interval = 4
-format = <label>
-format-padding = 4
-format-foreground = ${colors.secondary}
-format-prefix= " "
-format-prefix-foreground = ${colors.primary}
+; browser side
+menu-1-0 = Vivaldi
+menu-1-0-exec = vivaldi_sec &
+menu-1-1 = Xombrero
+menu-1-1-exec = xombrero &
+menu-1-2 = w3m
+menu-1-2-exec = termite -e "w3m https://duckduckgo.com" &
+
+; pentest side
+menu-2-0 = Term
+menu-2-0-exec = termite &
+menu-2-1 = Wireshark
+menu-2-1-exec = wireshark-gtk &
+menu-2-2 = Msf
+menu-2-2-exec = termite -e msfconfsole &
+
+; multimedia side
+menu-3-0 = Wallpapers
+menu-3-0-exec = feh -B black -D 2.0 ~/images &
+menu-3-1 = Gimp
+menu-3-1-exec = gimp &
+menu-3-2 = Scrot
+menu-3-2-exec = scrot &
+
+format-background = ${colors.background}
+format-padding = 2
+label-open = "%{F#fa1B54} %{F-}"
+label-close = "%{F#4b62f1} %{F-}"
+label-separator = " | "
 
 [module/bspwm]
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %icon%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-label-occupied = %icon%
-label-occupied-padding = 2
-
-label-urgent = %icon%
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %icon%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
-
 [module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-wrapping-scroll = false
-
-; find icon name : fc-match -a |grep -i Material
-; to find icon: xfd -fa MaterialIcons,
-; echo "\ueXXX" to print and paste here
-ws-icon-0 = mail;
-ws-icon-1 = web;
-ws-icon-2 = code;
-ws-icon-3 = media;
-ws-icon-4 = gimp;
-ws-icon-5 = focus;
-
-; focused = Active workspace on focused monitor
-label-focused = %icon%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %icon%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-; visible = Active workspace on unfocused monitor
-label-visible = %iconx%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %icon%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/ip]
 type = custom/script
@@ -152,15 +114,19 @@ interval = 2
 format = "<label> "
 format-prefix = "ip: "
 format-prefix-foreground = ${colors.primary}
+format-background = ${colors.background}
+format-padding = 1
 exec = echo "$(curl --limit-rate 1k -s https://ifcfg.me)"
-exec-if = dig gentoo.org @127.0.0.1
+exec-if = ping -c 1 gentoo.org
 
 [module/hostname]
 type = custom/script
 interval = 256
 format = "<label> "
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.primary}
+format-padding = 0
+format-background = ${colors.background}
 exec = echo "$(uname -n)"
 
 [module/mail]
@@ -169,6 +135,8 @@ type = custom/script
 interval = 600
 format = " <label> "
 format-prefix = " "
+format-padding = 2
+format-background = ${colors.background}
 format-prefix-foreground = ${colors.primary}
 exec = ~/.config/polybar/mails
 
@@ -176,6 +144,8 @@ exec = ~/.config/polybar/mails
 type = custom/text
 content = " "
 content-foreground = ${colors.secondary}
+content-padding = 2
+content-background = ${colors.background}
 ; need into /etc/sudoers line bellow to work
 ; username ALL=(ALL) NOPASSWD: /bin/systemctl restart tor
 click-left = "sudo systemctl restart tor"
@@ -185,11 +155,12 @@ type = internal/mpd
 host = 127.0.0.1
 port = 53000
 format-online = <icon-prev> <icon-pause> <icon-play> <icon-next>
+format-online-background = ${colors.background}
 
-icon-prev = 
+icon-prev = " "
 icon-play = 
 icon-pause = 
-icon-next = 
+icon-next = " "
 label-song = %{F#7a1B54}   %{F-} %{F#215d76}%artist:0:10% %{F-} %{F#B8eadb}*%{F-} %{F#602976} %title:0:10% %{F-}
 
 toggle-on-foreground = ${colors.primary}
@@ -197,19 +168,13 @@ toggle-off-foreground = ${colors.secondary}
 
 label-offline = no sound
 
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.primary}
-format-underline = #f90000
-label = %percentage%%
-
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = "mem: "
 format-prefix-foreground = ${colors.secondary}
+format-background = ${colors.background}
+format-padding = 2
 format-underline = #4bffdc
 label = %percentage_used%%
 
@@ -218,18 +183,15 @@ type = internal/network
 interface = wlp2s0
 interval = 3.0
 format-connected = <label-connected>
+format-connected-background = ${colors.background}
+format-connected-padding = 2
 format-connected-underline = #9f78e1
 label-connected = "%{F#a03377}wlan:%{F-} %essid% - %{F#aca074}%signal%% %{F-}"
 
-label-disconnected = %ifname% disconnected
+format-disconnected = "wlan offline"
+format-disconnected-background = ${colors.background}
+format-disconnected-padding = 2
 label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.secondary}
 
 [module/eth]
 type = internal/network
@@ -246,12 +208,14 @@ format-disconnected =
 [module/date]
 type = internal/date
 interval = 5
-date = " %A %d %b %Y"
-date-alt = " %d-%m-%Y"
-time = %H:%M
-time-alt = %H:%M:%S
+date = " %a %d %b  "
+date-alt = " %d-%m"
+time = "  %H:%M,"
+time-alt = %H:%M
 format-underline = #0a6cf5
 format-foreground = ${colors.foreground-alt}
+format-padding = 1
+format-background = ${colors.background}
 label = %time% %date%
 
 [module/volume]
@@ -259,6 +223,8 @@ type = custom/script
 interval = 2
 format = "<label> "
 format-prefix = "vol: "
+format-padding = 2
+format-background = ${colors.background}
 format-prefix-foreground = ${colors.primary}
 exec = echo "$(mpc volume | awk '{print $2}')"
 
@@ -266,17 +232,21 @@ exec = echo "$(mpc volume | awk '{print $2}')"
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 98
+full-at = 99
 
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
+format-charging-background = ${colors.background}
+format-charging-padding = 2
 
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = "bat: "
+format-full-prefix =  
 format-full-prefix-foreground = ${colors.primary}
 format-full-underline = ${self.format-charging-underline}
+format-full-background = ${colors.background}
+format-full-padding = 2
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -287,25 +257,6 @@ animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature%
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
 
 [settings]
 screenchange-reload = true
