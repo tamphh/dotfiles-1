@@ -33,6 +33,7 @@ xsetroot -cursor_name left_ptr &
 wmname LG3D
 hsetroot -fill images/wallpaper.jpg
 compton &
+xbacklight -set 1
 # redshift &
 
 ## BSPWM

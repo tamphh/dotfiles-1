@@ -3,8 +3,9 @@
 arg=$1
 cmd=""
 
+# For english, you have to replace word Active with Enable (or other ?).
 if [ $arg ] ; then
     cmd=$(systemctl status $arg | grep Active | awk '{print $2}' | cut -d ':' -f -1)
 fi
 
-echo "$arg - $cmd"
+echo "${arg:0:8} - $cmd"

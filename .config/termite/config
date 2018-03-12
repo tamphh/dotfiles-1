@@ -1,68 +1,55 @@
 [options]
-scroll_on_output = false
-scroll_on_keystroke = true
 audible_bell = false
-mouse_autohide = false
-allow_bold = true
-dynamic_title = true
-urgent_on_bell = true
 clickable_url = true
+dynamic_title = true
 font = Iosevka Term 8
 #font = scientifica 11
-scrollback_lines = 100
-search_wrap = true
-geometry = 520x340
-cursor_blink = system
-cursor_shape = underline 
+fullscreen = true
+#mouse_autohide = true
+scrollback_lines = 1000
 browser = vivaldi
-#size_hints = true
+size_hints = true
 filter_unmatched_urls = true
 
 [colors]
 cursor = #2d4944
 cursor_foreground = #6a605c
-foreground = #dcd1c0
-#foreground_bold = #d5f1f4
-#background = #0a050f
-
-# 20% background transparency (requires a compositor)
-background = rgba(10,5,15,.95)
-
-# if unset, will reverse foreground and background
+foreground = #fbeabb
+#background = #10181a
+background = #10171a
+#background = rgba(8,9,11,.97)
 highlight = #3b3633
 
-# colors from color0 to color254 can be set
-
 # black
-color0= #141c23
-color8= #1d2730
+color0= #29353a
+color8= #3a4a51
 
 # red
-color1= #994c42
-color9= #af5245
+color1= #b2786e
+color9= #be7f74
 
 # Green
-color2 = #65835b
-color10 = #759769
+color2 = #868c51
+color10 = #989e66
 
 # Yellow
-color3= #cfb881
-color11= #e5ca8c
+color3= #c3af66
+color11= #d1be79
 
 # Blue
-color4 = #4b536b
-color12 = #596483
+color4 = #51796e
+color12 = #5b867a
 
 # Magenta
-color5 =  #572557
-color13 = #6a2771
+color5 =  #a06f7c
+color13 = #a87b87
 
 # Cyan
-color6 = #509288
-color14 = #5f9890
+color6 = #788964
+color14 = #82956d
 
 # White
-color7=  #a79e88
-color15= #bcb299
+color7=  #fcf2aa
+color15= #fdf0cc
 
 [hints]

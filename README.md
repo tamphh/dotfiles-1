@@ -17,7 +17,7 @@
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ [wallpaper](https://www.goodfon.com/wallpaper/planet-brown-star-sci-fi-dry.html)
++ [wallpaper](https://www.goodfon.com/wallpaper/nier-automata-yorha-2b-1.html)
 
 ## Requirements for lemonbar || polybar
 
@@ -25,7 +25,7 @@
 + curl - used for retrieve IP address
 + mpd - music server
 + mpc - music client
-+ iw - for look AP (iwgetid - iwconfig)
++ systemd - used to see state of daemon and reload service.
 + i3lock (optionnal)
 + tor (optionnal)
 
