@@ -1,7 +1,7 @@
-width = 98%
-height = 34
-offset-x = 1%
-offset-y = 1%
+width = 100%
+height = 29
+offset-x = 0
+offset-y = 0
 fixed-center = true
 bottom = false 
 background = ${colors.background-alt}
@@ -19,5 +19,5 @@ font-1 = "Material Icons:antialias=false:size=8;5"
 override-redirect = true
 cursor-click = pointer
 cursor-scroll = ns-resize
-separator = "%{B#ed10181a}%{F#ff666666}|%{F-}%{B-}"
+separator = "%{B#ed10171a}%{F#ff666666}|%{F-}%{B-}"
 radius = 4.0
