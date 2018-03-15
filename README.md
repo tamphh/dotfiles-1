@@ -17,7 +17,7 @@
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ [wallpaper](https://img4.goodfon.com/wallpaper/middle/f/75/nier-automata-yorha-2b-1.jpg)
++ [wallpaper](https://www.goodfon.com/wallpaper/nier-automata-yorha-2b-1.html)
 
 ## Requirements for lemonbar || polybar
 
