@@ -1,21 +1,41 @@
 [colors]
-background = #ed10181a
-background-alt = #ed10181a
+background = ${xrdb:background}
+background-alt = ${xrdb:background}
 foreground = ${xrdb:foreground}
 foreground-alt = ${xrdb:foreground}
-primary = ${xrdb:color4}
-secondary = ${xrdb:color5}
+primary = ${xrdb:color6}
+secondary = #934897
 alert = ${xrdb:color1}
 
 [bar/top]
 monitor = "eDP-1"
 dpi = 133
 include-file = ~/.config/polybar/top-bar
-modules-left = hostname tor ip mpd volume uptime
-modules-center = date menu-apps
-modules-right = mail reloadDns dnsDaemon wlan eth memory battery lock
+modules-left = hostname ip volume uptime
+modules-center = date
+modules-right = menu-apps mail dnsDaemon memory battery lock
+
+[bar/top-second]
+monitor = "eDP-1"
+dpi = 133
+include-file = ~/.config/polybar/top-second-bar
+modules-left = tor reloadDns
+modules-center = mpd
+modules-right = wireless-network wlan eth
 
 [bar/bottom]
+;monitor = "eDP-1"
+;dpi = 133
+;include-file = ~/.config/polybar/bottom-bar
+;modules-left = torDaemon dnsDaemon firewallDaemon
+;modules-center = uptime webbrowser wallpapers tchat wireshark dnsDaemon
+;modules-right = uptime last
+
+[module/wireless-network]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+label-connected = %{F#ff0000} %{F-}%upspeed% %{F#00ff00} %{F-}%downspeed%
 
 [module/lock]
 type = custom/text
@@ -48,10 +68,12 @@ format-prefix-foreground = ${colors.alert}
 
 [module/reloadDns]
 type = custom/text
-content =  
-content-foreground = ${colors.alert}
+content = "reload dnscrypt "
+content-suffix =  
+content-suffix-foreground = ${colors.foreground}
+content-foreground = ${colors.primary}
 content-padding = 1
-content-background = ${colors.background}
+content-background = ${colors.background-alt}
 ; need into /etc/sudoers line bellow to work
 ; username ALL=(ALL) NOPASSWD: /bin/sh /home/izsha/bin/fix_dnscrypt.sh
 click-left = "sudo sh ~/bin/fix_dnscrypt.sh"
@@ -67,7 +89,7 @@ format-padding = 1
 
 [module/menu-apps]
 type = custom/menu
-expand-right = true
+;expand-right = true
 menu-0-0 = Browser
 menu-0-0-exec = menu-open-1
 menu-0-1 = Pentest
@@ -93,20 +115,73 @@ menu-2-2-exec = termite -e msfconfsole &
 
 ; multimedia side
 menu-3-0 = Wallpapers
-menu-3-0-exec = feh -B black -D 2.0 ~/images &
+menu-3-0-exec = feh -d --draw-tinted -x -D 2 ~/images &
 menu-3-1 = Gimp
 menu-3-1-exec = gimp &
 menu-3-2 = Scrot
 menu-3-2-exec = scrot &
 
+format = <menu> <label-toggle>
 format-background = ${colors.background}
 format-padding = 2
 label-open = "%{F#fa1B54} %{F-}"
 label-close = "%{F#4b62f1} %{F-}"
-label-separator = " | "
+label-separator = " . "
 
 [module/bspwm]
+type = internal/bspwm
+
+label-focused = %icon%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %icon%
+label-occupied-padding = 2
+
+label-urgent = %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %icon%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
 [module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+wrapping-scroll = false
+
+; find icon name : fc-match -a |grep -i Material
+; to find icon: xfd -fa MaterialIcons,
+; echo "\ueXXX" to print and paste here
+ws-icon-0 = mail;
+ws-icon-1 = web;
+ws-icon-2 = code;
+ws-icon-3 = media;
+ws-icon-4 = gimp;
+ws-icon-5 = focus;
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %iconx%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/ip]
 type = custom/script
@@ -142,7 +217,9 @@ exec = ~/.config/polybar/mails
 
 [module/tor]
 type = custom/text
-content = " "
+content = "reload tor "
+content-suffix =  
+content-suffix-foreground = ${colors.foreground}
 content-foreground = ${colors.secondary}
 content-padding = 2
 content-background = ${colors.background}
@@ -154,18 +231,17 @@ click-left = "sudo systemctl restart tor"
 type = internal/mpd
 host = 127.0.0.1
 port = 53000
-format-online = <icon-prev> <icon-pause> <icon-play> <icon-next>
+format-online = <icon-prev> <icon-pause> <icon-play> <icon-next> <label-song>
 format-online-background = ${colors.background}
 
 icon-prev = " "
 icon-play = 
 icon-pause = 
 icon-next = " "
-label-song = %{F#7a1B54}   %{F-} %{F#215d76}%artist:0:10% %{F-} %{F#B8eadb}*%{F-} %{F#602976} %title:0:10% %{F-}
+label-song = %{F#7a1B54}   %{F-} %{F#16a193}%artist:0:15% %{F-} %{F#B8eadb}*%{F-} %{F#934897} %title:0:20% %{F-}
 
 toggle-on-foreground = ${colors.primary}
 toggle-off-foreground = ${colors.secondary}
-
 label-offline = no sound
 
 [module/memory]
@@ -186,12 +262,21 @@ format-connected = <label-connected>
 format-connected-background = ${colors.background}
 format-connected-padding = 2
 format-connected-underline = #9f78e1
-label-connected = "%{F#a03377}wlan:%{F-} %essid% - %{F#aca074}%signal%% %{F-}"
+label-connected = " %essid% - %{F#aca074}%signal%% %{F-}"
+format-connected-prefix = "wlan0: "
+format-connected-prefix-foreground = ${colors.secondary}
 
 format-disconnected = "wlan offline"
 format-disconnected-background = ${colors.background}
 format-disconnected-padding = 2
 label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.secondary}
 
 [module/eth]
 type = internal/network
@@ -208,10 +293,15 @@ format-disconnected =
 [module/date]
 type = internal/date
 interval = 5
+; french format
 date = " %a %d %b  "
 date-alt = " %d-%m"
 time = "  %H:%M,"
 time-alt = %H:%M
+format-prefix = "--------[ "
+format-prefix-foreground = ${colors.primary}
+format-suffix = " ]--------"
+format-suffix-foreground = ${colors.primary}
 format-underline = #0a6cf5
 format-foreground = ${colors.foreground-alt}
 format-padding = 1
@@ -232,7 +322,7 @@ exec = echo "$(mpc volume | awk '{print $2}')"
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 99
+full-at = 98
 
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a

@@ -135,6 +135,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 map <F3> :NERDTreeToggle<CR>
 
+" update colors with F8 with darkest-space colorscheme
+map <F8> :update<CR>:colorscheme darkest-space<CR>
 let mapleader=","
 
 "" Some Keymaps for GPG

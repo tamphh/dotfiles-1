@@ -2,12 +2,12 @@
 # Default options
 #
 
-set :increase_step, 5
+set :increase_step, 1
 set :border_snap, 10
 set :default_gravity, :ct
-set :urgent_dialogs, false
+set :urgent_dialogs, true 
 set :honor_size_hints, false
-set :gravity_tiling, false
+set :gravity_tiling, true
 set :click_to_focus, false
 set :skip_pointer_warp, false
 set :skip_urgent_warp, false
@@ -31,12 +31,16 @@ end
 #
 
 style :all do
-  background  "#202020"
-  icon        "#757575"
-  border      "#303030", 0
-  padding     0, 3
-  font        "-*-*-*-*-*-*-14-*-*-*-*-*-*-*"
-  #font        "xft:sans-8"
+    padding      0
+    margin       0
+    font        "-*-*-*-*-*-*-14-*-*-*-*-*-*-*"
+end
+
+style :clients do
+    padding      0
+    margin_left  2
+    margin_top   2
+    margin_right   1
 end
 
 #
@@ -44,15 +48,15 @@ end
 #
 
 # Left - Right
-gravity :l_side, [ 2, 9, 47, 86 ]
-gravity :r_side, [ 50, 9, 48, 86 ]
+gravity :l_side, [ 0, 4, 50, 96 ]
+gravity :r_side, [ 50, 4, 50, 96 ]
 
 # Center
-gravity :ct, [ 2, 9, 96, 86 ]
+gravity :ct, [ 0, 4, 100, 96 ]
 gravity :ct66, [ 25, 25, 50, 50 ]
 
 # Gimp
-gravity :gimp_image, [ 24, 8, 50, 66 ]
+gravity :gimp_image, [ 24, 6, 50, 66 ]
 gravity :gimp_toolbox, [ 3, 10, 10, 75 ]
 gravity :gimp_dock, [ 85, 7, 12, 90 ]
 
@@ -126,7 +130,7 @@ grab "W-z", :WindowKill
 # Cycle between given gravities
 grab "W-F1", [ :l_side, :r_side ]
 grab "W-F2", [ :ct, :ct66 ]
-grab "W-F3", [ :d1, :d2, :d3, :d4, :d5 ]
+grab "W-F3", [ :d1, :d2, :d3 ]
 grab "W-F4", [ :pp, :we, :mu, :ca, :ma ]
 
 # Exec programs
@@ -213,11 +217,11 @@ tag "gimp_scum" do
 end
 
 ## programs on view console
-gravity :pp, [ 33, 9, 34, 19 ]
-gravity :we, [ 4, 13, 28, 77 ]
-gravity :mu, [ 68, 13, 28, 39 ]
-gravity :ca, [ 68, 52, 28, 38 ]
-gravity :ma, [ 33, 30, 34, 65 ]
+gravity :pp, [ 33, 4, 34, 21 ]
+gravity :we, [ 0, 13, 28, 79 ]
+gravity :mu, [ 72, 13, 28, 40 ]
+gravity :ca, [ 72, 53, 28, 39 ]
+gravity :ma, [ 33, 34, 34, 65 ]
 
 tag "pwd" do
     match "pwd"
@@ -245,11 +249,9 @@ tag "mail" do
 end
 
 ## programs on view dev 
-gravity :d1, [ 2, 9, 29, 86 ]
-gravity :d2, [ 32, 9, 32, 42 ]
-gravity :d3, [ 65, 9, 33, 42 ]
-gravity :d4, [ 32, 52, 32, 43 ]
-gravity :d5, [ 65, 52, 33, 43 ]
+gravity :d1, [ 0, 4, 33, 96 ]
+gravity :d2, [ 33, 4, 34, 96 ]
+gravity :d3, [ 67, 4, 33, 96 ]
 
 tag "code_1" do
   match "code-1"
@@ -268,12 +270,17 @@ end
 
 tag "code_4" do
   match "code-4"
-  gravity :d4
+  gravity :d1
 end
 
 tag "code_5" do
   match "code-5"
-  gravity :d5
+  gravity :d2
+end
+
+tag "code_6" do
+  match "code-6"
+  gravity :d3
 end
 
 #
