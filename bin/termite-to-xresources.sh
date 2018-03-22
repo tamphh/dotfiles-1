@@ -1,5 +1,6 @@
 #!/bin/sh
 
+XRESOURCES=~/.Xresources
 TERMITE=~/.config/termite/config
 DEST=$1
 _COLORS=(
@@ -16,6 +17,9 @@ _COLORS=(
     "color10"
     "color11"
     "color12"
+    "color13"
+    "color14"
+    "color15"
     "background"
     "foreground"
 )
@@ -33,9 +37,21 @@ function retrieve() {
     writeToDest $1 $c
 }
 
-if [[ ! -f "${DEST}" ]]; then
+function rofiConf() {
+    local bg=$(grep background ${DEST} | awk '{print $2}')
+    local fg=$(grep color3 ${DEST} | awk '{print $2}')
+    local bgSelect=$(grep color0 ${DEST} | awk '{print $2}')
+    local fgSelect=$(grep color11 ${DEST} | awk '{print $2}')
+    echo "rofi.color-normal: argb:00000000, ${fg}, argb:00000000, ${bgSelect}, ${fgSelect}" >> "${DEST}"
+    echo "rofi.color-window: ${bg}, #000000, #832757" >> "${DEST}"
+}
+
+if [ ! -f "${DEST}" ] && [ ! -z "${1}" ]; then
     for co in "${_COLORS[@]}"; do retrieve $co; done
-    exit 0
+    rofiConf
+    xrdb -merge ${XRESOURCES}
+    echo "You can include this file to $XRESOURCES with a line like: #include '$DEST'"
 else
-    echo "${DEST} exist alrealy" && exit 1
+    echo "Destination exist alrealy or not defined as arg"
+    echo "Usage: $0 /tmp/newfile" && exit 1
 fi
