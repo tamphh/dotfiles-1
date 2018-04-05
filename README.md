@@ -6,6 +6,12 @@
 + [twitter](https://twitter.com/szorfein)
 + [Personal blog](https://szorfein.github.io/)
 
+## Advertise
+
+A new theme will erase the previous, only the colors (Xresources) is saved into `~/.colors`. It change about every 15 days. if you like a theme, do a copy locally with:
+
+    $ git clone https://github.com/szorfein/dotfiles
+
 ## Requirements for this desktop...
 
 + subtle
@@ -17,7 +23,7 @@
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ [wallpaper](https://www.goodfon.com/wallpaper/simvoly-osminog-cio2-pauk-atom-lego-kniga-lapka-vai-fai-ochk.html)
++ [wallpaper](https://www.goodfon.com/wallpaper/ninja-tune-shadow-nindzya.html)
 
 ## Requirements for lemonbar || polybar
 

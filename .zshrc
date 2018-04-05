@@ -12,7 +12,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Themes in ~/.oh-my-zsh/themes/
 # Optionally, you can set ZSH_THEME="random" to find new theme.
-ZSH_THEME="nebirhos"
+ZSH_THEME="nicoulaj" 
 
 # Bindkey fr
 #bindkey "\e[2~"  yank

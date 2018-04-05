@@ -5,12 +5,12 @@
 set :increase_step, 1
 set :border_snap, 10
 set :default_gravity, :ct
-set :urgent_dialogs, true 
+set :urgent_dialogs, false
 set :honor_size_hints, false
 set :gravity_tiling, true
 set :click_to_focus, false
-set :skip_pointer_warp, false
-set :skip_urgent_warp, false
+set :skip_pointer_warp, true 
+set :skip_urgent_warp, true 
 
 #
 # Screen & bar, we use polybar
@@ -34,9 +34,18 @@ style :all do
     padding      0
     margin       0
     font        "-*-*-*-*-*-*-14-*-*-*-*-*-*-*"
+    border      "#ff3030", 0
+    background  "#202020"
+end
+
+style :views do 
+    style :focus do
+        foreground "#ffec26"
+    end
 end
 
 style :clients do
+    foreground "#00ff00"
     padding      0
     margin_left  2
     margin_top   2
@@ -48,17 +57,17 @@ end
 #
 
 # Left - Right
-gravity :l_side, [ 0, 4, 50, 96 ]
-gravity :r_side, [ 50, 4, 50, 96 ]
+gravity :l_side, [ 0, 3, 50, 96 ]
+gravity :r_side, [ 50, 3, 50, 96 ]
 
 # Center
-gravity :ct, [ 0, 4, 100, 96 ]
+gravity :ct, [ 0, 3, 100, 96 ]
 gravity :ct66, [ 25, 25, 50, 50 ]
 
 # Gimp
-gravity :gimp_image, [ 24, 6, 50, 66 ]
-gravity :gimp_toolbox, [ 3, 10, 10, 75 ]
-gravity :gimp_dock, [ 85, 7, 12, 90 ]
+gravity :gimp_image, [ 17, 7, 66, 90 ]
+gravity :gimp_toolbox, [ 4, 7, 12, 90 ]
+gravity :gimp_dock, [ 84, 7, 12, 90 ]
 
 #
 # Grabs
@@ -132,6 +141,7 @@ grab "W-F1", [ :l_side, :r_side ]
 grab "W-F2", [ :ct, :ct66 ]
 grab "W-F3", [ :d1, :d2, :d3 ]
 grab "W-F4", [ :pp, :we, :mu, :ca, :ma ]
+grab "W-F5", [ :fl_1, :fl_2, :fl_3 ]
 
 # Exec programs
 grab "W-Return", "termite"
@@ -217,7 +227,7 @@ tag "gimp_scum" do
 end
 
 ## programs on view console
-gravity :pp, [ 33, 4, 34, 21 ]
+gravity :pp, [ 33, 3, 34, 21 ]
 gravity :we, [ 0, 13, 28, 79 ]
 gravity :mu, [ 72, 13, 28, 40 ]
 gravity :ca, [ 72, 53, 28, 39 ]
@@ -249,9 +259,9 @@ tag "mail" do
 end
 
 ## programs on view dev 
-gravity :d1, [ 0, 4, 33, 96 ]
-gravity :d2, [ 33, 4, 34, 96 ]
-gravity :d3, [ 67, 4, 33, 96 ]
+gravity :d1, [ 0, 3, 33, 96 ]
+gravity :d2, [ 33, 3, 34, 96 ]
+gravity :d3, [ 67, 3, 33, 96 ]
 
 tag "code_1" do
   match "code-1"
@@ -282,6 +292,11 @@ tag "code_6" do
   match "code-6"
   gravity :d3
 end
+
+## float gravity (used in view term)
+gravity :fl_1, [ 11, 12, 26, 80 ]
+gravity :fl_2, [ 38, 12, 49, 39 ]
+gravity :fl_3, [ 38, 53, 49, 39 ]
 
 #
 # View

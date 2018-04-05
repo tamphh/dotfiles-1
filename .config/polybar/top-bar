@@ -1,5 +1,5 @@
 width = 100%
-height = 25
+height = 20
 offset-x = 0
 offset-y = 0
 fixed-center = true
@@ -8,7 +8,6 @@ background = ${colors.background-alt}
 foreground = ${colors.foreground-alt}
 line-size = 0
 line-color = #f00
-border-size = 0
 border-color = #00000000
 padding-left = 0
 padding-right = 0
@@ -19,7 +18,6 @@ font-1 = "Material Icons:antialias=false:size=8;5"
 override-redirect = true
 cursor-click = pointer
 cursor-scroll = ns-resize
-separator = "%{B#dd212326}%{F#ff666666}|%{F-}%{B-}"
-radius = 1.0
+separator = " %{F#555588}*%{F-} "
 border-bottom-size = 1
-border-bottom-color = ${colors.primary}
+border-bottom-color = ${colors.background}

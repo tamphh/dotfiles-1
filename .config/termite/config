@@ -5,6 +5,7 @@ dynamic_title = true
 font = Iosevka Term 8
 #font = scientifica 11
 fullscreen = true
+#mouse_autohide = true
 scrollback_lines = 1000
 browser = vivaldi
 size_hints = true
@@ -13,40 +14,40 @@ filter_unmatched_urls = true
 [colors]
 cursor = #2d4944
 cursor_foreground = #6a605c
-foreground = #d9d1e8
-background = #1f2123
+foreground = #ead8d8
+background = #050b17
 highlight = #3b3633
 
 # black
-color0= #373b40
-color8= #3c4148
+color0= #071021
+color8= #0b2439
 
 # red
-color1= #9d3a5c
-color9= #a54566
+color1= #bf254d
+color9= #d3345e
 
 # Green
-color2 = #089568
-color10 = #0ca071
+color2 = #115767
+color10 = #1a6677
 
 # Yellow
-color3= #b05772
-color11= #bf6c85
+color3= #ab96bf
+color11= #c5b1d7
 
 # Blue
-color4 = #646c9f
-color12 = #6973b1
+color4 = #0b4494
+color12 = #2e4997
 
 # Magenta
-color5 =  #7c4871
-color13 = #8a507e
+color5 =  #502659
+color13 = #5c2f65
 
 # Cyan
-color6 = #219e92
-color14 = #2cac9f
+color6 = #2580ba
+color14 = #3692cd
 
 # White
-color7=  #b3bece
-color15= #c9d5e8
+color7=  #aea1c3
+color15= #d6c7de
 
 [hints]
