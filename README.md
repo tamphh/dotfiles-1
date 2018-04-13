@@ -17,12 +17,12 @@
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ [wallpaper](https://www.goodfon.com/wallpaper/simvoly-osminog-cio2-pauk-atom-lego-kniga-lapka-vai-fai-ochk.html)
++ [wallpaper](https://www.goodfon.com/wallpaper/zvezdnye-voyny-probuzhdenie-1625.html)
 
 ## Requirements for lemonbar || polybar
 
 + material-icons & iosevka term
-+ curl - used for retrieve IP address
++ dig - used for retrieve IP address
 + mpd - music server
 + mpc - music client
 + systemd - used to see state of daemon and reload service.
