@@ -1,12 +1,12 @@
 [colors]
-background = ${xrdb:color0}
-background-alt = ${xrdb:color0}
+background = ${xrdb:background}
+background-alt = ${xrdb:background}
 foreground = ${xrdb:foreground}
 foreground-alt = ${xrdb:foreground}
-primary = ${xrdb:color6}
-secondary = ${xrdb:color12}
+primary = ${xrdb:color10}
+secondary = ${xrdb:color9}
 alert = ${xrdb:color1}
-border = ${xrdb:color2}
+border = ${xrdb:color13}
 
 [bar/top]
 monitor = "eDP-1"
@@ -29,8 +29,11 @@ modules-right = wireless-network wlan eth
 ;dpi = 133
 ;include-file = ~/.config/polybar/bottom-bar
 ;modules-left = torDaemon dnsDaemon firewallDaemon
+;modules-left = uptime
 ;modules-center = uptime webbrowser wallpapers tchat wireshark dnsDaemon
+;modules-center = menu-apps
 ;modules-right = uptime last
+;modules-right = torDaemon dnsDaemon
 
 [module/wireless-network]
 type = internal/network
@@ -55,6 +58,30 @@ format-prefix-foreground = ${colors.primary}
 format-foreground = ${colors.foreground}
 format-padding = 2
 format-background = ${colors.background}
+
+[module/wallpapers]
+type = custom/text content = "   "
+content-foreground = ${colors.secondary}
+click-left = feh -d --draw-tinted -x -g 640x480 -B black -D 2.0 ~/images
+
+[module/webbrowser]
+type = custom/text
+content = "   "
+content-foreground = ${colors.primary}
+click-left = vivaldi_sec &
+
+[module/tchat]
+type = custom/text
+content = "   "
+content-foreground = ${colors.primary}
+click-left = termite --name=weechat -e weechat &
+
+[module/wireshark]
+type = custom/text
+content = "   "
+content-foreground = ${colors.foreground}
+content-background = ${colors.alert}
+click-left = wireshark-gtk &
 
 [module/torDaemon]
 type = custom/script
@@ -208,7 +235,7 @@ exec-if = ping -c 1 gentoo.org
 [module/wave]
 type = custom/text
 content = *~’^‘~*-,._.,-*~’^‘~*
-content-foreground = ${colors.primary}
+content-foreground = "#e7c56c"
 content-padding = 4
 
 [module/hostname]
@@ -261,6 +288,14 @@ toggle-on-foreground = ${colors.primary}
 toggle-off-foreground = ${colors.secondary}
 
 label-offline = no sound
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.primary}
+format-underline = #f90000
+label = %percentage%%
 
 [module/memory]
 type = internal/memory
@@ -316,9 +351,9 @@ date = " %a %d %b  "
 date-alt = " %d-%m"
 time = "  %H:%M,"
 time-alt = %H:%M
-format-prefix = "<;;;;;;;;;]xxxxx(  "
+format-prefix = "<;;;;;;;;;]xxxx(  "
 format-prefix-foreground = ${colors.primary}
-format-suffix = " )xxxxx[;;;;;;;;;>"
+format-suffix = " )xxxx[;;;;;;;;;>"
 format-suffix-foreground = ${colors.primary}
 format-underline = #0a6cf5
 format-foreground = ${colors.foreground-alt}

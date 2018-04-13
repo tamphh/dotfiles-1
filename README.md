@@ -23,12 +23,12 @@ A new theme will erase the previous, only the colors (Xresources) is saved into 
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ [wallpaper](https://www.goodfon.com/wallpaper/ninja-tune-shadow-nindzya.html)
++ [wallpaper](https://img2.goodfon.com/wallpaper/middle/d/18/zvezdnye-voyny-probuzhdenie-1625.jpg)
 
 ## Requirements for lemonbar || polybar
 
 + material-icons & iosevka term
-+ curl - used for retrieve IP address
++ dig - used for retrieve IP address
 + mpd - music server
 + mpc - music client
 + systemd - used to see state of daemon and reload service.
