@@ -23,7 +23,7 @@ A new theme will erase the previous, only the colors (Xresources) is saved into 
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ [wallpaper](https://img2.goodfon.com/wallpaper/middle/d/18/zvezdnye-voyny-probuzhdenie-1625.jpg)
++ [wallpaper](https://www.goodfon.com/wallpaper/zvezdnye-voyny-probuzhdenie-1625.html)
 
 ## Requirements for lemonbar || polybar
 
