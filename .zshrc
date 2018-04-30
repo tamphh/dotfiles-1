@@ -80,7 +80,7 @@ pw() {
 # or : transfer hello.txt 
 transfer() { 
     local torIp=127.0.0.1
-    local torPort=51248
+    local torPort=9050 
 
     if [ $# -eq 0 ]; then 
         echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; 
@@ -89,10 +89,8 @@ transfer() {
     tmpfile=$( mktemp -t transferXXX ); 
     if tty -s; then
         basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); 
-        #curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; 
         curl --socks5-hostname ${torIp}:${torPort} --retry 3 --connect-timeout 60 --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; 
     else 
-        #curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; 
         curl --socks5-hostname ${torIp}:${torPort} --retry 3 --connect-timeout 60 --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; 
     fi;
     cat $tmpfile; 

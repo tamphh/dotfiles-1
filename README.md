@@ -1,6 +1,6 @@
 *** You can found other screens, configs on: ***
 + [dotshare.it](http://dotshare.it/~szorfein/dots/)
-+ [Reddit](https://www.reddit.com/user/szorfein/submitted/)
++ [Reddit](https://www.reddit.com/user/szorfein/posts/)
 + [Imgur](https://imgur.com/user/Szorfein/submitted)
 + [Google+](https://plus.google.com/103351806729237673609)
 + [twitter](https://twitter.com/szorfein)
@@ -12,7 +12,7 @@ A new theme will erase the previous, only the colors (Xresources) is saved into 
 
     $ git clone https://github.com/szorfein/dotfiles
 
-## Requirements for this desktop...
+## Requirements for this desktop
 
 + subtle
 + termite - virtual terminal
@@ -28,14 +28,16 @@ A new theme will erase the previous, only the colors (Xresources) is saved into 
 
 ## Requirements for lemonbar || polybar
 
+All dependencies for polybar can be remove, change, etc, you just have to edit the config file to your needs.
+
 + material-icons & iosevka term
 + dig - used for retrieve IP address
 + mpd - music server
 + mpc - music client
 + systemd - used to see state of daemon and reload service.
-+ i3lock (optionnal)
-+ dnscrypt-proxy (optionnal)
-+ tor (optionnal)
++ i3lock
++ dnscrypt-proxy
++ tor
 
 ### Troubleshoot
 
