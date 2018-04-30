@@ -1,18 +1,17 @@
-# Path to your oh-my-zsh installation.
-# To install it:
-# git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-export ZSH=$HOME/.oh-my-zsh
-
-# ruby & rails for development to /home
-# need: mkdir -p ~/.gems/bin
-# export GEM_HOME=/home/user/.gems
-# export GEM_PATH=/home/user/.gems:/usr/lib64/ruby/gems/2.3.0/gems/
-# export PATH=$PATH:/home/user/.gems/bin
-# export RB_USER_INSTALL='true'
-
 # Themes in ~/.oh-my-zsh/themes/
-# Optionally, you can set ZSH_THEME="random" to find new theme.
-ZSH_THEME="nicoulaj" 
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="nicoulaj"
+
+# It's not automatically call for me
+if [ -r $HOME/.aliases.zsh ] ; then
+    source $HOME/.aliases.zsh
+fi
+
+# It's not automatically call for me
+if [ -r $HOME/.zshenv ] ; then
+    source $HOME/.zshenv
+fi
 
 # Bindkey fr
 #bindkey "\e[2~"  yank
@@ -22,23 +21,13 @@ ZSH_THEME="nicoulaj"
 #bindkey "\e[5~"  up-line-or-history
 #bindkey "\e[6~"  down-line-or-history
 
+source $ZSH/oh-my-zsh.sh
+
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
 # Plugin list in ~/.oh-my-zsh/plugins
 plugins=(git git-prompt)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-export PATH=$HOME/bin:$PATH
-export EDITOR='vim'
-export GNUPGHOME="$HOME/.gnupg"
-export SSH_KEY_PATH="~/.ssh/ssh_key"
-export GPG_TTY=$(tty)
-export PASSWD=~/.passwords
-export _JAVA_AWT_WM_NONREPARENTING=1
-export _JAVA_OPTIONS=-Djava.io.tmpdir=/var/tmp
 
 # With Zsh and Termite
 if [[ $TERM == xterm-termite ]] ; then
@@ -46,12 +35,7 @@ if [[ $TERM == xterm-termite ]] ; then
     __vte_osc7
 fi
 
-# With Bash and Termite
-#if [[ $TERM == xterm-termite ]]; then
-#    . /etc/profile.d/vte-2.91.sh
-#    __vte_prompt_command
-#fi
-
+#unset GREP_OPTIONS
 test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || \
     eval "$(dircolors -b)" 
 
@@ -81,8 +65,8 @@ buildfile() {
     fi
 }
 
-# Usage to create new password file:
-# pw newpass.gpg
+# Create new password with : pw newpass.gpg
+# read pass : pw newpass
 pw() {
    cd "$PASSWD"
    if [ ! -z "$1" ]; then
@@ -91,11 +75,12 @@ pw() {
    fi
 }
 
-# Function for upload file to https://transfer.sh/
-# Use : $ transfer hello.txt
+# Function for upload file -> https://transfer.sh/
+# Use : curl --upload-file ./hello.txt https://transfer.sh/hello.txt 
+# or : transfer hello.txt 
 transfer() { 
-    torIp=127.0.0.1
-    torPort=9050
+    local torIp=127.0.0.1
+    local torPort=51248
 
     if [ $# -eq 0 ]; then 
         echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; 
@@ -104,8 +89,10 @@ transfer() {
     tmpfile=$( mktemp -t transferXXX ); 
     if tty -s; then
         basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); 
+        #curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; 
         curl --socks5-hostname ${torIp}:${torPort} --retry 3 --connect-timeout 60 --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; 
     else 
+        #curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; 
         curl --socks5-hostname ${torIp}:${torPort} --retry 3 --connect-timeout 60 --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; 
     fi;
     cat $tmpfile; 

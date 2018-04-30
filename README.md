@@ -18,12 +18,13 @@ A new theme will erase the previous, only the colors (Xresources) is saved into 
 + termite - virtual terminal
 + rofi - for run programs
 + polybar - top | bottom bar
-+ iosevka term - font for terminal app.
++ iosevka term - font for terminal app
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
-+ [wallpaper](https://www.goodfon.com/wallpaper/zvezdnye-voyny-probuzhdenie-1625.html)
++ firejail - launch app in a secure sandbox
++ [wallpaper](https://wallpapertag.com/wallpaper/full/6/5/0/798884-kerrigan-wallpaper-1920x1080-photo.jpg)
 
 ## Requirements for lemonbar || polybar
 
@@ -33,12 +34,15 @@ A new theme will erase the previous, only the colors (Xresources) is saved into 
 + mpc - music client
 + systemd - used to see state of daemon and reload service.
 + i3lock (optionnal)
++ dnscrypt-proxy (optionnal)
 + tor (optionnal)
 
 ### Troubleshoot
 
-+ Install on bspwm: [wiki](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)  
+To install on:  
++ bspwm: [wiki](https://github.com/szorfein/dotfiles/wiki/Install-BSPWM)  
 + i3-gaps: [wiki](https://github.com/szorfein/dotfiles/wiki/i3-gaps)
++ subtle: [wiki](https://github.com/szorfein/dotfiles/wiki/subtle)
 
 Current Desktop: ([subtle](https://subforge.org/projects/subtle))
 ![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")

@@ -1,11 +1,19 @@
-width = 90%
+width = 80%
 height = 19
-offset-x = 5%
-offset-y = 5  
+offset-x = 10%
+
+; subtle
+offset-y = 10 
+override-redirect = false
+
+; i3
+;offset-y = 24
+;override-redirect = true
+
 background = ${colors.background-alt}
 foreground = ${colors.foreground-alt}
 font-0 = "Iosevka-Term:size=6;2"
-font-1 = "Material Icons:antialias=false:size=8;5"
+font-1 = "Material Icons:antialias=false:size=8;4"
 border-top-size = 1
 border-top-color = ${colors.border}
 border-size = 0
