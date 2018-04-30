@@ -1,4 +1,4 @@
-color normal brightgreen default
+color normal white default
 color indicator yellow black
 color tree brightred default
 color status yellow black
@@ -8,7 +8,7 @@ mono bold bold
 # Index
 color index blue default "~N" # NEW  
 color index magenta default "~U" # UNREAD
-color index cyan default "~R" # READ
+color index color241 default "~R" # READ
 
 # URL 
 color body brightgreen black "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
@@ -28,9 +28,6 @@ color header red default "^(Envelope-To)"
 color header red default "^(To)"
 color header white default "^(Return-Path)"
 color header brightmagenta default "^(Date)"
-
-# Body
-color normal brightred default
 
 # PGP
 color body red default "(BAD signature)"

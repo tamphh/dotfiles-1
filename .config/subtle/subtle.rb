@@ -38,10 +38,10 @@ end
 
 style :clients do
     padding      0
-    margin_left  7
-    margin_right   6
-    margin_top   7
-    margin_bottom   7
+    margin_left  5
+    margin_right   4
+    margin_top   5
+    margin_bottom   5
 end
 
 #
@@ -49,15 +49,15 @@ end
 #
 
 # Left - Right
-gravity :l_side, [ 0, 5, 50, 93 ]
-gravity :r_side, [ 50, 5, 50, 93 ]
+gravity :l_side, [ 2, 5, 48, 93 ]
+gravity :r_side, [ 50, 5, 48, 93 ]
 
 # Center
-gravity :ct, [ 1, 5, 98, 93 ]
+gravity :ct, [ 2, 5, 96, 93 ]
 gravity :ct66, [ 25, 25, 50, 50 ]
 
 # Gimp
-gravity :gimp_image, [ 1, 5, 98, 93 ]
+gravity :gimp_image, [ 2, 7, 96, 91 ]
 gravity :gimp_toolbox, [ 4, 5, 12, 93 ]
 gravity :gimp_dock, [ 84, 5, 12, 93 ]
 
@@ -217,20 +217,12 @@ tag "gimp_scum" do
   match role: "gimp-.*|screenshot"
 end
 
-## programs on view console
-<<<<<<< HEAD
-gravity :pp, [ 33, 4, 34, 21 ]
-gravity :we, [ 0, 13, 28, 79 ]
-gravity :mu, [ 72, 13, 28, 40 ]
-gravity :ca, [ 72, 53, 28, 39 ]
-gravity :ma, [ 33, 34, 34, 65 ]
-=======
-gravity :pp, [ 33, 5, 34, 20 ]
-gravity :we, [ 1, 13, 28, 79 ]
-gravity :mu, [ 71, 13, 28, 40 ]
-gravity :ca, [ 71, 53, 28, 39 ]
-gravity :ma, [ 33, 32, 34, 66 ]
->>>>>>> ce32492... theme empire - 04-13-2018
+## programs on view console [4]
+gravity :pp, [ 34, 13, 32, 21 ]
+gravity :we, [ 5, 13, 29, 77 ]
+gravity :mu, [ 66, 13, 29, 41 ]
+gravity :ca, [ 66, 53, 29, 37 ]
+gravity :ma, [ 34, 33, 32, 57 ]
 
 tag "pwd" do
     match "pwd"
@@ -257,16 +249,10 @@ tag "mail" do
     gravity :ma
 end
 
-## programs on view dev 
-<<<<<<< HEAD
-gravity :d1, [ 0, 4, 33, 96 ]
-gravity :d2, [ 33, 4, 34, 96 ]
-gravity :d3, [ 67, 4, 33, 96 ]
-=======
+## programs on view dev [3]
 gravity :d1, [ 1, 5, 33, 93 ]
 gravity :d2, [ 34, 5, 33, 93 ]
 gravity :d3, [ 67, 5, 32, 93 ]
->>>>>>> ce32492... theme empire - 04-13-2018
 
 tag "code_1" do
   match "code-1"
@@ -298,14 +284,11 @@ tag "code_6" do
   gravity :d3
 end
 
-<<<<<<< HEAD
-=======
-## float gravity
-gravity :fl_1, [ 11, 13, 27, 79 ]
-gravity :fl_2, [ 38, 13, 49, 40 ]
-gravity :fl_3, [ 38, 53, 49, 39 ]
+## view terms [1]
+gravity :fl_1, [ 12, 13, 30, 79 ]
+gravity :fl_2, [ 42, 13, 46, 40 ]
+gravity :fl_3, [ 42, 53, 46, 39 ]
 
->>>>>>> ce32492... theme empire - 04-13-2018
 #
 # View
 #
@@ -322,7 +305,7 @@ view "gimp",  "gimp_.*"
 
 on :start do
     Subtlext::Client.spawn( "termite" )
-    Subtlext::Client.spawn( "vivaldi_sec" )
+    Subtlext::Client.spawn( "firejail vivaldi" )
     Subtlext::Client.spawn( "sh ~/.config/polybar/launch.sh" )
     Subtlext::Client.spawn( "sh ~/.config/subtle/init_desktop_3.sh" )
     Subtlext::Client.spawn( "sh ~/.config/subtle/init_desktop_4.sh" )

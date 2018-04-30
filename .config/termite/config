@@ -3,7 +3,6 @@ audible_bell = false
 clickable_url = true
 dynamic_title = true
 font = Iosevka Term 8
-#font = scientifica 11
 fullscreen = true
 scrollback_lines = 1000
 browser = vivaldi
@@ -13,40 +12,41 @@ filter_unmatched_urls = true
 [colors]
 cursor = #2d4944
 cursor_foreground = #6a605c
-foreground = #fae696
-background = #2b161c
+foreground = #a9cabf
+#background = #100e12
+background = rgba(16,14,18,.97)
 highlight = #2f1a21
 
 # black
-color0= #351920
-color8= #3c1d25
+color0= #211925
+color8= #251d29
 
 # red
-color1= #ba2637
-color9= #d82b3e
+color1= #512c36
+color9= #592f3a
 
 # Green
-color2 = #ee6f3d
-color10 = #eb845c
+color2 = #41402d
+color10 = #494834
 
 # Yellow
-color3= #f4b140
-color11= #e7c56c
+color3= #987965
+color11= #a28470
 
 # Blue
-color4 = #813c55
-color12 = #913f5d
+color4 = #434e5a
+color12 = #425460
 
 # Magenta
-color5 =  #6e224a
-color13 = #7f2253
+color5 =  #4e3c47
+color13 = #594551
 
 # Cyan
-color6 = #d3383a
-color14 = #d64f3a
+color6 = #4e6654
+color14 = #45635d
 
 # White
-color7=  #faae52
-color15= #fcb864
+color7=  #8b9179
+color15= #9ba288
 
 [hints]
