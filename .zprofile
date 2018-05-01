@@ -8,3 +8,8 @@ keychain --clear --agents "ssh,gpg" ssh1 ssh2 0xgpgkey
 
 [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
    . $HOME/.keychain/$HOSTNAME-sh-gpg
+
+# Infinality conf
+if [ -r $HOME/.infinality ] ; then
+    source $HOME/.infinality
+fi
