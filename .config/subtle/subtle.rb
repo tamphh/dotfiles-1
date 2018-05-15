@@ -40,15 +40,15 @@ end
 
 style :views do 
     style :focus do
-        foreground "#ffec26"
+        border "#ffec26", 0
     end
 end
 
 style :clients do
-    foreground "#00ff00"
+    border "#00ff00", 0
     padding      0
     margin_left  5
-    margin_right   4
+    margin_right   5
     margin_top   5
     margin_bottom   5
 end
@@ -142,7 +142,7 @@ grab "W-F1", [ :l_side, :r_side ]
 grab "W-F2", [ :ct, :ct66 ]
 grab "W-F3", [ :d1, :d2, :d3 ]
 grab "W-F4", [ :pp, :we, :mu, :ca, :ma ]
-grab "W-F5", [ :fl_1, :fl_2, :fl_3 ]
+grab "W-F5", [ :float_l, :float_r ]
 
 # Exec programs
 grab "W-Return", "termite"
@@ -231,8 +231,8 @@ end
 gravity :pp, [ 34, 13, 32, 21 ]
 gravity :we, [ 5, 13, 29, 77 ]
 gravity :mu, [ 66, 13, 29, 41 ]
-gravity :ca, [ 66, 53, 29, 37 ]
-gravity :ma, [ 34, 33, 32, 57 ]
+gravity :ca, [ 66, 54, 29, 36 ]
+gravity :ma, [ 34, 34, 32, 56 ]
 
 tag "pwd" do
     match "pwd"
@@ -294,10 +294,10 @@ tag "code_6" do
   gravity :d3
 end
 
-## view terms [1]
-gravity :fl_1, [ 12, 13, 30, 79 ]
-gravity :fl_2, [ 42, 13, 46, 40 ]
-gravity :fl_3, [ 42, 53, 46, 39 ]
+## view on default terms [1]
+gravity :float_l, [ 12, 13, 30, 79 ]
+gravity :float_r, [ 42, 13, 46, 79 ]
+#gravity :float_3, [ 42, 52, 46, 39 ]
 
 #
 # View

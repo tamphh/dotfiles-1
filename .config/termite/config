@@ -13,41 +13,41 @@ filter_unmatched_urls = true
 [colors]
 cursor = #2d4944
 cursor_foreground = #6a605c
-foreground = #a9cabf
-#background = #100e12
-background = rgba(16,14,18,.97)
+foreground = #b3bf96
+background = #0e1713
+#background = rgba(16,14,18,.97)
 highlight = #2f1a21
 
 # black
-color0= #211925
-color8= #251d29
+color0= #131f1a
+color8= #16221d
 
 # red
-color1= #512c36
-color9= #592f3a
+color1= #89784b
+color9= #938050
 
 # Green
-color2 = #41402d
-color10 = #494834
+color2 = #596b43
+color10 = #60724a
 
 # Yellow
-color3= #987965
-color11= #a28470
+color3= #747d55
+color11= #7d865e
 
 # Blue
-color4 = #434e5a
-color12 = #425460
+color4 = #34504b
+color12 = #3e5c57
 
 # Magenta
-color5 =  #4e3c47
-color13 = #594551
+color5 =  #344450
+color13 = #3a4b57
 
 # Cyan
-color6 = #4e6654
-color14 = #45635d
+color6 = #35645e
+color14 = #336c65
 
 # White
-color7=  #8b9179
-color15= #9ba288
+color7=  #b1ba8d
+color15= #bfc89d
 
 [hints]
