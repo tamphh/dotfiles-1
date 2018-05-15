@@ -8,7 +8,7 @@
 
 ## Advertise
 
-A new theme will erase the previous, only the colors (Xresources) is saved into `~/.colors`. It change about every 15 days. if you like a theme, do a copy locally with:
+A new theme will erase the previous, only the colors (.Xresources) are saved into `~/.colors`. It change about every 15 days. if you like a theme, do a copy locally with:
 
     $ git clone https://github.com/szorfein/dotfiles
 
@@ -24,14 +24,14 @@ A new theme will erase the previous, only the colors (Xresources) is saved into 
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
 + firejail - launch app in a secure sandbox
-+ [wallpaper](https://wallpapertag.com/wallpaper/full/6/5/0/798884-kerrigan-wallpaper-1920x1080-photo.jpg)
++ [wallpaper](https://wallpapertag.com/wallpaper/full/9/6/1/374331-grass-wallpaper-2560x1600-for-tablet.jpg)
 
 ## Requirements for lemonbar || polybar
 
 All dependencies for polybar can be remove, change, etc, you just have to edit the config file to your needs.
 
 + material-icons & iosevka term
-+ dig - used for retrieve IP address
++ wget - used for retrieve IP address
 + mpd - music server
 + mpc - music client
 + systemd - used to see state of daemon and reload service.

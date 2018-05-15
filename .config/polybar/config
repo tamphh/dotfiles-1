@@ -1,6 +1,6 @@
 [colors]
-background = #5e100e12
-background-alt = #5e100e12
+background = ${xrdb:background}
+background-alt = ${xrdb:background}
 foreground = ${xrdb:foreground}
 foreground-alt = ${xrdb:foreground}
 primary = ${xrdb:color12}
@@ -28,7 +28,7 @@ modules-right = wireless-network wlan eth
 ;monitor = "eDP-1"
 ;dpi = 133
 ;include-file = ~/.config/polybar/bottom-bar
-;modules-left = torDaemon dnsDaemon
+;modules-left = torDaemon dnsDaemon firewallDaemon
 ;modules-left = uptime
 ;modules-center = uptime webbrowser wallpapers tchat wireshark dnsDaemon
 ;modules-center = menu-apps
@@ -149,6 +149,16 @@ format-padding = 2
 label-open = "%{F#fa1B54} %{F-}"
 label-close = "%{F#4b62f1} %{F-}"
 label-separator = " . "
+
+[module/firewallDaemon]
+type = custom/script
+exec = ~/.config/polybar/status nftables
+interval = 4
+format = <label>
+format-padding = 4
+format-foreground = ${colors.secondary}
+format-prefix= " "
+format-prefix-foreground = ${colors.primary}
 
 [module/bspwm]
 type = internal/bspwm

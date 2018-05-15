@@ -19,8 +19,8 @@ style = stereo
 
 [color]
 gradient = 1
-gradient_color_1 = '#4e3c47'
-gradient_color_2 = '#441829'
+gradient_color_1 = '#596b43'
+gradient_color_2 = '#34504b'
 
 [smoothing]
 
