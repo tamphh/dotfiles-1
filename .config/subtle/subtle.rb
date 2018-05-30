@@ -47,26 +47,22 @@ end
 style :clients do
     border "#00ff00", 0
     padding      0
-    margin_left  5
-    margin_right   5
-    margin_top   5
-    margin_bottom   5
+    margin_left  7
+    margin_right   7
+    margin_top   7
+    margin_bottom   7
 end
 
 #
 #  Gravities
 #
 
-# Left - Right
-gravity :l_side, [ 2, 5, 48, 93 ]
-gravity :r_side, [ 50, 5, 48, 93 ]
-
 # Center
-gravity :ct, [ 2, 5, 96, 93 ]
+gravity :ct, [ 5, 14, 90, 79 ]
 gravity :ct66, [ 25, 25, 50, 50 ]
 
 # Gimp
-gravity :gimp_image, [ 2, 7, 96, 91 ]
+gravity :gimp_image, [ 5, 14, 90, 79 ]
 gravity :gimp_toolbox, [ 4, 5, 12, 93 ]
 gravity :gimp_dock, [ 84, 5, 12, 93 ]
 
@@ -138,11 +134,10 @@ grab "W-Right", :WindowRight
 grab "W-z", :WindowKill
 
 # Cycle between given gravities
-grab "W-F1", [ :l_side, :r_side ]
+grab "W-F1", [ :float_l, :float_r ]
 grab "W-F2", [ :ct, :ct66 ]
 grab "W-F3", [ :d1, :d2, :d3 ]
 grab "W-F4", [ :pp, :we, :mu, :ca, :ma ]
-grab "W-F5", [ :float_l, :float_r ]
 
 # Exec programs
 grab "W-Return", "termite"
@@ -228,11 +223,11 @@ tag "gimp_scum" do
 end
 
 ## programs on view console [4]
-gravity :pp, [ 34, 13, 32, 21 ]
-gravity :we, [ 5, 13, 29, 77 ]
-gravity :mu, [ 66, 13, 29, 41 ]
-gravity :ca, [ 66, 54, 29, 36 ]
-gravity :ma, [ 34, 34, 32, 56 ]
+gravity :pp, [ 34, 14, 32, 21 ]
+gravity :we, [ 5, 14, 29, 79 ]
+gravity :mu, [ 66, 14, 29, 41 ]
+gravity :ca, [ 66, 55, 29, 38 ]
+gravity :ma, [ 34, 35, 32, 58 ]
 
 tag "pwd" do
     match "pwd"
@@ -260,12 +255,14 @@ tag "mail" do
 end
 
 ## programs on view dev [3]
-gravity :d1, [ 1, 5, 33, 93 ]
-gravity :d2, [ 34, 5, 33, 93 ]
-gravity :d3, [ 67, 5, 32, 93 ]
+gravity :d1, [ 5, 14, 30, 79 ]
+gravity :d2, [ 35, 14, 30, 79 ]
+gravity :d3, [ 65, 14, 30, 79 ]
 
 tag "code_1" do
   match "code-1"
+  padding 0
+  margin 0
   gravity :d1
 end
 
@@ -295,9 +292,8 @@ tag "code_6" do
 end
 
 ## view on default terms [1]
-gravity :float_l, [ 12, 13, 30, 79 ]
-gravity :float_r, [ 42, 13, 46, 79 ]
-#gravity :float_3, [ 42, 52, 46, 39 ]
+gravity :float_l, [ 12, 14, 38, 79 ]
+gravity :float_r, [ 50, 14, 38, 79 ]
 
 #
 # View

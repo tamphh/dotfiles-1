@@ -8,9 +8,10 @@
 
 ## Advertise
 
-A new theme will erase the previous, only the colors (.Xresources) are saved into `~/.colors`. It change about every 15 days. if you like a theme, do a copy locally with:
+A new theme will erase the previous, only the colors (.Xresources) are saved into `~/.colors`. It change about every 15 days.  
+If you like a theme, do a copy locally, you can name it with current theme, e.g:
 
-    $ git clone https://github.com/szorfein/dotfiles
+    $ git clone https://github.com/szorfein/dotfiles grass-theme
 
 ## Requirements for this desktop
 
@@ -24,7 +25,9 @@ A new theme will erase the previous, only the colors (.Xresources) are saved int
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
 + firejail - launch app in a secure sandbox
-+ [wallpaper](https://wallpapertag.com/wallpaper/full/9/6/1/374331-grass-wallpaper-2560x1600-for-tablet.jpg)
++ [wallpaper](https://my.pcloud.com/publink/show?code=XZp2tj7ZQJVI6YrkKThXXl1nopjUM4j94ogy)  
+
+A complete list of programs that i use is [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/dependencies-list.txt) if need.
 
 ## Requirements for lemonbar || polybar
 

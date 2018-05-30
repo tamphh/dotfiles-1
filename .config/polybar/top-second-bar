@@ -1,10 +1,10 @@
-width = 90%
+width = 76%
 height = 19
-offset-x = 5%
+offset-x = 12%
 
 ; subtle
-offset-y = 10 
-override-redirect = false
+offset-y = 79 
+override-redirect = true 
 
 ; i3
 ;offset-y = 24
