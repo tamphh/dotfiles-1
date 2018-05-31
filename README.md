@@ -11,7 +11,9 @@
 A new theme will erase the previous, only the colors (.Xresources) are saved into `~/.colors`. It change about every 15 days.  
 If you like a theme, do a copy locally, you can name it with current theme, e.g:
 
-    $ git clone https://github.com/szorfein/dotfiles grass-theme
+    $ git clone https://github.com/szorfein/dotfiles redeyes-theme
+
+If you search an old wallpaper that i've use, search into the list [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/wallpapers-list.txt).
 
 ## Requirements for this desktop
 
