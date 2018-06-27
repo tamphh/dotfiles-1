@@ -6,8 +6,9 @@ set copy=no
 
 # Mailbox
 set mbox_type=Maildir
-set folder="~/.mails"
-set spoolfile="+Gmail/INBOX"
+set folder=~/.mails
+set spoolfile="+gmail/INBOX"
+set record=~/.mails/sent/
 set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
 
 # Personal

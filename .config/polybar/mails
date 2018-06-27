@@ -4,7 +4,7 @@
 # And print number of new messages.
 # Require another prog for doing this, offlineimap, msmtp or isync.
 
-gmaildir=~/.mails/Gmail/\[Gmail\].All\ Mail/new
+gmaildir=~/.mails/gmail/\[Gmail\].All\ Mail/new
 prog=/usr/bin/offlineimap
 count=0
 log=/tmp/mails.log

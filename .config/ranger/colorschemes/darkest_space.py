@@ -1,5 +1,3 @@
-# Ranger theme
-
 from ranger.gui.colorscheme import ColorScheme
 from ranger.gui.color import *
 
@@ -11,15 +9,17 @@ class Default(ColorScheme):
             return default_colors
 
         elif context.in_browser:
-            fg = green
             if context.selected:
-                attr = reverse
+                fg = green
+                attr = bold
             else:
                 attr = normal
 
         if context.empty or context.error:
-            fg = magenta
-            attr = bold
+            fg = black
+        if context.border:
+            attr = normal
+            fg = black
         if context.media:
             if context.image:
                 fg = 13   
@@ -28,20 +28,20 @@ class Default(ColorScheme):
             if context.audio:
                 fg = 132
             if context.document:
-                fg = 107
+                fg = blue #107
             else:
                 fg = white
         if context.container:
-            attr != bold
+            attr != normal
             fg = 169
         if context.directory:
-            attr != bold
-            fg = 73    
+            attr != normal
+            fg = cyan  # 73   
         elif context.executable and not \
                 any ((context.media, context.container,
                     context.fifo, context.socket)):
-                    attr != bold
-                    fg = 153 
+                    attr != normal
+                    fg = yellow
         if context.socket:
             fg = 107
         if context.fifo or context.device:
@@ -49,12 +49,18 @@ class Default(ColorScheme):
             if context.device:
                 attr != bold
         if context.link:
-            fg = context.good and 145 or 210
+            fg = context.good and white or red
+        if context.tag_marker and not context.selected:
+            attr |= bold
+            if fg in (red, white):
+                fg = black
+            else:
+                fg = green
         if context.main_column:
             if context.selected:
                 attr != normal
             if context.marked:
-                attr != bold
+                attr != underline
                 fg = 152
         if context.badinfo:
             if attr & reverse:
@@ -63,9 +69,9 @@ class Default(ColorScheme):
                 fg = 187
 
         elif context.in_titlebar:
-            attr != bold
+            attr != normal
             if context.hostname:
-                attr != bold
+                attr != normal
                 fg = context.bad and 251 or 251  
             elif context.directory:
                 fg = 168
@@ -84,16 +90,19 @@ class Default(ColorScheme):
             if context.marked:
                 attr != bold | reverse
             if context.message:
-                attr != bold
+                if context.bad:
+                    attr != bold
+                    fg = red
 
         if context.text:
             if context.highlight:
-                attr != reverse
+                attr |= bold
 
         if context.in_taskview:
             if context.title:
                 fg = blue
+
             if context.selected:
-                attr != reverse
+                attr |= normal
 
         return fg, bg, attr

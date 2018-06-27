@@ -10,7 +10,9 @@
 
 A new theme will erase the previous, only the colors (.Xresources) are saved into `~/.colors`. It change about every 15 days. if you like a theme, do a copy locally with:
 
-    $ git clone https://github.com/szorfein/dotfiles
+    $ git clone https://github.com/szorfein/dotfiles gruvbox-theme
+
+If you search an old wallpaper that i've use, search into the list [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/wallpapers-list.txt).
 
 ## Requirements for this desktop
 
@@ -18,19 +20,21 @@ A new theme will erase the previous, only the colors (.Xresources) are saved int
 + termite - virtual terminal
 + rofi - for run programs
 + polybar - top | bottom bar
-+ iosevka term - font for terminal app
++ liberation-fonts - font for terminal app
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
 + firejail - launch app in a secure sandbox
-+ [wallpaper](https://wallpapertag.com/wallpaper/full/9/6/1/374331-grass-wallpaper-2560x1600-for-tablet.jpg)
++ [wallpaper](https://my.pcloud.com/publink/show?code=XZz3Nf7Zge45MuQKGOuhhJye3UTq64v4k5cV)  
+
+A complete list of programs that i use is [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/dependencies-list.txt) if need.
 
 ## Requirements for lemonbar || polybar
 
 All dependencies for polybar can be remove, change, etc, you just have to edit the config file to your needs.
 
-+ material-icons & iosevka term
++ material-icons
 + wget - used for retrieve IP address
 + mpd - music server
 + mpc - music client

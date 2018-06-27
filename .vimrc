@@ -17,7 +17,7 @@ set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 
 " file encryption for file save of buffer contents
-set cryptmethod=blowfish
+set cryptmethod=blowfish2 " require vim >= 7.4.399
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -116,8 +116,12 @@ set expandtab
 set foldenable
 set foldmethod=manual
 
-"" Custom Color here: https://github.com/szorfein/darkest-space
-colorscheme darkest-space
+"" Colors
+colorscheme gruvbox
+
+"" Gruvbox colorscheme
+let g:gruvbox_contrast_dark = 'soft'
+set background=dark
 
 "" NERDTree Configuration
 "" Found https://github.com/scrooloose/nerdtree
@@ -139,6 +143,7 @@ map <F3> :NERDTreeToggle<CR>
 map <F8> :update<CR>:colorscheme darkest-space<CR>
 let mapleader=","
 
+"" With vim, copy to clipboard work only if you compile vim with X support
 "" Some Keymaps for GPG
 imap <C-V> <ESC>"+gpa
 " Copy in Normal mode
@@ -146,18 +151,20 @@ nmap <leader>y "+yE
 " Copy in visual mode
 vmap <leader>y "+y
 
-"" Vim GPG, copy to clipboard work only with gnupg.vim <= 2.5 for me
 "" plugin here: http://www.vim.org/scripts/script.php?script_id=3645
 "" wiki here http://pig-monkey.com/2013/04/password-management-vim-gnupg/
 if has("autocmd")
     let g:GPGPreferArmor=1
     let g:GPGPreferSign=1
+    let g:GPGUseAgent=1
+    let g:GPGFilePattern='*.\(gpg\|asc\|pgp\)'
 
     augroup GnuPGExtra
+        autocmd!
         " Set extra file options.
-        autocmd BufReadCmd,FileReadCmd '*.\(gpg\|asc\|pgp\)' call SetGPGOptions()
-        " Automatically close unmodified files after inactivity.
-        autocmd CursorHold '*.\(gpg\|asc\|pgp\)' quit
+        exe "autocmd BufReadCmd,FileReadCmd " . g:GPGFilePattern . " call SetGPGOptions() "
+         " Automatically close unmodified files after inactivity.
+        exe "autocmd CursorHold " . g:GPGFilePattern . " quit "
     augroup END
 
     function SetGPGOptions()
