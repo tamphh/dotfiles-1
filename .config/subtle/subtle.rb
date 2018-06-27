@@ -1,19 +1,16 @@
-#
-# Default options
-#
-
-set :increase_step, 1
+set :increase_step, 5
 set :border_snap, 10
-set :default_gravity, :ct
+set :default_gravity, :center
 set :urgent_dialogs, false
 set :honor_size_hints, false
-set :gravity_tiling, true
+set :gravity_tiling, true 
 set :click_to_focus, false
-set :skip_pointer_warp, true 
-set :skip_urgent_warp, true 
+set :skip_pointer_warp, false
+set :skip_urgent_warp, false
+set :wmname, "Subtle"
 
 #
-# Screen & bar, we use polybar
+# == Screen
 #
 
 screen 1 do
@@ -21,53 +18,71 @@ screen 1 do
   bottom [ ]
 end
 
+# Example for a second screen:
 #screen 2 do
 #  top    [ ]
 #  bottom [ ]
 #end
 
 #
-# Styles
+# == Styles
 #
 
+# Style for all style elements
 style :all do
-    padding      0
-    margin       0
-    font        "-*-*-*-*-*-*-14-*-*-*-*-*-*-*"
-    border      "#ff3030", 0
-    background  "#202020"
+  background  "#202020"
+  icon        "#757575"
+  border      "#303030", 0
+  padding     0, 3
+  font        "-*-*-*-*-*-*-14-*-*-*-*-*-*-*"
 end
 
-style :views do 
-    style :focus do
-        border "#ffec26", 0
-    end
+# Style for the all views
+style :views do
+  foreground  "#757575"
 end
 
+# Style for active/inactive windows
 style :clients do
-    border "#00ff00", 0
-    padding      0
-    margin_left  7
-    margin_right   7
-    margin_top   7
-    margin_bottom   7
+  active    "#892d2d", 1
+  inactive  "#333333", 1
+  margin_left 1
+  margin_right 1
+  margin_bottom 1
+  padding 1
+  width     50
+end
+
+# Style for subtle
+style :subtle do
+  margin      0, 0, 0, 0
+  panel       "#202020"
+  background  "#3d3d3d"
+  stipple     "#757575"
 end
 
 #
-#  Gravities
+# == Gravities
 #
+
+# Left
+gravity :left,           [   6,   10,  44, 86 ]
 
 # Center
-gravity :ct, [ 5, 14, 90, 79 ]
-gravity :ct66, [ 25, 25, 50, 50 ]
+gravity :center,         [   0,   6, 100, 94 ]
+gravity :center66,       [  17,  17,  66,  66 ]
+gravity :center33,       [  33,  33,  33,  33 ]
+
+# Right
+gravity :right,          [  50,   10,  44, 86 ]
 
 # Gimp
-gravity :gimp_image, [ 5, 14, 90, 79 ]
-gravity :gimp_toolbox, [ 4, 5, 12, 93 ]
-gravity :gimp_dock, [ 84, 5, 12, 93 ]
+gravity :gimp_image,     [  10,   6,  80, 94 ]
+gravity :gimp_toolbox,   [   0,   6,  10, 94 ]
+gravity :gimp_dock,      [  90,   6,  10, 94 ]
 
 #
-# Grabs
+# == Grabs
 #
 
 # Jump to view1, view2, ...
@@ -76,6 +91,7 @@ grab "W-S-2", :ViewJump2
 grab "W-S-3", :ViewJump3
 grab "W-S-4", :ViewJump4
 grab "W-S-5", :ViewJump5
+grab "W-S-6", :ViewJump6
 
 # Switch current view
 grab "W-1", :ViewSwitch1
@@ -83,6 +99,11 @@ grab "W-2", :ViewSwitch2
 grab "W-3", :ViewSwitch3
 grab "W-4", :ViewSwitch4
 grab "W-5", :ViewSwitch5
+grab "W-6", :ViewSwitch6
+
+# Select next and prev view */
+grab "W-Tab", :ViewNext
+grab "W-Tab", :ViewPrev
 
 # Move mouse to screen1, screen2, ...
 grab "W-A-1", :ScreenJump1
@@ -90,6 +111,7 @@ grab "W-A-2", :ScreenJump2
 grab "W-A-3", :ScreenJump3
 grab "W-A-4", :ScreenJump4
 grab "W-A-5", :ScreenJump5
+grab "W-A-6", :ScreenJump6
 
 # Force reload of config and sublets
 grab "W-C-r", :SubtleReload
@@ -134,10 +156,10 @@ grab "W-Right", :WindowRight
 grab "W-z", :WindowKill
 
 # Cycle between given gravities
-grab "W-F1", [ :float_l, :float_r ]
-grab "W-F2", [ :ct, :ct66 ]
-grab "W-F3", [ :d1, :d2, :d3 ]
-grab "W-F4", [ :pp, :we, :mu, :ca, :ma ]
+grab "W-F1", [ :left, :right ]
+grab "W-F2", [ :center, :center66, :center33 ]
+grab "W-F3", [ :c1, :c2, :c3 ]
+grab "W-F3", [ :mus, :cav, :wee, :mai, :term ]
 
 # Exec programs
 grab "W-Return", "termite"
@@ -152,25 +174,27 @@ grab "S-F3" do
   puts Subtlext::VERSION
 end
 
-# custom grab
+# Custom grab
 grab "C-A-Right", "mpc next"
 grab "C-A-Left", "mpc prev"
 grab "S-A-d", "mpc del 0"
-grab "C-A-Up", "mpc volume +2"
-grab "C-A-Down", "mpc volume -2"
+grab "C-A-Up", "mpc volume +1"
+grab "C-A-Down", "mpc volume -1"
 grab "G-F9", "xbacklight +1"
 grab "G-F8", "xbacklight -1"
 
 #
-# Tags
+# == Tags
 #
 
+# Simple tags
 tag "terms" do
-    match :instance => "xterm|[u]?rxvt|termite|kitty"
+    match :instance => "xterm|[u]?rxvt|termite"
 end
 
 tag "browser", "uzbl|opera|firefox|navigator|vivaldi"
 
+# Placement
 tag "fixed" do
   geometry [ 10, 10, 100, 100 ]
   stick    true
@@ -182,7 +206,7 @@ tag "resize" do
 end
 
 tag "gravity" do
-  gravity :ct
+  gravity :center
 end
 
 # Modes
@@ -193,14 +217,83 @@ tag "stick" do
 end
 
 tag "imgs" do
-  match "sxiv|feh"
-  gravity :ct66
+    match "sxiv|feh"
+    gravity :center66
 end
 
 tag "float" do
   match "display"
   float true
 end
+
+## programs on view dev [3]
+gravity :c1, [ 0, 6, 33, 94 ]
+gravity :c2, [ 33, 6, 34, 94 ]
+gravity :c3, [ 67, 6, 33, 94 ]
+
+tag "code_1" do
+    match "code-1"
+    gravity :c1
+end
+
+tag "code_2" do
+    match "code-2"
+    gravity :c2
+end
+
+tag "code_3" do
+    match "code-3"
+    gravity :c3
+end
+
+tag "code_4" do
+    match "code-4"
+    gravity :c1
+end
+
+tag "code_5" do
+    match "code-5"
+    gravity :c2
+end
+
+tag "code_6" do
+    match "code-6"
+    gravity :c3
+end
+## End programs on view dev [3]
+
+## Programs on view console [4]
+gravity :mus, [ 0, 6, 32, 64 ]
+gravity :cav, [ 0, 70, 32, 30 ]
+gravity :term, [ 32, 6, 36, 30 ]
+gravity :mai, [ 32, 67, 68, 33 ]
+gravity :wee, [ 68, 6, 32, 61 ]
+
+tag "pwd" do
+    match "pwd"
+    gravity :term
+end
+
+tag "chat" do
+    match :instance => "weechat"
+    gravity :wee
+end
+
+tag "music" do
+    match :instance => "ncmpcpp"
+    gravity :mus
+end
+
+tag "cava" do
+    match :instance => "cava"
+    gravity :cav
+end
+
+tag "mail" do
+    match :instance => "mutt"
+    gravity :mai
+end
+## End Programs on view console [4]
 
 # Gimp
 tag "gimp_image" do
@@ -209,7 +302,7 @@ tag "gimp_image" do
 end
 
 tag "gimp_toolbox" do
-  match   :role => "gimp-toolbox-*"
+  match   :role => "gimp-toolbox$"
   gravity :gimp_toolbox
 end
 
@@ -222,87 +315,14 @@ tag "gimp_scum" do
   match role: "gimp-.*|screenshot"
 end
 
-## programs on view console [4]
-gravity :pp, [ 34, 14, 32, 21 ]
-gravity :we, [ 5, 14, 29, 79 ]
-gravity :mu, [ 66, 14, 29, 41 ]
-gravity :ca, [ 66, 55, 29, 38 ]
-gravity :ma, [ 34, 35, 32, 58 ]
-
-tag "pwd" do
-    match "pwd"
-    gravity :pp
-end
-
-tag "chat" do
-    match :instance => "weechat"
-    gravity :we
-end
-
-tag "music" do
-    match :instance => "ncmpcpp"
-    gravity :mu
-end
-
-tag "cava" do
-    match :instance => "cava"
-    gravity :ca
-end
-
-tag "mail" do
-    match :instance => "mutt"
-    gravity :ma
-end
-
-## programs on view dev [3]
-gravity :d1, [ 5, 14, 30, 79 ]
-gravity :d2, [ 35, 14, 30, 79 ]
-gravity :d3, [ 65, 14, 30, 79 ]
-
-tag "code_1" do
-  match "code-1"
-  padding 0
-  margin 0
-  gravity :d1
-end
-
-tag "code_2" do
-  match "code-2"
-  gravity :d2
-end
-
-tag "code_3" do
-  match "code-3"
-  gravity :d3
-end
-
-tag "code_4" do
-  match "code-4"
-  gravity :d1
-end
-
-tag "code_5" do
-  match "code-5"
-  gravity :d2
-end
-
-tag "code_6" do
-  match "code-6"
-  gravity :d3
-end
-
-## view on default terms [1]
-gravity :float_l, [ 12, 14, 38, 79 ]
-gravity :float_r, [ 50, 14, 38, 79 ]
-
 #
-# View
+# == Views
 #
 
 view "terms", "terms|imgs|default"
 view "www",   "browser"
 view "dev",   "code_.*"
-view "console", "pwd|music|cava|chat|mail"
+view "console",   "pwd|music|cava|chat|mail"
 view "gimp",  "gimp_.*"
 
 #
@@ -310,13 +330,15 @@ view "gimp",  "gimp_.*"
 #
 
 on :start do
-    Subtlext::Client.spawn( "termite" )
-    Subtlext::Client.spawn( "firejail vivaldi" )
     Subtlext::Client.spawn( "sh ~/.config/polybar/launch.sh" )
-    Subtlext::Client.spawn( "sh ~/.config/subtle/init_desktop_3.sh" )
-    Subtlext::Client.spawn( "sh ~/.config/subtle/init_desktop_4.sh" )
+    Subtlext::Client.spawn( "sh ~/.config/subtle/init-dev.sh" )
+    Subtlext::Client.spawn( "sh ~/.config/subtle/init-console.sh" )
+    Subtlext::Client.spawn( "termite" )
+    Subtlext::Client.spawn( "vivaldi-sec" )
+    Subtlext::Client.spawn( "sh ~/.fehbg" )
 end
 
 on :reload do
     Subtlext::Client.spawn( "sh ~/.config/polybar/launch.sh" )
+    Subtlext::Client.spawn( "sh ~/.fehbg" )
 end

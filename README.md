@@ -21,7 +21,7 @@ If you search an old wallpaper that i've use, search into the list [here](https:
 + termite - virtual terminal
 + rofi - for run programs
 + polybar - top | bottom bar
-+ iosevka term - font for terminal app
++ liberation-fonts - font for terminal app
 + hsetroot - for set wallpaper
 + compton - minimal shadows / transparency of windows
 + xdo - small utility to perform elementary actions on windows
@@ -35,7 +35,7 @@ A complete list of programs that i use is [here](https://raw.githubusercontent.c
 
 All dependencies for polybar can be remove, change, etc, you just have to edit the config file to your needs.
 
-+ material-icons & iosevka term
++ material-icons
 + wget - used for retrieve IP address
 + mpd - music server
 + mpc - music client

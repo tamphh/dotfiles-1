@@ -36,16 +36,15 @@ net-misc/autossh
 net-misc/keychain
 net-misc/mps-youtube
 net-misc/openssh
-net-misc/proxychains
 net-misc/wget
 net-proxy/obfs4proxy
-net-proxy/privoxy
-net-vpn/tor
+net-proxy/privoxy +acl +client-tags +fast-redirect +threads
+net-vpn/tor +seccomp +tor-hardening
 net-wireless/iw
 net-wireless/wireless-tools
 net-wireless/wpa_supplicant
 sys-apps/dbus
-sys-apps/firejail
+sys-apps/firejail +seccomp
 sys-apps/systemd
 sys-libs/pam
 www-client/vivaldi
@@ -68,3 +67,6 @@ x11-themes/gtk-engines-adwaita
 x11-themes/gtk-engines-murrine
 x11-wm/i3-gaps
 x11-wm/subtle
+app-editors/vim +X
+app-vim/gnupg
+app-vim/pathogen

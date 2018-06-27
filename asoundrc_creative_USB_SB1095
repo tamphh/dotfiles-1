@@ -7,6 +7,9 @@
 # If sound crackle when music switch, 
 # recompile kernel with change CONFIG_SND_HDA_PREALLOC_SIZE=2048
 
+# For mpd, copy this file to /var/lib/mpd/.asoundrc
+# and set device "headphones", format "44100:16:1", mixer_type "software"
+
 # Rate converter are in /usr/lib64/alsa-lib/libasound_module_rate_<name>.so
 defaults.pcm.rate_converter "samplerate_medium"
 
