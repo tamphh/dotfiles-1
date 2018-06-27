@@ -1,4 +1,5 @@
 #! /usr/bin/env python2
+# -*- coding: utf8 -*-
 
 from subprocess import check_output
 

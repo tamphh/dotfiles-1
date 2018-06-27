@@ -11,7 +11,7 @@
 A new theme will erase the previous, only the colors (.Xresources) are saved into `~/.colors`. It change about every 15 days.  
 If you like a theme, do a copy locally, you can name it with current theme, e.g:
 
-    $ git clone https://github.com/szorfein/dotfiles redeyes-theme
+    $ git clone https://github.com/szorfein/dotfiles gruvbox-theme
 
 If you search an old wallpaper that i've use, search into the list [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/wallpapers-list.txt).
 
@@ -27,7 +27,7 @@ If you search an old wallpaper that i've use, search into the list [here](https:
 + xdo - small utility to perform elementary actions on windows
 + xhost - dependencies for Xorg
 + firejail - launch app in a secure sandbox
-+ [wallpaper](https://my.pcloud.com/publink/show?code=XZp2tj7ZQJVI6YrkKThXXl1nopjUM4j94ogy)  
++ [wallpaper](https://my.pcloud.com/publink/show?code=XZz3Nf7Zge45MuQKGOuhhJye3UTq64v4k5cV)  
 
 A complete list of programs that i use is [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/dependencies-list.txt) if need.
 
