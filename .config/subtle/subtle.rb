@@ -1,11 +1,11 @@
 set :increase_step, 5
 set :border_snap, 10
-set :default_gravity, :center
+set :default_gravity, :center66
 set :urgent_dialogs, false
 set :honor_size_hints, false
 set :gravity_tiling, true 
 set :click_to_focus, false
-set :skip_pointer_warp, false
+set :skip_pointer_warp, true
 set :skip_urgent_warp, false
 set :wmname, "Subtle"
 
@@ -44,12 +44,13 @@ end
 
 # Style for active/inactive windows
 style :clients do
-  active    "#892d2d", 1
+  active    "#5f8787", 1
   inactive  "#333333", 1
   margin_left 1
-  margin_right 1
+  margin_right 0
+  margin_top 0
   margin_bottom 1
-  padding 1
+  padding 0
   width     50
 end
 
@@ -66,20 +67,24 @@ end
 #
 
 # Left
-gravity :left,           [   6,   10,  44, 86 ]
+gravity :left,           [   5,   12,  45, 79 ]
+gravity :left_t,         [   5,   12,  45, 39 ]
+gravity :left_b,         [   5,   51,  45, 40 ]
 
 # Center
-gravity :center,         [   0,   6, 100, 94 ]
-gravity :center66,       [  17,  17,  66,  66 ]
+gravity :center,         [   0,   6, 100, 91 ]
+gravity :center66,       [  25,  25,  50,  50 ]
 gravity :center33,       [  33,  33,  33,  33 ]
 
 # Right
-gravity :right,          [  50,   10,  44, 86 ]
+gravity :right,          [  50,   12,  45, 79 ]
+gravity :right_t,          [  50,   12,  45, 39 ]
+gravity :right_b,          [  50,   51,  45, 40 ]
 
 # Gimp
-gravity :gimp_image,     [  10,   6,  80, 94 ]
-gravity :gimp_toolbox,   [   0,   6,  10, 94 ]
-gravity :gimp_dock,      [  90,   6,  10, 94 ]
+gravity :gimp_image,     [  10,   6,  80, 91 ]
+gravity :gimp_toolbox,   [   0,   6,  10, 91 ]
+gravity :gimp_dock,      [  90,   6,  10, 91 ]
 
 #
 # == Grabs
@@ -156,13 +161,13 @@ grab "W-Right", :WindowRight
 grab "W-z", :WindowKill
 
 # Cycle between given gravities
-grab "W-F1", [ :left, :right ]
+grab "W-F1", [ :left_t, :left_b, :left, :right_t, :right_b, :right ]
 grab "W-F2", [ :center, :center66, :center33 ]
 grab "W-F3", [ :c1, :c2, :c3 ]
 grab "W-F3", [ :mus, :cav, :wee, :mai, :term ]
 
 # Exec programs
-grab "W-Return", "termite"
+grab "W-Return", "kitty"
 grab "W-p", "rofi -show run"
 
 # Run Ruby lambdas
@@ -189,10 +194,13 @@ grab "G-F8", "xbacklight -1"
 
 # Simple tags
 tag "terms" do
-    match :instance => "xterm|[u]?rxvt|termite"
+    match :instance => "xterm|[u]?rxvt|termite|kitty"
 end
 
-tag "browser", "uzbl|opera|firefox|navigator|vivaldi"
+tag "browser" do
+  match "uzbl|opera|firefox|navigator|vivaldi|brave"
+  gravity :center
+end
 
 # Placement
 tag "fixed" do
@@ -213,11 +221,12 @@ end
 tag "stick" do
   match "mplayer|mpv"
   float true
-  stick true
+  stick false
 end
 
 tag "imgs" do
     match "sxiv|feh"
+    #float true
     gravity :center66
 end
 
@@ -227,9 +236,9 @@ tag "float" do
 end
 
 ## programs on view dev [3]
-gravity :c1, [ 0, 6, 33, 94 ]
-gravity :c2, [ 33, 6, 34, 94 ]
-gravity :c3, [ 67, 6, 33, 94 ]
+gravity :c1, [ 0, 6, 33, 91 ]
+gravity :c2, [ 33, 6, 34, 91 ]
+gravity :c3, [ 67, 6, 33, 91 ]
 
 tag "code_1" do
     match "code-1"
@@ -263,11 +272,11 @@ end
 ## End programs on view dev [3]
 
 ## Programs on view console [4]
-gravity :mus, [ 0, 6, 32, 64 ]
-gravity :cav, [ 0, 70, 32, 30 ]
-gravity :term, [ 32, 6, 36, 30 ]
-gravity :mai, [ 32, 67, 68, 33 ]
-gravity :wee, [ 68, 6, 32, 61 ]
+gravity :term, [ 6, 18, 34, 26 ]
+gravity :wee, [ 6, 46, 34, 40 ]
+gravity :mus, [ 41, 18, 27, 36 ]
+gravity :cav, [ 69, 30, 25, 24 ]
+gravity :mai, [ 41, 56, 53, 30 ]
 
 tag "pwd" do
     match "pwd"
@@ -330,12 +339,13 @@ view "gimp",  "gimp_.*"
 #
 
 on :start do
-    Subtlext::Client.spawn( "sh ~/.config/polybar/launch.sh" )
-    Subtlext::Client.spawn( "sh ~/.config/subtle/init-dev.sh" )
-    Subtlext::Client.spawn( "sh ~/.config/subtle/init-console.sh" )
-    Subtlext::Client.spawn( "termite" )
-    Subtlext::Client.spawn( "vivaldi-sec" )
-    Subtlext::Client.spawn( "sh ~/.fehbg" )
+    Subtlext::Client.spawn( "compton -b" )
+    Subtlext::Client.spawn( "pscircle.sh" )
+    Subtlext::Client.spawn( "kitty" )
+    Subtlext::Client.spawn( "~/.config/polybar/launch.sh" )
+    Subtlext::Client.spawn( "~/.config/subtle/init-dev.sh" )
+    Subtlext::Client.spawn( "~/.config/subtle/init-console.sh" )
+    Subtlext::Client.spawn( "brave-sec" )
 end
 
 on :reload do
