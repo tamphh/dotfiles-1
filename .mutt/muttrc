@@ -1,65 +1,43 @@
-ignore *
-unignore from: to: cc: date: subject:
-hdr_order from: to: cc: date: subject:
-
-set copy=no
-
-# Mailbox
+# Basics
 set mbox_type=Maildir
 set folder=~/.mails
 set spoolfile="+gmail/INBOX"
-set record=~/.mails/sent/
 set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
+ignore *
+unignore from: to: cc: date: subject:
+hdr_order from: to: cc: date: subject:
+set index_format="%4C %Z %{%b %d} %-16.16L  %s"
 
-# Personal
-set hidden_host=yes
+# Shortcut vi like
+#bind pager j next-line
+#bind pager k previous-line
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry
 
-# Sending
-set envelope_from=yes
-set sendmail_wait = -1
-set send_charset="utf-8"
+# menu for encryp of not mail
+bind compose p pgp-menu
 
-# Basic
-set timeout=3
-set wait_key=no
-set delete
-set pipe_decode
-set mailcap_path="~/.mutt/mailcap"
-set use_domain=no
-set user_agent=no
-set sleep_time=0
-set menu_scroll
-
-# Composing
-set edit_headers
-set fast_reply
-set askcc
-
-# HTML Message
-auto_view text/html
-alternative_order text/plain text/enriched text/html
-
-# Printint
-
-# PGP
+# GPG
+set crypt_use_gpgme = yes
 set pgp_use_gpg_agent = yes
-set pgp_sign_as = 0xlong_key_id_forsign
-set pgp_self_encrypt_as = 0xlong_key_id_forencrypt
-set pgp_timeout = 3600
+set pgp_sign_as = 0xA38E87A284B87751
+set pgp_self_encrypt_as = 0xA3AAFC98784CF661
+set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
+set pgp_timeout = 600
 set crypt_autosign = yes
 set crypt_replysignencrypted = yes
 set crypt_verify_sig = yes
-# copy file from /usr/share/doc/mutt/samples/gpg.rc
 source ~/.mutt/gpg.rc
 
-# Status Bar
+# Status bar
 set status_chars=" *%A"
-set status_format="───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+#set status_format="───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Index view
-set date_format="%d-%m-%Y %H:%M"
-set index_format="[%Z] %D %-20.20F %s"
-# i use other program for check mail
 set mail_check = 0
 set sort=threads
 set sort_aux=reverse-last-date-received
@@ -67,35 +45,48 @@ set uncollapse_jump
 set strict_threads
 set thorough_search
 
-# Pager View
-set pager_index_lines = 10
-set pager_context = 3
-set pager_stop
-
+# Enable features
+set askcc
+set delete
+set edit_headers
+set envelope_from
+set fast_reply
 set forward_format = "Fwd: %s"
 set forward_quote
+set include
+set hidden_host
+set menu_scroll
+set mime_forward = ask-no
+set pager_index_lines = 4
+set pager_context = 2
+set pager_stop
+set pipe_decode
 set reply_to
 set reverse_name
-set include
+set sendmail_wait = -1
+set send_charset="utf-8"
+set sendmail="/usr/bin/msmtp"
 set tilde
-set mime_forward = ask-no
 
-unset help
+# Disable features
 unset confirmappend
+unset copy
+unset move
+unset help
 unset mark_old
 unset markers
-unset record
+unset sleep_time
 unset sort_re
+unset use_from
+unset use_domain
+unset user_agent
 unset wait_key
+unset record
 
-# menu for encrypt or not mail
-bind compose p pgp-menu
-
+# Colors
 source ~/.mutt/colors
+
+# Mailboxes
 source ~/.mutt/mailboxes
 
-folder-hook Gmail/*  source ~/.mutt/accounts/gmail
-folder-hook Sheet/*     source ~/.mutt/accounts/sheet
-folder-hook Work/*     source ~/.mutt/accounts/work
-
-source ~/.mutt/accounts/gmail # default account
+folder-hook gmail/* source ~/.mutt/accounts/gmail

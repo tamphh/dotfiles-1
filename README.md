@@ -11,23 +11,21 @@
 A new theme will erase the previous, only the colors (.Xresources) are saved into `~/.colors`. It change about every 15 days.  
 If you like a theme, do a copy locally, you can name it with current theme, e.g:
 
-    $ git clone https://github.com/szorfein/dotfiles gruvbox-theme
+    $ git clone https://github.com/szorfein/dotfiles darkest-space-theme
 
 If you search an old wallpaper that i've use, search into the list [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/wallpapers-list.txt).
 
 ## Requirements for this desktop
 
 + subtle
-+ termite - virtual terminal
-+ rofi - for run programs
++ kitty - terminal
++ rofi - to run programs
 + polybar - top | bottom bar
-+ liberation-fonts - font for terminal app
-+ hsetroot - for set wallpaper
++ iosevka-term - font for terminal
++ feh - for set wallpaper
 + compton - minimal shadows / transparency of windows
-+ xdo - small utility to perform elementary actions on windows
-+ xhost - dependencies for Xorg
 + firejail - launch app in a secure sandbox
-+ [wallpaper](https://my.pcloud.com/publink/show?code=XZz3Nf7Zge45MuQKGOuhhJye3UTq64v4k5cV)  
++ pscircle - the wallpaper
 
 A complete list of programs that i use is [here](https://raw.githubusercontent.com/szorfein/dotfiles/master/dependencies-list.txt) if need.
 
@@ -52,4 +50,4 @@ To install on:
 + subtle: [wiki](https://github.com/szorfein/dotfiles/wiki/subtle)
 
 Current Desktop: ([subtle](https://subforge.org/projects/subtle))
-![Alt text](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")
+![Last screenshot](https://raw.githubusercontent.com/szorfein/dotfiles/master/screenshot.jpg "Screenshot")

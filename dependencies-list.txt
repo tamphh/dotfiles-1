@@ -9,14 +9,11 @@ app-text/zathura
 app-text/zathura-cb
 app-text/zathura-pdf-mupdf
 dev-util/dialog
-dev-vcs/git
 lxde-base/lxappearance
-mail-client/mutt
-mail-mta/msmtp
-media-fonts/infinality-ultimate-meta
+mail-client/mutt +gpg
+mail-mta/msmtp +mta +sasl +ssl
 media-fonts/iosevka
 media-fonts/material-icons
-media-fonts/noto
 media-gfx/feh
 media-gfx/gimp
 media-gfx/scrot
@@ -24,14 +21,12 @@ media-sound/alsa-utils
 media-sound/cava
 media-sound/mpc
 media-sound/mpd
-media-sound/ncmpcpp
-media-video/ffmpeg
-media-video/mpv
-net-analyzer/wireshark
+media-sound/ncmpcpp +clock +unicode +taglib
+media-video/mpv +lua +opengl +egl
 net-dns/dnscrypt-proxy
-net-irc/weechat
-net-mail/offlineimap
-net-misc/aria2
+net-irc/weechat +ssl +irc
+net-mail/offlineimap +ssl
+net-misc/aria2 +ssl +metalink +libxml2 +adns +bittorent
 net-misc/autossh
 net-misc/keychain
 net-misc/mps-youtube
@@ -47,7 +42,7 @@ sys-apps/dbus
 sys-apps/firejail +seccomp
 sys-apps/systemd
 sys-libs/pam
-www-client/vivaldi
+www-client/brave-bin
 www-servers/darkhttpd
 x11-apps/xinit
 x11-apps/xsetroot
@@ -61,12 +56,14 @@ x11-misc/rofi
 x11-misc/wmname
 x11-misc/xclip
 x11-misc/xdo
-x11-terms/termite
 x11-themes/adapta-gtk-theme
 x11-themes/gtk-engines-adwaita
 x11-themes/gtk-engines-murrine
-x11-wm/i3-gaps
-x11-wm/subtle
+x11-wm/subtle +xft
 app-editors/vim +X
 app-vim/gnupg
 app-vim/pathogen
+media-gfx/imagemagick +jpeg +png
+dev-python/pillow +jpeg +zlib
+x11-terms/kitty +imagemagick
+media-video/ffmpeg +ladspa +network +openssl +webp +x264

@@ -22,7 +22,7 @@ class Default(ColorScheme):
             fg = black
         if context.media:
             if context.image:
-                fg = 13   
+                fg = default
             if context.video:
                 fg = 97
             if context.audio:

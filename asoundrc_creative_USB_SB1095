@@ -10,6 +10,9 @@
 # For mpd, copy this file to /var/lib/mpd/.asoundrc
 # and set device "headphones", format "44100:16:1", mixer_type "software"
 
+# If problem with alsamixer for find your device, launch alsamixer with arg:
+# alsamixer -D "hw:Pro"
+
 # Rate converter are in /usr/lib64/alsa-lib/libasound_module_rate_<name>.so
 defaults.pcm.rate_converter "samplerate_medium"
 
