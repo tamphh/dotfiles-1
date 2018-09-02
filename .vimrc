@@ -107,9 +107,9 @@ set ignorecase
 set smartcase
 
 "" Tabs, May be overwritten by autocmd rules
-set shiftwidth=4
+set shiftwidth=2
 set softtabstop=0
-set tabstop=4
+set tabstop=2
 set expandtab
 
 "" Code Folding
@@ -117,7 +117,7 @@ set foldenable
 set foldmethod=manual
 
 "" Colors
-colorscheme gruvbox
+colorscheme darkest-space
 
 "" Gruvbox colorscheme
 let g:gruvbox_contrast_dark = 'soft'
@@ -132,7 +132,7 @@ let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$','\.bak$', '\~$']
 let NERDTreeShowBookmarks = 1
 let NERDTree_tabs_focus_on_files=1
 let NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let NERDTreeWinSize = 20
+let NERDTreeWinSize = 14
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
@@ -153,21 +153,23 @@ vmap <leader>y "+y
 
 "" plugin here: http://www.vim.org/scripts/script.php?script_id=3645
 "" wiki here http://pig-monkey.com/2013/04/password-management-vim-gnupg/
+"" Only work with the version 2.5 for me... (https://github.com/jamessan/vim-gnupg/archive/v2.5.tar.gz)
 if has("autocmd")
-    let g:GPGPreferArmor=1
+    let g:GPGPreferArmor = 1
     let g:GPGPreferSign=1
-    let g:GPGUseAgent=1
+    let g:GPGUseAgent = 1
     let g:GPGFilePattern='*.\(gpg\|asc\|pgp\)'
+    let g:GPGUsePipes = 1
 
     augroup GnuPGExtra
         autocmd!
         " Set extra file options.
-        exe "autocmd BufReadCmd,FileReadCmd " . g:GPGFilePattern . " call SetGPGOptions() "
+        exe "autocmd BufReadCmd,FileReadCmd " . g:GPGFilePattern . " call s:SetGPGOptions() "
          " Automatically close unmodified files after inactivity.
         exe "autocmd CursorHold " . g:GPGFilePattern . " quit "
     augroup END
 
-    function SetGPGOptions()
+    function s:SetGPGOptions()
         set filetype=gpgpass
         set noswapfile
         set viminfo=

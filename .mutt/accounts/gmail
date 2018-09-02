@@ -4,13 +4,15 @@ unset use_domain
 unset user_agent
 
 set sendmail        = "/usr/bin/msmtp -a gmail"
-set spoolfile       = "+Gmail/INBOX"
-set from            = "gmail@gmail.com"
-set mbox            = "+Gmail/archive"
-set postponed       = "+Gmail/drafts"
-set record          = "+Gmail/sent"
+set spoolfile       = "+gmail/INBOX"
+set from            = "username@gmail.com"
+set mbox            = "+gmail/archive"
+set postponed       = "+gmail/drafts"
+set record          = "+gmail/sent"
+set trash           = "+gmail/trash"
 
 # Personal infos
+set hostname=""
 set realname="..."
 set signature="+@ ..."
 
