@@ -24,13 +24,14 @@ bind compose p pgp-menu
 # GPG
 set crypt_use_gpgme = yes
 set pgp_use_gpg_agent = yes
-set pgp_sign_as = 0xA38E87A284B87751
-set pgp_self_encrypt_as = 0xA3AAFC98784CF661
+set pgp_sign_as = 0xlong_key_id_for_sign
+set pgp_self_encrypt_as = 0xlong_key_id_for_encrypt
 set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
 set pgp_timeout = 600
 set crypt_autosign = yes
 set crypt_replysignencrypted = yes
 set crypt_verify_sig = yes
+# copy file from /usr/share/doc/mutt/samples/gpg.rc
 source ~/.mutt/gpg.rc
 
 # Status bar
@@ -89,4 +90,5 @@ source ~/.mutt/colors
 # Mailboxes
 source ~/.mutt/mailboxes
 
+# Default account
 folder-hook gmail/* source ~/.mutt/accounts/gmail

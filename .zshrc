@@ -21,13 +21,14 @@ fi
 #bindkey "\e[5~"  up-line-or-history
 #bindkey "\e[6~"  down-line-or-history
 
+# Path for oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
 # Plugin list in ~/.oh-my-zsh/plugins
-plugins=(git git-prompt)
+plugins=(git git-prompt rbenv ruby)
 
 # With Zsh and Termite
 if [[ $TERM == xterm-termite ]] ; then

@@ -5,7 +5,7 @@ foreground = ${xrdb:foreground:#222}
 foreground-alt = ${xrdb:color14}
 primary = ${xrdb:color3}
 secondary = ${xrdb:color6}
-alert = #bd2c40
+alert = #d75f87
 
 [bar/top]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -22,6 +22,35 @@ modules-left = rldDns rldTor volume
 modules-center = mpd
 modules-right = netstat wlan eth
 
+[bar/bottom-launcher]
+dpi = 133
+include-file = ~/.config/polybar/bottom-launcher
+modules-center = runWebBrowser runMail runMsf runWireshark
+
+[module/runWebBrowser]
+type = custom/text
+content = "   "
+content-foreground = ${colors.alert}
+click-left = "brave_sec"
+
+[module/runMail]
+type = custom/text
+content = "   "
+content-foreground = ${colors.alert}
+click-left = "kitty -e mutt"
+
+[module/runMsf]
+type = custom/text
+content = "   "
+content-foreground = ${colors.alert}
+click-left = "kitty -e msfconsole"
+
+[module/runWireshark]
+type = custom/text  
+content = "   " 
+content-foreground = ${colors.alert}
+click-left = "wireshark"
+
 [module/uptime]
 type = custom/script
 exec = uptime|awk '{print $2 " " $3 " " $4 " " $5 " " $6}'|cut -d ',' -f -2
@@ -33,7 +62,7 @@ format-padding = 1
 
 [module/netstat]
 type = internal/network
-interface = enp1s0f2
+interface = wlp2s0  
 interval = 3.0
 label-connected = %{F#ff0000} %{F-}%upspeed% %{F#00ff00} %{F-}%downspeed%
 
@@ -63,7 +92,7 @@ click-left = "sudo systemctl restart dnscrypt-proxy"
 type = custom/script
 interval = 256
 format = "<label> "
-format-prefix = "  "
+format-prefix = " ƸӜƷ "
 format-prefix-foreground = ${colors.secondary}
 format-padding = 0
 exec = echo "$(uname -n)"
@@ -75,7 +104,7 @@ format = "<label>"
 format-prefix = "ip: "
 format-prefix-foreground = ${colors.primary}
 format-padding = 1
-exec = echo "$(wget -q -O - https://l2.io/ip | sed -e 's/[^[:digit:]\|.]//g')"
+exec = echo "$(wget -qO- https://canihazip.com/s | sed -e 's/[^[:digit:]\|.]//g')"
 exec-if = ping -c 1 gentoo.org
 
 [module/xwindow]
@@ -148,6 +177,7 @@ format-connected-prefix = "eth: "
 format-connected-prefix-foreground = ${colors.secondary}
 label-connected = "on"
 format-disconnected = "eth off"
+format-disconnected-foreground = ${colors.alert}
 
 [module/date]
 type = internal/date
