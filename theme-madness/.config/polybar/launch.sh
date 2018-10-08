@@ -12,14 +12,9 @@ done
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar top & bottom
-polybar top &
-polybar top-second &
-#polybar bottom-launcher &
-# polybar bottom &
+#polybar top &
 
 # For i3
-# polybar i3top &
-# polybar i3secondtop &
-# polybar i3bottom &
+polybar i3top &
 
 echo "Bars launched..."
