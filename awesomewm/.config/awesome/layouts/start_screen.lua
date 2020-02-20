@@ -11,109 +11,77 @@ local helpers = require("helpers")
 local theme = require("loaded-theme")
 local app = require("util.app")
 
-local text_rss = {
-  threatpost = {},
-  ycombinator = {}
-}
-
-local max_feeds = 4
-local feed_width = 400
-local feed_height = 248
-
-for i = 1, max_feeds do
-  text_rss['threatpost'][i] = widget.base_text('left')
-  text_rss['ycombinator'][i] = widget.base_text('left')
-end
-
 local function start_screen_hide()
   local s = awful.screen.focused()
   s.start_screen.visible = false
 end
 
 local exec_prog = function(cmd)
-  awful.spawn(cmd)
-  start_screen_hide()
+  app.start(cmd, nil, nil, start_screen_hide)
 end
 
-local function add_link(w, url)
-  w:buttons(gtable.join(
-     awful.button({ }, 1, function()
-      exec_prog(env.web_browser .. " " .. tostring(url))
-      start_screen_hide()
-    end)
-  ))
+local function open_link(url)
+  app.open_link(url, start_screen_hide)
 end
 
-local function update_feeds(rss) 
-  if rss.treatpost then
-    for i = 1, max_feeds do
-      button.add_hover(text_rss['threatpost'][i], rss.treatpost.title[i], beautiful.fg_grey_light, beautiful.fg_grey)
-      add_link(text_rss['threatpost'][i], rss.treatpost.link[i])
-    end
+local max_feeds = 4
+local feed_width = 380
+local feed_height = 248
+
+-- base for rss
+local rss_threatpost = wibox.widget {
+  spacing = 6,
+  layout = wibox.layout.fixed.vertical
+}
+
+local rss_ycombinator = wibox.widget {
+  spacing = 6,
+  layout = wibox.layout.fixed.vertical
+}
+
+local function rss_links(rss, feed_name, w)
+  w:reset()
+  local s, b, f
+  for i = 1, max_feeds do
+    s = beautiful.widget_text_font:match(('%d+')) or 9
+    f = function() open_link(rss[feed_name].link[i]) end
+    b = button.create(rss[feed_name].title[i], beautiful.fg_grey_light, beautiful.fg_grey, f, s)
+    b.align = "left"
+    w:add(b)
   end
-  if rss.ycombinator then
-    for i = 1, max_feeds do
-      button.add_hover(text_rss['ycombinator'][i], rss.ycombinator.title[i], beautiful.fg_grey_light, beautiful.fg_grey)
-      add_link(text_rss['ycombinator'][i], rss.ycombinator.link[i])
-    end
-  end
-end
-
-local function boxes(w, width, height, margin)
-  local width, height = width, height or 1, 1
-  local margin = margin or 1
-  local boxed_widget = wibox.widget {
-    {
-      {
-        nil,
-        {
-          {
-            nil,
-            w,
-            expand = "none",
-            layout = wibox.layout.align.vertical
-          },
-          margins = dpi(10),
-          widget = wibox.container.margin,
-        },
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-      },
-      bg = beautiful.grey_dark,
-      forced_height = dpi(height),
-      forced_width = dpi(width),
-      shape = helpers.rrect(8),
-      widget = wibox.container.background
-    },
-    margins = dpi(margin),
-    color = "#00000000",
-    widget = wibox.container.margin
-  }
-  return boxed_widget
 end
 
 local function make_rss_widget(title, w)
   return wibox.widget {
     {
       {
-        align = "left",
-        widget = widget.create_title(title, beautiful.primary),
+        {
+          align = "left",
+          widget = widget.create_title(title, beautiful.primary),
+        },
+        left = 5, bottom = 8,
+        widget = wibox.container.margin
       },
-      left = 5, bottom = 8, top = 5,
-      layout = wibox.container.margin
-    },
-    {
-      widget.box("vertical", w, 10),
-      forced_width = feed_width,
+      w,
       layout = wibox.layout.fixed.vertical
     },
-    nil,
-    layout = wibox.layout.align.vertical
+    margins = 10,
+    widget = wibox.container.margin
   }
 end
 
-local threatpost_widget = make_rss_widget("threatpost", text_rss.threatpost)
-local ycombinator_widget = make_rss_widget("ycombinator", text_rss.ycombinator)
+local threatpost_widget = make_rss_widget("threatpost", rss_threatpost)
+local ycombinator_widget = make_rss_widget("ycombinator", rss_ycombinator)
+
+-- signal rss
+awesome.connect_signal("daemon::rss", function(rss)
+  if rss.threatpost then
+    rss_links(rss, "threatpost", rss_threatpost)
+  end
+  if rss.ycombinator then
+    rss_links(rss, "ycombinator", rss_ycombinator)
+  end
+end)
 
 -- images
 local theme_picture_container = wibox.container.background()
@@ -184,13 +152,13 @@ local buttons_path_1_widget = widget.box('horizontal', { image,torrent }, 25)
 local buttons_path_2_widget = widget.box('horizontal', { movie }, 25)
 
 -- buttons url
-local github_cmd = function() exec_prog(env.web_browser .. " https://github.com/szorfein") end
+local github_cmd = function() open_link("https://github.com/szorfein") end
 local github = button.create("", beautiful.primary_light, beautiful.primary, github_cmd, button_font_size)
 
-local twitter_cmd = function() exec_prog(env.web_browser .. " https://twitter.com/szorfein") end
+local twitter_cmd = function() open_link("https://twitter.com/szorfein") end
 local twitter = button.create("", beautiful.secondary_light, beautiful.secondary, twitter_cmd, button_font_size)
 
-local reddit_cmd = function() exec_prog(env.web_browser .. " https://reddit.com/user/szorfein") end
+local reddit_cmd = function() open_link("https://reddit.com/user/szorfein") end
 local reddit = button.create("", beautiful.alert_light, beautiful.alert, reddit_cmd, button_font_size)
 
 local buttons_url_widget = widget.box('vertical', { github, twitter, reddit })
@@ -255,10 +223,45 @@ for i=1, todo_max do
   todos.tbuttons[i] = button.create("x ", beautiful.alert_light, beautiful.alert, todos.del_line[i], 10)
   todos.tlayout[i] = widget.box('horizontal', { todos.tbuttons[i], todos.ttexts[i] })
 end
+
 update_history()
+
 local todo_new = button.create("", beautiful.primary_light, beautiful.primary, exec_prompt, 10)
 local todo_widget = widget.box("horizontal", { todo_new, todo_textbox })
 local todo_list = widget.box("vertical", todos.tlayout)
+
+local function boxes(w, width, height, margin)
+  local width, height = width, height or 1, 1
+  local margin = margin or 1
+  local boxed_widget = wibox.widget {
+    {
+      {
+        nil,
+        {
+          {
+            nil,
+            w,
+            expand = "none",
+            layout = wibox.layout.align.vertical
+          },
+          margins = dpi(10),
+          widget = wibox.container.margin,
+        },
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+      },
+      bg = beautiful.grey_dark,
+      forced_height = dpi(height),
+      forced_width = dpi(width),
+      shape = helpers.rrect(10),
+      widget = wibox.container.background
+    },
+    margins = dpi(margin),
+    color = "#00000000",
+    widget = wibox.container.margin
+  }
+  return boxed_widget
+end
 
 local startscreen = class()
 
@@ -326,11 +329,6 @@ function startscreen:init(s)
     expand = "none",
     layout = wibox.layout.align.vertical
   }
-
-  -- signal rss
-  awesome.connect_signal("daemon::rss", function(rss)
-    update_feeds(rss)
-  end)
 end
 
 return startscreen

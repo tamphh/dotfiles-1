@@ -43,7 +43,7 @@ local function treat_rss()
   local file = "/tmp/threatpost.feed"
   local command = curl .. '"' .. url .. '" -o ' .. file
   aspawn.easy_async_with_shell(command, function()
-    rss['treatpost'] = rss_grab("item", { "title", "link" }, file)
+    rss['threatpost'] = rss_grab("item", { "title", "link" }, file)
     awesome.emit_signal("daemon::rss", rss)
   end)
 end

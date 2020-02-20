@@ -98,7 +98,8 @@ function layout_root:create_buttons()
 
   self.startscreen_button:buttons(gtable.join(
     awful.button({}, 1, function()
-      start_screen.visible = not start_screen.visible
+      local s = awful.screen.focused()
+      s.start_screen.visible = not s.start_screen.visible
     end)
   ))
 

@@ -4,7 +4,7 @@ local beautiful = require("beautiful")
 
 local app = {}
 
-function app.start(cmd, is_shell, have_class)
+function app.start(cmd, is_shell, have_class, callback)
   local is_shell = is_shell or nil -- bool
   local have_class = have_class or nil -- string
   if is_shell then
@@ -16,13 +16,12 @@ function app.start(cmd, is_shell, have_class)
   else
     aspawn(cmd)
   end
+  if callback then callback() end
 end
 
 function app.shell_and_wait(cmd, callback)
   aspawn(env.term .. env.term_call[2] .. "bash -c \"".. cmd .. " && read -p 'Press q to quit. ' -n 1\"")
-  if callback then
-    callback()
-  end
+  if callback then callback() end
 end
 
 local function check_proc(cmd_arr)
@@ -54,6 +53,11 @@ function app.feh(path, callback_function)
   if callback_function ~= nil then
     callback_function()
   end
+end
+
+function app.open_link(link, callback)
+  aspawn(env.web_browser .. " " .. tostring(link))
+  if callback then callback() end
 end
 
 return app
