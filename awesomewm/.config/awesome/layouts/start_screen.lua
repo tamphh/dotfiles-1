@@ -26,7 +26,8 @@ for i = 1, max_feeds do
 end
 
 local function start_screen_hide()
-  start_screen.visible = false
+  local s = awful.screen.focused()
+  s.start_screen.visible = false
 end
 
 local exec_prog = function(cmd)
@@ -259,70 +260,77 @@ local todo_new = button.create("", beautiful.primary_light, beautiful.primary
 local todo_widget = widget.box("horizontal", { todo_new, todo_textbox })
 local todo_list = widget.box("vertical", todos.tlayout)
 
--- the start_screen
-start_screen = wibox({ visible = false, ontop = true, type = "dock" })
-start_screen.bg = beautiful.grey .. "00"
-awful.placement.maximize(start_screen)
+local startscreen = class()
 
-start_screen:buttons(gtable.join(
-  awful.button({}, 3, function() start_screen_hide() end)
-))
+function startscreen:init(s)
 
-start_screen:setup {
-  nil,
-  {
+  -- the start_screen
+  s.start_screen = wibox({ visible = false, ontop = true, type = "dock", screen = s })
+  s.start_screen.bg = beautiful.grey .. "00"
+  awful.placement.maximize(s.start_screen)
+
+  s.start_screen:buttons(gtable.join(
+    awful.button({}, 3, function() start_screen_hide() end)
+  ))
+
+  s.start_screen:setup {
     nil,
     {
+      nil,
       {
-        boxes(date_widget, 100, 100, 1),
-        boxes(buttons_widget, 100, 300, 1),
-        layout = wibox.layout.fixed.vertical
-      },
-      {
-        nil,
         {
-          boxes(picture_widget, 210, 200, 1),
-          boxes(quote_widget, 210, 200, 1),
+          boxes(date_widget, 100, 100, 1),
+          boxes(buttons_widget, 100, 300, 1),
           layout = wibox.layout.fixed.vertical
         },
-        nil,
-        expand = "none",
-        layout = wibox.layout.align.vertical
-      },
-      {
-        boxes(threatpost_widget, feed_width, feed_height, 1),
-        boxes(ycombinator_widget, feed_width, feed_height, 1),
-        layout = wibox.layout.fixed.vertical
-      },
-      {
-        nil,
         {
-          boxes(todo_widget, 210, 30, 0),
-          boxes(todo_list, 210, 200, 1),
-          boxes(buttons_path_1_widget, 210, 85, 1),
-          boxes(buttons_path_2_widget, 210, 85, 1),
+          nil,
+          {
+            boxes(picture_widget, 210, 200, 1),
+            boxes(quote_widget, 210, 200, 1),
+            layout = wibox.layout.fixed.vertical
+          },
+          nil,
+          expand = "none",
+          layout = wibox.layout.align.vertical
+        },
+        {
+          boxes(threatpost_widget, feed_width, feed_height, 1),
+          boxes(ycombinator_widget, feed_width, feed_height, 1),
           layout = wibox.layout.fixed.vertical
         },
-        nil,
-        expand = "none",
-        layout = wibox.layout.align.vertical
+        {
+          nil,
+          {
+            boxes(todo_widget, 210, 30, 0),
+            boxes(todo_list, 210, 200, 1),
+            boxes(buttons_path_1_widget, 210, 85, 1),
+            boxes(buttons_path_2_widget, 210, 85, 1),
+            layout = wibox.layout.fixed.vertical
+          },
+          nil,
+          expand = "none",
+          layout = wibox.layout.align.vertical
+        },
+        {
+          boxes(buttons_url_widget, 100, 350, 1),
+          layout = wibox.layout.fixed.vertical
+        },
+        layout = wibox.layout.fixed.horizontal
       },
-      {
-        boxes(buttons_url_widget, 100, 350, 1),
-        layout = wibox.layout.fixed.vertical
-      },
-      layout = wibox.layout.fixed.horizontal
+      nil,
+      expand = "none",
+      layout = wibox.layout.align.horizontal
     },
     nil,
     expand = "none",
-    layout = wibox.layout.align.horizontal
-  },
-  nil,
-  expand = "none",
-  layout = wibox.layout.align.vertical
-}
+    layout = wibox.layout.align.vertical
+  }
 
--- signal rss
-awesome.connect_signal("daemon::rss", function(rss) 
-  update_feeds(rss) 
-end)
+  -- signal rss
+  awesome.connect_signal("daemon::rss", function(rss)
+    update_feeds(rss)
+  end)
+end
+
+return startscreen

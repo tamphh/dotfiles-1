@@ -31,7 +31,6 @@ local theme = require("loaded-theme")
 require("module.notifications")
 require("layouts.start_screen")
 require("layouts.lock_screen")
-require("layouts.app_drawer")
 require("module.layout")
 require("module.menu")
 
@@ -51,6 +50,12 @@ awful.screen.connect_for_each_screen(function(s)
 
   -- Create the wibox
   require("bars."..theme.name)(s)
+
+  -- App drawer bar
+  require("layouts.app_drawer")(s)
+
+  -- Start Screen widget
+  require("layouts.start_screen")(s)
 
   -- Monitor bar
   require("layouts.monitor_bar")(s)

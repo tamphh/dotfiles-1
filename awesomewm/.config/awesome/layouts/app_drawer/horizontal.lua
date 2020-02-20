@@ -10,7 +10,6 @@ local gshape = require("gears.shape")
 local app = require("util.app")
 local keygrabber = require("awful.keygrabber")
 
-local s = awful.screen.focused()
 local ntags = 10
 
 local w = wibox.widget { spacing = 18, layout = wibox.layout.fixed.horizontal }
@@ -19,7 +18,8 @@ local app_drawer_grabber
 local my_apps = {}
 
 local function app_drawer_hide()
-  app_drawer.visible = false
+  local s = awful.screen.focused()
+  s.app_drawer.visible = false
   keygrabber.stop(app_drawer_grabber)
 end
 
@@ -201,6 +201,7 @@ my_apps[10] = {
 }
 
 local function key_grabber(app_tag)
+  local s = awful.screen.focused()
 
   local grabber = keygrabber {
       keybindings = app_tag.keybindings,
@@ -208,9 +209,9 @@ local function key_grabber(app_tag)
       stop_callback = function() app_drawer_hide() end,
   }
 
-  if grabber.is_running and app_drawer.visible == false then
+  if grabber.is_running and s.app_drawer.visible == false then
     grabber:stop()
-  elseif app_drawer.visible == false then
+  elseif s.app_drawer.visible == false then
     grabber:stop()
   else
     grabber:start()
@@ -263,6 +264,7 @@ local function gen_menu(index)
 end
 
 function update_app_drawer(desired_tag)
+  local s = awful.screen.focused()
   local d = tonumber(desired_tag) or nil
   local curr_tag = s.selected_tag
   if d ~= nil then
@@ -283,36 +285,43 @@ function update_app_drawer(desired_tag)
   end
 end
 
-app_drawer = wibox({ visible = false, ontop = true, type = "dock", position = "top" })
-app_drawer.bg = beautiful.grey .. "fc"
-app_drawer.x = 0
-app_drawer.y = beautiful.wibar_position == "top" and beautiful.wibar_size or 0 
-app_drawer.height = 110
-app_drawer.width = awful.screen.focused().geometry.width
+local myapps = class()
 
-app_drawer:buttons(gtable.join(
-  -- Middle click - Hide app_drawer
-  awful.button({}, 2, function()
-    app_drawer_hide()
-  end),
-  -- Right click - Hide app_drawer
-  awful.button({}, 3, function()
-    app_drawer_hide()
-  end)
-))
+function myapps:init(s)
 
-app_drawer:setup {
-  nil,
-  {
+  s.app_drawer = wibox({ visible = false, ontop = true, type = "dock", position = "top", screen = s })
+  s.app_drawer.bg = beautiful.grey .. "fc"
+  s.app_drawer.x = 0
+  s.app_drawer.y = beautiful.wibar_position == "top" and beautiful.wibar_size or 0 
+  s.app_drawer.height = 110
+  s.app_drawer.width = s.geometry.width
+
+  s.app_drawer:buttons(gtable.join(
+    -- Middle click - Hide app_drawer
+    awful.button({}, 2, function()
+      s.app_drawer_hide()
+    end),
+    -- Right click - Hide app_drawer
+    awful.button({}, 3, function()
+      s.app_drawer_hide()
+    end)
+  ))
+
+  s.app_drawer:setup {
     nil,
-    w,
+    {
+      nil,
+      w,
+      expand = "none",
+      layout = wibox.layout.align.vertical
+    },
     expand = "none",
-    layout = wibox.layout.align.vertical
-  },
-  expand = "none",
-  layout = wibox.layout.align.horizontal
-}
+    layout = wibox.layout.align.horizontal
+  }
 
-awful.tag.attached_connect_signal(s, "property::selected", function()
-  update_app_drawer()
-end)
+  awful.tag.attached_connect_signal(s, "property::selected", function()
+    update_app_drawer()
+  end)
+end
+
+return myapps

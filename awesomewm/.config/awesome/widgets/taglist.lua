@@ -48,12 +48,13 @@ function taglist_root:select_template()
 end
 
 function taglist_root:make_buttons()
+  local s = awful.screen.focused()
   local button = gtable.join(
   awful.button({}, 1, function(t)
     t:view_only()
   end),
   awful.button({}, 3, function(t)
-    app_drawer.visible = not app_drawer.visible
+    s.app_drawer.visible = not s.app_drawer.visible
     update_app_drawer(t.index)
   end),
   awful.button({}, 4, function(t) awful.tag.viewprev(t.screen) end),

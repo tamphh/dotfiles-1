@@ -126,7 +126,8 @@ keys.globalkeys = gtable.join(
   { description = "show or toggle the monitor bar", group = "awesome" }),
 
   awful.key({ modkey }, "F1", function()
-    start_screen.visible = not start_screen.visible 
+    local s = awful.screen.focused()
+    s.start_screen.visible = not s.start_screen.visible
   end,
   { description = "show or toggle start_screen", group = "awesome" }),
 
@@ -201,7 +202,8 @@ keys.globalkeys = gtable.join(
   -- Rofi
   --awful.key({ modkey }, "p", function() awful.spawn.with_shell("launcher") end,
   awful.key({ modkey }, "p", function()
-    app_drawer.visible = not app_drawer.visible
+    local s = awful.screen.focused()
+    s.app_drawer.visible = not s.app_drawer.visible
     update_app_drawer()
   end,
   { description = "app launcher", group = "app launcher" }),
