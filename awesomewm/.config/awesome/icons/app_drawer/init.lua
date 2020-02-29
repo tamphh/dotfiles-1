@@ -48,7 +48,9 @@ local icon_name = {
   "metasploit",
   "burp",
   "privacy",
-  "photo"
+  "photo",
+  "swift",
+  "selinux"
 }
 
 for _,v in pairs(icon_name) do

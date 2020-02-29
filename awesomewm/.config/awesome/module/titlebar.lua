@@ -3,11 +3,11 @@ local wibox = require("wibox")
 local gtable = require("gears.table")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local widget = require("util.widgets")
 local helpers = require("helpers")
+local widget = require("util.widgets")
+local button = require("util.buttons")
 local smartBorders = require("util.smart-borders")
 local theme = require("loaded-theme")
-local gshape = require("gears.shape")
 --local naughty = require("naughty")
 
 local smart_border = beautiful.double_border or false
@@ -55,6 +55,7 @@ end
 local title_with_border = function(c, ...)
   local width = c.width / 3
 
+  -- internal border if enable and only on no floating window
   if beautiful.titlebar_internal_border then
     -- box_margin change border color if c.client is focus or not
     local w = wibox.widget {
@@ -70,7 +71,11 @@ local title_with_border = function(c, ...)
     c:connect_signal("focus", function(c)
       w.color = beautiful.titlebar_internal_border_colors[1]
     end)
-
+    -- when the height or width change
+    c:connect_signal("property::size", function(c)
+      local width = c.width / 3
+      w.forced_width = dpi(width)
+    end)
     return wibox.widget {
       nil,
       w,
@@ -116,43 +121,22 @@ local window_close = function(c)
 end
 
 -- if buttons are enable
-local gen_button = function(c, icon, fg, cmd)
-  local button = widget.base_icon()
-  local r_margin = 0
-  local r_top = 0
-  button.markup = helpers.colorize_text(icon, fg)
+local gen_button = function(c, icon, fg, fg_light, cmd)
+  if if_titlebar_is_off(c)
+    or not beautiful.titlebar_buttons_enabled then return end
 
-  button:buttons(gtable.join(
-    awful.button({}, 1, function()
-      cmd(c)
-    end)
-  ))
+  local r_margin = smart_border and dpi(11) or dpi(8)
+  local t_margin = smart_border and dpi(4) or dpi(1)
+  local f_size = beautiful.widget_icon_font:match(('%d+')) or 9
+  local func = function() cmd(c) end
+  local button = button.create(icon, fg, fg_light, func, f_size)
 
-  if smart_border then
-    r_margin = dpi(11)
-    r_top = dpi(4)
-  else
-    r_margin = dpi(8)
-    r_top = dpi(0)
-  end
-
-  if if_titlebar_is_off(c) then return wibox.widget{} end
-
-  if beautiful.titlebar_buttons_enabled then
-    return wibox.widget {
-      nil,
-      {
-        button,
-        top = r_top,
-        right = r_margin,
-        widget = wibox.container.margin
-      },
-      nil,
-      layout = wibox.layout.fixed.horizontal
-    }
-  else
-    return button
-  end
+  return wibox.widget {
+    button,
+    top = t_margin,
+    right = r_margin,
+    widget = wibox.container.margin
+  }
 end
 
 client.connect_signal("request::titlebars", function(c)
@@ -175,7 +159,6 @@ client.connect_signal("request::titlebars", function(c)
     }) : setup { 
       nil,
       ncmpcpp,
-      nil,
       expand = "none",
       layout = wibox.layout.align.horizontal
     }
@@ -199,27 +182,37 @@ client.connect_signal("request::titlebars", function(c)
         --awful.titlebar.widget.maximizedbutton(c),
         --awful.titlebar.widget.stickybutton   (c),
         --awful.titlebar.widget.ontopbutton    (c),
-        gen_button(c, '', beautiful.alert, window_close),
+        gen_button(c, '', beautiful.alert, beautiful.alert_light, window_close),
         layout = wibox.layout.fixed.horizontal
       },
       layout = wibox.layout.align.horizontal
     }
+  end
 
-    -- add an additional internal border on non floating client
-    if c.floating ~= true and beautiful.titlebar_internal_border then
-      awful.titlebar(c, { size = beautiful.titlebar_size, position = "bottom" }) : setup {
-        nil,
-        {
-          title_with_border(c, true),
-          buttons = mbuttons(c),
-          layout  = wibox.layout.flex.horizontal
-        },
-        nil,
-        layout = wibox.layout.align.horizontal
-      }
-    end
+  -- Bottom, add an additional internal border on non floating client
+  --if c.floating then w.color = beautiful.grey_dark end -- hide the bar
+  if beautiful.titlebar_internal_border and not c.floating then
+    awful.titlebar(c, { size = beautiful.titlebar_size, position = "bottom" }) : setup {
+      nil,
+      {
+        title_with_border(c, true),
+        buttons = mbuttons(c),
+        layout  = wibox.layout.flex.horizontal
+      },
+      nil,
+      layout = wibox.layout.align.horizontal
+    }
+  elseif beautiful.titlebar_internal_border and c.floating and not c.class == "music_n" then
+    awful.titlebar.hide(c, "bottom")
   end
 end)
+
+-- Add an internal border if enable
+if beautiful.titlebar_internal_border then
+  client.connect_signal("property::floating", function(c)
+    awful.titlebar.hide(c, "bottom")
+  end)
+end
 
 -- Add the smart_border if enable
 if smart_border then

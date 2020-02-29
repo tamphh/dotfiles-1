@@ -95,9 +95,13 @@ my_apps[2] = {
 
 my_apps[3] = {
   title = "web-dev",
-  { name = "<b>?</b>", icon = icons[""], exec = function() exe_app() end },
+  { name = "<b>R</b>uby", icon = icons["ruby"], exec = function() exe_shell("nnn ~/Downloads/Book/RUBY") end },
+  { name = "<b>S</b>wift", icon = icons["swift"], exec = function() exe_shell("nnn ~/Downloads/Book/SWIFT") end },
+  { name = "se<b>L</b>inux", icon = icons["selinux"], exec = function() exe_shell("nnn ~/Downloads/Book/LINUX") end },
   keybindings = {
-    { {}, 'h', function() exe_app() end },
+    { {}, 'r', function() exe_shell("nnn ~/Downloads/Book/RUBY") end },
+    { {}, 's', function() exe_shell("nnn ~/Downloads/Book/SWIFT") end },
+    { {}, 'l', function() exe_shell("nnn ~/Downloads/Book/LINUX") end },
   },
 }
 
@@ -178,11 +182,12 @@ my_apps[9] = {
   title = "vm",
   { name = "<b>Q</b>emu", icon = icons["qemu"], exec = function() exe_shell("qemu") end },
   { name = "<b>V</b>irtualbox", icon = icons["virtualbox"], exec = function() exe_app("VirtualBox") end },
-  { name = "<b>A</b>chlinux", icon = icons["arch"], exec = function() exe_shell("qemu-x86_64 start achlinux") end },
+  -- VBoxManage list vms ( to list all your vm )
+  { name = "<b>A</b>chlinux", icon = icons["arch"], exec = function() exe_app("VBoxManage startvm archbasic") end },
   keybindings = {
     { {}, 'q', function() exe_shell("qemu-x86_64") end },
     { {}, 'v', function() exe_app("VirtualBox") end },
-    { {}, 'a', function() exe_shell("qemu-x86_64 start achlinux") end },
+    { {}, 'a', function() exe_app("VBoxManage startvm archbasic") end },
   },
 }
 
@@ -299,11 +304,11 @@ function myapps:init(s)
   s.app_drawer:buttons(gtable.join(
     -- Middle click - Hide app_drawer
     awful.button({}, 2, function()
-      s.app_drawer_hide()
+      app_drawer_hide()
     end),
     -- Right click - Hide app_drawer
     awful.button({}, 3, function()
-      s.app_drawer_hide()
+      app_drawer_hide()
     end)
   ))
 

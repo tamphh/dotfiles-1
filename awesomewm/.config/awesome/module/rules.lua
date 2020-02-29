@@ -43,6 +43,7 @@ awful.rules.rules = {
         "pinentry",
         "veromix",
         "xtightvncviewer"
+        --"feh"
       },
       -- Note that the name property shown in xprop might be set slightly after creation of the client
       -- and the name shown there might not match defined rules here.
@@ -120,6 +121,16 @@ awful.rules.rules = {
     properties = helpers.like_subtle(beautiful.gravity_music_term or { 40, 67, 30, 20 })
   },
 
+  {
+    rule = { class = "chat" },
+    properties = helpers.like_subtle(beautiful.gravity_chat or { 6, 13, 40, 66 })
+  },
+
+  {
+    rule = { class = "mail" },
+    properties = helpers.like_subtle(beautiful.gravity_mail or { 53, 13, 40, 66 })
+  },
+
   { 
     rule_any = {
       class = {
@@ -128,6 +139,7 @@ awful.rules.rules = {
     }, properties = helpers.like_subtle({33, 33, 33, 33}) -- center33
   },
 
+  -- Centered
   {
     rule_any = {
       class = {
@@ -139,9 +151,28 @@ awful.rules.rules = {
       name = {
         "Save File"
       },
-    }, properties = helpers.like_subtle({25, 25, 50, 50}) -- center66
+    }, properties = helpers.like_subtle({25, 25, 50, 50}), -- center66
+    callback = function(c)
+      awful.placement.centered(c,{ honor_padding = true, honor_workarea = true })
+    end
   },
 
+  -- Additional rules for floating apps
+  {
+    rule_any = {
+      class = {
+        "feh",
+      },
+    },
+    properties = {
+      skip_decoration = true,
+      hide_titlebars = true,
+      ontop = true,
+      placement = awful.placement.centered
+    },
+  },
+
+  -- Maximized
   {
     rule_any = {
       class = {
@@ -152,7 +183,13 @@ awful.rules.rules = {
 
   -- Apps by screen(s)/tag(s)
   {
-    rule = { class = "Brave-browser" },
+    rule_any = {
+      class = {
+        "Brave-browser",
+        "Firefox",
+        "Tor Browser"
+      }
+    },
     properties = { screen = 1, tag = beautiful.tagnames[2] } 
   },
 
@@ -174,6 +211,15 @@ awful.rules.rules = {
   {
     rule = { class = "chat" },
     properties = { screen = 1, tag = beautiful.tagnames[6] } 
+  },
+
+  {
+    rule_any = {
+      class = {
+        "VirtualBox",
+        "VirtualBox Manager"
+      },
+    }, properties = { screen = 1, tag = beautiful.tagnames[9] }
   },
 
   { 

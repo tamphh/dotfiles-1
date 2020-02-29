@@ -44,7 +44,7 @@ function helpers.create_titlebar(c, titlebar_buttons, titlebar_position, titleba
 end
 
 function helpers.colorize_text(txt, fg)
-  local txt = txt or tostring(nil)
+  local txt = tostring(txt) or tostring(nil)
   return '<span foreground="'..fg..'">'..txt..'</span>'
 end
 

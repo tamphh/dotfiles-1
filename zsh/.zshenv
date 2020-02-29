@@ -11,9 +11,9 @@ export GPG_TTY=$(tty)
 export EDITOR='vim'
 export SUDO_EDITOR='vim'
 
-# nnn, require perl-file-mimeinfo
-export NNN_OPENER="mimeopen"
-export NNN_PLUG="s:sxiv"
+# nnn
+[ -f ~/.config/nnn/plugins/nuke ] && export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
+[ -f ~/.config/nnn/plugins/sxiv ] && export NNN_PLUG="s:sxiv"
 
 # Proxy
 #export http_proxy="http://127.0.0.1:45411"
