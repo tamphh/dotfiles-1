@@ -210,7 +210,9 @@ end)
 -- Add an internal border if enable
 if beautiful.titlebar_internal_border then
   client.connect_signal("property::floating", function(c)
-    awful.titlebar.hide(c, "bottom")
+    if not c.class == "music_n" and c.floating then
+      awful.titlebar.hide(c, "bottom")
+    end
   end)
 end
 

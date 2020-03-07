@@ -13,7 +13,7 @@ GIT=$(which git)
 # Local functions
 
 anim() {
-  local i sp n
+  i=0
   sp='/-\|'
   n=${#sp}
   printf ' '
@@ -43,12 +43,22 @@ chk() {
 }
 
 forZsh() {
-  chk https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-  chk https://github.com/denysdovhan/spaceship-prompt.git ~/.oh-my-zsh/themes/spaceship-prompt
-  # create symbolic link if not exist
-  if [[ ! -s ~/.oh-my-zsh/themes/spaceship.zsh-theme ]] ; then
-    ln -s  ~/.oh-my-zsh/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/themes/spaceship.zsh-theme
-  fi
+  OH_MY_ZSH=~/.oh-my-zsh
+  SPACESHIP=$OH_MY_ZSH/themes/spaceship-prompt
+  [ -s $OH_MY_ZSH/themes/spaceship.zsh-theme ] && unlink $OH_MY_ZSH/themes/spaceship.zsh-theme
+  [ -d $SPACESHIP ] && rm -rf $SPACESHIP
+  [ -d $OH_MY_ZSH ] && {
+    read -p "Clearing oh-my-zsh for updates? [y/n] "
+    if [[ $REPLY =~ ^y|^Y ]] ; then
+      rm -rf $OH_MY_ZSH
+    else
+      echo "Ok, we keep your directory..."
+    fi
+  }
+  chk https://github.com/robbyrussell/oh-my-zsh.git $OH_MY_ZSH
+  chk https://github.com/denysdovhan/spaceship-prompt.git $SPACESHIP
+  # create symbolic link
+  ln -s  $SPACESHIP/spaceship.zsh-theme $OH_MY_ZSH/themes/spaceship.zsh-theme
 }
 
 pathogen() {

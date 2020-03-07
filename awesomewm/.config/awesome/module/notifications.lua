@@ -63,6 +63,7 @@ do
 end
 
 -- signal, TODO need awesome-git as dependencies to enable the signal !!
+-- or wait awesome-4.4 (prefer for now)
 -- https://github.com/elenapan/dotfiles/issues/60
 --naughty.connect_signal("request::display", function(n)
 

@@ -6,10 +6,10 @@
 ! theme maker: https://coolors.co
 
 !! BG !!
-#define theme0 #0E0C0F
-#define theme1 #121013
-#define theme2 #151316
-#define theme3 #1A181C
+#define theme0 #130F14
+#define theme1 #151416
+#define theme2 #1A181C
+#define theme3 #211F23
 !! FG !!
 #define theme4 #AABFAA
 #define theme5 #CCECEC

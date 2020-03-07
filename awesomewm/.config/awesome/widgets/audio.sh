@@ -14,23 +14,21 @@ checkbins() {
 }
 
 searchAlbumCover() {
-  local MUSIC_DIR="$1"
-  local file="$(mpc --format %file% current)"
-  local album_dir="${file%/*}"
-  local cover=""
-  local src=""
-  album_dir="$MUSIC_DIR/$album_dir"
-  [ -d "$album_dir" ] && {
-    covers="$(find "$album_dir" -maxdepth 1 -regex '.*\.\(jpe?g\|png\)' | head -n 1)"
-    src="$(echo -n "$covers")"
-    [ -f "$src" ] && echo "$src"
-  }
+  file="$(mpc --format %file% current)"
+  album_dir="${file%/*}"
+  album_dir="$1/$album_dir"
+  [ -d "$album_dir" ] || die "album dir $album_dir no found"
+  covers="$(find "$album_dir" -maxdepth 1 -regex '.*\.\(jpe?g\|png\)' | head -n 1)"
+  if [ -z "$covers" ] ; then
+    echo nil
+  else
+    echo "$covers"
+  fi
 }
 
 call_mpc_details() {
   local img title artist state album
-
-  img=$(searchAlbumCover "$1")
+  img="$(searchAlbumCover $1)"
   title="$(mpc current -f %title% | tr -d "%([]){}\1/")"
   artist="$(mpc current -f %artist% | tr -d "%([]){}\1/")"
   state="$(mpc status | grep -oe "paused\|playing")"

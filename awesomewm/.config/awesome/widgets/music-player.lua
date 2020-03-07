@@ -164,7 +164,7 @@ end
 -- update
 function music_player_root:updates(mpd)
   -- default value
-  local img = mpd.cover ~= nil and mpd.cover or icons["default_cover"]
+  local img = mpd.cover ~= "nil" and mpd.cover or icons["default_cover"]
   local title = mpd.title ~= nil and "<b>"..mpd.title.."</b>" or 'Unknown'
   local artist = mpd.artist ~= nil and mpd.artist or 'Unknown'
 
@@ -180,7 +180,10 @@ end
 -- signals
 function music_player_root:signals()
   awesome.connect_signal("daemon::mpd", function(mpd)
-    self:updates(mpd)
+    if mpd.cover then
+      --naughty.notify({ text = tostring(mpd.cover) })
+      self:updates(mpd)
+    end
   end)
   awesome.connect_signal("daemon::mpd_time", function(mpd)
     self:update_time(mpd)

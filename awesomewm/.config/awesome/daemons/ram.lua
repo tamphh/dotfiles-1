@@ -1,4 +1,5 @@
 local gtimer = require("gears.timer")
+local noti = require("util.noti")
 
 local function mem_info()
   local mem = { buf = {}, swp = {} }
@@ -25,6 +26,10 @@ local function mem_info()
   mem.swp.inuse = mem.swp.t - mem.swp.f
   mem.swp.usep  = math.floor(mem.swp.inuse / mem.swp.t * 100)
   mem.inuse_percent = math.floor((mem.total - mem.free) / (mem.total) * 100 + 0.5 )
+
+  if mem.inuse_percent >= 90 then
+    noti.warn("Memory usage soon full : "..tostring(mem.inuse_percent).."%")
+  end
 
   awesome.emit_signal("daemon::ram", mem )
 end
