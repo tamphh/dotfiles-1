@@ -39,6 +39,15 @@ theme.fg_secondary = xrdb.color8 or "#3DBAC2"
 theme.fg_secondary_focus = xrdb.color0 or "#E0E5E5"
 theme.fg_alert = xrdb.color8 or "#DB695B"
 
+-- !!!! NEW MATERIAL COLORS !!!!
+theme.surface = xrdb.background -- black
+theme.on_primary = xrdb.color0 -- black
+theme.on_secondary = xrdb.color0 -- black
+theme.on_surface = xrdb.color7 -- white
+theme.error = xrdb.color9 -- white
+theme.on_error = xrdb.color8 -- white
+--
+
 -- Regroup fonts
 theme.myfont = "Iosevka Term"
 theme.font          = theme.myfont.." Regular 9"

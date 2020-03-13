@@ -1,16 +1,10 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local gears = require("gears")
-local separators = require("util.separators")
 local keygrabber = require("awful.keygrabber")
-local widgets = require("util.widgets")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
-
-local pad = separators.pad
-local font_icon = beautiful.myfont .. " Bold 63"
-local font_icon_2 = beautiful.myfont .. " Bold 64" -- to scale little icon with text
-local font_text = beautiful.myfont .. " Regular 11"
+local btext = require("util.mat-button.text")
 
 -- keylogger
 local exit_screen_grabber
@@ -20,36 +14,31 @@ function exit_screen_hide()
   exit_screen.visible = false
 end
 
--- {{{ Poweroff part
 local poweroff_command = function() 
-  --awful.spawn.with_shell("sudo systemctl poweroff")
   awful.spawn("sudo systemctl poweroff")
   exit_screen_hide()
 end
 
-local poweroff_icon = widgets.create_text("⭘", beautiful.alert_dark, font_icon)
-local poweroff_text = widgets.create_text("<b>P</b>oweroff", "#aaaaaa", font_text)
-local poweroff = widgets.box("vertical", { poweroff_icon, poweroff_text })
-poweroff:buttons(gears.table.join(
-  awful.button({ }, 1, function() 
-    poweroff_command()
-  end)
-))
--- {{{ END Poweroff part
+local poweroff = btext({ fgcolor = "error",
+  icon = "⭘",
+  text = "<b>P</b>oweroff",
+  command = poweroff_command
+})
 
--- {{{ Exit part
 local exit_command = function() 
   awesome.quit()
 end
 
-local exit_icon = widgets.create_text("ﴙ", beautiful.secondary_dark, font_icon_2)
-local exit_text = widgets.create_text("<b>E</b>xit", "#aaaaaa", font_text)
-local exit = widgets.box("vertical", { exit_icon, exit_text })
-exit:buttons(gears.table.join(
-  awful.button({ }, 1, function() 
-    exit_command()
-  end)
-))
+--local exit_command = function()
+--  local naughty = require("naughty")
+--  naughty.notify({ text = "hello" })
+--end
+
+local exit = btext({ fgcolor = "primary",
+  icon = ">>",
+  text = "<b>E</b>xit",
+  command = exit_command
+})
 -- {{{ END Exit part
 
 -- {{{ Lock part
@@ -58,15 +47,11 @@ local lock_command = function()
   lock_screen_show()
 end
 
-local lock_icon = widgets.create_text("", beautiful.primary_dark, font_icon)
-local lock_text = widgets.create_text("<b>L</b>ock", "#aaaaaa", font_text)
-local lock = widgets.box("vertical", { lock_icon, lock_text })
-lock:buttons(gears.table.join(
-  awful.button({ }, 1, function() 
-    lock_command()
-  end)
-))
--- {{{ END Lock part
+local lock = btext({ fgcolor = "secondary",
+  icon = "",
+  text = "<b>L</b>ock",
+  command = lock_command
+})
 
 -- get screen geometry
 local screen_width = awful.screen.focused().geometry.width
@@ -111,29 +96,6 @@ exit_screen:buttons(gears.table.join(
   end)
 ))
 
-local function bg_hover(w)
-  local wbg = wibox.container.background()
-  wbg.shape = helpers.rrect(14)
-  wbg.bg = beautiful.grey_dark
-  wbg:connect_signal("mouse::leave", function(c)
-    wbg.bg = beautiful.grey_dark
-  end)
-  wbg:connect_signal("mouse::enter", function(c)
-    wbg.bg = beautiful.grey
-  end)
-  return wibox.widget {
-    {
-      w,
-      top = 10,
-      left = 20,
-      right = 20,
-      bottom = 20,
-      widget = wibox.container.margin
-    },
-    widget = wbg
-  }
-end
-
 exit_screen:setup {
   nil,
   {
@@ -144,10 +106,10 @@ exit_screen:setup {
           {
             nil,
             {
-              bg_hover(poweroff),
-              bg_hover(exit),
-              bg_hover(lock),
-              spacing = 8,
+              poweroff,
+              exit,
+              lock,
+              spacing = 12,
               layout = wibox.layout.fixed.horizontal
             },
             expand = "none",

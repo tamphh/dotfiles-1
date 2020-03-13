@@ -43,9 +43,10 @@ function helpers.create_titlebar(c, titlebar_buttons, titlebar_position, titleba
   }
 end
 
-function helpers.colorize_text(txt, fg)
+function helpers.colorize_text(txt, fg, alpha)
   local txt = tostring(txt) or tostring(nil)
-  return '<span foreground="'..fg..'">'..txt..'</span>'
+  local alpha = alpha or 100
+  return '<span foreground="'..fg..'" alpha="'..alpha..'%">'..txt..'</span>'
 end
 
 function helpers.ret_content(path)
