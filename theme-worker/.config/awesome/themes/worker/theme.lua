@@ -41,11 +41,22 @@ theme.fg_alert = xrdb.color8 or "#DB695B"
 
 -- !!!! NEW MATERIAL COLORS !!!!
 theme.surface = xrdb.background -- black
+theme.on_surface = xrdb.color15 -- white
 theme.on_primary = xrdb.color0 -- black
 theme.on_secondary = xrdb.color0 -- black
-theme.on_surface = xrdb.color7 -- white
-theme.error = xrdb.color9 -- white
-theme.on_error = xrdb.color8 -- white
+theme.error = xrdb.color9 -- red
+theme.on_error = xrdb.color15 -- white
+--
+
+-- !!!! NEW MATERIAL FONTS !!!!
+theme.font_h1 = "Iosevka Light 60" -- used rarely on big icon or big title
+theme.font_h4 = "Iosevka Regular 32"
+theme.font_h6 = "Iosevka Medium 20"
+theme.font_subtile_1 = "Iosevka Regular 13" -- used on text list
+theme.font_body_1 = "Iosevka Term Regular 16" -- used on text body title
+theme.font_body_2 = "Iosevka Term Light 14" -- used on text body
+theme.font_button = "Iosevka Term Medium 14" -- used on text button
+theme.font_caption = "Iosevka Term Bold 12" -- used on annotation
 --
 
 -- Regroup fonts

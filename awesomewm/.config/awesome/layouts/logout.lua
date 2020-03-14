@@ -22,6 +22,7 @@ end
 local poweroff = btext({ fgcolor = "error",
   icon = "⭘",
   text = "<b>P</b>oweroff",
+  width = 110,
   command = poweroff_command
 })
 
@@ -37,6 +38,7 @@ end
 local exit = btext({ fgcolor = "primary",
   icon = ">>",
   text = "<b>E</b>xit",
+  width = 110,
   command = exit_command
 })
 -- {{{ END Exit part
@@ -50,6 +52,7 @@ end
 local lock = btext({ fgcolor = "secondary",
   icon = "",
   text = "<b>L</b>ock",
+  width = 110,
   command = lock_command
 })
 
@@ -58,7 +61,7 @@ local screen_width = awful.screen.focused().geometry.width
 local screen_height = awful.screen.focused().geometry.height
 
 exit_screen = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "dock" })
-exit_screen.bg = beautiful.grey_dark .. "00"
+exit_screen.bg = beautiful.surface .. "55"
 exit_screen.width = screen_width
 exit_screen.height = screen_height
 

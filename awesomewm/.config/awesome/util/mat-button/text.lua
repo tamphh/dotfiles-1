@@ -6,27 +6,35 @@ local widget = require("util.widgets")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
 
+-- opacity color on dark theme
+-- https://material.io/design/iconography/system-icons.html#color
+local b = {}
+b["focus"] = 100
+b["normal"] = 70
+b["inactive"] = 50
+
 local mat_colors = {}
-mat_colors["primary"] = { beautiful.primary, beautiful.on_primary }
-mat_colors["secondary"] = { beautiful.secondary, beautiful.on_secondary }
-mat_colors["error"] = { beautiful.error, beautiful.on_error }
-mat_colors["surface"] = { beautiful.surface, beautiful.on_surface }
+mat_colors["primary"] = { beautiful.primary, beautiful.primary }
+mat_colors["secondary"] = { beautiful.secondary, beautiful.secondary }
+mat_colors["error"] = { beautiful.error, beautiful.error }
+mat_colors["surface"] = { beautiful.on_surface, beautiful.on_surface }
 
 local mat_button = class()
 
 function mat_button:init(args)
-  self.font_text = "Iosevka Term Medium 14"
-  self.font_icon = "Iosevka Light 60"
+  self.font_text = args.font_text or beautiful.font_button or "Iosevka Term Medium 14"
+  self.font_icon = args.font_icon or beautiful.font_h1 or "Iosevka Light 60"
   self.icon = args.icon or ""  
   self.text = args.text or ""
-  self.fg_text = mat_colors["surface"]
-  self.layout = "vertical"
+  self.fg_text = args.fg_text and mat_colors[args.fg_text] or mat_colors["surface"]
+  self.layout = args.layout or "vertical"
   self.rrect = 10
+  self.width = args.width or nil
+  self.height = args.height or nil
   self.command = args.command or nil
-
   self.colors = args.fgcolor and mat_colors[args.fgcolor] or mat_colors["surface"]
   self.wicon = widget.create_text(self.icon, self.colors[1], self.font_icon)
-  self.wtext = widget.create_text(self.text, self.fg_text[2], self.font_text)
+  self.wtext = args.wtext or widget.create_text(self.text, self.fg_text[2], self.font_text)
   self.background = mat.bg_overlay(0.00, self.colors[1])
   self.w = wibox.widget {
     {
@@ -42,7 +50,8 @@ function mat_button:init(args)
       shape = helpers.rrect(self.rrect),
       widget = self.background,
     },
-    forced_width = 110,
+    forced_width = self.width,
+    forced_height = self.height,
     layout = wibox.layout.stack
   }
 end
@@ -56,23 +65,23 @@ function mat_button:add_action()
 end
 
 function mat_button:hover()
-  self.wicon.markup = helpers.colorize_text(self.icon, self.colors[1], 60)
-  self.wtext.markup = helpers.colorize_text(self.text, self.fg_text[2], 60)
+  self.wicon.markup = helpers.colorize_text(self.icon, self.colors[1], b["normal"])
+  self.wtext.markup = helpers.colorize_text(self.text, self.fg_text[2], b["normal"])
   self.background.opacity = 0.00
 
   self.w:connect_signal("mouse::leave", function() 
-    self.wicon.markup = helpers.colorize_text(self.icon, self.colors[1], 60)
-    self.wtext.markup = helpers.colorize_text(self.text, self.fg_text[2], 60)
+    self.wicon.markup = helpers.colorize_text(self.icon, self.colors[1], b["normal"])
+    self.wtext.markup = helpers.colorize_text(self.text, self.fg_text[2], b["normal"])
     self.background.opacity = 0.00
   end)
   self.w:connect_signal("mouse::enter", function() 
-    self.wicon.markup = helpers.colorize_text(self.icon, self.colors[1], 87)
-    self.wtext.markup = helpers.colorize_text(self.text, self.fg_text[2], 87)
+    self.wicon.markup = helpers.colorize_text(self.icon, self.colors[1], b["focus"])
+    self.wtext.markup = helpers.colorize_text(self.text, self.fg_text[2], b["focus"])
     self.background.opacity = 0.05
   end)
   self.w:connect_signal("button::release", function() 
-    self.wicon.markup = helpers.colorize_text(self.icon, self.colors[1], 60)
-    self.wtext.markup = helpers.colorize_text(self.text, self.fg_text[2], 60)
+    self.wicon.markup = helpers.colorize_text(self.icon, self.colors[1], b["normal"])
+    self.wtext.markup = helpers.colorize_text(self.text, self.fg_text[2], b["normal"])
     self.background.opacity = 0.05
   end)
   self.w:connect_signal("button::press", function()

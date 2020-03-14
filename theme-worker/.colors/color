@@ -16,12 +16,12 @@
 #define theme6 #ffffff
 !! Primary, Secondary !!
 #define theme7 #7ACCA8
-#define theme8 #84E8CD
+#define theme8 #52dcb9
 #define theme9 #9286E8
 #define theme10 #7E6FF2
 !! Alert !!
 #define theme11 #A91164
-#define theme12 #AF2272
+#define theme12 #f44ca8
 #define theme13 #B03388
 !! Others !!
 #define theme14 #67c460
