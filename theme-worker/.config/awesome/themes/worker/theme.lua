@@ -40,9 +40,12 @@ theme.fg_secondary_focus = xrdb.color0 or "#E0E5E5"
 theme.fg_alert = xrdb.color8 or "#DB695B"
 
 -- !!!! NEW MATERIAL COLORS !!!!
+theme.on_background = xrdb.color15 -- white
 theme.surface = xrdb.background -- black
 theme.on_surface = xrdb.color15 -- white
 theme.on_primary = xrdb.color0 -- black
+theme.primary_variant = xrdb.color1 -- primary saturate (200-500)
+theme.dark_primary = xrdb.color8 -- branded dark surface
 theme.on_secondary = xrdb.color0 -- black
 theme.error = xrdb.color9 -- red
 theme.on_error = xrdb.color15 -- white
@@ -56,7 +59,8 @@ theme.font_subtile_1 = "Iosevka Regular 13" -- used on text list
 theme.font_body_1 = "Iosevka Term Regular 16" -- used on text body title
 theme.font_body_2 = "Iosevka Term Light 14" -- used on text body
 theme.font_button = "Iosevka Term Medium 14" -- used on text button
-theme.font_caption = "Iosevka Term Bold 12" -- used on annotation
+theme.font_caption = "Iosevka Bold 12" -- used on annotation
+theme.font_overline = "Iosevka Regular 10"
 --
 
 -- Regroup fonts

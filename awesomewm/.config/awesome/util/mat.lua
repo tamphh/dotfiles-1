@@ -2,6 +2,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 
 -- a table with different level of opacity
+-- https://material.io/design/interaction/states.html#anatomy
 local dp = {}
 dp["00dp"] = 0.00
 dp["01dp"] = 0.05
@@ -44,6 +45,7 @@ function mat.overlay(level, bg)
 end
 
 -- https://material.io/design/interaction/states.html#anatomy
+-- https://material.io/design/color/dark-theme.html#states
 -- classed by white/dark surface or primary/secondary color
 local state = {}
 state["enabled"] = { 0, 0 }

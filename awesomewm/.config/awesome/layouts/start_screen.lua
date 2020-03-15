@@ -57,10 +57,11 @@ local function make_rss_widget(title, w)
   return wibox.widget {
     {
       {
-        {
-          align = "left",
-          widget = font.caption(title, beautiful.primary),
-        },
+        --{
+        --  align = "left",
+        --  widget = font.overline(title, beautiful.on_surface, 100, beautiful.primary),
+        --},
+        font.overline(title, beautiful.on_surface, 100, beautiful.primary),
         left = 5, bottom = 8,
         widget = wibox.container.margin
       },

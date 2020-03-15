@@ -1,10 +1,8 @@
 local wibox = require("wibox")
 local awful = require("awful")
-local gears = require("gears")
 local keygrabber = require("awful.keygrabber")
-local beautiful = require("beautiful")
-local helpers = require("helpers")
 local btext = require("util.mat-button.text")
+local modal = require("util.modal")
 
 -- keylogger
 local exit_screen_grabber
@@ -30,11 +28,6 @@ local exit_command = function()
   awesome.quit()
 end
 
---local exit_command = function()
---  local naughty = require("naughty")
---  naughty.notify({ text = "hello" })
---end
-
 local exit = btext({ fgcolor = "primary",
   icon = ">>",
   text = "<b>E</b>xit",
@@ -56,14 +49,8 @@ local lock = btext({ fgcolor = "secondary",
   command = lock_command
 })
 
--- get screen geometry
-local screen_width = awful.screen.focused().geometry.width
-local screen_height = awful.screen.focused().geometry.height
-
-exit_screen = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "dock" })
-exit_screen.bg = beautiful.surface .. "55"
-exit_screen.width = screen_width
-exit_screen.height = screen_height
+-- exit_screen creation
+exit_screen = modal:init()
 
 function exit_screen_show()
   local grabber = keygrabber {
@@ -88,50 +75,14 @@ function exit_screen_show()
 end
 
 -- buttons
-exit_screen:buttons(gears.table.join(
-  -- Middle click - Hide exit_screen
-  awful.button({ }, 2, function ()
-    exit_screen_hide()
-  end),
-  -- Right click - Hide exit_screen
-  awful.button({ }, 3, function ()
-    exit_screen_hide()
-  end)
-))
+modal:add_buttons(exit_screen_hide)
 
-exit_screen:setup {
-  nil,
-  {
-    {
-      nil,
-      {
-        {
-          {
-            nil,
-            {
-              poweroff,
-              exit,
-              lock,
-              spacing = 12,
-              layout = wibox.layout.fixed.horizontal
-            },
-            expand = "none",
-            layout = wibox.layout.align.vertical
-          },
-          margins = 18,
-          widget = wibox.container.margin
-        },
-        shape = helpers.rrect(18),
-        bg = beautiful.grey_dark,
-        widget = wibox.container.background
-      },
-      nil,
-      expand = "none",
-      layout = wibox.layout.align.horizontal
-    },
-    layout = wibox.layout.fixed.vertical
-  },
-  nil,
-  expand = "none",
-  layout = wibox.layout.align.vertical
+local w = wibox.widget {
+  poweroff,
+  exit,
+  lock,
+  spacing = 12,
+  layout = wibox.layout.fixed.horizontal
 }
+
+modal:run(w)
