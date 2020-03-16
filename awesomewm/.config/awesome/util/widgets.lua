@@ -51,16 +51,14 @@ function widgets.create_title(text, fg, size)
   return w
 end
 
-function widgets.box(l, widgets, space)
+function widgets.box(lay, widgets, space)
+  local lay = lay or "horizontal" -- default horizontal
   local spacing = space or 0
-  local _layout = wibox.layout.fixed.horizontal -- default horiz
-  if l == "vertical" then _layout = wibox.layout.fixed.vertical end
-
-  local w = wibox.widget { layout = _layout, spacing = dpi(spacing) } -- init a widget
+  local layout = wibox.layout.fixed[lay]
+  local w = wibox.widget { layout = layout, spacing = dpi(spacing) } -- init a widget
   for _, widget in ipairs(widgets) do
     w:add(widget)
   end
-
   return w
 end
 

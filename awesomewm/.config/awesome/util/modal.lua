@@ -9,6 +9,8 @@ local gtable = require("gears.table")
 -- https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
 local t = {}
 t["32"] = "52"
+t["8"] = "14"
+t["7"] = "12"
 t["5"] = "0D"
 
 local modal = {}

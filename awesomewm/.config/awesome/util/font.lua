@@ -61,6 +61,13 @@ function font.body_text(text, fg, alpha)
   return w
 end
 
+function font.button(text, fg, alpha)
+  local color = fg or beautiful.on_surface
+  local font = beautiful.font_button or "Iosevka Term Medium 14"
+  local alpha = alpha or 100
+  return make_widget(font, text, color, alpha)
+end
+
 function font.caption(text, fg)
   local color = fg or beautiful.on_secondary
   local font = beautiful.font_caption or "Iosevka Term Regular 16"

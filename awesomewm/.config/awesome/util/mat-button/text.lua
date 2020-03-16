@@ -5,6 +5,7 @@ local gtable = require("gears.table")
 local widget = require("util.widgets")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
+local font = require("util.font")
 
 -- opacity color on dark theme
 -- https://material.io/design/iconography/system-icons.html#color
@@ -28,13 +29,13 @@ function mat_button:init(args)
   self.text = args.text or ""
   self.fg_text = args.fg_text and mat_colors[args.fg_text] or mat_colors["surface"]
   self.layout = args.layout or "vertical"
-  self.rrect = 10
+  self.rrect = args.rrect or 10
   self.width = args.width or nil
   self.height = args.height or nil
   self.command = args.command or nil
   self.colors = args.fgcolor and mat_colors[args.fgcolor] or mat_colors["surface"]
   self.wicon = widget.create_text(self.icon, self.colors[1], self.font_icon)
-  self.wtext = args.wtext or widget.create_text(self.text, self.fg_text[2], self.font_text)
+  self.wtext = args.wtext or font.button(self.text, self.fg_text[2])
   self.background = mat.bg_overlay(0.00, self.colors[1])
   self.w = wibox.widget {
     {
