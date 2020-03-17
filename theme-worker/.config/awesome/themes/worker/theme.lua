@@ -41,9 +41,9 @@ theme.fg_alert = xrdb.color8 or "#DB695B"
 
 -- !!!! NEW MATERIAL COLORS !!!!
 theme.on_background = xrdb.color15 -- white
-theme.surface = xrdb.background -- black
-theme.on_surface = xrdb.color15 -- white
-theme.on_primary = xrdb.color0 -- black
+theme.surface = xrdb.color16 or "#100f10"
+theme.on_surface = xrdb.color15 or "#ffffff" -- white
+theme.on_primary = xrdb.color16 or "#100f10" -- black
 theme.primary_variant = xrdb.color1 -- primary saturate (200-500)
 theme.dark_primary = xrdb.color8 -- branded dark surface
 theme.on_secondary = xrdb.color0 -- black

@@ -1,8 +1,9 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local keygrabber = require("awful.keygrabber")
-local btext = require("util.mat-button.text")
+local btext = require("util.mat-button")
 local modal = require("util.modal")
+local beautiful = require("beautiful")
 
 -- keylogger
 local exit_screen_grabber
@@ -17,7 +18,8 @@ local poweroff_command = function()
   exit_screen_hide()
 end
 
-local poweroff = btext({ fgcolor = "error",
+local poweroff = btext({ fg_icon = beautiful.error,
+  overlay = beautiful.error,
   icon = "⭘",
   text = "<b>P</b>oweroff",
   width = 110,
@@ -28,7 +30,8 @@ local exit_command = function()
   awesome.quit()
 end
 
-local exit = btext({ fgcolor = "primary",
+local exit = btext({ fg_icon = beautiful.primary,
+  overlay = beautiful.primary,
   icon = ">>",
   text = "<b>E</b>xit",
   width = 110,
@@ -42,7 +45,8 @@ local lock_command = function()
   lock_screen_show()
 end
 
-local lock = btext({ fgcolor = "secondary",
+local lock = btext({ fg_icon = beautiful.secondary,
+  overlay = beautiful.secondary,
   icon = "",
   text = "<b>L</b>ock",
   width = 110,

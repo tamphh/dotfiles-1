@@ -9,7 +9,7 @@ local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 local theme = require("loaded-theme")
 local app = require("util.app")
-local btext = require("util.mat-button.text")
+local btext = require("util.mat-button")
 
 local function start_screen_hide()
   local s = awful.screen.focused()
@@ -53,7 +53,7 @@ local function rss_links(rss, feed_name, w)
     s = #rss[feed_name].title[i] > 26 and -- cut the text if too long
       string.sub(rss[feed_name].title[i], 1, 26) .. "..." or
       rss[feed_name].title[i]
-    b = button.text_list(s, f, "surface")
+    b = button.text_list(s, f, beautiful.on_surface)
     b.forced_width = 310
     w:add(b)
   end
@@ -133,30 +133,33 @@ end
 
 -- buttons apps
 local gimp_cmd = function() exec_prog("gimp") end
-local gimp = btext({ fgcolor = "primary", icon = "", command = gimp_cmd })
+local gimp = btext({ fg_icon = beautiful.primary, icon = "",
+  overlay = beautiful.primary, command = gimp_cmd })
 
 local game_cmd = function() exec_prog("lutris") end
-local game = btext({ fgcolor = "secondary", icon = "", command = game_cmd })
+local game = btext({ fg_icon = beautiful.secondary, icon = "",
+  overlay = beautiful.secondary, command = game_cmd })
 
 local pentest_cmd = function() launch_term("msfconsole") end
-local pentest = btext({ fgcolor = "error", icon = "ﮊ", command = pentest_cmd })
+local pentest = btext({ fg_icon = beautiful.error, icon = "ﮊ",
+  overlay = beautiful.error, command = pentest_cmd })
 
 local buttons_widget = widget.box('vertical', { gimp,game,pentest })
 
 -- buttons path
 local image_cmd = function() launch_term(env.file_browser .. " ~/images") end
-local image = btext({ fg_text = "primary",
-  text = "IMAGES", command = image_cmd, width = 80
+local image = btext({ fg_text = beautiful.primary, overlay = beautiful.primary,
+  text = "IMAGES", command = image_cmd
 })
 
 local torrent_cmd = function() launch_term(env.file_browser .. " ~/torrents") end
-local torrent = btext({ fg_text = "secondary",
-  text = "TORRENTS", command = torrent_cmd, width = 80
+local torrent = btext({ fg_text = beautiful.secondary, overlay = beautiful.secondary,
+  text = "TORRENTS", command = torrent_cmd
 })
 
 local movie_cmd = function() launch_term(env.file_browser .. " ~/videos") end
-local movie = btext({ fg_text = "error",
-  text = "MOVIES", command = movie_cmd, width = 80
+local movie = btext({ fg_text = beautiful.error, overlay = beautiful.error,
+  text = "MOVIES", command = movie_cmd
 })
 
 local buttons_path_1_widget = widget.box('horizontal', { image,torrent }, 15)
@@ -164,13 +167,16 @@ local buttons_path_2_widget = widget.box('horizontal', { movie })
 
 -- buttons url
 local github_cmd = function() open_link("https://github.com/szorfein") end
-local github = btext({ fgcolor = "primary", icon = "", command = github_cmd })
+local github = btext({ fg_icon = beautiful.primary, icon = "",
+  overlay = beautiful.primary, command = github_cmd })
 
 local twitter_cmd = function() open_link("https://twitter.com/szorfein") end
-local twitter = btext({ fgcolor = "secondary", icon = "", command = twitter_cmd })
+local twitter = btext({ fg_icon = beautiful.secondary, icon = "",
+  overlay = beautiful.secondary, command = twitter_cmd })
 
 local reddit_cmd = function() open_link("https://reddit.com/user/szorfein") end
-local reddit = btext({ fgcolor = "error", icon = "", command = reddit_cmd })
+local reddit = btext({ fg_icon = beautiful.error, icon = "",
+  overlay = beautiful.error, command = reddit_cmd })
 
 local buttons_url_widget = widget.box('vertical', { github, twitter, reddit })
 
@@ -196,7 +202,8 @@ local function update_history()
     if k > todo_max or not v then return end
     local t = font.text_list(v)
     local f = function() remove_todo(v) end -- serve to store the actual line
-    local b = btext({ fg_text = "secondary", text = " ", command = f })
+    local b = btext({ fg_text = beautiful.secondary, overlay = beautiful.secondary,
+      text = "", command = f })
     local w = widget.box('horizontal', { b, t })
     todo_list:add(w)
   end
@@ -226,12 +233,28 @@ local function exec_prompt()
   }
 end
 
-local todo_new = btext({ fgcolor = "primary", icon = "",
+local todo_new = btext({ fg_icon = beautiful.on_secondary, icon = "",
   font_icon = beautiful.font_button,
-  fg_text = "primary", text = " New task",
+  fg_text = beautiful.on_secondary, text = " New task",
+  bg = beautiful.secondary,
+  mode = "contained",
+  spacing = 3,
+  rrect = 30,
+  overlay = beautiful.on_surface,
   command = exec_prompt, layout = "horizontal"
 })
-local todo_widget = widget.box("horizontal", { todo_new, todo_textbox })
+
+local todo_widget = wibox.widget {
+  todo_list,
+  { -- align to the center
+    nil,
+    widget.box("horizontal", { todo_new, todo_textbox }),
+    expand = "none",
+    layout = wibox.layout.align.horizontal
+  },
+  spacing = 12,
+  layout = wibox.layout.fixed.vertical
+}
 
 update_history() -- init once the todo
 
@@ -309,8 +332,7 @@ function startscreen:init(s)
         {
           nil,
           {
-            boxes(todo_widget, 210, 50, 0),
-            boxes(todo_list, 210, 200, 1),
+            boxes(todo_widget, 210, 250, 1),
             boxes(buttons_path_1_widget, 210, 80, 1),
             boxes(buttons_path_2_widget, 210, 80, 1),
             layout = wibox.layout.fixed.vertical
