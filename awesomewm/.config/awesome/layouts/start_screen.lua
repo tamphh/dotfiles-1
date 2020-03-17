@@ -29,8 +29,6 @@ local feed_width = 380
 local feed_height = 345
 
 -- base for rss
-local rss_widgets = wibox.widget { layout = wibox.layout.fixed.vertical, spacing = 8 }
-
 local rss_threatpost = wibox.widget {
   spacing = 8,
   layout = wibox.layout.fixed.vertical
@@ -40,6 +38,12 @@ local rss_ycombinator = wibox.widget {
   spacing = 8,
   layout = wibox.layout.fixed.vertical
 }
+
+local tabs = require("util.tabs")
+local rss_widgets = tabs({
+  texts = { "ycombinator", "threatpost" }, -- text titles
+  containers = { rss_ycombinator, rss_threatpost } -- matching widgets
+})
 
 local function rss_links(rss, feed_name, w)
   w:reset()
@@ -55,109 +59,7 @@ local function rss_links(rss, feed_name, w)
   end
 end
 
-local my_tab, threatpost_widget, ycombinator_widget
-
-local function switch(name)
-  rss_widgets:reset()
-  rss_widgets:add(my_tab)
-  if name == "threatpost" then
-    rss_widgets:add(rss_threatpost)
-  elseif name == "ycombinator" then
-    rss_widgets:add(rss_ycombinator)
-  end
-end
-
-local line = {}
-local texts = {}
-local function enable(index)
-  local t = {}
-  -- clear previous line,
-  -- with material, only one element should be active per tab
-  for k,v in pairs(line) do
-    t[k] = texts[k].text -- get the actual value of text before remove
-    line[k].color = beautiful.surface
-    texts[k].markup = helpers.colorize_text(t[k], beautiful.on_surface, 38)
-  end
-  line[index].color = beautiful.primary
-  texts[index].markup = helpers.colorize_text(t[index], beautiful.on_surface)
-end
-
-local function tab()
-  local mat = require("util.mat")
-  local naughty = require("naughty")
-  local beautiful = require("beautiful")
-  local title = { "ycombinator", "threatpost" }
-  local w = wibox.widget { layout = wibox.layout.fixed.horizontal }
-  for k,v in pairs(title) do
-    texts[k] = font.button("")
-    local bg = wibox.widget {
-      bg = beautiful.on_surface.."00",
-      widget = wibox.container.background
-    }
-    local margin = wibox.widget {
-      top = dpi(12), bottom = dpi(12),
-      left = dpi(16), right = dpi(16),
-      forced_height = dpi(48),
-      widget = wibox.container.margin
-    }
-    line[k] = wibox.widget {
-      bottom = 2,
-      color = beautiful.surface,
-      widget = wibox.container.margin
-    }
-    local button = wibox.widget {
-      nil,
-      {
-        {
-          {
-            texts[k],
-            widget = margin
-          },
-          widget = line[k]
-        },
-        widget = bg,
-      },
-      expand = "none",
-      layout = wibox.layout.align.horizontal
-    }
-    texts[k].markup = helpers.colorize_text(v, beautiful.on_surface, 38)
-    bg.bg = beautiful.on_surface .. "00"
-    button:connect_signal("mouse::enter", function()
-      bg.bg = beautiful.on_surface.."0D"
-    end)
-    button:connect_signal("mouse::leave", function()
-      bg.bg = beautiful.on_surface.."00"
-    end)
-    button:connect_signal("button::release", function()
-      bg.bg = beautiful.on_surface.."0D"
-    end)
-    button:connect_signal("button::press", function()
-      bg.bg = beautiful.on_surface.."14"
-      enable(k)
-      switch(v)
-    end)
-    w:add(button)
-  end
-  return wibox.widget { -- return the tab widget centered
-    nil,
-    w,
-    expand = "none",
-    layout = wibox.layout.align.horizontal
-  }
-end
-
---local otab = require("util.tab")
---my_tab = otab({
---  texts = { "ycombinator", "threatpost" },
---  root = rss_widgets,
---  containers = { rss_ycombinator, rss_threatpost }
---})
-
-my_tab = tab()
-threatpost_widget = widget.box("vertical", { my_tab, rss_threatpost })
-ycombinator_widget = widget.box("vertical", { my_tab, rss_ycombinator })
-
--- signal rss
+-- signal to update rss feeds
 awesome.connect_signal("daemon::rss", function(rss)
   if rss.threatpost then
     rss_links(rss, "threatpost", rss_threatpost)
@@ -166,9 +68,6 @@ awesome.connect_signal("daemon::rss", function(rss)
     rss_links(rss, "ycombinator", rss_ycombinator)
   end
 end)
-
-switch("ycombinator") -- initialize the rss_widgets
-enable(1) -- show what tab is enable
 
 -- images
 local theme_picture_container = wibox.container.background()
@@ -405,8 +304,6 @@ function startscreen:init(s)
         },
         {
           boxes(rss_widgets, feed_width, feed_height, 1),
-          --boxes(threatpost_widget, feed_width, feed_height, 1),
-          --boxes(ycombinator_widget, feed_width, feed_height, 1),
           layout = wibox.layout.fixed.vertical
         },
         {
