@@ -1,8 +1,7 @@
 local awful = require("awful")
 local gshape = require("gears.shape")
 local wibox = require("wibox")
-local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
+local dpi = require("beautiful").xresources.apply_dpi
 local naughty = require("naughty")
 local helpers = require("helpers")
 
@@ -14,7 +13,7 @@ local lock_animation_icon = wibox.widget {
     -- Set forced size to prevent flickering when the icon rotates
     forced_height = dpi(80),
     forced_width = dpi(80),
-    font = beautiful.myfont.." 50",
+    font = M.f.h1.." 50",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox(lock_screen_symbol)
@@ -30,8 +29,8 @@ local some_textbox = wibox.widget.textbox()
 lock_screen = wibox({ visible = false, ontop = true, type = "splash" })
 awful.placement.maximize(lock_screen)
 
-lock_screen.bg = beautiful.wibar_bg or beautiful.grey
-lock_screen.fg = beautiful.fg_grey
+lock_screen.bg = M.x.surface
+lock_screen.fg = M.x.on_surface
 
 -- Lock animation
 local lock_animation_widget_rotate = wibox.container.rotate()
@@ -62,7 +61,7 @@ local lock_animation_widget = {
 local characters_entered = 0
 local function reset()
   characters_entered = 0
-  lock_animation_icon.markup = helpers.colorize_text(lock_screen_symbol, beautiful.primary)
+  lock_animation_icon.markup = helpers.colorize_text(lock_screen_symbol, M.x.primary)
   lock_animation_widget_rotate.direction = "north"
   lock_animation_arc.bg = "#00000000"
 end
@@ -72,26 +71,26 @@ if characters_entered == 0 then reset() end
 
 local function fail()
   characters_entered = 0
-  lock_animation_icon.markup = helpers.colorize_text(lock_screen_fail_symbol, beautiful.alert_light)
+  lock_animation_icon.markup = helpers.colorize_text(lock_screen_fail_symbol, M.x.error)
   lock_animation_widget_rotate.direction = "north"
   lock_animation_arc.bg = "#00000000"
 end
 
 local animation_colors = {
     -- Rainbow sequence =)
-    beautiful.primary_dark,
-    beautiful.primary,
-    beautiful.primary_light,
-    beautiful.secondary_dark,
-    beautiful.secondary,
-    beautiful.secondary_light
+    M.x.primary .. "CC", -- 80%
+    M.x.primary .. "E6", -- 90%
+    M.x.primary .. "FF", -- 100%
+    M.x.secondary .. "CC",
+    M.x.secondary .. "E6",
+    M.x.secondary .. "FF",
 }
 
 local animation_directions = { "north", "west", "south", "east" }
 
 -- Function that "animates" every key press
 local function key_animation(char_inserted)
-  local color = beautiful.fg_grey
+  local color = M.x.on_surface
   local direction = animation_directions[(characters_entered % 4) + 1]
   if char_inserted then
     color = animation_colors[(characters_entered % 6) + 1]
@@ -100,7 +99,7 @@ local function key_animation(char_inserted)
     if characters_entered == 0 then
       reset()
     else
-      color = beautiful.alert
+      color = M.x.error
     end
   end
 

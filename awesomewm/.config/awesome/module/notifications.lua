@@ -1,24 +1,23 @@
-local beautiful = require("beautiful")
 local naughty = require("naughty")
 
 -- timeout
 naughty.config.defaults.timeout = 10
-naughty.config.presets.low.timeout = 5
-naughty.config.presets.critical.timeout = 20
+naughty.config.presets.low.timeout = 6
+naughty.config.presets.critical.timeout = 0 -- click to disable
 
 naughty.config.presets.normal = {
-  font         = beautiful.font,
-  fg           = beautiful.fg_grey_light,
-  bg           = beautiful.grey,
-  border_color = beautiful.primary_dark,
+  font         = M.f.button,
+  fg           = M.x.on_surface,
+  bg           = M.x.surface,
+  border_color = M.x.primary,
   border_width = 1
 }
 
 naughty.config.presets.low = {
-  font         = beautiful.font,
-  fg           = beautiful.fg_grey,
-  bg           = beautiful.grey,
-  border_color = beautiful.grey_dark,
+  font         = M.f.button,
+  fg           = M.x.surface,
+  bg           = M.x.on_surface,
+  border_color = M.x.on_surface,
   border_width = 1
 }
 
@@ -27,10 +26,10 @@ naughty.config.presets.info = naughty.config.presets.low
 naughty.config.presets.warn = naughty.config.presets.normal
 
 naughty.config.presets.critical = {
-  font         = beautiful.font,
-  fg           = beautiful.fg_alert,
-  bg           = beautiful.alert_dark,
-  border_color = beautiful.alert,
+  font         = M.f.subtile_1, -- TODO change
+  fg           = M.x.on_error,
+  bg           = M.x.error,
+  border_color = M.x.error,
   border_width = 2
 }
 
@@ -63,7 +62,7 @@ do
 end
 
 -- signal, TODO need awesome-git as dependencies to enable the signal !!
--- or wait awesome-4.4 (prefer for now)
+-- i wait the next release 4.4 for now
 -- https://github.com/elenapan/dotfiles/issues/60
 --naughty.connect_signal("request::display", function(n)
 

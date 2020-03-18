@@ -1,5 +1,4 @@
 local wibox = require("wibox")
-local beautiful = require("beautiful")
 local ascreen = require("awful.screen")
 local helpers = require("helpers")
 local abutton = require("awful.button")
@@ -17,7 +16,7 @@ local modal = {}
 
 function modal:init()
   self.w = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "dock" })
-  self.w.bg = beautiful.on_surface .. t["5"]
+  self.w.bg = M.x.on_surface .. t["5"]
   self.w.width = ascreen.focused().geometry.width
   self.w.height = ascreen.focused().geometry.height
   return self.w
@@ -50,7 +49,7 @@ function modal:run(w)
             widget = wibox.container.margin
           },
           shape = helpers.rrect(18),
-          bg = beautiful.surface,
+          bg = M.x.surface,
           widget = wibox.container.background
         },
         nil,

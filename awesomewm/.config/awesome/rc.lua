@@ -23,10 +23,15 @@ function class(base)
 end
 
 -- {{{ Variable definitions
-env = require("env-config") -- user settings globally
+M = require("loaded-theme") -- material theme globally
 
 -- Themes define colours, icons, font and wallpapers.
-local theme = require("loaded-theme")
+local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
+beautiful.init( theme_dir .. M.name .. "/theme.lua" )
+
+env = require("env-config") -- user settings globally
+
+local noti = require("util.noti")
 
 require("module.notifications")
 require("layouts.start_screen")
@@ -49,7 +54,7 @@ awful.screen.connect_for_each_screen(function(s)
   require("module.tagnames")(s)
 
   -- Create the wibox
-  require("bars."..theme.name)(s)
+  require("bars."..M.name)(s)
 
   -- App drawer bar
   require("layouts.app_drawer")(s)
@@ -67,4 +72,4 @@ require("module.titlebar")
 require("module.signals")
 require("module.autostart")
 
-naughty.notify({ text = "theme "..theme.name.." is loaded" })
+noti.info("theme "..M.name.." is loaded")

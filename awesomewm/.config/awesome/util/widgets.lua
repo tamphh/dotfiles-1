@@ -1,12 +1,11 @@
 local wibox = require("wibox")
-local beautiful = require("beautiful")
 local helpers = require("helpers")
 local gshape = require("gears.shape")
 local gtable = require("gears.table")
 local awful = require("awful")
 local naughty = require("naughty")
 local separator = require("util.separators")
-local dpi = beautiful.xresources.apply_dpi
+local dpi = require("beautiful").xresources.apply_dpi
 local app = require("util.app")
 
 local widgets = {}
@@ -29,8 +28,7 @@ end
 
 -- optional parameters to make icon
 function widgets.base_icon(icon, fg)
-  local font = beautiful.widget_icon_font or "Iosevka Term Regular 11" 
-  local w = widgets.create_base_text(font)
+  local w = widgets.create_base_text(M.x.button)
   if icon and fg then
     w.markup = helpers.colorize_text(icon, fg)
   end
@@ -38,17 +36,7 @@ function widgets.base_icon(icon, fg)
 end
 
 function widgets.base_text(alignment)
-  local font = beautiful.widget_text_font or "Iosevka Term Regular 9" 
-  return widgets.create_base_text(font, alignment)
-end
-
-function widgets.create_title(text, fg, size)
-  local margin = margin or 0
-  local size = size or 10
-  local font = beautiful.myfont.." Bold "..size or "Iosevka Term Bold "..size
-  local w = widgets.create_base_text(font)
-  w.markup = helpers.colorize_text(text, fg)
-  return w
+  return widgets.create_base_text(M.x.body_2, alignment)
 end
 
 function widgets.box(lay, widgets, space)
@@ -147,8 +135,7 @@ function widgets.bg(bg_color, w)
 end
 
 function widgets.create_button(fg, icon, fg_hover)
-  local font = beautiful.widget_icon_font_button or 'Iosevka Term 16'
-  local w = widgets.create_text(icon, fg, font)
+  local w = widgets.create_text(icon, fg, M.f.button)
   w.align = 'left'
   w.valign = 'center'
   return w
@@ -225,8 +212,8 @@ function widgets.make_a_slider(default_value)
     forced_height = dpi(8),
     bar_shape = gshape.rounded_rect,
     bar_height = dpi(5),
-    bar_color = beautiful.primary_dark,
-    handle_color = beautiful.alert,
+    bar_color = M.x.primary,
+    handle_color = M.x.error,
     handle_shape = gshape.circle,
     handle_border_color = '#00000012',
     handle_border_width = dpi(3),
@@ -260,9 +247,9 @@ function widgets.make_arcchart(w)
   local w = w or nil
   return wibox.widget {
     widget = wibox.container.arcchart,
-    bg = beautiful.primary_dark,
-    border_color = beautiful.alert_dark,
-    colors = { beautiful.alert_light, beautiful.primary_light },
+    bg = M.x.primary,
+    border_color = M.x.error,
+    colors = { M.x.error, M.x.on_error },
     max_value = 99,
     min_value = 0,
     paddings = 2,
@@ -279,7 +266,7 @@ end
 function widgets.make_progressbar(value, width, colors)
   local value = value or 10
   local width = width or 100
-  local colors = colors or { beautiful.alert, beautiful.primary }
+  local colors = colors or { M.x.error, M.x.on_error }
   return wibox.widget {
     max_value     = 100,
     value         = value,
@@ -288,7 +275,7 @@ function widgets.make_progressbar(value, width, colors)
     forced_width  = width,
     paddings      = 1,
     border_width  = 1,
-    border_color  = beautiful.grey,
+    border_color  = M.x.primary,
     bar_shape     = gshape.rounded_bar,
     shape         = gshape.rounded_bar,
     color         = colors[1],

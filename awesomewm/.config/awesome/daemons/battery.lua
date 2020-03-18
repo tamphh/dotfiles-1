@@ -10,12 +10,12 @@ local function battery_info()
   local fpath = path_power..bat
 
   local battery_state = {
-    ["Full\n"]        = { beautiful.widget_battery_icon_full, beautiful.fg_grey },
+    ["Full\n"]        = { beautiful.widget_battery_icon_full, beautiful.on_background },
     ["Unknown\n"]     = { unknown_icon, beautiful.alert_light },
 
-    ["Charged\n"]     = { beautiful.widget_battery_icon_charging, beautiful.primary_light },
-    ["Charging\n"]    = { beautiful.widget_battery_icon_charging, beautiful.secondary_light },
-    ["Discharging\n"] = { beautiful.widget_battery_icon_discharging, beautiful.alert }
+    ["Charged\n"]     = { beautiful.widget_battery_icon_charging, beautiful.primary },
+    ["Charging\n"]    = { beautiful.widget_battery_icon_charging, beautiful.secondary },
+    ["Discharging\n"] = { beautiful.widget_battery_icon_discharging, beautiful.error }
   }
 
   -- if battery is present

@@ -2,9 +2,9 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local helpers = require("helpers")
+local font = require("util.font")
 
 -- beautiful vars
-local fg = beautiful.widget_battery_fg
 local spacing = beautiful.widget_spacing or 1
 
 -- root
@@ -12,16 +12,16 @@ local battery_root = class()
 
 function battery_root:init(args)
   -- options
-  self.icon = args.icon or beautiful.widget_battery_icon or { "臘", beautiful.fg_grey }
-  self.title = args.title or beautiful.widget_battery_title or { "BAT", beautiful.fg_grey }
-  self.title_size = args.title_size or 10
+  self.fg = args.fg or beautiful.widget_battery_fg or M.x.background
+  self.icon = args.icon or beautiful.widget_battery_icon or { "臘", M.x.on_background }
+  self.title = args.title or beautiful.widget_battery_title or { "BAT", M.x.on_background }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
   self.want_layout = args.layout or beautiful.widget_battery_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or { beautiful.primary, beautiful.alert }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors or { M.x.primary, M.x.error }
   -- base widgets
-  self.wicon = widget.base_icon(self.icon[1], self.icon[2])
-  self.wtitle = widget.create_title(self.title[1], self.title[2], self.title_size)
+  self.wicon = font.button(self.icon[1], self.icon[2])
+  self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = widget.base_text()
   self.widget = self:make_widget()
 end
@@ -38,7 +38,7 @@ function battery_root:make_text()
   local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext }, spacing)
   awesome.connect_signal("daemon::battery", function(state, percent)
     self.wicon.markup = helpers.colorize_text(state[1], state[2])
-    self.wtext.markup = helpers.colorize_text(percent..'%', fg)
+    self.wtext.markup = helpers.colorize_text(percent..'%', self.fg)
   end)
   return w
 end
@@ -74,7 +74,7 @@ function battery_root:make_progressbar()
   end
   awesome.connect_signal("daemon::battery", function(state, percent)
     p.value = percent
-    self.wtext.markup = helpers.colorize_text(env.battery, beautiful.fg_grey)
+    self.wtext.markup = helpers.colorize_text(env.battery, M.x.on_background)
   end)
   return w
 end

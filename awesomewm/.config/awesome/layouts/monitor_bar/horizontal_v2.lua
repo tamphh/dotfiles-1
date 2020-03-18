@@ -3,48 +3,49 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local widget = require('util.widgets')
+local font = require("util.font")
 
 -- for the top
 local ram = require("widgets.ram")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40,
-  title = { "RAM", "#aaff99" }, title_size = 20,
-  bar_colors = {{ "#3e7f80" }, beautiful.grey_light } 
+  title = { "RAM", "#aaff99" },
+  bar_colors = {{ "#3e7f80" }, M.x.on_surface } 
 })
 
 local volume = require("widgets.volume")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40, 
-  title = { "VOL", "#daffe9" }, title_size = 20,
-  bar_colors = {{ "#3e6a80" }, beautiful.grey_light } 
+  title = { "VOL", "#daffe9" },
+  bar_colors = {{ "#3e6a80" }, M.x.on_surface } 
 })
 
 local brightness = require("widgets.brightness")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40,
-  title = { "BRI", "#aaffe9" }, title_size = 20,
-  bar_colors = {{ "#473e80" }, beautiful.grey_light } 
+  title = { "BRI", "#aaffe9" },
+  bar_colors = {{ "#473e80" }, M.x.on_surface } 
 })
 
 local battery = require("widgets.battery")({
   mode = "progressbar", layout = "vertical",  bar_size = 40,
-  title = { "BAT", "#9afff9" }, title_size = 20,
-  bar_colors = {{ "#673e80" }, beautiful.grey_light } 
+  title = { "BAT", "#9afff9" },
+  bar_colors = {{ "#673e80" }, M.x.on_surface } 
 })
 
 -- bottom (monitor bar)
 local cpu = require("widgets.cpu")({ 
-  title = { "CPU", "#ff99bb" }, title_size = 20,
+  title = { "CPU", "#ff99bb" },
   mode = "dotsbar", layout = "vertical"
 })
 
 local disk = require("widgets.disks")({
   mode = "block", layout = "vertical",
-  title = { "FS", "#efea8a" }, title_size = 20,
-  bar_colors = { { "#855789", "#7155a9", "#3f63a0" }, beautiful.grey_light }
+  title = { "FS", "#efea8a" },
+  bar_colors = { { "#855789", "#7155a9", "#3f63a0" }, M.x.on_surface }
 })
 
 local network = require("widgets.network")({
   mode = "block", layout = "vertical",
   title = { "NET", "#aafa66" }, title_size = 20,
-  bar_colors = { { beautiful.primary , beautiful.secondary }, beautiful.grey_light }
+  bar_colors = { { M.x.primary , M.x.secondary }, M.x.on_surface }
 })
 
 local music_player = require("widgets.music-player")({ mode = "block" })
@@ -64,7 +65,7 @@ function mybar:init(s)
     return wibox.widget {
       { -- margin top, bottom
         { -- left
-          widget.create_title("", beautiful.primary, 16), nil, nil, -- top
+          font.caption("", M.x.primary), nil, nil, -- top
           layout = wibox.layout.align.vertical
         },
         { -- center
@@ -74,7 +75,7 @@ function mybar:init(s)
           widget = wibox.container.margin
         },
         { -- right
-          widget.create_title("", beautiful.secondary, 16), nil, nil, -- top
+          font.caption("", M.x.secondary), nil, nil, -- top
           layout = wibox.layout.align.vertical
         },
         layout = wibox.layout.align.horizontal

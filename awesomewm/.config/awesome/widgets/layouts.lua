@@ -1,11 +1,11 @@
-local widget = require("util.widgets")
-local gtable = require("gears.table")
 local awful = require("awful")
-local beautiful = require("beautiful")
 local wibox = require("wibox")
+local gtable = require("gears.table")
+local beautiful = require("beautiful")
 local gtable = require("gears.table")
 local helpers = require("helpers")
 local change_theme = require("widgets.button_change_theme")
+local font = require("util.font")
 
 -- beautiful var
 local wibar_pos = beautiful.wibar_position or "top"
@@ -15,14 +15,14 @@ local layout_root = class()
 function layout_root:init(args)
   -- options
   self.mode = args.mode or "icons" -- possible value: icons , menu
-  self.icon_startscreen = { " ", beautiful.fg_grey_light }
-  self.icon_monitor = { " ", beautiful.fg_grey_light }
-  self.icon_lockscreen = { " ", beautiful.fg_grey_light }
+  self.icon_startscreen = { " ", M.x.on_background }
+  self.icon_monitor = { " ", M.x.on_background }
+  self.icon_lockscreen = { " ", M.x.on_background }
   self.icon_menu = self:choose_icon_menu()
   -- widgets
-  self.monitoring_button = widget.create_button(self.icon_monitor[2], self.icon_monitor[1])
-  self.startscreen_button = widget.create_button(self.icon_startscreen[2], self.icon_startscreen[1])
-  self.lockscreen_button = widget.create_button(self.icon_lockscreen[2], self.icon_lockscreen[1])
+  self.monitoring_button = font.h6(self.icon_monitor[1], self.icon_monitor[2])
+  self.startscreen_button = font.h6(self.icon_startscreen[1], self.icon_startscreen[2])
+  self.lockscreen_button = font.h6(self.icon_lockscreen[1], self.icon_lockscreen[2])
   self.widget = self:make_widget()
 end
 
@@ -149,12 +149,8 @@ function layout_root:make_icons()
 end
 
 function layout_root:make_menu()
-  local wicon = widget.create_button(beautiful.fg_grey, self.icon_menu)
-  self:create_popup(wicon)
-  local w = wibox.widget {
-    wicon,
-    layout = wibox.layout.fixed.horizontal
-  }
+  local w = font.h6(self.icon_menu, M.x.on_background) -- TODO test other theme
+  self:create_popup(w)
   return w
 end
 

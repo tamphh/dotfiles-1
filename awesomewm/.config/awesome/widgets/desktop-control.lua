@@ -1,18 +1,18 @@
 local awful = require("awful")
 local gtable = require("gears.table")
-local widget = require("util.widgets")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
+local font = require("util.font")
 
 -- Get theme variables
-local tile_color = beautiful.desktop_mode_color_tile or beautiful.primary
-local floating_color = beautiful.desktop_mode_color_floating or beautiful.secondary
-local max_color = beautiful.desktop_mode_color_max or beautiful.alert
+local tile_color = beautiful.desktop_mode_color_tile or M.x.primary
+local floating_color = beautiful.desktop_mode_color_floating or M.x.secondary
+local max_color = beautiful.desktop_mode_color_max or M.x.error
 local floating_text = beautiful.desktop_mode_text_floating or ""
 local tile_text = beautiful.desktop_mode_text_tile or ""
 local max_text = beautiful.desktop_mode_text_max or "类"
 
-local layoutbox = widget.create_button(tile_color, tile_text)
+local layoutbox = font.h6(tile_text, tile_color) -- TODO test on other theme
 layoutbox:buttons(gtable.join(
   awful.button({}, 1, function () awful.layout.inc( 1) end),
   awful.button({}, 3, function () awful.layout.inc(-1) end),
@@ -45,9 +45,9 @@ end
 awful.tag.attached_connect_signal(s, "property::selected", function()
   update_widget()
 end)
+
 awful.tag.attached_connect_signal(s, "property::layout", function()
   update_widget()
 end)
 
-local layoutbox_widget = widget.box('horizontal', {layoutbox})
-return layoutbox_widget
+return layoutbox

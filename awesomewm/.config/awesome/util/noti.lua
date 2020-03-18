@@ -1,11 +1,14 @@
 local naughty = require("naughty")
-local beautiful = require("beautiful")
 
 local noti = {}
 
+-- called snackbars in material, low emphasis
+-- https://material.io/components/snackbars/#specs
 function noti.info(msg)
   naughty.notify({ 
-    text = msg
+    text = msg,
+    position = "bottom_middle",
+    preset = naughty.config.presets.low
   })
 end
 

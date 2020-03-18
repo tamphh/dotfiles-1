@@ -11,7 +11,7 @@ local desktop_ctrl = require("widgets.desktop-control")
 local music = require("widgets.music-player")({ mode = "song" })
 local layouts = require("widgets.layouts")({ mode = "menu" })
 local textclock = wibox.widget {
-  format = '<span foreground="'..beautiful.fg_grey..'">%H:%M</span>',
+  format = '<span foreground="'..M.x.on_background..'">%H:%M</span>',
   widget = wibox.widget.textclock
 }
 

@@ -46,6 +46,8 @@ end
 function helpers.colorize_text(txt, fg, alpha)
   local txt = tostring(txt) or tostring(nil)
   local alpha = alpha or 100
+  --local naughty = require("naughty")
+  --naughty.notify({ text = "err "..tostring(txt) .. " and "..tostring(fg) })
   return '<span foreground="'..fg..'" alpha="'..alpha..'%">'..txt..'</span>'
 end
 

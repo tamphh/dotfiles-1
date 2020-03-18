@@ -7,23 +7,24 @@ local helpers = require("helpers")
 local dpi = beautiful.xresources.apply_dpi
 local gtable = require('gears.table')
 local icons = require("icons.default")
+local font = require("util.font")
 
 -- beautiful vars
 local icon = beautiful.widget_change_theme_icon or '嗀'
 local icon_reload = beautiful.widget_change_theme_icon_reload or '勒'
-local fg = beautiful.widget_change_theme_fg or beautiful.fg_grey_light or '#a9a9a9'
-local bg = beautiful.widget_change_theme_bg or '#232323'
+local fg = beautiful.widget_change_theme_fg or M.x.on_background
+local bg = beautiful.widget_change_theme_bg or M.x.background
 local l = beautiful.widget_change_theme_layout or 'horizontal'
 local space = beautiful.widget_spacing or dpi(1)
 
 -- for the popup
-local fg_p = beautiful.fg_grey or "#aaaaaa"
-local bg_p = beautiful.grey_dark or "#222222" -- same than the wibar
+local fg_p = M.x.on_surface
+local bg_p = M.x.surface
 local padding = beautiful.widget_popup_padding or 1
 
 -- widget creation
-local text = widget.create_button(fg, icon)
-local rld = widget.create_button(fg, icon_reload)
+local text = font.button(icon, fg)
+local rld = font.button(icon_reload, fg)
 local wi = widget.box(l, { text, rld }, space)
 
 local popup_anonymous = widget.imagebox(80, icons["anonymous"])
@@ -42,7 +43,7 @@ local w = awful.popup {
       {
         {
           {
-            widget.create_title("Change theme", fg),
+            font.h6("Change theme", fg),
             layout = wibox.layout.align.vertical
           },
           {

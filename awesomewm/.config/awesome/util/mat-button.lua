@@ -29,20 +29,20 @@ mat_mode.outlined.fg = { disabled = 60, hovered = 87 , focused = 100 }
 
 function mat_button:init(args)
   -- options
-  self.font_text = args.font_text or beautiful.font_button or "Iosevka Term Medium 14"
-  self.font_icon = args.font_icon or beautiful.font_h1 or "Iosevka Light 60"
+  self.font_text = args.font_text or M.f.button
+  self.font_icon = args.font_icon or M.f.h1
   self.icon = args.icon or ""  
   self.text = args.text or ""
-  self.fg_text = args.fg_text or beautiful.on_surface
-  self.fg_icon = args.fg_icon or beautiful.on_surface
-  self.bg = args.bg or beautiful.surface
+  self.fg_text = M.x[args.fg_text] or M.x.on_surface
+  self.fg_icon = M.x[args.fg_icon] or M.x.on_surface
+  self.bg = M.x[args.bg] or M.x.surface
   self.layout = args.layout or "vertical"
   self.rrect = args.rrect or 10
   self.width = args.width or nil
   self.height = args.height or nil -- default height 36
   self.spacing = args.spacing or 0
   self.command = args.command or nil
-  self.overlay = args.overlay or beautiful.on_primary
+  self.overlay = M.x[args.overlay] or M.x.on_primary
   -- button mode https://material.io/components/buttons/#
   self.mode = args.mode or 'text' -- mode are: contained , outlined or text
   -- widgets

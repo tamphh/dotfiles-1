@@ -7,7 +7,6 @@ local button = require("util.buttons")
 local font = require("util.font")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
-local theme = require("loaded-theme")
 local app = require("util.app")
 local btext = require("util.mat-button")
 
@@ -53,7 +52,7 @@ local function rss_links(rss, feed_name, w)
     s = #rss[feed_name].title[i] > 26 and -- cut the text if too long
       string.sub(rss[feed_name].title[i], 1, 26) .. "..." or
       rss[feed_name].title[i]
-    b = button.text_list(s, f, beautiful.on_surface)
+    b = button.text_list(s, f, "on_surface")
     b.forced_width = 310
     w:add(b)
   end
@@ -79,7 +78,7 @@ local theme_picture = wibox.widget {
   widget = theme_picture_container
 }
 
-local theme_name = font.h6(theme.name, beautiful.on_surface, 87)
+local theme_name = font.h6(M.name, M.x.on_surface, 87)
 local picture_widget = widget.box('vertical', { theme_picture, theme_name })
 
 -- quotes
@@ -95,17 +94,17 @@ local quotes = {
   "Fear stimulates my imagination.",
   "I'm living like there's no tomorrow, cause there isn't one."
 }
-local quote_title = font.h4("", beautiful.on_surface, 38)
+local quote_title = font.h4("", M.x.on_surface, 38)
 local quote = font.body_text(quotes[math.random(#quotes)])
 local quote_widget = widget.box("vertical", { quote_title, quote }, dpi(8))
 
 -- date
 local day = wibox.widget.textclock("%d")
-day.font = beautiful.font_h4
+day.font = M.f.h4
 day.align = "center"
 
 local month = wibox.widget.textclock("%B")
-month.font = beautiful.font_body_1
+month.font = M.f.body_1
 month.align = "left"
 month.text = month.text:sub(1,3)
 month:connect_signal("widget::redraw_needed", function()
@@ -115,12 +114,12 @@ end)
 local date_widget = wibox.widget {
   {
     day,
-    fg = beautiful.primary,
+    fg = M.x.primary,
     widget = wibox.container.background
   },
   {
     month,
-    fg = beautiful.secondary,
+    fg = M.x.secondary,
     widget = wibox.container.background
   },
   layout = wibox.layout.fixed.vertical
@@ -133,32 +132,32 @@ end
 
 -- buttons apps
 local gimp_cmd = function() exec_prog("gimp") end
-local gimp = btext({ fg_icon = beautiful.primary, icon = "",
-  overlay = beautiful.primary, command = gimp_cmd })
+local gimp = btext({ fg_icon = "primary", icon = "",
+  overlay = "primary", command = gimp_cmd })
 
 local game_cmd = function() exec_prog("lutris") end
-local game = btext({ fg_icon = beautiful.secondary, icon = "",
-  overlay = beautiful.secondary, command = game_cmd })
+local game = btext({ fg_icon = "secondary", icon = "",
+  overlay = "secondary", command = game_cmd })
 
 local pentest_cmd = function() launch_term("msfconsole") end
-local pentest = btext({ fg_icon = beautiful.error, icon = "ﮊ",
-  overlay = beautiful.error, command = pentest_cmd })
+local pentest = btext({ fg_icon = "error", icon = "ﮊ",
+  overlay = "error", command = pentest_cmd })
 
 local buttons_widget = widget.box('vertical', { gimp,game,pentest })
 
 -- buttons path
 local image_cmd = function() launch_term(env.file_browser .. " ~/images") end
-local image = btext({ fg_text = beautiful.primary, overlay = beautiful.primary,
+local image = btext({ fg_text = "primary", overlay = "primary",
   text = "IMAGES", command = image_cmd
 })
 
 local torrent_cmd = function() launch_term(env.file_browser .. " ~/torrents") end
-local torrent = btext({ fg_text = beautiful.secondary, overlay = beautiful.secondary,
+local torrent = btext({ fg_text = "secondary", overlay = "secondary",
   text = "TORRENTS", command = torrent_cmd
 })
 
 local movie_cmd = function() launch_term(env.file_browser .. " ~/videos") end
-local movie = btext({ fg_text = beautiful.error, overlay = beautiful.error,
+local movie = btext({ fg_text = "error", overlay = "error",
   text = "MOVIES", command = movie_cmd
 })
 
@@ -167,16 +166,16 @@ local buttons_path_2_widget = widget.box('horizontal', { movie })
 
 -- buttons url
 local github_cmd = function() open_link("https://github.com/szorfein") end
-local github = btext({ fg_icon = beautiful.primary, icon = "",
-  overlay = beautiful.primary, command = github_cmd })
+local github = btext({ fg_icon = "primary", icon = "",
+  overlay = "primary", command = github_cmd })
 
 local twitter_cmd = function() open_link("https://twitter.com/szorfein") end
-local twitter = btext({ fg_icon = beautiful.secondary, icon = "",
-  overlay = beautiful.secondary, command = twitter_cmd })
+local twitter = btext({ fg_icon = "secondary", icon = "",
+  overlay = "secondary", command = twitter_cmd })
 
 local reddit_cmd = function() open_link("https://reddit.com/user/szorfein") end
-local reddit = btext({ fg_icon = beautiful.error, icon = "",
-  overlay = beautiful.error, command = reddit_cmd })
+local reddit = btext({ fg_icon = "error", icon = "",
+  overlay = "error", command = reddit_cmd })
 
 local buttons_url_widget = widget.box('vertical', { github, twitter, reddit })
 
@@ -202,7 +201,7 @@ local function update_history()
     if k > todo_max or not v then return end
     local t = font.text_list(v)
     local f = function() remove_todo(v) end -- serve to store the actual line
-    local b = btext({ fg_text = beautiful.secondary, overlay = beautiful.secondary,
+    local b = btext({ fg_text = "secondary", overlay = "secondary",
       text = "", command = f })
     local w = widget.box('horizontal', { b, t })
     todo_list:add(w)
@@ -220,7 +219,7 @@ end
 local function exec_prompt()
   awful.prompt.run {
     prompt = " > ",
-    fg = beautiful.fg_grey , 
+    fg = M.f.on_surface, 
     history_path = os.getenv("HOME").."/.history_todo",
     textbox = todo_textbox,
     exe_callback = function(input)
@@ -233,14 +232,14 @@ local function exec_prompt()
   }
 end
 
-local todo_new = btext({ fg_icon = beautiful.on_secondary, icon = "",
-  font_icon = beautiful.font_button,
-  fg_text = beautiful.on_secondary, text = " New task",
-  bg = beautiful.secondary,
+local todo_new = btext({ fg_icon = "on_secondary", icon = "",
+  font_icon = M.f.button,
+  fg_text = "on_secondary", text = " New task",
+  bg = "secondary",
   mode = "contained",
   spacing = 3,
   rrect = 30,
-  overlay = beautiful.on_surface,
+  overlay = "on_surface",
   command = exec_prompt, layout = "horizontal"
 })
 
@@ -278,7 +277,7 @@ local function boxes(w, width, height, margin)
         expand = "none",
         layout = wibox.layout.align.horizontal
       },
-      bg = beautiful.grey_dark,
+      bg = M.x.surface,
       forced_height = dpi(height),
       forced_width = dpi(width),
       shape = helpers.rrect(10),
@@ -297,7 +296,7 @@ function startscreen:init(s)
 
   -- the start_screen
   s.start_screen = wibox({ visible = false, ontop = true, type = "dock", screen = s })
-  s.start_screen.bg = beautiful.grey .. "00"
+  s.start_screen.bg = M.x.surface .. "00"
   awful.placement.maximize(s.start_screen)
 
   s.start_screen:buttons(gtable.join(

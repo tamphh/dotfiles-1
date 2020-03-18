@@ -4,26 +4,24 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local sep = require("util.separators")
-
--- beautiful vars
-local fg = beautiful.fg_primary
+local font = require("util.font")
 
 -- root
 local disks_root = class()
 
 function disks_root:init(args)
   -- options
-  self.icon = widget.base_icon("", beautiful.primary)
-  self.title = args.title or beautiful.widget_fs_title or { "FS", beautiful.fg_grey }
-  self.title_size = args.title_size or 10
+  self.fg = args.fg or M.x.on_primary
+  self.icon = widget.base_icon("", M.x.primary)
+  self.title = args.title or beautiful.widget_fs_title or { "FS", M.x.on_background }
   self.mode = args.mode or 'text' -- possible values: text, arcchart, block
   self.want_layout = args.layout or beautiful.widget_cpu_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 100
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or { beautiful.primary, beautiful.alert }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors or { M.x.primary, M.x.error }
   -- base widgets
   self.wicon = widget.base_icon()
   self.wtext = widget.base_text()
-  self.wtitle = widget.create_title(self.title[1], self.title[2], self.title_size)
+  self.wtitle = font.h6(self.title[1], self.title[2])
   self.wbars = {} -- store all bars (one by cpu/core)
   self.widget = self:make_widget()
 end
@@ -132,7 +130,7 @@ function disks_root:make_block()
     if fs_info ~= nil and fs_info[1] ~= nil then
       for i=1, #env.disks do
         self.wbars[i].used_percent.value = fs_info[i].used_percent
-        self.wbars[i].size.markup = helpers.colorize_text(fs_info[i].size, beautiful.primary_light)
+        self.wbars[i].size.markup = helpers.colorize_text(fs_info[i].size, M.x.primary)
       end
     end
   end)

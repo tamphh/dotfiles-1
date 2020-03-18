@@ -5,7 +5,7 @@ local gtable = require("gears.table")
 local widget = require('util.widgets')
 
 -- beautiful vars
-local fg = beautiful.widget_scrot_fg or '#c0ffee'
+local fg = beautiful.widget_scrot_fg or beautiful.on_background
 local icon = beautiful.widget_scrot_icon or '  '
 
 -- widget creation

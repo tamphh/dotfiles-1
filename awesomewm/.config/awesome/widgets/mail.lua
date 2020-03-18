@@ -18,8 +18,8 @@ local read_icon = w_type == 'button' and " "..beautiful.widget_email_read_icon..
 local unread_icon = w_type == 'button' and " "..beautiful.widget_email_unread_icon.." "  or beautiful.widget_email_unread_icon
 
 -- colour
-local d_grey = beautiful.grey_dark or "#222222"
-local fg_grey = beautiful.fg_grey or "#a9a9a9"
+local d_grey = beautiful.background or "#000000"
+local fg_grey = beautiful.on_background or "#ffffff"
 
 -- widget creation
 local icon

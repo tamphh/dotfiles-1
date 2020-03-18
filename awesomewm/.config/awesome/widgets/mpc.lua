@@ -5,17 +5,18 @@ local button = require("util.buttons")
 local helpers = require("helpers")
 local aspawn = require("awful.spawn")
 local wibox = require("wibox")
+local btext = require("util.mat-button")
 
 -- beautiful vars
-local icon_prev = beautiful.widget_mpc_prev_icon
-local icon_pause = beautiful.widget_mpc_pause_icon
-local icon_play = beautiful.widget_mpc_play_icon
-local icon_stop = beautiful.widget_mpc_stop_icon
-local icon_next = beautiful.widget_mpc_next_icon
+local icon_prev = beautiful.widget_mpc_prev_icon or ""
+local icon_pause = beautiful.widget_mpc_pause_icon or ""
+local icon_play = beautiful.widget_mpc_play_icon or ""
+local icon_stop = beautiful.widget_mpc_stop_icon or ""
+local icon_next = beautiful.widget_mpc_next_icon or ""
 -- for titlebar
-local icon_ncmpcpp_prev = beautiful.widget_ncmpcpp_prev
-local icon_ncmpcpp_toggle = beautiful.widget_ncmpcpp_toggle
-local icon_ncmpcpp_next = beautiful.widget_ncmpcpp_next
+local icon_ncmpcpp_prev = beautiful.widget_ncmpcpp_prev or ' ≪ '
+local icon_ncmpcpp_toggle = beautiful.widget_ncmpcpp_toggle or ' ⊡ '
+local icon_ncmpcpp_next = beautiful.widget_ncmpcpp_next or ' ≫ '
 
 -- command
 local prev_cmd = function() aspawn("mpc prev", false) end
@@ -28,10 +29,9 @@ local mpc_root = class()
 function mpc_root:init(args)
   -- options
   self.mode = args.mode or 'text' -- possible values: text, titlebar
-  self.size = args.size or beautiful.widget_icon_font:match('([0-9]+)') or 16 -- font size
-  self.size_ncmpcpp = args.size or 20 -- font size
-  self.colors = args.colors or { beautiful.fg_grey, beautiful.fg_grey_light } -- fg, fg light for the hover
-  self.colors_ncmpcpp = args.colors or { beautiful.alert, beautiful.alert_light } -- fg, fg light for the hover
+  self.font = args.font or M.f.button
+  self.fg = args.fg or M.x.primary
+  self.overlay = args.overlay or M.x.primary -- bg for the hover
   self.spacing = args.spacing or dpi(7)
   self.want_layout = args.layout or beautiful.widget_mpc_layout or 'horizontal' -- possible values: horizontal , vertical
   -- base widgets
@@ -41,13 +41,31 @@ end
 
 function mpc_root:base_widget()
   if self.mode == "titlebar" then
-    self.wicon_prev = button.create(icon_ncmpcpp_prev, self.colors_ncmpcpp[2], self.colors_ncmpcpp[1], prev_cmd, self.size_ncmpcpp)
-    self.wicon_toggle = button.create(icon_ncmpcpp_toggle, self.colors_ncmpcpp[2], self.colors_ncmpcpp[1], toggle_cmd, self.size_ncmpcpp)
-    self.wicon_next = button.create(icon_ncmpcpp_next, self.colors_ncmpcpp[2], self.colors_ncmpcpp[1], next_cmd, self.size_ncmpcpp)
+    self.wicon_prev = btext({ 
+      font_icon = self.font, fg_icon = self.fg, icon = icon_ncmpcpp_prev,
+      overlay = self.overlay, command = prev_cmd
+    })
+    self.wicon_toggle = btext({
+      font_icon = self.font, fg_icon = self.fg, icon = icon_ncmpcpp_toggle,
+      overlay = self.overlay, command = toggle_cmd
+    })
+    self.wicon_next = btext({
+      font_icon = self.font, fg_icon = self.fg, icon = icon_ncmpcpp_next,
+      overlay = self.overlay, command = next_cmd
+    })
   else
-    self.wicon_prev = button.create(icon_prev, self.colors[2], self.colors[1], prev_cmd, self.size)
-    self.wicon_toggle = button.create(icon_play, self.colors[2], self.colors[1], toggle_cmd, self.size)
-    self.wicon_next = button.create(icon_next, self.colors[2], self.colors[1], next_cmd, self.size)
+    self.wicon_prev = btext({
+      font_icon = self.font, fg_icon = self.fg, icon = icon_prev,
+      overlay = self.overlay, command = prev_cmd
+    })
+    self.wicon_toggle = btext({
+      font_icon = self.font, fg_icon = self.fg, icon = icon_play,
+      overlay = self.overlay, command = toggle_cmd
+    })
+    self.wicon_next = btext({
+      font_icon = self.font, fg_icon = self.fg, icon = icon_next,
+      overlay = self.overlay, command = next_cmd
+    })
   end
 end
 
@@ -64,13 +82,13 @@ function mpc_root:make_text()
 
   awesome.connect_signal("daemon::mpd", function(mpd)
     if (mpd.status == "playing") then
-      self.wicon_toggle.markup = helpers.colorize_text(icon_pause, self.colors[1])
+      self.wicon_toggle.markup = helpers.colorize_text(icon_pause, self.fg)
     elseif (mpd.status == "paused") then
-      self.wicon_toggle.markup = helpers.colorize_text(icon_play, self.colors[1])
+      self.wicon_toggle.markup = helpers.colorize_text(icon_play, self.fg)
     elseif (mpd.status == "void") then
-      self.wicon_toggle.markup = helpers.colorize_text(icon_play, self.colors[1])
+      self.wicon_toggle.markup = helpers.colorize_text(icon_play, self.fg)
     else
-      self.wicon_toggle.markup = helpers.colorize_text(icon_stop, self.colors[1])
+      self.wicon_toggle.markup = helpers.colorize_text(icon_stop, self.fg)
     end
   end)
 

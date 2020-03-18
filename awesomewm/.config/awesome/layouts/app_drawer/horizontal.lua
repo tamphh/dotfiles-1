@@ -9,11 +9,12 @@ local icons = require("icons.app_drawer")
 local gshape = require("gears.shape")
 local app = require("util.app")
 local keygrabber = require("awful.keygrabber")
+local font = require("util.font")
 
 local ntags = 10
 
 local w = wibox.widget { spacing = 18, layout = wibox.layout.fixed.horizontal }
-local wtitle = widget.create_base_text(beautiful.myfont .. "Bold 20")
+local wtitle = font.h6("")
 local app_drawer_grabber
 local my_apps = {}
 
@@ -226,12 +227,12 @@ end
 local bg_hover = function()
   local w = wibox.container.background()
   w.shape = helpers.rrect(14)
-  w.bg = beautiful.grey
+  w.bg = M.x.surface
   w:connect_signal("mouse::leave", function(c)
-    w.bg = beautiful.grey
+    w.bg = M.x.surface
   end)
   w:connect_signal("mouse::enter", function(c)
-    w.bg = beautiful.grey_light
+    w.bg = M.x.on_surface .. "0A"
   end)
   return w
 end
@@ -241,12 +242,11 @@ local function gen_menu(index)
   w:reset()
   for _,v in ipairs(my_apps[index]) do
     local app_icon = widget.imagebox(55, v.icon)
-    wtitle.markup = helpers.colorize_text(my_apps[index].title, beautiful.fg_grey)
+    wtitle.markup = helpers.colorize_text(my_apps[index].title, M.x.on_background)
     app_icon:buttons(gtable.join(
       awful.button({}, 1, function() v.exec() end)
     ))
-    local app_name = widget.create_base_text(beautiful.font .. "Regular 12")
-    app_name.markup = helpers.colorize_text(v.name, beautiful.fg_grey_light)
+    local app_name = font.caption(v.name, M.x.on_background)
     w:add(wibox.widget {
       {
         {
@@ -295,7 +295,7 @@ local myapps = class()
 function myapps:init(s)
 
   s.app_drawer = wibox({ visible = false, ontop = true, type = "dock", position = "top", screen = s })
-  s.app_drawer.bg = beautiful.grey .. "fc"
+  s.app_drawer.bg = M.x.surface .. "fc"
   s.app_drawer.x = 0
   s.app_drawer.y = beautiful.wibar_position == "top" and beautiful.wibar_size or 0 
   s.app_drawer.height = 110

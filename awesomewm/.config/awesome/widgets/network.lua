@@ -3,9 +3,9 @@ local dpi = beautiful.xresources.apply_dpi
 local widget = require("util.widgets")
 local helpers = require("helpers")
 local wibox = require("wibox")
+local font = require("util.font")
 
 -- beautiful vars
-local fg = beautiful.widget_network_fg
 local spacing = beautiful.widget_spacing or 1
 
 -- root
@@ -13,15 +13,15 @@ local network_root = class()
 
 function network_root:init(args)
   -- options
-  self.icon_up = args.icon_up or beautiful.widget_network_icon_up or { "ﲗ", beautiful.fg_grey }
-  self.icon_down = args.icon_down or beautiful.widget_network_icon_down or { "ﲐ", beautiful.fg_grey }
-  self.icon_ip = args.icon_ip or beautiful.widget_network_icon_ip or { "", beautiful.fg_grey }
-  self.title = args.title or beautiful.widget_network_title or { "NET", beautiful.fg_grey  }
-  self.title_size = args.title_size or 10
+  self.fg = args.fg or beautiful.widget_network_fg or M.x.on_surface
+  self.icon_up = args.icon_up or beautiful.widget_network_icon_up or { "ﲗ", M.x.on_background }
+  self.icon_down = args.icon_down or beautiful.widget_network_icon_down or { "ﲐ", M.x.on_background }
+  self.icon_ip = args.icon_ip or beautiful.widget_network_icon_ip or { "", M.x.on_background }
+  self.title = args.title or beautiful.widget_network_title or { "NET", M.x.on_background }
   self.mode = args.mode or 'text' -- possible values: ip, text
   self.want_layout = args.layout or beautiful.widget_network_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 100
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or { beautiful.primary, beautiful.alert }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors or { M.x.primary, M.x.error }
   -- base widgets
   self.wicon_up = widget.base_icon(self.icon_up[1], self.icon_up[2])
   self.wicon_down = widget.base_icon(self.icon_down[1], self.icon_down[2])
@@ -29,7 +29,7 @@ function network_root:init(args)
   self.wtext = widget.base_text()
   self.wtext_1 = widget.base_text()
   self.wtext_2 = widget.base_text()
-  self.wtitle = widget.create_title(self.title[1], self.title[2], self.title_size)
+  self.wtitle = font.h6(self.title[1], self.title[2])
   self.widget = self:make_widget()
 end
 
@@ -46,7 +46,7 @@ end
 function network_root:make_ip()
   local w = widget.box_with_margin(self.want_layout, { self.wicon_net, self.wtext_1 }, spacing)
   awesome.connect_signal("daemon::network", function(net)
-    self.wtext_1.markup = helpers.colorize_text(net[env.net_device].name.." "..net[env.net_device].ip, fg)
+    self.wtext_1.markup = helpers.colorize_text(net[env.net_device].name.." "..net[env.net_device].ip, self.fg)
   end)
   return w
 end
@@ -54,8 +54,8 @@ end
 function network_root:make_text()
   local w = widget.box_with_margin(self.want_layout, { self.wicon_up, self.wtext_1, self.wicon_down, self.wtext_2 }, spacing)
   awesome.connect_signal("daemon::network", function(net)
-    self.wtext_1.markup = helpers.colorize_text(net[env.net_device].up, fg)
-    self.wtext_2.markup = helpers.colorize_text(net[env.net_device].down, fg)
+    self.wtext_1.markup = helpers.colorize_text(net[env.net_device].up, self.fg)
+    self.wtext_2.markup = helpers.colorize_text(net[env.net_device].down, self.fg)
   end)
   return w
 end
@@ -120,10 +120,10 @@ function network_root:make_block()
     local down = net[env.net_device].down
     pu.value = up
     pd.value = down
-    ip.markup = helpers.colorize_text(net[env.net_device].ip, fg)
-    self.wtext_1.markup = helpers.colorize_text(up.." B/s", fg)
-    self.wtext_2.markup = helpers.colorize_text(down.." B/s", fg)
-    self.wtext.markup = helpers.colorize_text(env.net_device, fg)
+    ip.markup = helpers.colorize_text(net[env.net_device].ip, self.fg)
+    self.wtext_1.markup = helpers.colorize_text(up.." B/s", self.fg)
+    self.wtext_2.markup = helpers.colorize_text(down.." B/s", self.fg)
+    self.wtext.markup = helpers.colorize_text(env.net_device, self.fg)
   end)
   return w
 end

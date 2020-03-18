@@ -8,12 +8,16 @@ local widget = require("util.widgets")
 local button = require("util.buttons")
 local smartBorders = require("util.smart-borders")
 local theme = require("loaded-theme")
+local font = require("util.font")
+local btext = require("util.mat-button")
 --local naughty = require("naughty")
 
 local smart_border = beautiful.double_border or false
 
 -- import widget
-local ncmpcpp = require("widgets.mpc")({ mode = "titlebar" })
+local ncmpcpp = require("widgets.mpc")({ 
+  mode = "titlebar", font = M.f.h4, fg = "primary", overlay = "primary"
+})
 
 local mbuttons = function(c)
   return gtable.join(
@@ -127,9 +131,8 @@ local gen_button = function(c, icon, fg, fg_light, cmd)
 
   local r_margin = smart_border and dpi(11) or dpi(8)
   local t_margin = smart_border and dpi(4) or dpi(1)
-  local f_size = beautiful.widget_icon_font:match(('%d+')) or 9
   local func = function() cmd(c) end
-  local button = button.create(icon, fg, fg_light, func, f_size)
+  local button = btext({ text = icon, fg_text = fg, overlay = fg_light, command = func })
 
   return wibox.widget {
     button,
@@ -182,7 +185,7 @@ client.connect_signal("request::titlebars", function(c)
         --awful.titlebar.widget.maximizedbutton(c),
         --awful.titlebar.widget.stickybutton   (c),
         --awful.titlebar.widget.ontopbutton    (c),
-        gen_button(c, '', beautiful.alert, beautiful.alert_light, window_close),
+        gen_button(c, '', "error", "error", window_close),
         layout = wibox.layout.fixed.horizontal
       },
       layout = wibox.layout.align.horizontal

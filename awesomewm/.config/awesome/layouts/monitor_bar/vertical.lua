@@ -16,8 +16,8 @@ local l = "horizontal"
 local pad = separator.pad(3)
 
 -- Setting titles
-local settings_title = widget.create_title('Settings', beautiful.fg_grey)
-local monitors_title = widget.create_title('Monitors', beautiful.fg_grey)
+local settings_title = widget.create_title('Settings', beautiful.on_background)
+local monitors_title = widget.create_title('Monitors', beautiful.on_background)
 
 -- import widgets
 local vol = require("widgets.volume")({ mode = "slider" })
@@ -34,7 +34,7 @@ function mybar:init(s)
   s.monitor_bar.bg = beautiful.grey
 
   -- add an exit button
-  local exit_icon = widget.for_one_icon(beautiful.fg_secondary, beautiful.alert_dark, "    LOGOUT    ", font)
+  local exit_icon = widget.for_one_icon(beautiful.secondary, beautiful.error, "    LOGOUT    ", font)
   local exit = widget.box(l, { exit_icon })
   exit:buttons(gtable.join(
   awful.button({ }, 1, function ()
@@ -57,7 +57,7 @@ function mybar:init(s)
   s.monitor_bar.width = dpi(230)
 
   local textclock = wibox.widget {
-    format = '<span foreground="'..beautiful.fg_primary..'" font="22.5">%H:%M</span>',
+    format = '<span foreground="'..beautiful.primary..'" font="22.5">%H:%M</span>',
     refresh = 60,
     widget = wibox.widget.textclock,
     forced_height = dpi(88),

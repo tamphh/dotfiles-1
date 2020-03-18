@@ -16,8 +16,8 @@ local arrow = separators.arrow_left
 -- gradient colors (dark to light)
 local g0 = beautiful.grey_dark
 local g1 = beautiful.grey
-local g2 = beautiful.primary_dark
-local g3 = beautiful.secondary_dark
+local g2 = beautiful.primary
+local g3 = beautiful.secondary
 
 -- {{{ Add a background to the widgets
 
@@ -30,7 +30,7 @@ local my_network = widget.bg( g2, network )
 local wifi_str = require("widgets.wifi_str")
 local my_wifi_str = widget.bg( g3, wifi_str )
 
-local mpc = require("widgets.mpc")({ colors = { beautiful.primary, beautiful.primary_light } })
+local mpc = require("widgets.mpc")({ colors = { beautiful.primary, beautiful.primary } })
 local my_mpc_widget = widget.bg( g1, mpc )
 
 local volume = require("widgets.volume")({})

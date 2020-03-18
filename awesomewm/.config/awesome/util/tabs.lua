@@ -27,18 +27,18 @@ local mat_tabs = class()
 
 function mat_tabs:init(args)
   -- options
-  self.font_text = args.font_text or beautiful.font_button or "Iosevka Term Medium 14"
+  self.font_text = args.font_text or M.f.font_button
   self.texts = args.texts or {}
-  self.fg = args.fg or beautiful.on_surface
-  self.bg = args.bg or beautiful.surface
-  self.fg_text = args.fg_text or beautiful.on_surface
-  self.bg_overlay = args.bg_overlay or beautiful.on_surface
+  self.fg = args.fg or M.x.on_surface
+  self.bg = args.bg or M.x.surface
+  self.fg_text = args.fg_text or M.x.on_surface
+  self.bg_overlay = args.bg_overlay or M.x.on_surface
   self.layout = args.layout or "horizontal"
   self.rrect = args.rrect or 1
   self.width = args.width or nil
   self.height = args.height or 48 -- default for one row
-  self.colorline_enable = self.colorline_enable or beautiful.primary
-  self.fg_enable = self.fg_enable or beautiful.on_surface
+  self.colorline_enable = self.colorline_enable or M.x.primary
+  self.fg_enable = self.fg_enable or M.x.on_surface
   self.containers = args.containers or {}
   -- widgets
   self.wtexts = {}

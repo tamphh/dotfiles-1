@@ -8,10 +8,10 @@ local exit_screen = require("layouts.logout")
 require("awful.hotkeys_popup.keys")
 
 -- default config
-beautiful.menu_fg_normal = beautiful.fg_grey
-beautiful.menu_bg_normal = beautiful.grey
-beautiful.menu_fg_focus = beautiful.fg_primary
-beautiful.menu_bg_focus = beautiful.primary
+beautiful.menu_fg_normal = M.x.on_surface
+beautiful.menu_bg_normal = M.x.surface
+beautiful.menu_fg_focus = M.x.on_primary
+beautiful.menu_bg_focus = M.x.primary
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu

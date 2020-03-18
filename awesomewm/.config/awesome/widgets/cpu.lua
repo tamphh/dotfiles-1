@@ -2,9 +2,9 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local helpers = require("helpers")
+local font = require("util.font")
 
 -- beautiful vars
-local fg = beautiful.widget_cpu_fg or beautiful.fg_grey
 local spacing = beautiful.widget_spacing or 1
 
 -- root
@@ -12,15 +12,15 @@ local cpu_root = class()
 
 function cpu_root:init(args)
   -- options
+  self.fg = args.fg or beautiful.widget_cpu_fg or M.x.on_background
   self.mode = args.mode or 'text' -- possible values: text, arcchart, progressbar, dotsbar
   self.want_layout = args.layout or beautiful.widget_cpu_layout or 'horizontal' -- possible values: horizontal , vertical
   self.cpus = args.cpus or 2 -- number of cpu / core
-  self.title = args.title or beautiful.widget_cpu_title or { "CPU", beautiful.fg_grey }
-  self.title_size = args.title_size or 10
+  self.title = args.title or beautiful.widget_cpu_title or { "CPU", M.x.on_background }
   -- base widgets
   self.wicon = widget.base_icon()
   self.wtext = widget.base_text()
-  self.wtitle = widget.create_title(self.title[1], self.title[2], self.title_size)
+  self.wtitle = font.h6(self.title[1], self.title[2])
   self.wbars = {} -- store all bars (one by cpu/core)
   self.wfreqs = {} -- store all freqs (one by cpu/core)
   self.widget = self:make_widget()
@@ -41,8 +41,8 @@ end
 function cpu_root:make_text()
   local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext }, spacing)
   awesome.connect_signal("daemon::cpu", function(cpus)
-    self.wicon.markup = helpers.colorize_text("x", fg)
-    self.wtext.markup = helpers.colorize_text(cpus[1]..'%', fg)
+    self.wicon.markup = helpers.colorize_text("x", self.fg)
+    self.wtext.markup = helpers.colorize_text(cpus[1]..'%', self.fg)
   end)
   return w
 end
@@ -75,7 +75,7 @@ function cpu_root:make_arcchart()
     layout = wibox.layout.align.horizontal
   }
   awesome.connect_signal("daemon::cpu", function(cpus)
-    self.wtext.markup = helpers.colorize_text(cpus[1].."%", beautiful.fg_primary)
+    self.wtext.markup = helpers.colorize_text(cpus[1].."%", M.x.primary)
     self:update_wbars(cpus)
   end)
   return w
@@ -107,7 +107,7 @@ function cpu_root:dotsbar_vert(freq)
   local t = wibox.widget.textbox(self.cpus.." Cores")
   local wb = wibox.widget { layout = wibox.layout.fixed.horizontal, spacing = 4 }
   for i = 1, self.cpus do
-    wb:add(widget.box_with_bg(self.want_layout, self.wbars[i], -10, beautiful.grey))
+    wb:add(widget.box_with_bg(self.want_layout, self.wbars[i], -10, M.x.on_surface))
   end
   local w = wibox.widget {
     {
@@ -136,7 +136,7 @@ function cpu_root:dotsbar_horiz(freq)
   z = wibox.widget{ layout = wibox.layout.fixed.vertical, spacing = 12 } -- adjust spacing, depend of the symbol used
   for i = 1, self.cpus do
     self.wfreqs[i] = widget.base_text()
-    w:add(widget.box_with_bg(self.want_layout, self.wbars[i], 2, beautiful.grey))
+    w:add(widget.box_with_bg(self.want_layout, self.wbars[i], 2, M.x.surface))
     z:add(widget.box(self.want_layout, { self.wfreqs[i]} ))
   end
   return wibox.widget {
@@ -160,7 +160,7 @@ function cpu_root:make_dotsbar()
   for c = 1, self.cpus do
     self.wbars[c] = {}
     for i = 1, bar.size do
-      table.insert(self.wbars[c], widget.create_text("", beautiful.grey_dark, beautiful.myfont.." 12"))
+      table.insert(self.wbars[c], font.caption("", M.x.on_surface))
     end
   end
 
@@ -172,14 +172,14 @@ function cpu_root:make_dotsbar()
 
   awesome.connect_signal("daemon::cpu", function(cpus)
     local symbol = self.want_layout == "horizontal" and "" or ""
-    freq.markup = helpers.colorize_text(cpus[1].."%", beautiful.fg_grey)
+    freq.markup = helpers.colorize_text(cpus[1].."%", M.x.on_background)
     for c = 1, self.cpus do
       local val = math.floor(cpus[c+1]/bar.divisor)
       if self.want_layout == "horizontal" then
-        self.wfreqs[c].markup = helpers.colorize_text(cpus[c+1].."%", beautiful.fg_grey_light)
+        self.wfreqs[c].markup = helpers.colorize_text(cpus[c+1].."%", M.x.on_background)
       end
       for i = 1, bar.size do
-        local color = (val >= i and beautiful.alert or beautiful.grey_light)
+        local color = (val >= i and M.x.error or M.x.on_surface)
         self.wbars[c][i].markup = helpers.colorize_text(symbol, color)
       end
     end

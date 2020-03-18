@@ -7,35 +7,36 @@ local helpers = require("helpers")
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("icons.default")
 local gtable = require("gears.table")
+local font = require("util.font")
 
 -- widget for the popup
-local mpc = require("widgets.mpc")({ size = 16 })
+local mpc = require("widgets.mpc")({ spacing = 0 })
 local volume_bar = require("widgets.volume")({ mode = "slider" })
 volume_bar.forced_width = dpi(40) -- set a max width
 
 -- beautiful vars
 local icon = beautiful.widget_mpc_button_icon or "  "
-local fg = beautiful.widget_volume_fg
-local bg = beautiful.widget_volume_bg
-local font_button = beautiful.widget_icon_font_button or 'Iosevka Term 16'
+local fg = beautiful.widget_volume_fg or M.x.on_background
+local bg = beautiful.widget_volume_bg or M.x.background
+local font_button = M.f.button
 local l = beautiful.widget_button_music_layout or 'horizontal'
 
 -- for the popup
-local fg_p = beautiful.fg_grey or "#aaaaaa"
-local bg_p = beautiful.grey_dark or "#222222" -- same than the wibar
+local fg_p = M.x.on_surface
+local bg_p = M.x.surface
 local padding = beautiful.widget_popup_padding or 1
 
 local music_player_root = class()
 
 function music_player_root:init(args)
   -- options
-  self.icon = args.icon or beautiful.widget_mpd_icon or { icon, beautiful.fg_grey }
+  self.icon = args.icon or beautiful.widget_mpd_icon or { icon, M.x.on_background }
   self.mode = args.mode or 'popup' -- possible values: block, popup, song
   self.wposition = args.position or widget.check_popup_position(beautiful.wibar_position)
   -- widgets
-  self.wicon = widget.base_icon(self.icon[1], self.icon[2])
-  self.title = widget.base_text()
-  self.artist = widget.base_text()
+  self.wicon = font.button(self.icon[1], self.icon[2])
+  self.title = font.button("")
+  self.artist = font.caption("")
   self.cover = widget.imagebox(90)
   self.time_pasted = widget.base_text()
   self.widget = self:make_widget()
@@ -165,16 +166,19 @@ end
 function music_player_root:updates(mpd)
   -- default value
   local img = mpd.cover ~= "nil" and mpd.cover or icons["default_cover"]
-  local title = mpd.title ~= nil and "<b>"..mpd.title.."</b>" or 'Unknown'
   local artist = mpd.artist ~= nil and mpd.artist or 'Unknown'
+  local title = mpd.title ~= nil and mpd.title or 'Unknown'
+  local title_cut = #title > 15
+    and string.sub(title, 1, 15) .. "..."
+    or title
 
   self.cover.image = img
-  self.title.markup = helpers.colorize_text(title, beautiful.alert)
-  self.artist.markup = helpers.colorize_text("By "..artist, beautiful.primary)
+  self.title.markup = helpers.colorize_text(title_cut, M.x.error)
+  self.artist.markup = helpers.colorize_text("By "..artist, M.x.primary)
 end
 
 function music_player_root:update_time(mpd)
-  self.time_pasted.markup = helpers.colorize_text(mpd.full_time, beautiful.secondary)
+  self.time_pasted.markup = helpers.colorize_text(mpd.full_time, M.x.secondary)
 end
 
 -- signals
