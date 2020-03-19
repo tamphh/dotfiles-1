@@ -107,7 +107,7 @@ function cpu_root:dotsbar_vert(freq)
   local t = wibox.widget.textbox(self.cpus.." Cores")
   local wb = wibox.widget { layout = wibox.layout.fixed.horizontal, spacing = 4 }
   for i = 1, self.cpus do
-    wb:add(widget.box_with_bg(self.want_layout, self.wbars[i], -10, M.x.on_surface))
+    wb:add(widget.box_with_bg(self.want_layout, self.wbars[i], -10, M.x.surface .. "66"))
   end
   local w = wibox.widget {
     {
@@ -136,7 +136,7 @@ function cpu_root:dotsbar_horiz(freq)
   z = wibox.widget{ layout = wibox.layout.fixed.vertical, spacing = 12 } -- adjust spacing, depend of the symbol used
   for i = 1, self.cpus do
     self.wfreqs[i] = widget.base_text()
-    w:add(widget.box_with_bg(self.want_layout, self.wbars[i], 2, M.x.surface))
+    w:add(widget.box_with_bg(self.want_layout, self.wbars[i], 2, M.x.surface .. "66"))
     z:add(widget.box(self.want_layout, { self.wfreqs[i]} ))
   end
   return wibox.widget {
@@ -160,11 +160,11 @@ function cpu_root:make_dotsbar()
   for c = 1, self.cpus do
     self.wbars[c] = {}
     for i = 1, bar.size do
-      table.insert(self.wbars[c], font.caption("", M.x.on_surface))
+      table.insert(self.wbars[c], font.caption("", M.x.surface))
     end
   end
 
-  local freq = wibox.widget.textbox()
+  local freq = font.button("")
 
   local w = self.want_layout == 'vertical'
     and self:dotsbar_vert(freq)
@@ -172,14 +172,14 @@ function cpu_root:make_dotsbar()
 
   awesome.connect_signal("daemon::cpu", function(cpus)
     local symbol = self.want_layout == "horizontal" and "" or ""
-    freq.markup = helpers.colorize_text(cpus[1].."%", M.x.on_background)
+    freq.markup = helpers.colorize_text(cpus[1].."%", M.x.on_surface, M.t.medium)
     for c = 1, self.cpus do
       local val = math.floor(cpus[c+1]/bar.divisor)
       if self.want_layout == "horizontal" then
-        self.wfreqs[c].markup = helpers.colorize_text(cpus[c+1].."%", M.x.on_background)
+        self.wfreqs[c].markup = helpers.colorize_text(cpus[c+1].."%", M.x.surface)
       end
       for i = 1, bar.size do
-        local color = (val >= i and M.x.error or M.x.on_surface)
+        local color = (val >= i and M.x.error or M.x.surface)
         self.wbars[c][i].markup = helpers.colorize_text(symbol, color)
       end
     end

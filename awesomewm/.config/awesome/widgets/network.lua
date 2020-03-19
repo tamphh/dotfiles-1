@@ -14,21 +14,21 @@ local network_root = class()
 function network_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_network_fg or M.x.on_surface
-  self.icon_up = args.icon_up or beautiful.widget_network_icon_up or { "ﲗ", M.x.on_background }
-  self.icon_down = args.icon_down or beautiful.widget_network_icon_down or { "ﲐ", M.x.on_background }
+  self.icon_up = args.icon_up or beautiful.widget_network_icon_up or { "ﲗ", M.x.on_surface }
+  self.icon_down = args.icon_down or beautiful.widget_network_icon_down or { "ﲐ", M.x.on_surface }
   self.icon_ip = args.icon_ip or beautiful.widget_network_icon_ip or { "", M.x.on_background }
   self.title = args.title or beautiful.widget_network_title or { "NET", M.x.on_background }
   self.mode = args.mode or 'text' -- possible values: ip, text
   self.want_layout = args.layout or beautiful.widget_network_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 100
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or { M.x.primary, M.x.error }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors[1] or { M.x.primary }
   -- base widgets
-  self.wicon_up = widget.base_icon(self.icon_up[1], self.icon_up[2])
-  self.wicon_down = widget.base_icon(self.icon_down[1], self.icon_down[2])
-  self.wicon_net = widget.base_icon(self.icon_ip[1], self.icon_ip[2])
-  self.wtext = widget.base_text()
-  self.wtext_1 = widget.base_text()
-  self.wtext_2 = widget.base_text()
+  self.wicon_up = font.button(self.icon_up[1], self.icon_up[2])
+  self.wicon_down = font.button(self.icon_down[1], self.icon_down[2])
+  self.wicon_net = font.button(self.icon_ip[1], self.icon_ip[2])
+  self.wtext = font.button("")
+  self.wtext_1 = font.button("")
+  self.wtext_2 = font.button("")
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.widget = self:make_widget()
 end
@@ -86,9 +86,9 @@ function network_root:make_progressbar_vert(p_up, p_down)
 end
 
 function network_root:make_block()
-  local pu = widget.make_progressbar(_, self.bar_size, { self.bar_colors[1][1], self.bar_colors[2] })
+  local pu = widget.make_progressbar(_, self.bar_size, self.bar_colors[1])
   pu.max_value = 80000
-  local pd = widget.make_progressbar(_, self.bar_size, { self.bar_colors[1][2], self.bar_colors[2] })
+  local pd = widget.make_progressbar(_, self.bar_size, self.bar_colors[2])
   pd.max_value = 80000
   local w
   local ip = widget.base_text()
@@ -120,10 +120,10 @@ function network_root:make_block()
     local down = net[env.net_device].down
     pu.value = up
     pd.value = down
-    ip.markup = helpers.colorize_text(net[env.net_device].ip, self.fg)
+    ip.markup = helpers.colorize_text(net[env.net_device].ip, self.fg, M.t.medium)
     self.wtext_1.markup = helpers.colorize_text(up.." B/s", self.fg)
     self.wtext_2.markup = helpers.colorize_text(down.." B/s", self.fg)
-    self.wtext.markup = helpers.colorize_text(env.net_device, self.fg)
+    self.wtext.markup = helpers.colorize_text(env.net_device, self.fg, M.t.medium)
   end)
   return w
 end

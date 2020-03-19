@@ -9,25 +9,25 @@ local font = require("util.font")
 local ram = require("widgets.ram")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40,
   title = { "RAM", "#aaff99" },
-  bar_colors = {{ "#3e7f80" }, M.x.on_surface } 
+  bar_colors = "#3e7f80"
 })
 
 local volume = require("widgets.volume")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40, 
   title = { "VOL", "#daffe9" },
-  bar_colors = {{ "#3e6a80" }, M.x.on_surface } 
+  bar_colors = "#3e6a80"
 })
 
 local brightness = require("widgets.brightness")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40,
   title = { "BRI", "#aaffe9" },
-  bar_colors = {{ "#473e80" }, M.x.on_surface } 
+  bar_colors = "#473e80"
 })
 
 local battery = require("widgets.battery")({
   mode = "progressbar", layout = "vertical",  bar_size = 40,
   title = { "BAT", "#9afff9" },
-  bar_colors = {{ "#673e80" }, M.x.on_surface } 
+  bar_colors = "#673e80"
 })
 
 -- bottom (monitor bar)
@@ -39,13 +39,13 @@ local cpu = require("widgets.cpu")({
 local disk = require("widgets.disks")({
   mode = "block", layout = "vertical",
   title = { "FS", "#efea8a" },
-  bar_colors = { { "#855789", "#7155a9", "#3f63a0" }, M.x.on_surface }
+  bar_colors = { "#855789", "#7155a9", "#3f63a0" }
 })
 
 local network = require("widgets.network")({
   mode = "block", layout = "vertical",
   title = { "NET", "#aafa66" }, title_size = 20,
-  bar_colors = { { M.x.primary , M.x.secondary }, M.x.on_surface }
+  bar_colors = { M.x.primary , M.x.secondary }
 })
 
 local music_player = require("widgets.music-player")({ mode = "block" })

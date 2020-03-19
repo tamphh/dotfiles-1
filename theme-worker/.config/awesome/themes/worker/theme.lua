@@ -186,7 +186,6 @@ theme.widget_battery_icon_discharging = ""
 theme.widget_battery_icon_charging = ""
 theme.widget_battery_icon_full = ""
 theme.widget_battery_icon_ac = "臘"
-theme.widget_battery_bg = M.x.background
 
 -- mpc
 theme.widget_mpc_fg = M.x.on_background

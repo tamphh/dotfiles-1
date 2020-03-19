@@ -241,7 +241,7 @@ local function gen_menu(index)
   if not my_apps[index] then return end
   w:reset()
   for _,v in ipairs(my_apps[index]) do
-    local app_icon = widget.imagebox(55, v.icon)
+    local app_icon = widget.imagebox(48, v.icon)
     wtitle.markup = helpers.colorize_text(my_apps[index].title, M.x.on_background)
     app_icon:buttons(gtable.join(
       awful.button({}, 1, function() v.exec() end)

@@ -11,16 +11,16 @@ local disks_root = class()
 
 function disks_root:init(args)
   -- options
-  self.fg = args.fg or M.x.on_primary
-  self.icon = widget.base_icon("", M.x.primary)
+  self.fg = args.fg or M.x.on_background
+  self.icon = args.icon or beautiful.widget_fs_icon or { "", M.x.on_surface }
   self.title = args.title or beautiful.widget_fs_title or { "FS", M.x.on_background }
   self.mode = args.mode or 'text' -- possible values: text, arcchart, block
   self.want_layout = args.layout or beautiful.widget_cpu_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 100
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or { M.x.primary, M.x.error }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors or { M.x.primary }
   -- base widgets
-  self.wicon = widget.base_icon()
-  self.wtext = widget.base_text()
+  self.wicon = font.button(self.icon[1], self.icon[2])
+  self.wtext = font.caption("")
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wbars = {} -- store all bars (one by cpu/core)
   self.widget = self:make_widget()
@@ -93,9 +93,9 @@ end
 function disks_root:make_block()
   for i = 1, #env.disks do
     self.wbars[i] = {}
-    self.wbars[i]["title"] = wibox.widget.textbox(env.disks[i])
-    self.wbars[i]["used_percent"] = widget.make_progressbar(_, self.bar_size, { self.bar_colors[1][i], self.bar_colors[2] })
-    self.wbars[i]["size"] = wibox.widget.textbox()
+    self.wbars[i]["title"] = font.caption(env.disks[i], self.fg, M.t.medium)
+    self.wbars[i]["used_percent"] = widget.make_progressbar(_, self.bar_size, self.bar_colors[i])
+    self.wbars[i]["size"] = font.caption("")
   end
 
   local w
@@ -118,11 +118,11 @@ function disks_root:make_block()
     local wp = wibox.widget { layout = wibox.layout.fixed.horizontal } -- progressbar
     local wn = wibox.widget { layout = wibox.layout.fixed.horizontal } -- fs names
     for i = 1, #env.disks do
-      local n = wibox.widget.textbox(" "..tostring(i))
+      local n = font.caption(tostring(i), self.icon[2], M.t.medium)
       local t = self.wbars[i].title
       local u = widget.progressbar_layout(self.wbars[i].used_percent, self.want_layout)
       wp:add(widget.box(self.want_layout, { u, n }, 8))
-      wn:add(widget.box('horizontal', { n, wibox.widget.textbox(":"), t, sep.pad(1) }))
+      wn:add(widget.box('horizontal', { n, font.caption(":", self.fg, M.t.disabled), t, sep.pad(2) }))
     end
     w = self:make_progressbar_vert(wp, wn)
   end

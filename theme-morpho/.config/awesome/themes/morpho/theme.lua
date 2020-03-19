@@ -278,7 +278,7 @@ theme.widget_button_music_layout = 'horizontal'
 theme.widget_mpc_button_icon = "ﱘ"
 
 -- progressbar colors
-theme.bar_colors = { { theme.alert, theme.alert, theme.alert }, theme.primary }
+theme.bar_colors = { M.x.error, M.x.error, M.x.error }
 
 -- }}} End WIDGET
 

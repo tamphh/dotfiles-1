@@ -59,7 +59,7 @@ function font.button(text, fg, alpha)
   return make_widget(M.f.button, text, color, alpha)
 end
 
-function font.caption(text, fg)
+function font.caption(text, fg, alpha)
   local color = fg or M.x.on_secondary
   local alpha = alpha or 100
   return make_widget(M.f.caption, text, color, alpha)

@@ -31,7 +31,7 @@ function mybar:init(s)
     return wibox.widget {
       { -- margin top, bottom
         { -- left
-          widget.create_title("", beautiful.primary, 16), nil, nil, -- top
+          widget.create_title("", M.x.primary, 16), nil, nil, -- top
           layout = wibox.layout.align.vertical
         },
         { -- center
@@ -47,7 +47,7 @@ function mybar:init(s)
           layout = wibox.layout.align.vertical
         },
         { -- right
-          widget.create_title("", beautiful.secondary, 16), nil, nil, -- top
+          widget.create_title("", M.x.secondary, 16), nil, nil, -- top
           layout = wibox.layout.align.vertical
         },
         layout = wibox.layout.align.horizontal

@@ -39,4 +39,12 @@ mytheme.f = {
   overline = "Iosevka Regular 10",
 }
 
+-- text emphasis
+-- https://material.io/design/color/dark-theme.html#ui-application
+mytheme.t = {
+  high = 87,
+  medium = 60,
+  disabled = 38
+}
+
 return mytheme

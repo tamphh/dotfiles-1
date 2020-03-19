@@ -12,17 +12,17 @@ local ram_root = class()
 
 function ram_root:init(args)
   -- options
-  self.icon = args.icon or beautiful.widget_ram_icon or ""
-  self.fg = args.fg or beautiful.widget_ram_fg or M.x.on_background
+  self.icon = args.icon or beautiful.widget_ram_icon or { "", M.x.on_surface }
+  self.fg = args.fg or beautiful.widget_ram_fg or M.x.on_surface
   self.title = args.title or beautiful.widget_ram_title or { "RAM", beautiful.on_background }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, arcchart
   self.want_layout = args.layout or beautiful.widget_ram_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or { beautiful.primary, beautiful.error }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors[1] or beautiful.primary
   -- base widgets
-  self.wicon = font.button(self.icon, self.fg)
+  self.wicon = font.button(self.icon[1], self.icon[2])
   self.wtitle = font.h6(self.title[1], self.title[2])
-  self.wtext = widget.base_text()
+  self.wtext = font.button("")
   self.widget = self:make_widget()
 end
 
@@ -91,7 +91,7 @@ function ram_root:make_progressbar_vert(p)
 end
 
 function ram_root:make_progressbar()
-  local p = widget.make_progressbar(_, self.bar_size, { self.bar_colors[1][1], self.bar_colors[2] })
+  local p = widget.make_progressbar(_, self.bar_size, self.bar_colors)
   local wp = widget.progressbar_layout(p, self.want_layout)
   local w
   if self.want_layout == 'vertical' then
@@ -101,7 +101,7 @@ function ram_root:make_progressbar()
   end
   awesome.connect_signal("daemon::ram", function(mem)
     p.value = mem.inuse_percent
-    self.wtext.markup = helpers.colorize_text(tostring(mem.total).." MB", M.x.on_background)
+    self.wtext.markup = helpers.colorize_text(tostring(mem.total).." MB", self.fg, M.t.medium)
   end)
   return w
 end

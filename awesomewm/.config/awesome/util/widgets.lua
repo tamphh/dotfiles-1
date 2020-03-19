@@ -266,7 +266,7 @@ end
 function widgets.make_progressbar(value, width, colors)
   local value = value or 10
   local width = width or 100
-  local colors = colors or { M.x.error, M.x.on_error }
+  local colors = colors or M.x.error
   return wibox.widget {
     max_value     = 100,
     value         = value,
@@ -275,11 +275,11 @@ function widgets.make_progressbar(value, width, colors)
     forced_width  = width,
     paddings      = 1,
     border_width  = 1,
-    border_color  = M.x.primary,
+    border_color  = M.x.surface,
     bar_shape     = gshape.rounded_bar,
     shape         = gshape.rounded_bar,
-    color         = colors[1],
-    background_color = colors[2],
+    color         = colors,
+    background_color = colors .. "66", -- 40%
     widget        = wibox.widget.progressbar
   }
 end

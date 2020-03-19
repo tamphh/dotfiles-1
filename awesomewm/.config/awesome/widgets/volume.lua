@@ -15,17 +15,17 @@ local volume_root = class()
 function volume_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_volume_fg or M.x.on_surface
-  self.icon = args.icon or beautiful.widget_volume_icon or ""
+  self.icon = args.icon or beautiful.widget_volume_icon or { "", M.x.on_surface }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
   self.want_layout = args.layout or beautiful.widget_volume_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or { M.x.primary, M.x.error }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors or M.x.primary
   self.title = args.title or beautiful.widget_volume_title or { "VOL", M.x.on_background }
   self.title_size = args.title_size or 10
   -- base widgets
-  self.wicon = font.button(self.icon, self.fg)
+  self.wicon = font.button(self.icon[1], self.icon[2])
   self.wtitle = font.h6(self.title[1], self.title[2])
-  self.wtext = widget.base_text()
+  self.wtext = font.button("")
   self.widget = self:make_widget()
 end
 
@@ -40,7 +40,7 @@ function volume_root:make_widget()
 end
 
 function volume_root:update(volume, fg)
-  self.wtext.markup = helpers.colorize_text(volume.."%", fg)
+  self.wtext.markup = helpers.colorize_text(volume.."%", fg, M.t.medium)
 end
 
 function volume_root:make_text()
@@ -94,7 +94,7 @@ function volume_root:make_progressbar_vert(p)
 end
 
 function volume_root:make_progressbar()
-  local p = widget.make_progressbar(_, self.bar_size, { self.bar_colors[1][1], self.bar_colors[2] })
+  local p = widget.make_progressbar(_, self.bar_size, self.bar_colors)
   local wp = widget.progressbar_layout(p, self.want_layout)
   local w
   if self.want_layout == 'vertical' then
@@ -104,7 +104,7 @@ function volume_root:make_progressbar()
   end
   awesome.connect_signal("daemon::volume", function(vol, is_muted)
     p.value = vol
-    self.wtext.markup = helpers.colorize_text(vol.." %", M.x.on_background)
+    self.wtext.markup = helpers.colorize_text(vol.."%", self.fg, M.t.medium)
   end)
   return w
 end

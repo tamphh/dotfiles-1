@@ -14,7 +14,7 @@ naughty.config.presets.normal = {
 }
 
 naughty.config.presets.low = {
-  font         = M.f.button,
+  font         = M.f.body_2,
   fg           = M.x.surface,
   bg           = M.x.on_surface,
   border_color = M.x.on_surface,
