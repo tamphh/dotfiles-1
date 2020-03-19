@@ -7,22 +7,17 @@ local dpi = require('beautiful').xresources.apply_dpi
 local icons = require("icons.default")
 
 -- beautiful vars
-local tor_icon = beautiful.widget_tor_icon
-local fg_enable = beautiful.widget_tor_fg_enable
-local fg_disable = beautiful.widget_tor_fg_disable
-local bg = beautiful.widget_tor_bg
+local tor_icon = beautiful.widget_tor_icon or " 﨩"
+local fg_enable = beautiful.widget_tor_fg_enable or M.x.primary
+local fg_disable = beautiful.widget_tor_fg_disable or M.x.error
+local bg = beautiful.widget_tor_bg or M.x.background
 local padding = beautiful.widget_popup_padding or dpi(1)
-
--- material colors
-local g_dark = beautiful.grey_dark or "#222222"
-local g = beautiful.grey or "#333333"
-local g_light = beautiful.grey_light or "#444444"
 
 -- widget creation
 local tor_widget = widget.for_one_icon(fg_enable, bg, tor_icon, "Iosevka Term 16")
 local tor_run = false -- boolean
 local sep = widget.base_text()
-sep.markup = helpers.colorize_text("---", g_light)
+sep.markup = helpers.colorize_text("---", M.x.on_surface)
 
 -- popup
 local popup_image = widget.imagebox(80)
@@ -64,7 +59,7 @@ local w = awful.popup {
             margins = 10,
             widget = wibox.container.margin
           },
-          bg = g,
+          bg = M.x.surface,
           widget = wibox.container.background
         },
         {
@@ -92,7 +87,7 @@ local w = awful.popup {
   ontop = true,
   hide_on_right_click = true,
   offset = { y = padding, x = padding },
-  bg = g_dark
+  bg = M.x.surface
 }
 
 -- attach popup

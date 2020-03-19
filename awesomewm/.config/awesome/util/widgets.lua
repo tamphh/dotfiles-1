@@ -206,27 +206,20 @@ function widgets.add_left_click_action(w, action, shell, class)
 end
 
 -- Create a slider
-function widgets.make_a_slider(default_value)
+function widgets.make_a_slider(default_value, color)
+  local color = color or M.x.primary
   local v = default_value or 15
   return wibox.widget {
     forced_height = dpi(8),
     bar_shape = gshape.rounded_rect,
-    bar_height = dpi(5),
-    bar_color = M.x.primary,
-    handle_color = M.x.error,
+    bar_height = dpi(4),
+    bar_color = color .. "61", -- 38%
+    handle_width = dpi(12),
+    handle_color = color,
     handle_shape = gshape.circle,
-    handle_border_color = '#00000012',
-    handle_border_width = dpi(3),
     value = v,
     widget = wibox.widget.slider
   }
-end
-
--- add icon, padding and layout to a slider
-function widgets.add_icon_to_slider(slider, icon, fg_icon, layout)
-  local pad = separator.pad(2)
-  local ic = widgets.base_icon(icon, fg_icon)
-  return widgets.box(layout, { ic, pad, slider })
 end
 
 -- check popup position

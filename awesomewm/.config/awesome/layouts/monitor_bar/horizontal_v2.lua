@@ -48,8 +48,6 @@ local network = require("widgets.network")({
   bar_colors = { M.x.primary , M.x.secondary }
 })
 
-local music_player = require("widgets.music-player")({ mode = "block" })
-
 -- init tables
 local mybar = class()
 

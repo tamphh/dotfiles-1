@@ -30,7 +30,7 @@ mytheme.x = {
 mytheme.f = {
   h1 = "Iosevka Light 60", -- used rarely on big icon or big title
   h4 = "Iosevka Regular 32",
-  h6 = "Iosevka Medium 20",
+  h6 = "Iosevka Regular 20",
   subtile_1 = "Iosevka Regular 13", -- used on text list
   body_1 = "Iosevka Term Regular 16", -- used on text body title
   body_2 = "Iosevka Term Light 14", -- used on text body
@@ -45,6 +45,17 @@ mytheme.t = {
   high = 87,
   medium = 60,
   disabled = 38
+}
+
+-- elevation overlay transparency in hexa code
+-- https://material.io/design/color/dark-theme.html#properties
+mytheme.e = {
+  dp00 = "00",
+  dp01 = "0D",
+  dp02 = "12",
+  dp03 = "14",
+  dp04 = "17",
+  dp06 = "1C",
 }
 
 return mytheme

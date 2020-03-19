@@ -3,39 +3,25 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local helpers = require("helpers")
+local font = require("util.font")
 
 -- beautiful vars
-local fg_read = beautiful.widget_email_fg_read
-local fg_unread = beautiful.widget_email_fg_unread
-local bg = beautiful.widget_email_bg
+local fg_read = beautiful.widget_email_fg_read or M.x.on_background
+local fg_unread = beautiful.widget_email_fg_unread or M.x.on_background
+local bg = beautiful.widget_email_bg or M.x.background
 local l = beautiful.widget_email_layout or 'horizontal'
 local w_type = beautiful.widget_email_type or 'text'
 local padding = beautiful.widget_popup_padding or 1
 local spacing = beautiful.widget_spacing or 1
-
-local read_icon = w_type == 'button' and " "..beautiful.widget_email_read_icon.." "
-  or beautiful.widget_email_read_icon
-local unread_icon = w_type == 'button' and " "..beautiful.widget_email_unread_icon.." "  or beautiful.widget_email_unread_icon
-
--- colour
-local d_grey = beautiful.background or "#000000"
-local fg_grey = beautiful.on_background or "#ffffff"
+local read_icon = beautiful.widget_email_read_icon or ""
+local unread_icon = beautiful.widget_email_unread_icon or ""
 
 -- widget creation
-local icon
-if w_type == 'button' then
-  icon = widget.create_title(unread_icon, fg_unread)
-else
-  icon = widget.base_icon()
-  icon.markup = helpers.colorize_text(unread_icon, fg_unread)
-end
+local icon = font.button(unread_icon, fg_unread)
+local text = font.button("")
+local email_widget = widget.box(l, { icon, text }, spacing)
 
-local text = widget.base_text()
-
-local email_widget = w_type == 'button' and icon 
-  or widget.box_with_margin(l, { icon, text }, spacing)
-
-local popup_title = widget.create_title("Last messages:", fg_grey)
+local popup_title = font.h6("Last messages:", M.x.on_surface)
 local popup_msg = {}
 for i = 1, 4 do
   popup_msg[i] = widget.base_text()
@@ -70,20 +56,17 @@ local w = awful.popup {
   ontop = true,
   hide_on_right_click = true,
   offset = { y = padding, x = padding },
-  bg = d_grey
+  bg = M.x.surface
 }
 
 w:bind_to_widget(email_widget)
 
--- tooltip if beautiful.widget_email_type = 'button' is used
-local tt
-if w_type == 'button' then
-  tt = awful.tooltip {
-    markup = 0,
-    visible = false,
-    objects = { email_widget }
-  }
-end
+-- tooltip
+local tt = awful.tooltip {
+  markup = 0,
+  visible = false,
+  objects = { email_widget }
+}
 
 local grab_emails_script = [[
   bash -c "
@@ -119,7 +102,7 @@ local function update_popup()
     for i = 1, 4 do
       msg[i] = tostring(msg[i]) or nil
       if msg[i] ~= tostring(nil) and msg[i] ~= '' then
-        popup_msg[i].markup = helpers.colorize_text(i.." - From: "..msg[i], fg_grey)
+        popup_msg[i].markup = helpers.colorize_text(i.." - From: "..msg[i], M.x.on_surface)
       else
         popup_msg[i].markup = ''
       end

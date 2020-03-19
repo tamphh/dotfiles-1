@@ -14,6 +14,8 @@ local modkey = "Mod4"
 local taglist_root = class()
 
 function taglist_root:init(args)
+  self.bg = beautiful.taglist_bg or M.x.background .. M.e.dp00
+  self.bg_focus = beautiful.taglist_bg_focus or M.x.background .. M.e.dp01
   self.mode = args.mode or 'line' -- possible values: icon , line , shape , text
   self.want_layout = args.want_layout -- possible values: grid , horizontal , vertical, flex (horiz)
   self.template = self:select_template()
@@ -175,10 +177,10 @@ end
 function taglist_root:template_icon() 
   local function update_bg(w)
     w:connect_signal("mouse::leave", function(c)
-      w.bg = beautiful.taglist_bg or beautiful.grey_dark
+      w.bg = self.bg
     end)
     w:connect_signal("mouse::enter", function(c)
-      w.bg = beautiful.taglist_bg_focus or beautiful.grey_light
+      w.bg = self.bg_focus
     end)
   end
   local t = {
@@ -189,12 +191,10 @@ function taglist_root:template_icon()
         {
           {
             id = "img_tag",
-            forced_height = 30,
-            forced_width = 30,
             widget = wibox.widget.imagebox,
           },
-          left = beautiful.taglist_spacing or 8,
-          right = beautiful.taglist_spacing or 8,
+          top = dpi(14), bottom = dpi(14),
+          left = dpi(12), right = dpi(12),
           widget = wibox.container.margin
         },
         nil,
@@ -207,7 +207,7 @@ function taglist_root:template_icon()
     },
     id = "img_tag_bg",
     shape = beautiful.taglist_shape or helpers.rrect(10),
-    bg = beautiful.taglist_bg or beautiful.grey_dark,
+    bg = self.bg,
     widget = wibox.container.background,
     create_callback = function(item, tag, index, _)
       self:update_icon(item:get_children_by_id('img_tag')[1], tag, index)

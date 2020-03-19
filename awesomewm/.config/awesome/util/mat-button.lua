@@ -1,6 +1,5 @@
 local wibox = require("wibox")
 local awful = require("awful")
-local mat = require("util.mat")
 local gtable = require("gears.table")
 local widget = require("util.widgets")
 local beautiful = require("beautiful")

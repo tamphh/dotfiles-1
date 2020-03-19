@@ -74,10 +74,8 @@ theme.gravity_cava = { 16, 61, 31, 19 }
 theme.gravity_music_term = { 49, 12, 34, 68 }
 
 -- Top bar
-theme.wibar_size = dpi(40)
 theme.wibar_bg = M.x.background .. "fa"
 theme.wibar_border_radius = dpi(0)
-theme.wibar_position = "top"
 
 -- {{{ TAGLIST
 
@@ -88,9 +86,6 @@ theme.taglist_text_occupied = {"-","-","-","-","-","-","-","-","-","-"}
 theme.taglist_text_focused = {"-","-","-","-","-","-","-","-","-","-"}
 theme.taglist_text_urgent = {"-","-","-","-","-","-","-","-","-","-"}
 theme.taglist_text_empty = {"-","-","-","-","-","-","-","-","-","-"}
-
-theme.taglist_bg_focus = M.x.background
-theme.taglist_bg = M.x.background .. "fa"
 
 -- icon_taglist
 theme.ntags = 10
@@ -158,45 +153,10 @@ theme.widget_spacing = dpi(20) -- space between each widgets
 -- popup (distance between the bar and the popup, 0 is pasted at the bar)
 theme.widget_popup_padding = dpi(3)
 
--- Hostname
-theme.widget_hostname_text_icon = '<span foreground="'..M.x.primary..'">  </span>'
-
--- Tor
-theme.widget_tor_icon = "  﨩  "
-theme.widget_tor_fg_enable = M.x.primary
-theme.widget_tor_fg_disable = M.x.primary
-theme.widget_tor_bg = M.x.background
-
--- Mails
-theme.widget_email_read_icon = "  "
-theme.widget_email_unread_icon = "  "
-theme.widget_email_fg_read = M.x.on_background
-theme.widget_email_fg_unread = M.x.on_background
-theme.widget_email_bg = M.x.background
-theme.widget_email_layout = 'horizontal' -- horizontal or vertical
-theme.widget_email_type = 'button' -- button or text
-
 -- Wifi str
 theme.widget_wifi_str_fg = M.x.primary
 theme.widget_wifi_str_bg = M.x.background .. "00"
 theme.widget_wifi_layout = 'horizontal' -- horizontal or vertical
-
--- Battery
-theme.widget_battery_icon_discharging = ""
-theme.widget_battery_icon_charging = ""
-theme.widget_battery_icon_full = ""
-theme.widget_battery_icon_ac = "臘"
-
--- mpc
-theme.widget_mpc_fg = M.x.on_background
-theme.widget_mpc_bg = M.x.background
-theme.widget_mpc_layout = 'horizontal' -- horizontal or vertical
-
--- Date
-theme.widget_date_icon = ""
-theme.widget_date_fg = M.x.on_background
-theme.widget_date_bg = M.x.background
-theme.widget_date_layout = 'horizontal' -- horizontal or vertical
 
 -- Screenshot
 theme.widget_scrot_fg = M.x.on_background
@@ -206,7 +166,7 @@ theme.widget_scrot_icon = ''
 theme.widget_button_music_layout = 'horizontal'
 
 -- Button mpc
-theme.widget_mpc_button_icon = "ﱘ"
+theme.widget_mpc_button_icon = { "ﱘ" , M.x.on_background }
 
 -- }}} End WIDGET
 

@@ -10,13 +10,10 @@ local gtable = require("gears.table")
 local font = require("util.font")
 
 -- widget for the popup
-local mpc = require("widgets.mpc")({ spacing = 0 })
+local mpc = require("widgets.mpc")({})
 local volume_bar = require("widgets.volume")({ mode = "slider" })
-volume_bar.forced_width = dpi(40) -- set a max width
 
 -- beautiful vars
-local icon = beautiful.widget_mpc_button_icon or "  "
-local fg = beautiful.widget_volume_fg or M.x.on_background
 local bg = beautiful.widget_volume_bg or M.x.background
 local font_button = M.f.button
 local l = beautiful.widget_button_music_layout or 'horizontal'
@@ -30,9 +27,12 @@ local music_player_root = class()
 
 function music_player_root:init(args)
   -- options
-  self.icon = args.icon or beautiful.widget_mpd_icon or { icon, M.x.on_background }
+  self.fg = args.fg or beautiful.widget_volume_fg or M.x.on_background
+  self.icon = args.icon or beautiful.widget_mpc_button_icon or { icon, M.x.on_background }
   self.mode = args.mode or 'popup' -- possible values: block, popup, song
-  self.wposition = args.position or widget.check_popup_position(beautiful.wibar_position)
+  self.wibar_position = args.wibar_position or beautiful.wibar_position or "top"
+  self.wibar_size = args.wibar_size or beautiful.wibar_size or dpi(56)
+  self.wposition = args.position or widget.check_popup_position(self.wibar_position)
   -- widgets
   self.wicon = font.button(self.icon[1], self.icon[2])
   self.title = font.button("")
@@ -79,74 +79,63 @@ function music_player_root:make_block()
 end
 
 function music_player_root:create_popup(w)
+  self.cover.forced_height = 200
+  self.cover.forced_width = 200
+  self.cover.resize = true
+  self.title.forced_height = 20
   local img = wibox.widget {
+    nil,
     {
-      nil,
       {
-        self.cover,
+        nil,
         {
-          nil,
-          {
-            nil,
-            nil,
-            mpc,
-            expand = "none",
-            layout = wibox.layout.align.vertical
-          },
-          expand = "none",
-          layout = wibox.layout.align.horizontal
+          self.cover,
+          shape = helpers.rrect(15),
+          widget = wibox.container.background
         },
-        --vertical_offset = 10,
-        layout = wibox.layout.stack
+        expand = "none",
+        layout = wibox.layout.align.horizontal
       },
-      expand = "none",
-      layout = wibox.layout.align.vertical
+      {
+        nil,
+        mpc,
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+      },
+      layout = wibox.layout.fixed.vertical
     },
-    forced_height = 80,
-    forced_width = 80,
-    widget = wibox.container.margin
+    expand = "none",
+    layout = wibox.layout.align.horizontal
   }
   local desc = wibox.widget {
     self.title,
     self.artist,
     self.time_pasted,
-    {
-      volume_bar,
-      left = 6, right = 6,
-      widget = wibox.container.margin
-    },
-    spacing = dpi(2),
+    volume_bar,
+    spacing = dpi(5),
     layout = wibox.layout.fixed.vertical
   }
   self.wpopup = awful.popup {
     widget = {
       {
-        nil,
         {
-          nil,
-          {
-            img,
-            desc,
-            spacing = 20,
-            layout = wibox.layout.fixed.horizontal
-          },
-          expand = "none",
-          layout = wibox.layout.align.horizontal
+          img,
+          desc,
+          layout = wibox.layout.fixed.vertical
         },
-        expand = "none",
-        layout = wibox.layout.align.vertical
+        margins = dpi(14),
+        forced_width = dpi(270),
+        widget = wibox.container.margin
       },
-      top = dpi(14),
-      bottom = dpi(14),
-      forced_width = dpi(340),
-      widget = wibox.container.margin
+      bg = M.x.on_surface .. M.e.dp01,
+      widget = wibox.container.background
     },
     visible = false, -- do not show at start
     ontop = true,
     hide_on_right_click = true,
     preferred_positions = self.wposition,
     offset = { y = padding, x = padding }, -- no pasted on the bar
-    bg = bg_p,
+    bg = M.x.surface,
     shape = helpers.rrect(15)
   }
 
@@ -156,7 +145,7 @@ end
 
 function music_player_root:make_popup()
   -- widget creation
-  local button = widget.create_button(fg, icon)
+  local button = self.wicon
   self:create_popup(button)
   self:signals()
   return widget.box(layout, { button })
@@ -168,8 +157,8 @@ function music_player_root:updates(mpd)
   local img = mpd.cover ~= "nil" and mpd.cover or icons["default_cover"]
   local artist = mpd.artist ~= nil and mpd.artist or 'Unknown'
   local title = mpd.title ~= nil and mpd.title or 'Unknown'
-  local title_cut = #title > 15
-    and string.sub(title, 1, 15) .. "..."
+  local title_cut = #title > 20
+    and string.sub(title, 1, 20)
     or title
 
   self.cover.image = img
@@ -203,7 +192,7 @@ function music_player_root:make_song()
   }
   self:create_popup(w)
   self.wpopup.x = dpi(4)
-  self.wpopup.y = beautiful.wibar_size + dpi(4)
+  self.wpopup.y = self.wibar_size + dpi(4)
   w:connect_signal('mouse::enter', function()
     self.wpopup.visible = true
   end)

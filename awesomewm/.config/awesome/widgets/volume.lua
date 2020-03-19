@@ -6,7 +6,6 @@ local aspawn = require("awful.spawn")
 local font = require("util.font")
 
 -- beautiful vars
-local fg_err = M.x.error
 local spacing = beautiful.widget_spacing or 1
 
 -- root
@@ -17,7 +16,7 @@ function volume_root:init(args)
   self.fg = args.fg or beautiful.widget_volume_fg or M.x.on_surface
   self.icon = args.icon or beautiful.widget_volume_icon or { "", M.x.on_surface }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
-  self.want_layout = args.layout or beautiful.widget_volume_layout or 'horizontal' -- possible values: horizontal , vertical
+  self.layout = args.layout or beautiful.widget_volume_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
   self.bar_colors = args.bar_colors or beautiful.bar_colors or M.x.primary
   self.title = args.title or beautiful.widget_volume_title or { "VOL", M.x.on_background }
@@ -26,7 +25,7 @@ function volume_root:init(args)
   self.wicon = font.button(self.icon[1], self.icon[2])
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
-  self.widget = self:make_widget()
+  self.w = self:make_widget()
 end
 
 function volume_root:make_widget()
@@ -44,10 +43,10 @@ function volume_root:update(volume, fg)
 end
 
 function volume_root:make_text()
-  local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext }, spacing)
+  local w = widget.box_with_margin(self.ayout, { self.wicon, self.wtext }, spacing)
   awesome.connect_signal("daemon::volume", function(volume, is_muted)
       if is_muted then
-        self:update(volume, fg_err)
+        self:update(volume, M.x.error)
       else
         self:update(volume, self.fg)
       end
@@ -56,8 +55,8 @@ function volume_root:make_text()
 end
 
 function volume_root:make_slider()
-  local volume = widget.make_a_slider(15)
-  local w = widget.add_icon_to_slider(volume, self.icon, self.fg, 'horizontal')
+  local volume = widget.make_a_slider(15, self.bar_colors)
+  local w = widget.box(self.layout, { self.wicon, volume }, 4)
   -- Set value
   volume:connect_signal('property::value', function()
     if env.sound_system == "alsa" then
@@ -95,12 +94,12 @@ end
 
 function volume_root:make_progressbar()
   local p = widget.make_progressbar(_, self.bar_size, self.bar_colors)
-  local wp = widget.progressbar_layout(p, self.want_layout)
+  local wp = widget.progressbar_layout(p, self.layout)
   local w
-  if self.want_layout == 'vertical' then
+  if self.layout == 'vertical' then
     w = self:make_progressbar_vert(wp)
   else
-    w = widget.box_with_margin(self.want_layout, { self.wicon, wp }, 8)
+    w = widget.box(self.layout, { self.wicon, p }, 8)
   end
   awesome.connect_signal("daemon::volume", function(vol, is_muted)
     p.value = vol
@@ -114,7 +113,7 @@ local volume_widget = class(volume_root)
 
 function volume_widget:init(args)
   volume_root.init(self, args)
-  return self.widget
+  return self.w
 end
 
 return volume_widget

@@ -33,10 +33,10 @@ function mpc_root:init(args)
   self.fg = args.fg or M.x.primary
   self.overlay = args.overlay or M.x.primary -- bg for the hover
   self.spacing = args.spacing or dpi(7)
-  self.want_layout = args.layout or beautiful.widget_mpc_layout or 'horizontal' -- possible values: horizontal , vertical
+  self.layout = args.layout or beautiful.widget_mpc_layout or 'horizontal' -- possible values: horizontal , vertical
   -- base widgets
   self:base_widget()
-  self.widget = self:make_widget()
+  self.w = self:make_widget()
 end
 
 function mpc_root:base_widget()
@@ -78,7 +78,8 @@ function mpc_root:make_widget()
 end
 
 function mpc_root:make_text()
-  local w = widget.box_with_margin(self.want_layout, { self.wicon_prev, self.wicon_toggle, self.wicon_next }, self.spacing)
+  local w = widget.box(self.want_layout,
+    { self.wicon_prev, self.wicon_toggle, self.wicon_next })
 
   awesome.connect_signal("daemon::mpd", function(mpd)
     if (mpd.status == "playing") then
@@ -111,7 +112,7 @@ local mpc_widget = class(mpc_root)
 
 function mpc_widget:init(args)
   mpc_root.init(self, args)
-  return self.widget
+  return self.w
 end
 
 return mpc_widget

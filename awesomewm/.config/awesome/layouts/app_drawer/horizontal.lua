@@ -1,10 +1,10 @@
 local awful = require("awful")
-local naughty = require("naughty")
 local gtable = require("gears.table")
 local wibox = require("wibox")
 local helpers = require("helpers")
 local widget = require("util.widgets")
 local beautiful = require("beautiful")
+local dpi = beautiful.xresources.apply_dpi
 local icons = require("icons.app_drawer")
 local gshape = require("gears.shape")
 local app = require("util.app")
@@ -275,13 +275,11 @@ function update_app_drawer(desired_tag)
   if d ~= nil then
     gen_menu(d)
   elseif curr_tag ~= nil then
-    --naughty.notify({ text = "We are in the "..tostring(curr_tag.index) })
     gen_menu(curr_tag.index)
   else -- fallback to find the right curr_tag
     for i = 1, ntags do
       if tag then
         if curr_tag == s.tags[i] then
-          --naughty.notify({ text = "We are in the "..tostring(i) })
           gen_menu(i)
           break
         end
@@ -297,7 +295,7 @@ function myapps:init(s)
   s.app_drawer = wibox({ visible = false, ontop = true, type = "dock", position = "top", screen = s })
   s.app_drawer.bg = M.x.surface .. "fc"
   s.app_drawer.x = 0
-  s.app_drawer.y = beautiful.wibar_position == "top" and beautiful.wibar_size or 0 
+  s.app_drawer.y = beautiful.wibar_position == "top" and beautiful.wibar_size or dpi(56)
   s.app_drawer.height = 110
   s.app_drawer.width = s.geometry.width
 

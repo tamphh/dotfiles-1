@@ -11,6 +11,7 @@ local desktop_ctrl = require("widgets.desktop-control")
 local music = require("widgets.music-player")({ mode = "song" })
 local layouts = require("widgets.layouts")({ mode = "menu" })
 local textclock = wibox.widget {
+  font = M.f.h6,
   format = '<span foreground="'..M.x.on_background..'">%H:%M</span>',
   widget = wibox.widget.textclock
 }
@@ -31,11 +32,14 @@ function mybar:init(s)
   s.mytaglist = require("widgets.taglist")(s, { mode = "icon" })
 
   -- Create the wibox with default options
-  s.mywibox = awful.wibar({ position = beautiful.wibar_position, height = beautiful.wibar_size, bg = beautiful.wibar_bg, screen = s })
+  self.height = beautiful.wibar_height or dpi(56)
+  self.position = beautiful.wibar_position or "top"
+
+  s.mywibox = awful.wibar({ position = self.position, height = self.height, screen = s })
+  s.mywibox.bg = beautiful.wibar_bg or M.x.background
 
   -- Add widgets to the wibox
   s.mywibox:setup {
-    --widget.box('horizontal', { pad(2), layouts, s.mytasklist }), -- left
     widget.box('horizontal', { pad(2), music }), -- left
     { -- middle
       s.mytaglist,

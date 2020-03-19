@@ -3,6 +3,10 @@ local beautiful = require("beautiful")
 local gtimer = require("gears.timer")
 
 local unknown_icon = beautiful.widget_battery_icon_unknown or ""
+local discharging_icon = beautiful.widget_battery_icon_discharging or ""
+local charging_icon = beautiful.widget_battery_icon_charging or ""
+local full_icon = beautiful.widget_battery_icon_full or ""
+local ac_icon = beautiful.widget_battery_icon_ac or "臘"
 
 local function battery_info()
   local path_power="/sys/class/power_supply/"
@@ -10,12 +14,11 @@ local function battery_info()
   local fpath = path_power..bat
 
   local battery_state = {
-    ["Full\n"]        = { beautiful.widget_battery_icon_full, beautiful.on_background },
-    ["Unknown\n"]     = { unknown_icon, beautiful.alert_light },
-
-    ["Charged\n"]     = { beautiful.widget_battery_icon_charging, beautiful.primary },
-    ["Charging\n"]    = { beautiful.widget_battery_icon_charging, beautiful.secondary },
-    ["Discharging\n"] = { beautiful.widget_battery_icon_discharging, beautiful.error }
+    ["Full\n"]        = { full_icon, M.x.on_background },
+    ["Unknown\n"]     = { unknown_icon, M.x.error },
+    ["Charged\n"]     = { charging_icon, M.x.primary },
+    ["Charging\n"]    = { charging_icon, M.x.secondary },
+    ["Discharging\n"] = { discharging_icon, M.x.error },
   }
 
   -- if battery is present
