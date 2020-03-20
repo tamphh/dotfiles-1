@@ -295,7 +295,7 @@ function myapps:init(s)
   s.app_drawer = wibox({ visible = false, ontop = true, type = "dock", position = "top", screen = s })
   s.app_drawer.bg = M.x.surface .. "fc"
   s.app_drawer.x = 0
-  s.app_drawer.y = beautiful.wibar_position == "top" and beautiful.wibar_size or dpi(56)
+  s.app_drawer.y = beautiful.wibar_height or dpi(56) -- assume the wibar is top or bottom
   s.app_drawer.height = 110
   s.app_drawer.width = s.geometry.width
 

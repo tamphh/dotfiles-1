@@ -18,7 +18,7 @@ function volume_root:init(args)
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
   self.layout = args.layout or beautiful.widget_volume_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or M.x.primary
+  self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.primary
   self.title = args.title or beautiful.widget_volume_title or { "VOL", M.x.on_background }
   self.title_size = args.title_size or 10
   -- base widgets
@@ -43,7 +43,7 @@ function volume_root:update(volume, fg)
 end
 
 function volume_root:make_text()
-  local w = widget.box_with_margin(self.ayout, { self.wicon, self.wtext }, spacing)
+  local w = widget.box_with_margin(self.layout, { self.wicon, self.wtext }, spacing)
   awesome.connect_signal("daemon::volume", function(volume, is_muted)
       if is_muted then
         self:update(volume, M.x.error)
@@ -99,7 +99,7 @@ function volume_root:make_progressbar()
   if self.layout == 'vertical' then
     w = self:make_progressbar_vert(wp)
   else
-    w = widget.box(self.layout, { self.wicon, p }, 8)
+    w = widget.box_with_margin(self.layout, { self.wicon, wp }, 8)
   end
   awesome.connect_signal("daemon::volume", function(vol, is_muted)
     p.value = vol

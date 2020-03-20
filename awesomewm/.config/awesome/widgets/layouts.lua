@@ -20,9 +20,9 @@ function layout_root:init(args)
   self.icon_lockscreen = { " ", M.x.on_background }
   self.icon_menu = self:choose_icon_menu()
   -- widgets
-  self.monitoring_button = font.h6(self.icon_monitor[1], self.icon_monitor[2])
-  self.startscreen_button = font.h6(self.icon_startscreen[1], self.icon_startscreen[2])
-  self.lockscreen_button = font.h6(self.icon_lockscreen[1], self.icon_lockscreen[2])
+  self.monitoring_button = font.button(self.icon_monitor[1], self.icon_monitor[2])
+  self.startscreen_button = font.button(self.icon_startscreen[1], self.icon_startscreen[2])
+  self.lockscreen_button = font.button(self.icon_lockscreen[1], self.icon_lockscreen[2])
   self.widget = self:make_widget()
 end
 

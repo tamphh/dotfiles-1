@@ -18,7 +18,7 @@ function battery_root:init(args)
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
   self.want_layout = args.layout or beautiful.widget_battery_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
-  self.bar_colors = args.bar_colors or beautiful.bar_colors[1] or M.x.primary
+  self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.primary
   -- base widgets
   self.wicon = font.button(self.icon[1], self.icon[2])
   self.wtitle = font.h6(self.title[1], self.title[2])

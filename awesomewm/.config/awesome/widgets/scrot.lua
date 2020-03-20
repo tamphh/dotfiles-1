@@ -2,14 +2,14 @@ local awful = require("awful")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
 local gtable = require("gears.table")
-local widget = require('util.widgets')
+local font = require("util.font")
 
 -- beautiful vars
-local fg = beautiful.widget_scrot_fg or beautiful.on_background
+local fg = beautiful.widget_scrot_fg or M.x.on_background
 local icon = beautiful.widget_scrot_icon or '  '
 
 -- widget creation
-local scrot_icon = widget.create_button( fg , icon )
+local scrot_icon = font.button(icon, fg)
 
 function take_scrot(time) 
   local time = time or 0

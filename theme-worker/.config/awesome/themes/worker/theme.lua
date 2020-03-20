@@ -2,17 +2,16 @@
 -- Worker awesome theme --
 ---------------------------
 
-local theme_name = "worker"
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local gfs = require("gears.filesystem")
 local gshape = require("gears.shape")
 local themes_path = gfs.get_themes_dir()
-local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/layouts/"
+local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.name .. "/layouts/"
 local xrdb = xresources.get_current_theme()
 local wibox = require("wibox")
-local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/taglist/"
+local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.name .. "/taglist/"
 
 local theme = {}
 
@@ -101,22 +100,13 @@ for i = 1, theme.ntags do
   theme.taglist_icons_urgent[i] = taglist_icon_path .. tostring(i) .. "_urgent.png"
 end
 
--- different color on each taglists
---theme.taglist_text_color_empty = { theme.grey_dark, theme.grey_dark, theme.grey_dark, theme.grey_dark, theme.grey_dark, theme.grey_dark, theme.grey_dark, theme.grey_dark, theme.grey_dark, theme.grey_dark }
-
---theme.taglist_text_color_occupied = { theme.grey, theme.primary, theme.secondary, theme.grey, theme.primary, theme.secondary, theme.grey, theme.primary, theme.secondary, theme.grey }
-
---theme.taglist_text_color_focused = { theme.grey_light, theme.primary_light, theme.secondary_light, theme.grey_light, theme.primary_light, theme.secondary_light, theme.grey_light, theme.primary_light, theme.secondary_light, theme.grey_light }
-
---theme.taglist_text_color_urgent = { theme.alert_dark, theme.alert, theme.alert_light, theme.alert_dark, theme.alert, theme.alert_light, theme.alert_dark, theme.alert, theme.alert_light, theme.alert }
-
 theme.taglist_layout = wibox.layout.fixed.horizontal -- horizontal or vertical
 
 -- }}} TAGLIST END
 
 -- {{{ MENU
 
-theme.menu_submenu_icon = themes_path.."theme_name../submenu.png"
+theme.menu_submenu_icon = themes_path..M.name.."/submenu.png"
 theme.menu_height = dpi(16)
 theme.menu_width  = dpi(100)
 
@@ -133,19 +123,6 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 --theme.icon_theme = nil
 theme.icon_theme = nil
-
--- {{{ Tasklist
-
---theme.tasklist_disable_task_name = true
---theme.tasklist_disable_icon = false
-theme.tasklist_spacing = dpi(4)
-theme.tasklist_align = "center"
-theme.tasklist_fg_normal = M.x.on_background
-theme.tasklist_bg_normal = M.x.background.."29"
-theme.tasklist_bg_focus = M.x.background.."29"
-theme.tasklist_bg_urgent = M.x.error.."29"
-
--- }}} End Tasklist
 
 -- {{{ WIDGETS
 

@@ -12,7 +12,7 @@ local floating_text = beautiful.desktop_mode_text_floating or ""
 local tile_text = beautiful.desktop_mode_text_tile or ""
 local max_text = beautiful.desktop_mode_text_max or "类"
 
-local layoutbox = font.h6(tile_text, tile_color) -- TODO test on other theme
+local layoutbox = font.button(tile_text, tile_color)
 layoutbox:buttons(gtable.join(
   awful.button({}, 1, function () awful.layout.inc( 1) end),
   awful.button({}, 3, function () awful.layout.inc(-1) end),

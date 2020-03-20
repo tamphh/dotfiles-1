@@ -21,7 +21,7 @@ function network_root:init(args)
   self.mode = args.mode or 'text' -- possible values: ip, text
   self.want_layout = args.layout or beautiful.widget_network_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 100
-  self.bar_colors = args.bar_colors or beautiful.bar_colors[1] or { M.x.primary }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors_network or { M.x.primary, M.x.primary }
   -- base widgets
   self.wicon_up = font.button(self.icon_up[1], self.icon_up[2])
   self.wicon_down = font.button(self.icon_down[1], self.icon_down[2])

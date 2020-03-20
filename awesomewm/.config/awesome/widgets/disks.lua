@@ -17,7 +17,7 @@ function disks_root:init(args)
   self.mode = args.mode or 'text' -- possible values: text, arcchart, block
   self.want_layout = args.layout or beautiful.widget_cpu_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 100
-  self.bar_colors = args.bar_colors or beautiful.bar_colors or { M.x.primary }
+  self.bar_colors = args.bar_colors or beautiful.bar_colors_disk or { M.x.primary }
   -- base widgets
   self.wicon = font.button(self.icon[1], self.icon[2])
   self.wtext = font.caption("")
@@ -107,7 +107,7 @@ function disks_root:make_block()
       local s = self.wbars[i].size -- text size
       local wx = wibox.widget {
         {
-          widget.box(self.want_layout, { self.icon, t, u, s }, 8),
+          widget.box(self.want_layout, { self.wicon, t, u, s }, 8),
           widget = widget.progressbar_margin_horiz()
         },
         layout = wibox.layout.fixed.vertical

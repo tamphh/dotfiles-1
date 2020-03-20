@@ -16,13 +16,6 @@ o["fg"]["disable"] = 38
 o["fg"]["enable"] = 87
 o["fg"]["enable_focus"] = 100
 
--- TODO: enhance or delete this
-local mat_colors = {}
-mat_colors["primary"] = { beautiful.primary, beautiful.primary }
-mat_colors["secondary"] = { beautiful.secondary, beautiful.secondary }
-mat_colors["error"] = { beautiful.error, beautiful.error }
-mat_colors["surface"] = { beautiful.on_surface, beautiful.on_surface }
-
 local mat_tabs = class()
 
 function mat_tabs:init(args)

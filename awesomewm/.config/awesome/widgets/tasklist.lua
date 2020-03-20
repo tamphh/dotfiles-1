@@ -4,6 +4,14 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
+-- options
+local spacing = beautiful.tasklist_spacing or dpi(4)
+local align = beautiful.tasklist_align or "center"
+local fg_normal = beautiful.tasklist_fg_normal or M.x.on_background
+local bg_normal = beautiful.tasklist_bg_normal or M.x.background
+local bg_focus = beautiful.tasklist_bg_focus or M.x.on_background .. M.e.dp01
+local bg_urgent = beautiful.tasklist_bg_urgent or M.x.error
+
 -- remove few symbols
 beautiful.tasklist_plain_task_name=true
 
@@ -58,6 +66,13 @@ function tasklist_widget:new(s)
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
     buttons = self:buttons(),
+    style = {
+      fg_normal = fg_normal,
+      bg_normal = bg_normal,
+      fg_focus = fg_focus,
+      bg_focus = bg_focus,
+      align = align,
+    },
     widget_template = self:template()
   }
   return widget

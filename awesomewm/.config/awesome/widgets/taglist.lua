@@ -83,6 +83,7 @@ function taglist_root:template_line()
       id = 'background_role',
       widget = wibox.container.background,
     },
+    bg = M.x.background,
     widget = wibox.container.background,
     create_callback = function(item, tag, index, _)
       self:update_line(item, tag, index)
@@ -113,7 +114,7 @@ function taglist_root:template_text()
       item.align = "center"
       item.valign = "center"
       item.forced_width = dpi(25)
-      item.font = beautiful.taglist_font
+      item.font = M.f.h6
       self:update_text(item, tag, index)
     end,
     update_callback = function(item, tag, index, _)
@@ -150,7 +151,7 @@ function taglist_root:template_shape()
       item.text_taglist.align = "center"
       item.text_taglist.valign = "center"
       item.text_taglist.forced_width = dpi(25)
-      item.text_taglist.font = beautiful.taglist_font
+      item.text_taglist.font = M.f.h6
       self:update_text(item.text_taglist, tag, index)
       self:update_shape(item, tag, index)
     end,

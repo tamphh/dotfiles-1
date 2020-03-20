@@ -17,6 +17,7 @@ function cpu_root:init(args)
   self.want_layout = args.layout or beautiful.widget_cpu_layout or 'horizontal' -- possible values: horizontal , vertical
   self.cpus = args.cpus or 2 -- number of cpu / core
   self.title = args.title or beautiful.widget_cpu_title or { "CPU", M.x.on_background }
+  self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.error
   -- base widgets
   self.wicon = widget.base_icon()
   self.wtext = widget.base_text()
@@ -179,7 +180,7 @@ function cpu_root:make_dotsbar()
         self.wfreqs[c].markup = helpers.colorize_text(cpus[c+1].."%", M.x.surface)
       end
       for i = 1, bar.size do
-        local color = (val >= i and M.x.error or M.x.surface)
+        local color = (val >= i and self.bar_colors or M.x.surface)
         self.wbars[c][i].markup = helpers.colorize_text(symbol, color)
       end
     end

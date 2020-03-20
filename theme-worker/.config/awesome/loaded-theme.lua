@@ -34,7 +34,9 @@ mytheme.f = {
   subtile_1 = "Iosevka Regular 13", -- used on text list
   body_1 = "Iosevka Term Regular 16", -- used on text body title
   body_2 = "Iosevka Term Light 14", -- used on text body
-  button = "Iosevka Term Medium 14", -- used on text button
+  -- for button, don't use a Mono variant because icons are too small
+  -- issue: https://github.com/Powerlevel9k/powerlevel9k/issues/430
+  button = "Iosevka Term Medium Nerd Font Complete 14", -- used on text button
   caption = "Iosevka Bold 12", -- used on annotation
   overline = "Iosevka Regular 10",
 }

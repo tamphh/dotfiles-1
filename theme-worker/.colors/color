@@ -31,7 +31,7 @@
 *foreground: theme4
 
 ! Black
-*color0: theme2
+*color0: theme0
 *color8: theme3
 
 ! Red

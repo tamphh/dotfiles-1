@@ -30,7 +30,11 @@ function mybar:init(s)
   s.mytaglist = require("widgets.taglist")(s, { mode = "line", want_layout = 'flex' })
 
   -- Create the wibox with default options
-  s.mywibox = awful.wibar({ position = beautiful.wibar_position, height = beautiful.wibar_size, bg = beautiful.wibar_bg, screen = s })
+  self.height = beautiful.wibar_height or dpi(56)
+  self.position = beautiful.wibar_position or "top"
+
+  s.mywibox = awful.wibar({ position = self.position, height = self.height, screen = s })
+  s.mywibox.bg = beautiful.wibar_bg or M.x.background
 
   -- Add widgets to the wibox
   s.mywibox:setup {

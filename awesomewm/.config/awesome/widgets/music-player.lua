@@ -54,19 +54,25 @@ end
 
 function music_player_root:make_block()
   self.title.align = "left"
-  self.title.forced_height = dpi(10) -- adjust to have one line
-  self.time_pasted.align = "left"
-  self.time_pasted.forced_height = dpi(10) -- adjust to have one line
   self.cover.forced_height = dpi(60)
   self.cover.forced_width = dpi(60)
   local w = wibox.widget {
     {
       self.cover,
       {
-        widget.add_margin(self.title, { bottom = 5 }), 
-        widget.add_margin(self.time_pasted, { top = 3, bottom = 5 }), 
-        mpc,
-        layout = wibox.layout.fixed.vertical
+        nil,
+        {
+          {
+            self.title,
+            forced_height = dpi(20), -- one line
+            left = dpi(10),
+            widget = wibox.container.margin
+          },
+          mpc,
+          layout = wibox.layout.fixed.vertical
+        },
+        expand = "none",
+        layout = wibox.layout.align.vertical
       },
       layout = wibox.layout.align.horizontal
     },
