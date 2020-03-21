@@ -109,16 +109,25 @@ end
 
 function taglist_root:template_text() 
   local t = {
-    widget = wibox.widget.textbox,
+    {
+      --id = 'text_role',
+      --id     = 'index_role',
+      widget = wibox.widget.textbox,
+    },
+    id = "text_margin_role",
+    margins = 6,
+    widget = wibox.container.margin,
     create_callback = function(item, tag, index, _)
-      item.align = "center"
-      item.valign = "center"
-      item.forced_width = dpi(25)
-      item.font = M.f.h6
-      self:update_text(item, tag, index)
+      local w = item:get_children()[1]
+      w.align = "center"
+      w.valign = "center"
+      w.forced_width = dpi(25)
+      w.font = M.f.button,
+      self:update_text(w, tag, index)
     end,
     update_callback = function(item, tag, index, _)
-      self:update_text(item, tag, index)
+      local w = item:get_children()[1]
+      self:update_text(w, tag, index)
     end
   }
   return t

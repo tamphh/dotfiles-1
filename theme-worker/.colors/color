@@ -9,7 +9,7 @@
 #define theme0 #130F14
 #define theme1 #151416
 #define theme2 #1A181C
-#define theme3 #211F23
+#define theme3 #211B24
 !! FG !!
 #define theme4 #AABFAA
 #define theme5 #CCECEC
@@ -22,10 +22,10 @@
 !! Alert !!
 #define theme11 #A91164
 #define theme12 #f44ca8
-#define theme13 #B03388
+#define theme13 #f76b99
 !! Others !!
-#define theme14 #67c460
-#define theme15 #6486ce
+#define theme14 #52dc75
+#define theme15 #52badc
 
 *background: theme1
 *foreground: theme4

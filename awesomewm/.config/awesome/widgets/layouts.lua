@@ -6,6 +6,7 @@ local gtable = require("gears.table")
 local helpers = require("helpers")
 local change_theme = require("widgets.button_change_theme")
 local font = require("util.font")
+local bicon = require("util.icon")
 
 -- beautiful var
 local wibar_pos = beautiful.wibar_position or "top"
@@ -15,14 +16,14 @@ local layout_root = class()
 function layout_root:init(args)
   -- options
   self.mode = args.mode or "icons" -- possible value: icons , menu
-  self.icon_startscreen = { " ", M.x.on_background }
-  self.icon_monitor = { " ", M.x.on_background }
-  self.icon_lockscreen = { " ", M.x.on_background }
+  self.icon_startscreen = { "", M.x.on_background }
+  self.icon_monitor = { "", M.x.on_background }
+  self.icon_lockscreen = { "", M.x.on_background }
   self.icon_menu = self:choose_icon_menu()
   -- widgets
-  self.monitoring_button = font.button(self.icon_monitor[1], self.icon_monitor[2])
-  self.startscreen_button = font.button(self.icon_startscreen[1], self.icon_startscreen[2])
-  self.lockscreen_button = font.button(self.icon_lockscreen[1], self.icon_lockscreen[2])
+  self.monitoring_button = bicon({ icon = self.icon_monitor[1], fg = self.icon_monitor[2]})
+  self.startscreen_button = bicon({ icon = self.icon_startscreen[1],fg = self.icon_startscreen[2]})
+  self.lockscreen_button = bicon({ icon = self.icon_lockscreen[1], fg = self.icon_lockscreen[2]})
   self.widget = self:make_widget()
 end
 
@@ -121,35 +122,19 @@ function layout_root:create_buttons()
   set_tooltip(self.lockscreen_button, 'Lock screen')
 end
 
-local function add_margin()
-  local c = wibox.container.margin()
-  if wibar_pos == 'top' or wibar_pos == 'bottom' then
-    c.top = 3
-    c.bottom = 3
-  else
-    c.left = 6
-    c.right = 6
-  end
-  return c
-end
-
 function layout_root:make_icons()
   self:create_buttons()
   local w = wibox.widget {
-    {
-      self.lockscreen_button,
-      self.monitoring_button,
-      self.startscreen_button,
-      spacing = beautiful.widget_spacing or 1,
-      layout = fixed_position(ob)
-    },
-    widget = add_margin()
+    self.lockscreen_button,
+    self.monitoring_button,
+    self.startscreen_button,
+    layout = fixed_position(ob)
   }
   return w
 end
 
 function layout_root:make_menu()
-  local w = font.h6(self.icon_menu, M.x.on_background) -- TODO test other theme
+  local w = font.button(self.icon_menu, M.x.on_background)
   self:create_popup(w)
   return w
 end

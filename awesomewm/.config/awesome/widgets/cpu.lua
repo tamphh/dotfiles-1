@@ -20,7 +20,7 @@ function cpu_root:init(args)
   self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.error
   -- base widgets
   self.wicon = widget.base_icon()
-  self.wtext = widget.base_text()
+  self.wtext = font.button("")
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wbars = {} -- store all bars (one by cpu/core)
   self.wfreqs = {} -- store all freqs (one by cpu/core)
@@ -59,6 +59,7 @@ function cpu_root:make_all_arcchart()
 end
 
 function cpu_root:make_arcchart()
+  self.wtitle.font = M.f.body_2
   self:make_all_arcchart()
   local w = wibox.widget {
     widget.box('horizontal', { self.wbars[self.cpus] } ), -- left

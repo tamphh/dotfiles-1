@@ -240,7 +240,7 @@ function widgets.make_arcchart(w)
   local w = w or nil
   return wibox.widget {
     widget = wibox.container.arcchart,
-    bg = M.x.primary,
+    bg = M.x.primary .. "66", -- 40%
     border_color = M.x.error,
     colors = { M.x.error, M.x.on_error },
     max_value = 99,

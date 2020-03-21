@@ -45,6 +45,7 @@ function ram_root:make_text()
 end
 
 function ram_root:make_arcchart()
+  self.wtitle.font = M.f.body_2
   local arc = widget.make_arcchart()
   local w = wibox.widget {
     { -- left
@@ -52,7 +53,7 @@ function ram_root:make_arcchart()
       {
         nil,
         self.wtitle,
-        self.text,
+        self.wtext,
         layout = wibox.layout.fixed.vertical
       },
       nil,
@@ -65,7 +66,7 @@ function ram_root:make_arcchart()
   awesome.connect_signal("daemon::ram", function(mem)
     arc.max_value = mem.total
     arc.values = { mem.inuse, mem.swp.inuse }
-    self.wtext.markup = helpers.colorize_text(tostring(mem.inuse_percent).."%", M.x.on_primary)
+    self.wtext.markup = helpers.colorize_text(tostring(mem.inuse_percent).."%", M.x.primary)
   end)
   return w
 end

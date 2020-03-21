@@ -4,44 +4,62 @@
 ! material color: https://material.io/inline-tools/color/
 ! material: https://material.io/tools/color 
 
-! Bg !
+! BG !
+#define theme0  #070c15
+#define theme1  #0c121b
+#define theme2  #2c323b
+#define theme3  #4a505a
+! FG !
+#define theme4  #b2ebf2
+#define theme5  #b3e5fc
+#define theme6  #e8f5e9
+! Primary, Secondary !
+#define theme7  #00a7aa
+#define theme8  #00c6d0
+#define theme9  #00d092
+#define theme10 #58daad
+! Error !
+#define theme11 #ac2f44
+#define theme12 #d93951
+#define theme13 #e76781
+! Other !
+#define theme14 #5db09c
+#define theme15 #77aad3
 
-! Grey bg (dark to light)
-! no place but used by tmux and awesome #070c15
-*background:   #0c121b
-*color0:       #2c323b
-*color8:       #4a505a
+*background: theme1
+*foreground: theme4
 
-! Primary bg (dark to light)
-*color6:       #093b46
-*color2:       #1d505d
-*color14:      #2a6472
+! Black
+*color0:  theme0
+*color8:  theme2
 
-! Secondary bg (dark to light)
-*color5:       #1b4a5f
-*color4:       #295d75
-*color13:      #38718b
+! Red
+*color1:  theme11
+*color9:  theme12
 
-! Error bg (dark to light)
-*color1:       #ac2f44
-*color9:       #d03a49
-*color3:       #d84c60
+! Green
+*color2:  theme14
+*color10: theme14
 
-! Text !
+! Yellow
+*color3:  theme13
+*color11: theme13
 
-! Text Grey
-*foreground:   #b2ebf2
+! Blue
+*color4:  theme15
+*color12: theme15
 
-! Text Primary (normal - focus)
-*color10:      #bbdefb
-*color7:       #b3e5fc
+! Magenta
+*color5:  theme9
+*color13: theme10
 
-! Text Secondary (normal - focus)
-*color12:      #c8e6c9
-*color15:      #e8f5e9
+! Cyan
+*color6:  theme7
+*color14: theme8
 
-! Text Error
-*color11:      #ffe0b2
+! White
+*color7:  theme5
+*color15: theme6
 
 st.font: SpaceMono Nerd Font:style=Regular:pixelsize=13
 st.opacity: 255

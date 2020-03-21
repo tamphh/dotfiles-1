@@ -7,16 +7,16 @@ mytheme.name = "worker"
 
 -- xrdb variables and fallback
 mytheme.x = {
-  background = xrdb.background or "#121212",
+  background = xrdb.color0 or "#121212",
   foreground = xrdb.foreground or "#FDFDFD",
   surface = xrdb.color0 or "#000000",
+  dark_primary = "#211B24", -- branded dark surface
 
-  dark_primary = "#1F1B24", -- branded dark surface
   primary = xrdb.color14 or "#52dcba", -- cyan
   primary_variant = xrdb.color6 or "#009F6C", -- primary saturate (200-500)
   error = xrdb.color9 or "#CF6673",
   
-  secondary = xrdb.color5 or "#BB86FC", -- magenta
+  secondary = xrdb.color13 or "#BB86FC", -- magenta
   
   on_background = xrdb.foreground or "#ffffff", -- white
   on_surface = "#ffffff",  -- white

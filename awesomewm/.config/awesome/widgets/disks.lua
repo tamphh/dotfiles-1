@@ -47,6 +47,7 @@ function disks_root:make_all_arcchart()
 end
 
 function disks_root:make_arcchart()
+  self.wtitle.font = M.f.body_2
   self:make_all_arcchart()
   local w = wibox.widget {
     widget.box('horizontal', { self.wbars[#env.disks] }),

@@ -1,9 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local separators = require('util.separators')
-local widget = require('util.widgets')
 
 -- widgets load
 local pad = separators.pad
@@ -27,7 +25,8 @@ function mybar:init(s)
   s.mytaglist = require("widgets.taglist")(s, { mode = "text", want_layout = "vertical" })
 
   -- Create the wibox with default options
-  s.mywibox = awful.wibar({ position = beautiful.wibar_position, width = beautiful.wibar_size, bg = beautiful.wibar_bg, screen = s })
+  s.mywibox = awful.wibar({ position = beautiful.wibar_position, width = beautiful.wibar_size, screen = s })
+  s.mywibox.bg = beautiful.wibar_bg or M.x.background
 
   -- Add widgets to the wibox
   s.mywibox:setup {
@@ -40,12 +39,16 @@ function mybar:init(s)
       layout = wibox.layout.fixed.vertical  
     },
     { -- Right widgets
-      mpc,
-      widget.add_margin(change_theme, { left = 13 }),
-      widget.add_margin(desktop_ctrl, { left = 13 }),
-      scrot,
-      spacing = beautiful.widget_spacing,
-      layout = wibox.layout.fixed.vertical,
+      nil,
+      {
+        mpc,
+        change_theme,
+        desktop_ctrl,
+        scrot,
+        layout = wibox.layout.fixed.vertical,
+      },
+      expand = "none",
+      layout = wibox.layout.align.horizontal,
     },
     expand ="none",
     layout = wibox.layout.align.vertical

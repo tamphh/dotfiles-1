@@ -16,7 +16,7 @@ function brightness_root:init(args)
   self.fg = args.fg or beautiful.widget_brightness_fg or M.x.on_surface
   self.icon = args.icon or beautiful.widget_brightness_icon or { "", M.x.on_surface }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
-  self.want_layout = args.layout or beautiful.widget_brightness_layout or 'horizontal' -- possible values: horizontal , vertical
+  self.layout = args.layout or beautiful.widget_brightness_layout or 'horizontal' -- possible values: horizontal , vertical
   self.bar_size = args.bar_size or 200
   self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.primary
   self.title = args.title or beautiful.widget_brightness_title or { "BRI", M.x.on_background }
@@ -46,8 +46,8 @@ function brightness_root:make_text()
 end
 
 function brightness_root:make_slider()
-  local slider = widget.make_a_slider(1)
-  local w = widget.add_icon_to_slider(slider, self.icon[1], self.icon[2], self.want_layout)
+  local slider = widget.make_a_slider(1, self.bar_colors)
+  local w = widget.box(self.layout, { self.wicon, slider }, 4)
   -- set level
   slider:connect_signal('property::value', function()
     aspawn.with_shell('light -S ' .. slider.value)

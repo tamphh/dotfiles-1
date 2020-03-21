@@ -237,7 +237,7 @@ local todo_new = btext({ fg_icon = "on_secondary", icon = "",
   fg_text = "on_secondary", text = " New task",
   bg = "secondary",
   mode = "contained",
-  spacing = 3,
+  spacing = 4,
   rrect = 30,
   overlay = "on_surface",
   command = exec_prompt, layout = "horizontal"

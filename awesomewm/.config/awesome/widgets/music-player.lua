@@ -8,6 +8,7 @@ local dpi = beautiful.xresources.apply_dpi
 local icons = require("icons.default")
 local gtable = require("gears.table")
 local font = require("util.font")
+local bicon = require("util.icon")
 
 -- widget for the popup
 local mpc = require("widgets.mpc")({})
@@ -28,13 +29,14 @@ local music_player_root = class()
 function music_player_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_volume_fg or M.x.on_background
-  self.icon = args.icon or beautiful.widget_mpc_button_icon or { icon, M.x.on_background }
+  self.icon = args.icon or beautiful.widget_mpc_button_icon or { "", M.x.on_background }
   self.mode = args.mode or 'popup' -- possible values: block, popup, song
   self.wibar_position = args.wibar_position or beautiful.wibar_position or "top"
   self.wibar_size = args.wibar_size or beautiful.wibar_size or dpi(56)
   self.wposition = args.position or widget.check_popup_position(self.wibar_position)
   -- widgets
-  self.wicon = font.button(self.icon[1], self.icon[2])
+  --self.wicon = font.button(self.icon[1], self.icon[2])
+  self.wicon = bicon({ icon = self.icon[1], fg = self.icon[2] })
   self.title = font.button("")
   self.artist = font.caption("")
   self.cover = widget.imagebox(90)

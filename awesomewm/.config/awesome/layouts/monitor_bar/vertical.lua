@@ -6,9 +6,10 @@ local separator = require("util.separators")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
+local font = require("util.font")
+local btext = require("util.mat-button")
 
 -- beautiful var
-local font = "sans 16"
 local fg = "#ffffff"
 local bg = "#651030"
 local l = "horizontal"
@@ -16,8 +17,10 @@ local l = "horizontal"
 local pad = separator.pad(3)
 
 -- Setting titles
-local settings_title = widget.create_title('Settings', beautiful.on_background)
-local monitors_title = widget.create_title('Monitors', beautiful.on_background)
+local monitors_title = font.body_title('Monitors', M.x.on_surface, M.t.high)
+monitors_title.align = "left"
+local settings_title = font.body_title('Settings', M.x.on_surface, M.t.high)
+settings_title.align = "left"
 
 -- import widgets
 local vol = require("widgets.volume")({ mode = "slider" })
@@ -31,17 +34,20 @@ local mybar = class()
 function mybar:init(s)
 
   s.monitor_bar = awful.wibar({ stretch = false, visible = false, type = "dock", screen = s })
-  s.monitor_bar.bg = beautiful.grey
+  s.monitor_bar.bg = M.x.surface
 
   -- add an exit button
-  local exit_icon = widget.for_one_icon(beautiful.secondary, beautiful.error, "    LOGOUT    ", font)
-  local exit = widget.box(l, { exit_icon })
-  exit:buttons(gtable.join(
-  awful.button({ }, 1, function ()
+  local hide_monitor = function ()
     exit_screen_show()
     s.monitor_bar.visible = false
-  end)
-  ))
+  end
+  local exit = btext({ fg_icon = "on_error", icon = "",
+    font_icon = M.f.button,
+    fg_text = "on_error", text = "LOGOUT",
+    bg = "error", mode = "contained",
+    spacing = 10,
+    overlay = "on_error", command = hide_monitor, layout = "horizontal"
+  })
 
   local wibar_pos = beautiful.wibar_position or "top"
   -- place the sidebar at the right position
@@ -57,7 +63,7 @@ function mybar:init(s)
   s.monitor_bar.width = dpi(230)
 
   local textclock = wibox.widget {
-    format = '<span foreground="'..beautiful.primary..'" font="22.5">%H:%M</span>',
+    format = '<span foreground="'..M.x.on_surface..'" font="22.5">%H:%M</span>',
     refresh = 60,
     widget = wibox.widget.textclock,
     forced_height = dpi(88),
@@ -73,64 +79,42 @@ function mybar:init(s)
 
   -- setup
   s.monitor_bar:setup {
-    { -- top
-      pad,
-      textclock,
-      pad,
-      expand = "none",
-      layout = wibox.layout.align.horizontal
+    { -- bg
+      { -- margin
+        { -- top
+          nil,
+          textclock,
+          expand = "none",
+          layout = wibox.layout.align.horizontal
+        },
+        { -- center
+          monitors_title,
+          cpu,
+          ram,
+          disks,
+          spacing = dpi(10),
+          layout = wibox.layout.fixed.vertical
+        },
+        { -- bottom
+          settings_title,
+          vol,
+          brightness,
+          {
+            nil,
+            exit,
+            layout = wibox.layout.align.horizontal,
+            expand = "none"
+          },
+          spacing = 6,
+          layout = wibox.layout.fixed.vertical
+        },
+        layout = wibox.layout.align.vertical
+      },
+      margins = 12,
+      widget = wibox.container.margin
     },
-    { -- center
-      widget.box('horizontal', { pad, monitors_title }), 
-      {
-        pad,
-        cpu,
-        pad,
-        layout = wibox.layout.align.horizontal
-      },
-      {
-        pad,
-        ram,
-        pad,
-        layout = wibox.layout.align.horizontal
-      },
-      {
-        pad,
-        disks,
-        pad,
-        layout = wibox.layout.align.horizontal
-      },
-      spacing = dpi(10),
-      layout = wibox.layout.fixed.vertical
-    },
-    { -- bottom
-      pad,
-      widget.box('horizontal', { pad, settings_title }),
-      {
-        pad,
-        vol,
-        pad,
-        layout = wibox.layout.align.horizontal
-      },
-      {
-        pad,
-        brightness,
-        pad,
-        layout = wibox.layout.align.horizontal
-      },
-      pad,
-      pad,
-      {
-        nil,
-        exit,
-        nil,
-        layout = wibox.layout.align.horizontal,
-        expand = "none"
-      },
-      pad,
-      layout = wibox.layout.fixed.vertical
-    },
-    layout = wibox.layout.align.vertical
+    bg = M.x.on_surface .. M.e.dp01,
+    widget = wibox.container.background
   }
 end
 

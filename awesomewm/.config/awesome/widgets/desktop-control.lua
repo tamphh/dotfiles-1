@@ -1,4 +1,5 @@
 local awful = require("awful")
+local wibox = require("wibox")
 local gtable = require("gears.table")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
@@ -50,4 +51,11 @@ awful.tag.attached_connect_signal(s, "property::layout", function()
   update_widget()
 end)
 
-return layoutbox
+return wibox.widget {
+  {
+    layoutbox,
+    margins = 12,
+    widget = wibox.container.margin
+  },
+  widget = wibox.container.background
+}

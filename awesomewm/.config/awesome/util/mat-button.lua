@@ -76,6 +76,7 @@ function mat_button:make_widget()
           {
             self.wicon,
             self.wtext,
+            spacing = dpi(self.spacing),
             layout = wibox.layout.fixed[self.layout],
           },
           widget = self.margin
@@ -87,7 +88,6 @@ function mat_button:make_widget()
           },
           widget = self.bgoverlay
         },
-        spacing = dpi(self.spacing),
         layout = wibox.layout.stack
       },
       widget = self.background
