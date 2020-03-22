@@ -44,7 +44,6 @@ function mybar:init(s)
       desktop_ctrl,
       scrot,
       wibox.widget.textbox(" "),
-      spacing = beautiful.widget_spacing,
       layout = wibox.layout.fixed.horizontal
     },
     expand ="none",

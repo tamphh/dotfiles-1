@@ -4,6 +4,7 @@ local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local helpers = require("helpers")
 local font = require("util.font")
+local tooltip = require("util.tooltip")
 
 -- beautiful vars
 local fg_read = beautiful.widget_email_fg_read or M.x.on_background
@@ -62,11 +63,7 @@ local w = awful.popup {
 w:bind_to_widget(email_widget)
 
 -- tooltip
-local tt = awful.tooltip {
-  markup = 0,
-  visible = false,
-  objects = { email_widget }
-}
+local tt = tooltip.create(email_widget)
 
 local grab_emails_script = [[
   bash -c "
@@ -80,11 +77,11 @@ awful.widget.watch(grab_emails_script, 300, -- 5m
     if (mail_num > 0) then
       icon.markup = helpers.colorize_text(read_icon, fg_read)
       text.markup = helpers.colorize_text(mail_num, fg_read)
-      tt.markup = helpers.colorize_text("You got "..mail_num.." messages", fg_read)
+      tt.text = "You got "..mail_num.." messages"
     else
       icon.markup = helpers.colorize_text(unread_icon, fg_unread)
       text.markup = helpers.colorize_text(0, fg_read)
-      tt.markup = helpers.colorize_text("No new messages", fg_read)
+      tt.text = "No new messages"
     end
   end
 )

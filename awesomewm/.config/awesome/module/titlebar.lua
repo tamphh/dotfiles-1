@@ -12,7 +12,11 @@ local font = require("util.font")
 local btext = require("util.mat-button")
 --local naughty = require("naughty")
 
-local smart_border = beautiful.double_border or false
+-- options
+local smart_border = beautiful.double_border or nil
+local bg_unfocus = beautiful.titlebar_bg_normal or M.x.surface
+local bg_focus = beautiful.titlebar_bg_focus or M.x.on_surface .. M.e.dp01
+local titlebar_font = beautiful.titlebar_font or M.f.subtile_1
 
 -- import widget
 local ncmpcpp = require("widgets.mpc")({ 
@@ -155,20 +159,67 @@ client.connect_signal("request::titlebars", function(c)
     helpers.create_titlebar(c, buttons, "right", beautiful.titlebars_imitate_borders_size)
   end
 
+  local background_normal = function()
+    -- background elevation don't like smart_border
+    if smart_border then return wibox.widget.base.empty_widget() end
+    return wibox.widget {
+      bg = bg_unfocus,
+      widget = wibox.container.background
+    }
+  end
+
+  local background_elevation = function(c)
+    -- background elevation don't like smart_border
+    if smart_border then return wibox.widget.base.empty_widget() end
+
+    local background = wibox.widget {
+      bg = bg_unfocus,
+      widget = wibox.container.background
+    }
+
+    c:connect_signal("unfocus", function(c)
+      background.bg = bg_unfocus
+    end)
+
+    c:connect_signal("focus", function(c)
+      background.bg = bg_focus
+    end)
+
+    return background
+  end
+
   -- bottom bar for ncmpcpp
   if c.class == "music_n" and theme.name ~= "machine" then
-    awful.titlebar(c, {
-      font = beautiful.titlebar_font, position = "bottom", size = dpi(50)
-    }) : setup { 
-      nil,
-      ncmpcpp,
-      expand = "none",
-      layout = wibox.layout.align.horizontal
-    }
+    if smart_border then
+      awful.titlebar(c, {
+        font = titlebar_font, position = "bottom", size = dpi(50)
+      }) : setup {
+        nil,
+        ncmpcpp,
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+      }
+    else
+      awful.titlebar(c, {
+        font = titlebar_font, position = "bottom", size = dpi(50)
+      }) : setup {
+        {
+          {
+            nil,
+            ncmpcpp,
+            expand = "none",
+            layout = wibox.layout.align.horizontal
+          },
+          widget = background_elevation(c),
+        },
+        widget= background_normal
+      }
+    end
   end
 
   -- add a titlebar if titlebars_enabled is true
   if beautiful.titlebars_enabled then
+    if smart_border then
     awful.titlebar(c, { size = beautiful.titlebar_size, position = position }) : setup {
       { -- Left
         --awful.titlebar.widget.iconwidget(c),
@@ -190,6 +241,35 @@ client.connect_signal("request::titlebars", function(c)
       },
       layout = wibox.layout.align.horizontal
     }
+  else
+    awful.titlebar(c, { size = beautiful.titlebar_size, position = position }) : setup {
+      {
+        {
+          { -- Left
+            --awful.titlebar.widget.iconwidget(c),
+            buttons = mbuttons(c),
+            layout  = wibox.layout.fixed.horizontal
+          },
+          {
+            mytitle(c),
+            buttons = mbuttons(c),
+            layout  = wibox.layout.flex.horizontal
+          },
+          { -- Right
+            --awful.titlebar.widget.floatingbutton (c),
+            --awful.titlebar.widget.maximizedbutton(c),
+            --awful.titlebar.widget.stickybutton   (c),
+            --awful.titlebar.widget.ontopbutton    (c),
+            gen_button(c, '', "error", "error", window_close),
+            layout = wibox.layout.fixed.horizontal
+          },
+          layout = wibox.layout.align.horizontal
+        },
+        widget = background_elevation(c),
+      },
+      widget = background_normal
+    }
+  end
   end
 
   -- Bottom, add an additional internal border on non floating client

@@ -55,15 +55,15 @@ theme.tagnames = {" 1 "," 2 "," 3 "," 4 "," 5 "," 6 "," 7 "," 8 "," 9 "," 10 "}
 
 -- different color on each taglists
 theme.taglist_text_color_empty = {
-  M.x.on_background .. M.e.dp01,
-  M.x.on_background .. M.e.dp02,
-  M.x.on_background .. M.e.dp03,
-  M.x.on_background .. M.e.dp04,
   M.x.on_background .. M.e.dp06,
-  M.x.on_background .. M.e.dp01,
-  M.x.on_background .. M.e.dp02,
-  M.x.on_background .. M.e.dp03,
-  M.x.on_background .. M.e.dp04,
+  M.x.on_background .. M.e.dp06,
+  M.x.on_background .. M.e.dp06,
+  M.x.on_background .. M.e.dp06,
+  M.x.on_background .. M.e.dp06,
+  M.x.on_background .. M.e.dp06,
+  M.x.on_background .. M.e.dp06,
+  M.x.on_background .. M.e.dp06,
+  M.x.on_background .. M.e.dp06,
   M.x.on_background .. M.e.dp06,
 }
 
@@ -81,16 +81,16 @@ theme.taglist_text_color_occupied = {
 }
 
 theme.taglist_text_color_focused = {
-  M.x.primary .. "66",
-  M.x.primary .. "69",
-  M.x.primary .. "6B",
-  M.x.primary .. "6E",
-  M.x.primary .. "70",
-  M.x.primary .. "73",
-  M.x.primary .. "75",
-  M.x.primary .. "78",
-  M.x.primary .. "7A",
-  M.x.primary .. "7D",
+  M.x.primary,
+  M.x.primary,
+  M.x.primary,
+  M.x.primary,
+  M.x.primary,
+  M.x.primary,
+  M.x.primary,
+  M.x.primary,
+  M.x.primary,
+  M.x.primary,
 }
 
 theme.taglist_text_color_urgent = {
@@ -107,6 +107,9 @@ theme.taglist_text_color_urgent = {
 }
 
 -- }}} TAGLIST END
+
+--theme.tasklist_bg_normal = M.x.on_background .. M.e.dp00
+--theme.tasklist_bg_focus = M.x.on_background .. M.e.dp00
 
 -- {{{ MENU
 
@@ -146,7 +149,6 @@ theme.widget_mpc_button_icon = { "ﱘ", M.x.on_background }
 theme.bar_color = M.x.primary
 theme.bar_colors_disk = { M.x.primary, M.x.primary, M.x.primary }
 theme.bar_colors_network = { M.x.primary, M.x.primary }
-
 
 -- }}} End WIDGET
 

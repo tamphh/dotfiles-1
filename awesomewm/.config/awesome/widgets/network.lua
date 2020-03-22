@@ -14,6 +14,7 @@ local network_root = class()
 function network_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_network_fg or M.x.on_surface
+  --self.bg = args.bg or beautiful.widget_network_bg or M.x.surface
   self.icon_up = args.icon_up or beautiful.widget_network_icon_up or { "ﲗ", M.x.on_surface }
   self.icon_down = args.icon_down or beautiful.widget_network_icon_down or { "ﲐ", M.x.on_surface }
   self.icon_ip = args.icon_ip or beautiful.widget_network_icon_ip or { "", M.x.on_background }

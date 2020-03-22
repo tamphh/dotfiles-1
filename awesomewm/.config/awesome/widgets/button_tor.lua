@@ -5,17 +5,17 @@ local widget = require("util.widgets")
 local helpers = require("helpers")
 local dpi = require('beautiful').xresources.apply_dpi
 local icons = require("icons.default")
+local bicon = require("util.icon")
 
 -- beautiful vars
 local tor_icon = beautiful.widget_tor_icon or " 﨩"
 local fg_enable = beautiful.widget_tor_fg_enable or M.x.primary
 local fg_disable = beautiful.widget_tor_fg_disable or M.x.error
-local bg = beautiful.widget_tor_bg or M.x.background
 local padding = beautiful.widget_popup_padding or dpi(1)
 
 -- widget creation
-local tor_widget = widget.for_one_icon(fg_enable, bg, tor_icon, "Iosevka Term 16")
-local tor_run = false -- boolean
+local tor_widget = bicon({ icon = tor_icon, fg = fg_enable })
+local tor_run = nil -- boolean
 local sep = widget.base_text()
 sep.markup = helpers.colorize_text("---", M.x.on_surface)
 
@@ -131,7 +131,7 @@ local function update_popup()
     country = country or msg
     hostname = hostname or msg
 
-    popup_ip.markup = helpers.colorize_text("ip: "..ip, "#ff0000")
+    popup_ip.markup = helpers.colorize_text("ip: "..ip, M.x.error)
     popup_region.markup = helpers.colorize_text("city: "..city, "#f0f000")
     popup_country.markup = helpers.colorize_text("country: "..country, "#f000f0")
     popup_hostname.markup = helpers.colorize_text("hostname: "..hostname, "#00f000")

@@ -44,13 +44,6 @@ theme.double_border = false
 theme.double_border_normal = M.x.background
 theme.double_border_focus = M.x.on_background
 
--- {{{ Tooltip
-
-theme.tooltip_bg = M.x.surface
-theme.tooltip_fg = M.x.on_surface
-
--- }}} 
-
 -- {{{ TITLEBAR 
 
 theme.titlebar_fg_normal = M.x.on_background

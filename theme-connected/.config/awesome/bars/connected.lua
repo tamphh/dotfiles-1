@@ -14,17 +14,19 @@ local pad = separators.pad
 local arrow = separators.arrow_left
 
 -- gradient colors (dark to light)
-local g0 = beautiful.grey_dark
-local g1 = beautiful.grey
-local g2 = beautiful.primary
-local g3 = beautiful.secondary
+local g0 = M.x.background
+local g1 = M.x.dark_primary
+local g2 = M.x.primary
+local g3 = M.x.secondary
 
 -- {{{ Add a background to the widgets
 
 local tor = require("widgets.button_tor")
 local my_tor = widget.bg( g1, tor )
 
-local network = require("widgets.network")({ mode = "ip" })
+local network = require("widgets.network")({
+  mode = "ip", fg = M.x.on_primary, icon_ip = { "", M.x.on_primary }
+})
 local my_network = widget.bg( g2, network )
 
 local wifi_str = require("widgets.wifi_str")
@@ -33,8 +35,9 @@ local my_wifi_str = widget.bg( g3, wifi_str )
 local mpc = require("widgets.mpc")({ colors = { beautiful.primary, beautiful.primary } })
 local my_mpc_widget = widget.bg( g1, mpc )
 
-local volume = require("widgets.volume")({})
-local my_volume = widget.bg( g2, volume )
+local my_volume = require("widgets.volume")({
+  fg = M.x.on_primary, icon = { "", M.x.on_primary }, bg = g2
+})
 
 local change_theme = require("widgets.button_change_theme")
 local my_change_theme = widget.bg( g1, change_theme )
@@ -42,8 +45,9 @@ local my_change_theme = widget.bg( g1, change_theme )
 local ram = require("widgets.ram")({})
 local my_ram = widget.bg( g1, ram )
 
-local battery = require("widgets.battery")({})
-local my_battery = widget.bg( g3, battery )
+local my_battery = require("widgets.battery")({
+  fg = M.x.on_secondary, bg = g3, icon = { "臘", M.x.on_secondary }
+})
 
 local mail = require("widgets.mail")
 local my_email = widget.bg( g2, mail )
@@ -105,7 +109,7 @@ function mybar:init(s)
       arrow(g2, g3),
       my_wifi_str,
       arrow(g3, g0),
-      pad(32),
+      pad(28),
       arrow(g0, g1),
       my_mpc_widget,
       arrow(g1, g2),

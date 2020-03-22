@@ -4,6 +4,7 @@ local gtable = require("gears.table")
 local font = require("util.font")
 local wibox = require("wibox")
 local awful = require("awful")
+local beautiful = require("beautiful")
 
 local root_icon = class()
 
@@ -49,6 +50,15 @@ function root_icon:action()
   ))
 end
 
+function root_icon:margins()
+  self.wibar_size = beautiful.wibar_size or 56
+  local margins = self.wibar_size < 30 and 0 or 12
+  return wibox.widget {
+    margins = margins,
+    widget = wibox.container.margin
+  }
+end
+
 -- https://material.io/design/iconography/system-icons.html#system-icon-metrics
 function root_icon:spec()
   self.wicon.forced_height = 24
@@ -60,8 +70,7 @@ function root_icon:spec()
       --  bg = M.x.on_surface .. M.e.dp02,
       --  widget = wibox.container.background
       --},
-      margins = 12,
-      widget = wibox.container.margin
+      widget = self:margins()
     },
     --bg = M.x.on_surface .. M.e.dp01,
     widget = wibox.container.background

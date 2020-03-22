@@ -7,6 +7,7 @@ local helpers = require("helpers")
 local change_theme = require("widgets.button_change_theme")
 local font = require("util.font")
 local bicon = require("util.icon")
+local tooltip = require("util.tooltip")
 
 -- beautiful var
 local wibar_pos = beautiful.wibar_position or "top"
@@ -111,9 +112,9 @@ function layout_root:create_buttons()
   ))
 
   local function set_tooltip(w, text)
-    local tooltip = awful.tooltip({ objects = { w } })
+    local tt = tooltip.create(w)
     w:connect_signal('mouse::enter', function()
-      tooltip.text = text
+      tt.text = text
     end)
   end
 

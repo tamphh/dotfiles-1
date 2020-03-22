@@ -15,14 +15,6 @@ local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.n
 
 local theme = {}
 
-theme.bg_normal     = M.x.background
-theme.bg_focus      = M.x.background
-theme.bg_urgent     = M.x.error
-
-theme.fg_normal     = M.x.on_background
-theme.fg_focus      = M.x.on_background
-theme.fg_urgent     = M.x.on_alert
-
 theme.border_width  = dpi(1)
 theme.screen_margin = dpi(6)
 theme.useless_gap   = dpi(4)
@@ -78,16 +70,16 @@ theme.taglist_text_color_occupied = {
 }
 
 theme.taglist_text_color_focused = {
-  M.x.primary .. "66",
-  M.x.primary .. "69",
-  M.x.primary .. "6B",
-  M.x.primary .. "6E",
-  M.x.primary .. "70",
-  M.x.primary .. "73",
-  M.x.primary .. "75",
-  M.x.primary .. "78",
-  M.x.primary .. "7A",
-  M.x.primary .. "7D",
+  M.x.primary,
+  M.x.secondary,
+  M.x.primary,
+  M.x.secondary,
+  M.x.primary,
+  M.x.secondary,
+  M.x.primary,
+  M.x.secondary,
+  M.x.primary,
+  M.x.secondary,
 }
 
 theme.taglist_text_color_urgent = {
@@ -105,17 +97,6 @@ theme.taglist_text_color_urgent = {
 
 -- icon_taglist
 theme.ntags = 10
-theme.taglist_icons_empty = {}
-theme.taglist_icons_occupied = {}
-theme.taglist_icons_focused = {}
-theme.taglist_icons_urgent = {}
--- table.insert(tag_icons, tag)
-for i = 1, theme.ntags do
-  theme.taglist_icons_empty[i] = taglist_icon_path .. tostring(i) .. "_empty.png"
-  theme.taglist_icons_occupied[i] = taglist_icon_path .. tostring(i) .. "_occupied.png"
-  theme.taglist_icons_focused[i] = taglist_icon_path .. tostring(i) .. "_focused.png"
-  theme.taglist_icons_urgent[i] = taglist_icon_path .. tostring(i) .. "_urgent.png"
-end
 
 theme.taglist_layout = wibox.layout.fixed.horizontal -- horizontal or vertical
 
@@ -132,7 +113,7 @@ theme.wallpaper = os.getenv("HOME").."/images/"..M.name..".jpg"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-theme.menu_height, theme.bg_focus, theme.fg_focus
+  theme.menu_height, M.x.secondary, M.x.on_secondary
 )
 
 -- Define the icon theme for application icons. If not set then the icons
@@ -151,17 +132,13 @@ theme.widget_wifi_str_fg = "#87aaaa"
 theme.widget_wifi_str_bg = M.x.background
 theme.widget_wifi_layout = 'horizontal' -- horizontal or vertical
 
--- Screenshot
-theme.widget_scrot_fg = M.x.on_background
-theme.widget_scrot_icon = ''
-
 -- Button mpc
 theme.widget_mpc_button_icon = "ﱘ"
 
 -- progressbar colors
-theme.bar_color = M.x.error
-theme.bar_colors_disk = { M.x.error, M.x.error, M.x.error }
-theme.bar_colors_network = { M.x.error, M.x.error }
+theme.bar_color = M.x.primary
+theme.bar_colors_disk = { M.x.primary, M.x.primary, M.x.primary }
+theme.bar_colors_network = { M.x.primary, M.x.primary }
 
 -- }}} End WIDGET
 

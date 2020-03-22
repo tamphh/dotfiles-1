@@ -1,34 +1,58 @@
-! Grey bg (dark to light)
-! no place but used by tmux and awesome #0c211a
-*background: #162b24
-*color0: #223830
-*color8: #3d544c
+! BG !
+#define theme0  #10211b
+#define theme1  #162b24
+#define theme2  #223830
+#define theme3  #1d2e23
+! FG !
+#define theme4  #c6e1a6
+#define theme5  #d5e5c3
+#define theme6  #e8f5e9
+! Primary, Secondary !
+#define theme7  #5b8662
+#define theme8  #799b70
+#define theme9  #b56d5d
+#define theme10 #cf7b60
+! Error !
+#define theme11 #cac054
+#define theme12 #d6ce7d
+#define theme13 #e4de9f
+! Other !
+#define theme14 #84ee9f
+#define theme15 #94aeef
 
-! Primary bg (dark to light)
-*color6: #4d745a
-*color2: #5b8662
-*color14: #799b70
+*background: theme1
+*foreground: theme4
 
-! Secondary bg (dark to light)
-*color5: #996654
-*color4: #b56d5d
-*color13: #cf7b60
+! Black
+*color0:  theme0
+*color8:  theme2
 
-! Error bg (dark to light)
-*color1: #cac054
-*color9: #d6ce7d
-*color3: #e4de9f
+! Red
+*color1:  theme11
+*color9:  theme12
 
-! fg grey 
-*foreground: #c6e1a6
+! Green
+*color2:  theme14
+*color10: theme14
 
-! fg primary
-*color10: #d5e5c3
-*color7: #e8f5e9
+! Yellow
+*color3:  theme13
+*color11: theme13
 
-! fg secondary
-*color12: #d8b290
-*color15: #ddc0a6
+! Blue
+*color4:  theme15
+*color12: theme15
 
-! fg error
-*color11: #ece8be
+! Magenta
+*color5:  theme9
+*color13: theme10
+
+! Cyan
+*color6:  theme7
+*color14: theme8
+
+! White
+*color7:  theme5
+*color15: theme6
+
+st.font: RobotoMono Nerd Font:style=Regular:pixelsize=13

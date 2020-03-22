@@ -82,7 +82,7 @@ end
 
 function brightness_root:make_progressbar()
   local p = widget.make_progressbar(_, self.bar_size, self.bar_colors)
-  local wp = widget.progressbar_layout(p, self.want_layout)
+  local wp = widget.progressbar_layout(p, self.layout)
   local w
   if self.want_layout == 'vertical' then
     w = self:make_progressbar_vert(wp)

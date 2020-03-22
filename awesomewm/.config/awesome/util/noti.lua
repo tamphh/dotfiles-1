@@ -20,8 +20,9 @@ end
 
 function noti.warn(msg)
   naughty.notify({ 
-    title = "Warn",
-    text = "WARN: "..msg
+    title = "Warning",
+    text = msg,
+    preset = naughty.config.presets.critical
   })
 end
 

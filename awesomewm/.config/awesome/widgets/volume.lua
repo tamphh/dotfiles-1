@@ -14,6 +14,7 @@ local volume_root = class()
 function volume_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_volume_fg or M.x.on_surface
+  self.bg = args.bg or beautiful.widget_volume_bg or M.x.surface
   self.icon = args.icon or beautiful.widget_volume_icon or { "", M.x.on_surface }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
   self.layout = args.layout or beautiful.widget_volume_layout or 'horizontal' -- possible values: horizontal , vertical
@@ -25,6 +26,10 @@ function volume_root:init(args)
   self.wicon = font.button(self.icon[1], self.icon[2])
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
+  self.background = wibox.widget {
+    bg = self.bg,
+    widget = wibox.container.background
+  }
   self.w = self:make_widget()
 end
 
@@ -38,17 +43,25 @@ function volume_root:make_widget()
   end
 end
 
-function volume_root:update(volume, fg)
+function volume_root:update(volume, fg, bg)
   self.wtext.markup = helpers.colorize_text(volume.."%", fg, M.t.medium)
+  self.background.bg = bg
 end
 
 function volume_root:make_text()
-  local w = widget.box_with_margin(self.layout, { self.wicon, self.wtext }, spacing)
+  local w = wibox.widget {
+    {
+      self.wicon, self.wtext,
+      spacing = spacing,
+      layout = wibox.layout.fixed[self.layout],
+    },
+    widget = self.background
+  }
   awesome.connect_signal("daemon::volume", function(volume, is_muted)
-      if is_muted then
-        self:update(volume, M.x.error)
+      if is_muted == 1 then
+        self:update(volume, M.x.on_error, M.x.error)
       else
-        self:update(volume, self.fg)
+        self:update(volume, self.fg, self.bg)
       end
   end)
   return w

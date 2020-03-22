@@ -26,15 +26,6 @@ theme.general_padding = { left = dpi(9), right = dpi(9), top = dpi(9), bottom = 
 -- smart border
 theme.double_border = false
 
--- {{{ Tooltip
-theme.tooltip_bg = M.x.surface
-theme.tooltip_fg = M.x.on_surface
-theme.tooltip_font = M.f.caption
-theme.tooltip_border_width = 0
-theme.tooltip_shape = helpers.rrect(50)
---theme.tooltip_align = "center"
--- }}}
-
 -- {{{ TITLEBAR 
 
 theme.titlebar_bg_normal = M.x.primary .. "99" -- 60%

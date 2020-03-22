@@ -1,21 +1,35 @@
 -- Create a signal: daemon::volume
--- return values: volume, is_muted
+-- return values: volume [number], is_muted [0 or 1]
 local aspawn = require("awful.spawn")
 local awidget = require("awful.widget")
-local naughty = require("naughty")
+local noti = require("util.noti")
 local env = require("env-config")
 
 if env.sound_system == "alsa" then
+  local gtimer = require("gears.timer")
 
-  awidget.watch("amixer -D "..env.sound_card_alsa.." sget Master", 2, function(widget, stdout)
-    local volume = stdout:match('(%d+)%%') or nil
-    local is_muted = volume == 0 and false or true
+  local update_volume = function()
+    aspawn.easy_async_with_shell(
+      [[
+      amixer -D ]]..env.sound_card_alsa.. [[ sget Master | grep "\[" | head -n1
+      ]],
+      function(stdout)
+        local noti = require("util.noti")
+        local volume = tonumber(stdout:match('(%d+)%%'))
 
-    if volume ~= nil then
-      awesome.emit_signal("daemon::volume", tonumber(volume), is_muted)
-    else
-      naughty.notify({ title = "Warning!", text = "Can't find volume: "..volume
-    }) end end)
+        if not volume then
+          noti.warn("Can't find volume on: "..env.sound_card_alsa)
+        end
+        local is_muted = volume == 0 and 1 or 0
+        awesome.emit_signal("daemon::volume", volume, is_muted)
+      end
+    )
+  end
+
+  gtimer.start_new(5, function()
+    update_volume()
+    return true
+  end)
 
 else -- asume you use pulseaudio
 

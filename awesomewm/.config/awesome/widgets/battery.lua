@@ -13,6 +13,7 @@ local battery_root = class()
 function battery_root:init(args)
   -- options
   self.fg = args.fg or beautiful.widget_battery_fg or M.x.on_surface
+  self.bg = args.bg or beautiful.widget_battery_bg or M.x.surface
   self.icon = args.icon or beautiful.widget_battery_icon or { "臘", M.x.on_surface }
   self.title = args.title or beautiful.widget_battery_title or { "BAT", M.x.on_background }
   self.mode = args.mode or 'text' -- possible values: text, progressbar, slider
@@ -23,6 +24,10 @@ function battery_root:init(args)
   self.wicon = font.button(self.icon[1], self.icon[2])
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
+  self.background = wibox.widget {
+    bg = self.bg,
+    widget = wibox.container.background
+  }
   self.widget = self:make_widget()
 end
 
@@ -35,7 +40,14 @@ function battery_root:make_widget()
 end
 
 function battery_root:make_text()
-  local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext }, spacing)
+  local w = wibox.widget {
+    {
+      self.wicon, self.wtext,
+      spacing = spacing,
+      layout = wibox.layout.fixed[self.want_layout]
+    },
+    widget = self.background
+  }
   awesome.connect_signal("daemon::battery", function(state, percent)
     self.wicon.markup = helpers.colorize_text(state[1], state[2])
     self.wtext.markup = helpers.colorize_text(percent..'%', self.fg)

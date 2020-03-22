@@ -40,7 +40,7 @@ function mybar:init(s)
   s.mywibox:setup {
     widget.box('horizontal', { pad(2), layouts }), -- left
     s.mytasklist, -- middle
-    widget.box('horizontal', { change_theme, pad(2) }), -- right
+    widget.box('horizontal', { change_theme, scrot, pad(2) }), -- right
     --expand ="none",
     layout = wibox.layout.align.horizontal
   }
