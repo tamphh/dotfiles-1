@@ -1,41 +1,59 @@
-! bg
-
-! grey (dark to light)
-! no place but used by tmux and awesome #202a34
-*background:   #20252c
-*color0:       #222c36
-
+! BG !
+#define theme0  #181d24
+#define theme1  #20252c
+#define theme2  #222c36
+#define theme3  #222f3c
+! FG !
+#define theme4  #cfd8dc
+#define theme5  #d8f5e9
+#define theme6  #f0f9fb
 ! primary (dark to light)
-*color6:       #2e8382
-*color2:       #3d8e8e
-*color14:      #42a3a5
+#define theme7  #3d8e8e
+#define theme8  #79bbbd
+#define theme9  #6e6b8f
+#define theme10 #a8a9db
+! Error !
+#define theme11 #5e3a7b
+#define theme12 #c5b8da
+#define theme13 #7c4790
+! Other !
+#define theme14 #5ca790
+#define theme15 #5c47d0
 
-! secondary (dark to light)
-*color5:       #58527d
-*color4:       #6e6b8f
-*color13:      #8685a1
+*background: theme1
+*foreground: theme4
 
-! alert (dark to light)
-*color1:       #5e3a7b
-*color9:       #6c4086
-*color3:       #7c4790
+! Black
+*color0:  theme0
+*color8:  theme2
 
-! fg
+! Red
+*color1:  theme11
+*color9:  theme12
 
-! grey (dark to light)
-*color8:       #b0bec5
-*foreground:   #cfd8dc
+! Green
+*color2:  theme14
+*color10: theme14
 
-! primary (dark to light)
-*color10:      #b2ebf2
-*color7:       #e0f7fa
+! Yellow
+*color3:  theme13
+*color11: theme13
 
-! secondary (dark to light)
-*color12:      #c8e6c9
-*color15:      #e8f5e9
+! Blue
+*color4:  theme15
+*color12: theme15
 
-! alert (dark to light)
-*color11:      #d8f5e9
+! Magenta
+*color5:  theme9
+*color13: theme10
+
+! Cyan
+*color6:  theme7
+*color14: theme8
+
+! White
+*color7:  theme5
+*color15: theme6
 
 ! st font
 st.font: Iosevka Term:style=Regular:pixelsize=14

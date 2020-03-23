@@ -18,7 +18,7 @@ local read_icon = beautiful.widget_email_read_icon or ""
 local unread_icon = beautiful.widget_email_unread_icon or ""
 
 -- widget creation
-local icon = font.button(unread_icon, fg_unread)
+local icon = font.button(unread_icon, fg_unread, M.t.medium)
 local text = font.button("")
 local email_widget = widget.box(l, { icon, text }, spacing)
 
@@ -75,12 +75,12 @@ awful.widget.watch(grab_emails_script, 300, -- 5m
     local filter_mail = stdout:match('%d+') or 0
     local mail_num = tonumber(filter_mail) or 0
     if (mail_num > 0) then
-      icon.markup = helpers.colorize_text(read_icon, fg_read)
-      text.markup = helpers.colorize_text(mail_num, fg_read)
+      icon.markup = helpers.colorize_text(read_icon, fg_read, M.t.high)
+      text.markup = helpers.colorize_text(mail_num, fg_read, M.t.high)
       tt.text = "You got "..mail_num.." messages"
     else
-      icon.markup = helpers.colorize_text(unread_icon, fg_unread)
-      text.markup = helpers.colorize_text(0, fg_read)
+      icon.markup = helpers.colorize_text(unread_icon, fg_unread, M.t.disabled)
+      text.markup = helpers.colorize_text(0, fg_read, M.t.medium)
       tt.text = "No new messages"
     end
   end

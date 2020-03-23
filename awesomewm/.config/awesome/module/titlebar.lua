@@ -14,8 +14,9 @@ local btext = require("util.mat-button")
 
 -- options
 local smart_border = beautiful.double_border or nil
-local bg_unfocus = beautiful.titlebar_bg_normal or M.x.surface
+local bg_unfocus = beautiful.titlebar_bg_normal or M.x.on_surface .. M.e.dp00
 local bg_focus = beautiful.titlebar_bg_focus or M.x.on_surface .. M.e.dp01
+local bg = beautiful.titlebar_bg or M.x.surface
 local titlebar_font = beautiful.titlebar_font or M.f.subtile_1
 
 -- import widget
@@ -163,7 +164,7 @@ client.connect_signal("request::titlebars", function(c)
     -- background elevation don't like smart_border
     if smart_border then return wibox.widget.base.empty_widget() end
     return wibox.widget {
-      bg = bg_unfocus,
+      bg = bg,
       widget = wibox.container.background
     }
   end
@@ -212,7 +213,7 @@ client.connect_signal("request::titlebars", function(c)
           },
           widget = background_elevation(c),
         },
-        widget= background_normal
+        widget = background_normal
       }
     end
   end

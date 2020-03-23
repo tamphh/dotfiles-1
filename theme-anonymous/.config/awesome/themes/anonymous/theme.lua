@@ -2,17 +2,14 @@
 -- Anonymous awesome theme --
 ---------------------------
 
-local theme_name = "anonymous"
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local gfs = require("gears.filesystem")
 local gears = require("gears")
 local themes_path = gfs.get_themes_dir()
-local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/layouts/"
-local xrdb = xresources.get_current_theme()
-local wibox = require("wibox")
-local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/taglist/"
+local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.name .. "/layouts/"
+local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.name .. "/taglist/"
 
 -- screen size
 local ascreen = require("awful.screen")
@@ -21,66 +18,28 @@ local screen_height = ascreen.focused().geometry.height
 
 local theme = {}
 
--- Get colors from .Xresources
--- bg
-theme.grey_dark = "#202a34"
-theme.grey = xrdb.background
-theme.grey_light = xrdb.color0
+theme.fg_normal     = M.x.on_background
+theme.fg_focus      = M.x.primary
+theme.fg_urgent     = M.x.error
+theme.fg_minimize   = M.x.secondary
 
-theme.primary_dark = xrdb.color6
-theme.primary = xrdb.color2
-theme.primary_light = xrdb.color14
-
-theme.secondary_dark = xrdb.color5
-theme.secondary = xrdb.color4
-theme.secondary_light = xrdb.color13
-
-theme.alert_dark = xrdb.color1
-theme.alert = xrdb.color9
-theme.alert_light = xrdb.color3
-
--- fg
-theme.fg_grey = xrdb.color8
-theme.fg_grey_light = xrdb.foreground
-theme.fg_primary = xrdb.color10
-theme.fg_primary_focus = xrdb.color7
-theme.fg_secondary = xrdb.color12
-theme.fg_secondary_focus = xrdb.color15
-theme.fg_alert = xrdb.color11
-
-theme.font          = "RobotoMono Nerd Font 8"
-
-theme.bg_normal     = theme.grey
-theme.bg_focus      = theme.grey_light
---theme.bg_urgent     = theme.xbackground
---theme.bg_minimize   = "#444444"
---theme.bg_systray    = theme.xbackground
-
-theme.fg_normal     = theme.fg_primary
-theme.fg_focus      = theme.fg_primary_focus
-theme.fg_urgent     = theme.fg_alert
-theme.fg_minimize   = theme.fg_primary
-
-theme.border_width  = dpi(5)
+theme.border_width  = dpi(3)
 theme.screen_margin = dpi(6)
 theme.useless_gap   = dpi(5)
-theme.border_normal = theme.grey_dark
-theme.border_focus  = theme.grey_light
-theme.border_marked = theme.grey
+theme.border_focus  = M.x.background .. M.e.dp01
 
 -- general padding
 theme.general_padding = { left = dpi(6), right = dpi(6), top = dpi(6), bottom = dpi(6) }
 
 -- rounded corners
 theme.border_radius = dpi(8)
-theme.wibar_position = "top"
 
 -- {{{ TITLEBAR 
 
-theme.titlebar_fg_normal = theme.fg_primary
-theme.titlebar_bg_normal = theme.grey_dark
-theme.titlebar_fg_focus = theme.fg_primary_focus
-theme.titlebar_bg_focus = theme.grey_dark
+theme.titlebar_fg_normal = M.x.on_background
+theme.titlebar_bg_normal = M.x.background
+theme.titlebar_fg_focus = M.x.primary
+theme.titlebar_bg_focus = M.x.background
 theme.titlebars_enabled = true 
 theme.titlebar_title_enabled = true 
 theme.titlebars_imitate_borders = false
@@ -88,10 +47,10 @@ theme.titlebars_imitate_borders = false
 -- }}} End TITLEBAR
 
 -- Top bar
-theme.wibar_size = dpi(42)
+theme.wibar_size = dpi(50)
 theme.wibar_width = screen_width - dpi(126)
 
-theme.wibar_bg = theme.grey .. "00"
+theme.wibar_bg = M.x.background .. "00"
 theme.wibar_border_radius = dpi(0)
 
 -- Edge snap
@@ -106,11 +65,6 @@ end
 
 -- Nerd Font icon here
 theme.tagnames = {" 1 "," 2 "," 3 "," 4 "," 5 "," 6 "," 7 "," 8 "," 9 "," 10 "}
--- mini_taglist
---theme.taglist_text_occupied = {"","","ﲵ","ﱘ","","","","","","ﮊ"}
---theme.taglist_text_focused = {"","","ﲵ","ﱘ","","","","","","ﮊ"}
---theme.taglist_text_urgent = {"","","ﲵ","ﱘ","","","","","","ﮊ"}
---theme.taglist_text_empty = {"","","","","","","","","",""}
 
 -- icon_taglist
 local ntags = 10
@@ -126,25 +80,19 @@ for i = 1, ntags do
   theme.taglist_icons_urgent[i] = taglist_icon_path .. tostring(i) .. "_urgent.png"
 end
 
--- Text Taglist (default)
-theme.taglist_font = "RobotoMono Nerd Font Mono 16"
-theme.taglist_layout = wibox.layout.fixed.horizontal -- horizontal or vertical
-
--- }}} TAGLIST END
-
 -- {{{ MENU
 
-theme.menu_submenu_icon = themes_path.."theme_name../submenu.png"
+theme.menu_submenu_icon = themes_path..M.name.."/submenu.png"
 theme.menu_height = dpi(16)
 theme.menu_width  = dpi(100)
 
 -- }}} End MENU
 
-theme.wallpaper = os.getenv("HOME") .. "/images/"..theme_name..".jpg"
+theme.wallpaper = os.getenv("HOME") .. "/images/"..M.name..".jpg"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-  theme.menu_height, theme.grey_light, theme.fg_focus
+  theme.menu_height, M.x.dark_primary, M.x.primary
 )
 
 -- Define the icon theme for application icons. If not set then the icons
@@ -168,97 +116,34 @@ theme.tasklist_align = "center"
 
 -- {{{ WIDGET
 
-theme.myfont = "RobotoMono Nerd Font"
-theme.widget_icon_font = "RobotoMono Nerd Font Mono 13"
-theme.widget_text_font = "RobotoMono Nerd Font 8"
-
 -- popup
 theme.widget_popup_padding = dpi(3)
 
--- Hostname
-theme.widget_hostname_text_icon = '<span foreground="#948a77">  </span>'
-
--- Tor
-theme.widget_tor_icon = "﨩"
-theme.widget_tor_fg_enable = theme.fg_grey
-theme.widget_tor_fg_disable = theme.fg_alert
-theme.widget_tor_bg = theme.grey .. "00"
-theme.widget_tor_layout = 'horizontal' -- horizontal or vertical
-
--- Mini ncmpcpp player
---
-theme.widget_font = 'RobotoMono Nerd Font Mono 15'
-theme.widget_ncmpcpp_prev = ' ≪ '
-theme.widget_ncmpcpp_toggle = ' ⊡ '
-theme.widget_ncmpcpp_next = ' ≫ '
-
 -- Mails
-theme.widget_email_read_icon = ""
-theme.widget_email_unread_icon = ""
-theme.widget_email_fg_read = theme.fg_grey
-theme.widget_email_fg_unread = theme.fg_grey_light
-theme.widget_email_bg = theme.grey .. "ff"
 theme.widget_email_layout = 'vertical' -- horizontal or vertical
 
--- Network
-theme.widget_network_icon = ""
-theme.widget_network_fg = theme.fg_grey
-theme.widget_network_bg = theme.grey .. "00"
-theme.widget_network_layout = 'horizontal' -- horizontal or vertical
-
 -- Wifi str
-theme.widget_wifi_str_fg = "#87aaaa"
-theme.widget_wifi_str_bg = theme.grey .. "00"
 theme.widget_wifi_layout = 'vertical' -- horizontal or vertical
 
 -- RAM
-theme.widget_ram_fg = theme.fg_alert
-theme.widget_ram_bg = theme.grey .. "ff"
 theme.widget_ram_layout = 'vertical' -- horizontal or vertical
 
 -- Battery
-theme.widget_battery_icon_discharging = ""
-theme.widget_battery_icon_charging = ""
-theme.widget_battery_icon_full = ""
-theme.widget_battery_icon_ac = "臘"
-theme.widget_battery_fg = theme.fg_secondary
-theme.widget_battery_bg = theme.grey .. "ff"
 theme.widget_battery_layout = 'vertical' -- horizontal or vertical
 
--- mpc
-theme.widget_mpc_prev_icon = ""
-theme.widget_mpc_pause_icon = ""
-theme.widget_mpc_play_icon = ""
-theme.widget_mpc_stop_icon = ""
-theme.widget_mpc_next_icon = ""
-theme.widget_mpc_fg = theme.primary
-theme.widget_mpc_bg = theme.grey .. "00"
-theme.widget_mpc_layout = 'horizontal' -- horizontal or vertical
-
--- volume
-theme.widget_volume_fg = theme.fg_grey
-theme.widget_volume_bg = theme.grey .. "00"
+-- Volume
 theme.widget_volume_layout = 'vertical' -- horizontal or vertical
 
 -- Date
-theme.widget_date_icon = ""
-theme.widget_date_fg = theme.fg_grey
-theme.widget_date_bg = theme.grey .. "00"
 theme.widget_date_layout = 'vertical' -- horizontal or vertical
 
--- Screenshot
-theme.widget_scrot_fg = theme.fg_grey
-theme.widget_scrot_icon = '  '
-
 -- Change theme
-theme.widget_change_theme_bg = theme.grey_dark .. "00"
-theme.widget_change_theme_fg = theme.fg_grey
-theme.widget_change_theme_icon = ' 嗀'
-theme.widget_change_theme_icon_reload = ' 勒'
 theme.widget_change_theme_layout = 'vertical' -- horizontal or vertical
 
 -- progressbar colors
-theme.bar_colors = { { theme.alert, theme.alert, theme.alert }, theme.grey_light }
+theme.bar_color = M.x.primary
+theme.bar_colors_disk = { M.x.primary, M.x.primary, M.x.primary }
+theme.bar_colors_network = { M.x.primary, M.x.primary }
 
 -- }}} End WIDGET
 

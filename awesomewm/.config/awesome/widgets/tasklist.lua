@@ -108,9 +108,9 @@ function tasklist_widget:new(s)
     buttons = self:buttons(),
     style = {
       --fg_normal = fg_normal,
-      bg_normal = bg_normal,
+      bg_normal = bg_normal or M.x.background,
       --fg_focus = fg_focus,
-      bg_focus = bg_focus,
+      bg_focus = bg_focus or M.x.background,
       align = align,
     },
     widget_template = self:template()

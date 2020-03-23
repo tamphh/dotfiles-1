@@ -75,7 +75,7 @@ function mybar:init(s)
   s.monitor_bar:setup {
     nil, -- Left widgets
     {
-      boxes(music_player),
+      boxes(music_player, 225),
       boxes(disk, 250),
       boxes(widget.box('vertical', { w1, w2 }), 300),
       boxes(network, 250),

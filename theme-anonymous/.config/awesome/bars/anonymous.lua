@@ -3,7 +3,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
-local dpi = require('beautiful').xresources.apply_dpi
+local dpi = beautiful.xresources.apply_dpi
 local separators = require('util.separators')
 local widget = require('util.widgets')
 
@@ -20,7 +20,7 @@ local tagslist = require("taglists.anonymous")
 local mpc_button = require('widgets.music-player')({})
 local my_mpc_button = widget.bg_rounded( beautiful.background, "#873076", mpc_button )
 
-local mpc = require("widgets.mpc")({ colors = { beautiful.primary, beautiful.primary } })
+local mpc = require("widgets.mpc")({})
 local mpc_bg = beautiful.widget_mpc_bg
 local my_mpc = widget.bg_rounded( mpc_bg, "#3b6f6f", mpc )
 
@@ -83,10 +83,14 @@ function mybar:init(s)
   s.mytaglist = require("taglists.anonymous")
 
 -- For look like a detached bar, we have to add a fake invisible bar...
-s.useless_wibar = awful.wibar({ position = beautiful.wibar_position, height = beautiful.screen_margin * 2, opacity = 0, screen = s })
+  self.size = beautiful.wibar_size or dpi(56)
+  self.position = beautiful.wibar_position or "top"
 
--- Create the wibox with default options
-s.mywibox = awful.wibar({ height = beautiful.wibar_size, bg = beautiful.wibar_bg, width = beautiful.wibar_width, screen = s })
+  s.useless_wibar = awful.wibar({ position = self.position, height = beautiful.screen_margin * 2, opacity = 0, screen = s })
+
+  -- Create the wibox with default options
+  s.mywibox = awful.wibar({ height = self.size, width = beautiful.wibar_width, screen = s })
+  s.mywibox.bg = beautiful.wibar_bg or M.x.background
 
 -- Add widgets to the wibox
 s.mywibox:setup {
@@ -109,23 +113,15 @@ s.mywibox:setup {
     },
     { -- right
       layout = wibox.layout.fixed.horizontal,
-      pad(2),
+      spacing = dpi(8),
       tor,
-      pad(1),
       my_mpc,
-      pad(1),
       my_vol,
-      pad(1),
       my_mail,
-      pad(1),
       my_ram,
-      pad(1),
       my_battery,
-      pad(1),
       my_date,
-      pad(1),
       my_change_theme,
-      pad(1),
       scrot
     }
   }

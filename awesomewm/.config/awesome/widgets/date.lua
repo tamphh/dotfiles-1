@@ -12,7 +12,7 @@ local l = beautiful.widget_date_layout or 'horizontal'
 local spacing = beautiful.widget_spacing or 1
 
 -- widget creation
-local icon = font.button(date_icon, fg)
+local icon = font.button(date_icon, fg, M.t.medium)
 local text = font.button("")
 date_widget = widget.box_with_margin(l, { icon, text }, spacing)
 
@@ -23,6 +23,6 @@ local date_script = [[
 
 awful.widget.watch(date_script, 60, function(widget, stdout)
   local date = stdout:match('%a+%s?%d+%s?%a+')
-  icon.markup = helpers.colorize_text(date_icon, fg)
-  text.markup = helpers.colorize_text(date, fg)
+  icon.markup = helpers.colorize_text(date_icon, fg, M.t.medium)
+  text.markup = helpers.colorize_text(date, fg, M.t.medium)
 end)

@@ -20,7 +20,7 @@ function ram_root:init(args)
   self.bar_size = args.bar_size or 200
   self.bar_colors = args.bar_colors or beautiful.bar_color or beautiful.primary
   -- base widgets
-  self.wicon = font.button(self.icon[1], self.icon[2], M.t.high)
+  self.wicon = font.button(self.icon[1], self.icon[2], M.t.medium)
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
   self.widget = self:make_widget()
@@ -39,7 +39,7 @@ end
 function ram_root:make_text()
   local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext }, spacing)
   awesome.connect_signal("daemon::ram", function(mem)
-    self.wtext.markup = helpers.colorize_text(mem.inuse_percent.."%", self.fg, M.t.high)
+    self.wtext.markup = helpers.colorize_text(mem.inuse_percent.."%", self.fg, M.t.medium)
   end)
   return w
 end

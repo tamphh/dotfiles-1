@@ -8,7 +8,7 @@ local icons = require("icons.default")
 local bicon = require("util.icon")
 
 -- beautiful vars
-local tor_icon = beautiful.widget_tor_icon or " 﨩"
+local tor_icon = beautiful.widget_tor_icon or "﨩"
 local fg_enable = beautiful.widget_tor_fg_enable or M.x.primary
 local fg_disable = beautiful.widget_tor_fg_disable or M.x.error
 local padding = beautiful.widget_popup_padding or dpi(1)

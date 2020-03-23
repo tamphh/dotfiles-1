@@ -46,7 +46,7 @@ function mybar:init(s)
       layout = wibox.layout.fixed.horizontal
     },
     { -- right
-      widget.box('horizontal', { layouts, desktop_ctrl, textclock }, 20),
+      widget.box('horizontal', { layouts, desktop_ctrl, pad(4), textclock }),
       pad(2),
       layout = wibox.layout.fixed.horizontal
     },

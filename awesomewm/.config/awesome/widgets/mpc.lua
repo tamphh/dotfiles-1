@@ -6,6 +6,7 @@ local helpers = require("helpers")
 local aspawn = require("awful.spawn")
 local wibox = require("wibox")
 local btext = require("util.mat-button")
+local bicon = require("util.icon")
 
 -- beautiful vars
 local icon_prev = beautiful.widget_mpc_prev_icon or ""
@@ -32,7 +33,7 @@ function mpc_root:init(args)
   self.font = args.font or M.f.button
   self.fg = args.fg or M.x.primary
   self.overlay = args.overlay or M.x.primary -- bg for the hover
-  self.spacing = args.spacing or dpi(7)
+  self.spacing = args.spacing or dpi(1)
   self.layout = args.layout or beautiful.widget_mpc_layout or 'horizontal' -- possible values: horizontal , vertical
   -- base widgets
   self:base_widget()
@@ -54,17 +55,14 @@ function mpc_root:base_widget()
       overlay = self.overlay, command = next_cmd
     })
   else
-    self.wicon_prev = btext({
-      font_icon = self.font, fg_icon = self.fg, icon = icon_prev,
-      overlay = self.overlay, command = prev_cmd
+    self.wicon_prev = bicon({
+      fg = self.fg, icon = icon_prev, command = prev_cmd
     })
-    self.wicon_toggle = btext({
-      font_icon = self.font, fg_icon = self.fg, icon = icon_play,
-      overlay = self.overlay, command = toggle_cmd
+    self.wicon_toggle = bicon({
+      fg = self.fg, icon = icon_play, command = toggle_cmd
     })
-    self.wicon_next = btext({
-      font_icon = self.font, fg_icon = self.fg, icon = icon_next,
-      overlay = self.overlay, command = next_cmd
+    self.wicon_next = bicon({
+      fg = self.fg, icon = icon_next, command = next_cmd
     })
   end
 end
@@ -79,7 +77,7 @@ end
 
 function mpc_root:make_text()
   local w = widget.box(self.want_layout,
-    { self.wicon_prev, self.wicon_toggle, self.wicon_next })
+    { self.wicon_prev, self.wicon_toggle, self.wicon_next }, 0)
 
   awesome.connect_signal("daemon::mpd", function(mpd)
     if (mpd.status == "playing") then

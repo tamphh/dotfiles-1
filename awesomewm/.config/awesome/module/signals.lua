@@ -93,7 +93,7 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 if beautiful.border_width > 0 then
-  local focus = beautiful.border_focus or M.x.error
+  local focus = beautiful.border_focus or M.x.error ..M.e.dp01
   local unfocus = beautiful.border_normal or M.x.background
   client.connect_signal("focus", function(c) c.border_color = focus end)
   client.connect_signal("unfocus", function(c) c.border_color = unfocus end)

@@ -21,7 +21,7 @@ function brightness_root:init(args)
   self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.primary
   self.title = args.title or beautiful.widget_brightness_title or { "BRI", M.x.on_background }
   -- base widgets
-  self.wicon = font.button(self.icon[1], self.icon[2])
+  self.wicon = font.button(self.icon[1], self.icon[2], M.t.medium)
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
   self.widget = self:make_widget()
@@ -40,7 +40,7 @@ end
 function brightness_root:make_text()
   local w = widget.box_with_margin(self.want_layout, { self.wicon, self.wtext }, spacing)
   awesome.connect_signal("daemon::brightness", function(brightness)
-    self.wtext.markup = helpers.colorize_text(brightness, self.fg)
+    self.wtext.markup = helpers.colorize_text(brightness, self.fg, M.t.medium)
   end)
   return w
 end

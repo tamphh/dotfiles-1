@@ -135,7 +135,7 @@ function layout_root:make_icons()
 end
 
 function layout_root:make_menu()
-  local w = font.button(self.icon_menu, M.x.on_background)
+  local w = bicon({ icon = self.icon_menu, fg = M.x.on_background })
   self:create_popup(w)
   return w
 end

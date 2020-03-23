@@ -195,7 +195,6 @@ function music_player_root:make_song()
   local w = wibox.widget {
     self.wicon,
     self.title,
-    spacing = beautiful.widget_spacing or 10,
     layout = wibox.layout.fixed.horizontal
   }
   self:create_popup(w)

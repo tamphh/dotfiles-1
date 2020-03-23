@@ -23,7 +23,7 @@ function volume_root:init(args)
   self.title = args.title or beautiful.widget_volume_title or { "VOL", M.x.on_background }
   self.title_size = args.title_size or 10
   -- base widgets
-  self.wicon = font.button(self.icon[1], self.icon[2])
+  self.wicon = font.button(self.icon[1], self.icon[2], M.t.medium)
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wtext = font.button("")
   self.background = wibox.widget {

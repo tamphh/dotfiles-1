@@ -94,13 +94,14 @@ function widgets.bg_rounded(bg_color, border_color, w, wtype)
   return wibox.widget {
     {
       m,
-      shape = gshape.rounded_rect,
-      bg = bg_color,
-      shape_border_color = border_color,
-      shape_border_width = 2,
-      widget = wibox.container.background
+      margins = dpi(3),
+      widget = wibox.container.margin
     },
-    layout = wibox.layout.fixed.horizontal
+    shape = gshape.rounded_rect,
+    bg = bg_color,
+    shape_border_color = border_color,
+    shape_border_width = 2,
+    widget = wibox.container.background
   }
 end
 
