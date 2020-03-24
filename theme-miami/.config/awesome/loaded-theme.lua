@@ -7,7 +7,7 @@ mytheme.name = "miami"
 
 -- xrdb variables and fallback
 mytheme.x = {
-  background = xrdb.background or "#121212",
+  background = xrdb.color0 or "#121212",
   foreground = xrdb.foreground or "#FDFDFD",
   surface = xrdb.color0 or "#000000",
   dark_primary = "#30222C", -- branded dark surface
@@ -18,7 +18,7 @@ mytheme.x = {
 
   secondary = xrdb.color13 or "#BB86FC", -- magenta
 
-  on_background = xrdb.foreground or "#ffffff", -- white
+  on_background = xrdb.color15 or "#ffffff", -- white
   on_surface = xrdb.color15, -- white
   on_primary = xrdb.color0, -- black
   on_secondary = xrdb.color0,  -- black

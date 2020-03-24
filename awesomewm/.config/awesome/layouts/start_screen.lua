@@ -245,12 +245,7 @@ local todo_new = btext({ fg_icon = "on_secondary", icon = "",
 
 local todo_widget = wibox.widget {
   todo_list,
-  { -- align to the center
-    nil,
-    widget.box("horizontal", { todo_new, todo_textbox }),
-    expand = "none",
-    layout = wibox.layout.align.horizontal
-  },
+  widget.centered(widget.box("horizontal", { todo_new, todo_textbox })),
   spacing = 12,
   layout = wibox.layout.fixed.vertical
 }
@@ -262,21 +257,12 @@ local function boxes(w, width, height, margin)
   local margin = margin or 1
   local boxed_widget = wibox.widget {
     {
+      widget.centered(
       {
-        nil,
-        {
-          {
-            nil,
-            w,
-            expand = "none",
-            layout = wibox.layout.align.vertical
-          },
-          margins = dpi(10),
-          widget = wibox.container.margin,
-        },
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-      },
+        widget.centered(w, "vertical"),
+        margins = dpi(10),
+        widget = wibox.container.margin,
+      }),
       bg = M.x.surface,
       forced_height = dpi(height),
       forced_width = dpi(width),
@@ -313,33 +299,23 @@ function startscreen:init(s)
           boxes(buttons_widget, 100, 376, 1),
           layout = wibox.layout.fixed.vertical
         },
+        widget.centered(
         {
-          nil,
-          {
-            boxes(picture_widget, 210, 200, 1),
-            boxes(quote_widget, 210, 200, 1),
-            layout = wibox.layout.fixed.vertical
-          },
-          nil,
-          expand = "none",
-          layout = wibox.layout.align.vertical
-        },
+          boxes(picture_widget, 210, 200, 1),
+          boxes(quote_widget, 210, 200, 1),
+          layout = wibox.layout.fixed.vertical
+        }, "vertical"),
         {
           boxes(rss_widgets, feed_width, feed_height, 1),
           layout = wibox.layout.fixed.vertical
         },
+        widget.centered(
         {
-          nil,
-          {
-            boxes(todo_widget, 210, 250, 1),
-            boxes(buttons_path_1_widget, 210, 80, 1),
-            boxes(buttons_path_2_widget, 210, 80, 1),
-            layout = wibox.layout.fixed.vertical
-          },
-          nil,
-          expand = "none",
-          layout = wibox.layout.align.vertical
-        },
+          boxes(todo_widget, 210, 250, 1),
+          boxes(buttons_path_1_widget, 210, 80, 1),
+          boxes(buttons_path_2_widget, 210, 80, 1),
+          layout = wibox.layout.fixed.vertical
+        }, "vertical"),
         {
           boxes(buttons_url_widget, 100, 376, 1),
           layout = wibox.layout.fixed.vertical

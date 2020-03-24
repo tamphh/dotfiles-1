@@ -55,7 +55,7 @@ local mybar = class()
 function mybar:init(s)
 
   -- bottom bar
-  s.monitor_bar = awful.wibar({ position = "bottom", height = dpi(80), screen = s })
+  s.monitor_bar = awful.wibar({ position = "bottom", width = dpi(1300), height = dpi(80), screen = s, type = "dock" })
   s.monitor_bar.bg = beautiful.wibar_bg
 
   -- widget to decorate 

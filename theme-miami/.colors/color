@@ -12,19 +12,19 @@
 !! FG !!
 #define theme4  #ffe0b2
 #define theme5  #fff59d
-#define theme6  #fff9c4
+#define theme6  #fffdc4
 !! Primary, Secondary !!
-#define theme7  #c3543f
-#define theme8  #e06e5d
-#define theme9  #dba041
-#define theme10 #e0b05d
+#define theme7  #ff804c
+#define theme8  #ff966d
+#define theme9  #e8c135
+#define theme10 #ebce55
 !! Alert !!
-#define theme11 #e04934
+#define theme11 #cd4864
 #define theme12 #de4d67
-#define theme13 #e97492
 !! Others !!
-#define theme14 #adde4d
-#define theme15 #5dcfe0
+#define theme13 #faad48
+#define theme14 #b9c489
+#define theme15 #d79fda
 
 *background: theme1
 *foreground: theme4

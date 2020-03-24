@@ -44,7 +44,7 @@ theme.titlebar_size = dpi(20)
 -- }}} End TITLEBAR
 
 -- Top bar
-theme.wibar_height = dpi(38)
+theme.wibar_height = dpi(45)
 theme.wibar_bg = M.x.background .. "ef"
 theme.wibar_border_radius = dpi(0)
 

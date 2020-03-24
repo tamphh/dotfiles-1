@@ -57,18 +57,12 @@ end
 
 function battery_root:make_progressbar_vert(p)
   local w = wibox.widget {
-    {
-      nil,
-      widget.box('vertical', { self.wtitle, self.wtext }),
-      expand = "none",
-      layout = wibox.layout.align.vertical
-    },
-    {
-      nil,
-      widget.box('vertical', { p, self.wicon }),
-      expand = "none",
-      layout = wibox.layout.align.vertical
-    },
+    widget.centered(
+      widget.box('vertical', { self.wtitle, self.wtext }), "vertical"
+    ),
+    widget.centered(
+      widget.box('vertical', { p, self.wicon }), "vertical"
+    ),
     spacing = 15,
     layout = wibox.layout.fixed.horizontal
   }

@@ -114,19 +114,10 @@ function mat_tabs:enable(index)
   self.wtexts[index].markup = helpers.colorize_text(self.texts[index], self.fg_enable)
 end
 
-function mat_tabs:widget_centered()
-  return wibox.widget { -- return the tab widget centered
-    nil,
-    self.tab,
-    expand = "none",
-    layout = wibox.layout.align.horizontal
-  }
-end
-
 function mat_tabs:switch(index)
   local index = index or 1 -- default switch on the 1st container
   self.w:reset()
-  self.w:add(self:widget_centered())
+  self.w:add(widget.centered(self.tab))
   self.w:add(self.containers[index])
 end
 

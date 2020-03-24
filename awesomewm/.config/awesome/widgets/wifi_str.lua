@@ -2,6 +2,7 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local helpers = require("helpers")
+local font = require("util.font")
 
 -- beautiful vars
 local fg = beautiful.widget_wifi_str_fg
@@ -10,7 +11,7 @@ local l = beautiful.widget_wifi_layout or 'horizontal'
 local spacing = beautiful.widget_spacing or 1
 
 -- widget creation
-local text = widget.base_text()
+local text = font.body_text("")
 local wifi_str_widget = widget.box_with_margin(l, { text }, spacing)
 
 awful.widget.watch(

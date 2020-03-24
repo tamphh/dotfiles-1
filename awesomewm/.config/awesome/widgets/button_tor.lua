@@ -6,6 +6,7 @@ local helpers = require("helpers")
 local dpi = require('beautiful').xresources.apply_dpi
 local icons = require("icons.default")
 local bicon = require("util.icon")
+local font = require("util.font")
 
 -- beautiful vars
 local tor_icon = beautiful.widget_tor_icon or "﨩"
@@ -16,8 +17,8 @@ local padding = beautiful.widget_popup_padding or dpi(1)
 -- widget creation
 local tor_widget = bicon({ icon = tor_icon, fg = fg_enable })
 local tor_run = nil -- boolean
-local sep = widget.base_text()
-sep.markup = helpers.colorize_text("---", M.x.on_surface)
+local sep = font.caption("")
+sep.markup = helpers.colorize_text("---", M.x.on_surface, M.t.disabled)
 
 -- popup
 local popup_image = widget.imagebox(80)
@@ -35,16 +36,18 @@ local button_restart = widget.imagebox(little_size, icons["tor_restart"])
 widget.add_left_click_action(button_restart, "sudo systemctl restart tor", true, 'miniterm')
 
 -- To display informations about your ip
-local popup_ip = widget.base_text()
-local popup_region = widget.base_text()
-local popup_country = widget.base_text()
-local popup_hostname = widget.base_text()
+local popup_ip = font.body_text("")
+local popup_region = font.body_text("")
+local popup_country = font.body_text("")
+local popup_hostname = font.body_text("")
 local w = awful.popup {
   widget = {
     {
       {
+        nil,
         popup_image,
-        layout = wibox.layout.align.horizontal
+        expand = "none",
+        layout = wibox.layout.align.vertical
       },
       {
         {
@@ -64,11 +67,11 @@ local w = awful.popup {
         },
         {
           {
-            button_start,
+            widget.centered(button_start),
             sep,
-            button_stop,
+            widget.centered(button_stop),
             sep,
-            button_restart,
+            widget.centered(button_restart),
             layout = wibox.layout.fixed.vertical
           },
           top = 3,

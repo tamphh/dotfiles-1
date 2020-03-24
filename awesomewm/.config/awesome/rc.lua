@@ -68,7 +68,7 @@ end)
 -- }}}
 
 require("module.rules")
-require("module.titlebar")
+require("titlebars")
 require("module.signals")
 require("module.autostart")
 

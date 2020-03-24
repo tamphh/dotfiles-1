@@ -10,7 +10,7 @@ mytheme.x = {
   background = xrdb.color0 or "#121212",
   foreground = xrdb.foreground or "#FDFDFD",
   surface = xrdb.color0 or "#000000",
-  dark_primary = "#211B24", -- branded dark surface
+  dark_primary = "#281f2c", -- branded dark surface
 
   primary = xrdb.color14 or "#52dcba", -- cyan
   primary_variant = xrdb.color6 or "#009F6C", -- primary saturate (200-500)
@@ -18,12 +18,12 @@ mytheme.x = {
   
   secondary = xrdb.color13 or "#BB86FC", -- magenta
   
-  on_background = xrdb.foreground or "#ffffff", -- white
-  on_surface = "#ffffff",  -- white
-  on_primary = "#000000", -- black
-  on_secondary = "#000000",  -- black
-  on_error = "#ffffff", -- white
-  on_surface = "#ffffff"
+  on_background = xrdb.color15 or "#ffffff", -- white
+  on_surface = xrdb.color15,  -- white
+  on_primary = xrdb.color0, -- black
+  on_secondary = xrdb.color0,  -- black
+  on_error = xrdb.color0, -- white
+  on_surface = xrdb.color15
 }
 
 -- fonts

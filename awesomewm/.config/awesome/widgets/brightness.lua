@@ -62,18 +62,12 @@ end
 
 function brightness_root:make_progressbar_vert(p)
   local w = wibox.widget {
-    {
-      nil,
-      widget.box('vertical', { self.wtitle, self.wtext }),
-      expand = "none",
-      layout = wibox.layout.align.vertical
-    },
-    {
-      nil,
-      widget.box('vertical', { p, self.wicon }),
-      expand = "none",
-      layout = wibox.layout.align.vertical
-    },
+    widget.centered(
+      widget.box('vertical', { self.wtitle, self.wtext }), "vertical"
+    ),
+    widget.centered(
+      widget.box('vertical', { p, self.wicon }), "vertical"
+    ),
     spacing = 15,
     layout = wibox.layout.fixed.horizontal
   }
@@ -84,10 +78,10 @@ function brightness_root:make_progressbar()
   local p = widget.make_progressbar(_, self.bar_size, self.bar_colors)
   local wp = widget.progressbar_layout(p, self.layout)
   local w
-  if self.want_layout == 'vertical' then
+  if self.layout == 'vertical' then
     w = self:make_progressbar_vert(wp)
   else
-    w = widget.box_with_margin(self.want_layout, { self.wicon, wp }, 8)
+    w = widget.box_with_margin(self.layout, { self.wicon, wp }, 8)
   end
   awesome.connect_signal("daemon::brightness", function(brightness)
     p.value = brightness

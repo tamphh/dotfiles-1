@@ -14,6 +14,7 @@ function root_icon:init(args)
   self.bg = args.bg or M.x.background
   self.icon = args.icon or ""
   self.command = args.command or nil
+  self.no_margin = args.no_margin or nil -- boolean
   -- base widgets
   self.wicon = font.button(self.icon, self.fg)
   self.w = self:spec()
@@ -52,6 +53,7 @@ end
 
 function root_icon:margins()
   self.wibar_size = beautiful.wibar_size or 56
+  if self.no_margin then self.wibar_size = 0 end
   local margins = self.wibar_size < 30 and 0 or 12
   return wibox.widget {
     margins = margins,

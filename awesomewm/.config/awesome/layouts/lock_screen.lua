@@ -4,6 +4,7 @@ local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
 local naughty = require("naughty")
 local helpers = require("helpers")
+local widget = require("util.widgets")
 
 local password = env.password
 
@@ -161,13 +162,7 @@ end
 lock_screen:setup {
   -- Horizontal centering
   nil,
-  {
-    -- Vertical centering
-    nil,
-    lock_animation_widget,
-    expand = "none",
-    layout = wibox.layout.align.vertical
-  },
+  widget.centered(lock_animation_widget, "vertical"),
   expand = "none",
   layout = wibox.layout.align.horizontal
 }

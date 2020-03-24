@@ -52,12 +52,7 @@ function disks_root:make_arcchart()
   local w = wibox.widget {
     widget.box('horizontal', { self.wbars[#env.disks] }),
     nil,
-    {
-      nil,
-      self.wtitle,
-      nil,
-      layout = wibox.layout.align.vertical
-    },
+    widget.centered(self.wtitle, "vertical"),
     layout = wibox.layout.align.horizontal
   }
   -- signal
@@ -73,18 +68,10 @@ end
 
 function disks_root:make_progressbar_vert(bars, titles)
   local w = wibox.widget {
-    {
-      nil,
-      widget.box('vertical', { self.wtitle, titles }),
-      expand = "none",
-      layout = wibox.layout.align.vertical
-    },
-    {
-      nil,
-      bars,
-      expand = "none",
-      layout = wibox.layout.align.vertical
-    },
+    widget.centered(
+      widget.box('vertical', { self.wtitle, titles }), "vertical"
+    ),
+    widget.centered(bars, "vertical"),
     spacing = 15,
     layout = wibox.layout.fixed.horizontal
   }

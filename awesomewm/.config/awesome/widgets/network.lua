@@ -92,7 +92,7 @@ function network_root:make_block()
   local pd = widget.make_progressbar(_, self.bar_size, self.bar_colors[2])
   pd.max_value = 80000
   local w
-  local ip = widget.base_text()
+  local ip = font.body_text("")
   if self.want_layout == 'horizontal' then
     local space = 8
     w = wibox.widget {

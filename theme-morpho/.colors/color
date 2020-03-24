@@ -8,23 +8,23 @@
 #define theme0  #161325
 #define theme1  #1a1729
 #define theme2  #221f3a
-#define theme3  #1E1A30
+#define theme3  #28233d
 ! FG !
 #define theme4  #d5c3e4
-#define theme5  #cdcdea
-#define theme6  #eee7f4
+#define theme5  #e3d2f5
+#define theme6  #f4edfa
 !! Primary, Secondary !!
-#define theme7  #702fa0
-#define theme8  #9f72c0
-#define theme9  #5d50aa
-#define theme10 #7872c0
+#define theme7  #8553b0
+#define theme8  #b59bce
+#define theme9  #6855cf
+#define theme10 #a39bed
 !! Alert !!
-#define theme11 #a5c072
-#define theme12 #b1a7db
-#define theme13 #d0cae9
+#define theme11 #6c86a6
+#define theme12 #a4b8d2
 !! Others !!
-#define theme14 #bbc072
-#define theme15 #1365ad
+#define theme13 #c7a295
+#define theme14 #77bb7b
+#define theme15 #a1afff
 
 *background: theme1
 *foreground: theme4

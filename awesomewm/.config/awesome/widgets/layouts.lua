@@ -67,7 +67,6 @@ function layout_root:create_popup(w)
         {
           self:make_icons(),
           change_theme,
-          spacing = beautiful.widget_spacing or 10,
           layout = wibox.layout.fixed.horizontal
         },
         nil,

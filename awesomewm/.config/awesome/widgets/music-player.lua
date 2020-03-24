@@ -40,7 +40,7 @@ function music_player_root:init(args)
   self.title = font.button("")
   self.artist = font.caption("")
   self.cover = widget.imagebox(90)
-  self.time_pasted = widget.base_text()
+  self.time_pasted = font.caption("")
   self.widget = self:make_widget()
 end
 
@@ -55,6 +55,7 @@ function music_player_root:make_widget()
 end
 
 function music_player_root:make_block()
+  local mpc = require("widgets.mpc")({ no_margin = true }) -- mini block, no need margin
   self.title.align = "left"
   self.cover.forced_height = dpi(60)
   self.cover.forced_width = dpi(60)
@@ -87,29 +88,16 @@ function music_player_root:make_block()
 end
 
 function music_player_root:create_popup(w)
-  self.cover.forced_height = 200
-  self.cover.forced_width = 200
+  self.cover.forced_height = dpi(200)
+  self.cover.forced_width = dpi(200)
   self.cover.resize = true
+  --self.cover.clip_shape = helpers.rrect(20) -- do not work ?
   self.title.forced_height = 20
   local img = wibox.widget {
     nil,
     {
-      {
-        nil,
-        {
-          self.cover,
-          shape = helpers.rrect(15),
-          widget = wibox.container.background
-        },
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-      },
-      {
-        nil,
-        mpc,
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-      },
+      widget.centered(self.cover),
+      widget.centered(mpc),
       layout = wibox.layout.fixed.vertical
     },
     expand = "none",

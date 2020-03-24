@@ -26,19 +26,6 @@ function widgets.create_base_text(font, alignment)
   }
 end
 
--- optional parameters to make icon
-function widgets.base_icon(icon, fg)
-  local w = widgets.create_base_text(M.x.button)
-  if icon and fg then
-    w.markup = helpers.colorize_text(icon, fg)
-  end
-  return w
-end
-
-function widgets.base_text(alignment)
-  return widgets.create_base_text(M.x.body_2, alignment)
-end
-
 function widgets.box(lay, widgets, space)
   local lay = lay or "horizontal" -- default horizontal
   local spacing = space or 0
@@ -79,22 +66,11 @@ function widgets.box_with_bg(l, ws, space, bg)
   }
 end
 
-function widgets.margin_for_icon_or_button(w, wtype)
-  local m
-  if ( wtype ~= nil and wtype == "button" ) then
-    m = widgets.add_margin(w, { left = 9, right = 9, top = 9, bottom = 9 })
-  else
-    m = widgets.add_margin(w, { left = 10, right = 10, top = 3, bottom = 3 })
-  end
-  return m
-end
-
 function widgets.bg_rounded(bg_color, border_color, w, wtype)
-  local m = widgets.margin_for_icon_or_button(w, wtype)
   return wibox.widget {
     {
-      m,
-      margins = dpi(3),
+      w,
+      top = 3, bottom = 3, left = 10, right = 10,
       widget = wibox.container.margin
     },
     shape = gshape.rounded_rect,
@@ -133,55 +109,6 @@ function widgets.bg(bg_color, w)
     spacing = 10,
     layout  = wibox.layout.fixed.horizontal
   }
-end
-
-function widgets.create_button(fg, icon, fg_hover)
-  local w = widgets.create_text(icon, fg, M.f.button)
-  w.align = 'left'
-  w.valign = 'center'
-  return w
-end
-
-function widgets.for_one_icon(fg, bg, icon, font)
-  local w = widgets.create_text(icon, fg, font)
-  return wibox.widget {
-    w,
-    bg = bg,
-    widget = wibox.container.background
-  }
-end
-
-function widgets.circle(w, background, color_shape)
-  local w_shape = color_shape or nil
-  local w_width = 0  
-  if w_shape then
-    w_width = 1
-  end
-
-  return wibox.widget {
-    w,
-    bg = background,
-    shape_clip = true,
-    shape = gshape.circle,
-    spacing = 4,
-    shape_border_color = w_shape,
-    shape_border_width = w_width,
-    widget = wibox.container.background
-  }
-end
-
-function widgets.circle_padding(w, space)
-  return {
-    w,
-    spacing = space,
-    layout  = wibox.layout.fixed.horizontal
-  }
-end
-
-function widgets.update_background(w, background)
-  w:set_shape(gshape.circle) -- otherwise there's no borders
-  w:set_shape_border_width(2)
-  w:set_shape_border_color(background)
 end
 
 -- used to create an imagebox, argument image is optionnal
@@ -309,6 +236,16 @@ function widgets.progressbar_margin_horiz()
   w.bottom = 4
   w.forced_height = 20
   return w
+end
+
+function widgets.centered(w, layout)
+  local layout = layout or "horizontal"
+  return wibox.widget {
+    nil,
+    w,
+    expand = "none",
+    layout = wibox.layout.align[layout]
+  }
 end
 
 return widgets

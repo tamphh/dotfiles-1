@@ -250,12 +250,7 @@ local function gen_menu(index)
     w:add(wibox.widget {
       {
         {
-          {
-            nil,
-            app_icon,
-            expand = "none",
-            layout = wibox.layout.align.horizontal
-          },
+          widget.centered(app_icon),
           app_name,
           layout = wibox.layout.fixed.vertical
         },

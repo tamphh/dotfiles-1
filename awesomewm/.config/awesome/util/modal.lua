@@ -3,6 +3,7 @@ local ascreen = require("awful.screen")
 local helpers = require("helpers")
 local abutton = require("awful.button")
 local gtable = require("gears.table")
+local widget = require("util.widgets")
 
 -- hexa code for transparency in percent
 -- https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
@@ -39,12 +40,7 @@ function modal:run(w)
         nil,
         {
           {
-            {
-              nil,
-              w,
-              expand = "none",
-              layout = wibox.layout.align.vertical
-            },
+            widget.centered(w, 'vertical'),
             margins = 18,
             widget = wibox.container.margin
           },

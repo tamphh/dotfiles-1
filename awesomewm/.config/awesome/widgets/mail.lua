@@ -5,6 +5,7 @@ local widget = require("util.widgets")
 local helpers = require("helpers")
 local font = require("util.font")
 local tooltip = require("util.tooltip")
+local font = require("util.font")
 
 -- beautiful vars
 local fg_read = beautiful.widget_email_fg_read or M.x.on_background
@@ -25,7 +26,7 @@ local email_widget = widget.box(l, { icon, text }, spacing)
 local popup_title = font.h6("Last messages:", M.x.on_surface)
 local popup_msg = {}
 for i = 1, 4 do
-  popup_msg[i] = widget.base_text()
+  popup_msg[i] = font.body_text("")
 end
 
 local w = awful.popup {

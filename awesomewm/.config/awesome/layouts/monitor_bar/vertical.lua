@@ -81,12 +81,7 @@ function mybar:init(s)
   s.monitor_bar:setup {
     { -- bg
       { -- margin
-        { -- top
-          nil,
-          textclock,
-          expand = "none",
-          layout = wibox.layout.align.horizontal
-        },
+        widget.centered(textclock), -- top
         { -- center
           monitors_title,
           cpu,
@@ -99,12 +94,7 @@ function mybar:init(s)
           settings_title,
           vol,
           brightness,
-          {
-            nil,
-            exit,
-            layout = wibox.layout.align.horizontal,
-            expand = "none"
-          },
+          widget.centered(exit),
           spacing = 6,
           layout = wibox.layout.fixed.vertical
         },

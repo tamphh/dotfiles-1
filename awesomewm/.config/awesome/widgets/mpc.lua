@@ -35,6 +35,7 @@ function mpc_root:init(args)
   self.overlay = args.overlay or M.x.primary -- bg for the hover
   self.spacing = args.spacing or dpi(1)
   self.layout = args.layout or beautiful.widget_mpc_layout or 'horizontal' -- possible values: horizontal , vertical
+  self.no_margin = args.no_margin or nil -- boolean
   -- base widgets
   self:base_widget()
   self.w = self:make_widget()
@@ -56,13 +57,13 @@ function mpc_root:base_widget()
     })
   else
     self.wicon_prev = bicon({
-      fg = self.fg, icon = icon_prev, command = prev_cmd
+      fg = self.fg, icon = icon_prev, command = prev_cmd, no_margin = self.no_margin
     })
     self.wicon_toggle = bicon({
-      fg = self.fg, icon = icon_play, command = toggle_cmd
+      fg = self.fg, icon = icon_play, command = toggle_cmd, no_margin = self.no_margin
     })
     self.wicon_next = bicon({
-      fg = self.fg, icon = icon_next, command = next_cmd
+      fg = self.fg, icon = icon_next, command = next_cmd, no_margin = self.no_margin
     })
   end
 end
@@ -76,6 +77,7 @@ function mpc_root:make_widget()
 end
 
 function mpc_root:make_text()
+  local w
   local w = widget.box(self.want_layout,
     { self.wicon_prev, self.wicon_toggle, self.wicon_next }, 0)
 

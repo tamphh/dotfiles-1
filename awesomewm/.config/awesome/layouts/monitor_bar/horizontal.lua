@@ -23,7 +23,7 @@ local mybar = class()
 function mybar:init(s)
 
   -- bottom bar
-  s.monitor_bar = awful.wibar({ position = "bottom", height = dpi(80), screen = s })
+  s.monitor_bar = awful.wibar({ position = "bottom", height = dpi(84), screen = s })
   s.monitor_bar.bg = M.x.surface
 
   -- widget to decorate 
@@ -35,17 +35,11 @@ function mybar:init(s)
           font.button("", M.x.primary, 16), nil, nil, -- top
           layout = wibox.layout.align.vertical
         },
-        { -- center
-          nil,
-          {
-            w,
-            left = 15, right = 15,
-            forced_width = dpi(s),
-            widget = wibox.container.margin
-          },
-          nil,
-          expand = "none",
-          layout = wibox.layout.align.vertical
+        { -- center,
+          widget.centered(w, "vertical"),
+          left = 12, right = 12,
+          forced_width = dpi(s),
+          widget = wibox.container.margin
         },
         { -- right
           font.button("", M.x.secondary, 16), nil, nil, -- top
@@ -75,11 +69,15 @@ function mybar:init(s)
   s.monitor_bar:setup {
     nil, -- Left widgets
     {
-      boxes(music_player, 225),
+      boxes(music_player),
       boxes(disk, 250),
       boxes(widget.box('vertical', { w1, w2 }), 300),
       boxes(network, 250),
-      boxes(cpu),
+      { -- the only who need a top margin, idkw
+        boxes(cpu),
+        top = 10,
+        widget = wibox.container.margin,
+      },
       spacing = beautiful.widget_spacing,
       layout = wibox.layout.fixed.horizontal
     },

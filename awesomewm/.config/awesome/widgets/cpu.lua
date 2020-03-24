@@ -19,7 +19,7 @@ function cpu_root:init(args)
   self.title = args.title or beautiful.widget_cpu_title or { "CPU", M.x.on_background }
   self.bar_colors = args.bar_colors or beautiful.bar_color or M.x.error
   -- base widgets
-  self.wicon = widget.base_icon()
+  self.wicon = font.button("")
   self.wtext = font.button("")
   self.wtitle = font.h6(self.title[1], self.title[2])
   self.wbars = {} -- store all bars (one by cpu/core)
@@ -113,12 +113,9 @@ function cpu_root:dotsbar_vert(freq)
   end
   local w = wibox.widget {
     {
-      {
-        nil,
-        widget.box('vertical', { self.wtitle, freq }),
-        expand = "none",
-        layout = wibox.layout.align.vertical
-      },
+      widget.centered(
+        widget.box('vertical', { self.wtitle, freq }), "vertical"
+      ),
       wb,
       spacing = 15,
       layout = wibox.layout.fixed.horizontal
@@ -137,21 +134,17 @@ function cpu_root:dotsbar_horiz(freq)
   w = wibox.widget{ layout = wibox.layout.fixed.vertical, spacing = 1 }
   z = wibox.widget{ layout = wibox.layout.fixed.vertical, spacing = 12 } -- adjust spacing, depend of the symbol used
   for i = 1, self.cpus do
-    self.wfreqs[i] = widget.base_text()
+    self.wfreqs[i] = font.body_text("")
     w:add(widget.box_with_bg(self.want_layout, self.wbars[i], 2, M.x.surface .. "66"))
     z:add(widget.box(self.want_layout, { self.wfreqs[i]} ))
   end
-  return wibox.widget {
-    nil,
+  return widget.centered(
     {
       y,
-      widget.box('horizontal', { w, z }, 10),
+      widget.box('horizontal', { w, z }),
       layout = wibox.layout.fixed.vertical
-    },
-    nil,
-    expand = "none",
-    layout = wibox.layout.align.vertical
-  }
+    }, "vertical"
+  )
 end
 
 function cpu_root:make_dotsbar()

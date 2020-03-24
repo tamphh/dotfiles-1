@@ -6,26 +6,26 @@
 ! theme maker: https://coolors.co
 
 !! BG !!
-#define theme0 #130F14
-#define theme1 #151416
-#define theme2 #1A181C
-#define theme3 #211B24
+#define theme0  #130F14
+#define theme1  #151416
+#define theme2  #1A181C
+#define theme3  #281f2c
 !! FG !!
-#define theme4 #AABFAA
-#define theme5 #CCECEC
-#define theme6 #ffffff
+#define theme4  #afca9b
+#define theme5  #CCECEC
+#define theme6  #e1ffef
 !! Primary, Secondary !!
-#define theme7 #009f6c
-#define theme8 #52dcba
-#define theme9 #9186e8
-#define theme10 #7E6FF2
+#define theme7  #1f9369
+#define theme8  #53b491
+#define theme9  #6b51c1
+#define theme10 #a998db
 !! Alert !!
-#define theme11 #A91164
-#define theme12 #f44ca8
-#define theme13 #f76b99
-!! Others !!
-#define theme14 #52dc75
-#define theme15 #52badc
+#define theme11 #ef536d
+#define theme12 #f47b97
+!! Others !! (yellow, green, blue)
+#define theme13 #ace269
+#define theme14 #83d860
+#define theme15 #56d7a0
 
 *background: theme1
 *foreground: theme4
@@ -61,9 +61,5 @@
 ! White
 *color7: theme5
 *color15: theme6
-
-! Rest bg dark and light
-*color16: theme0
-*color17: theme3
 
 st.opacity: 240

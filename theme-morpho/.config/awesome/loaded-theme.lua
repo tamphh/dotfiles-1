@@ -10,7 +10,7 @@ mytheme.x = {
   background = xrdb.color0 or "#121212",
   foreground = xrdb.foreground or "#FDFDFD",
   surface = xrdb.color0 or "#000000",
-  dark_primary = "#1E1A30", -- branded dark surface
+  dark_primary = "#28233D", -- branded dark surface
 
   primary = xrdb.color14 or "#52dcba", -- cyan
   primary_variant = xrdb.color6 or "#009F6C", -- primary saturate (200-500)
@@ -18,7 +18,7 @@ mytheme.x = {
 
   secondary = xrdb.color13 or "#BB86FC", -- magenta
 
-  on_background = xrdb.foreground or "#ffffff", -- white
+  on_background = xrdb.color15 or "#ffffff", -- white
   on_surface = xrdb.color15,  -- white
   on_primary = xrdb.color0, -- black
   on_secondary = xrdb.color0,  -- black
@@ -36,7 +36,7 @@ mytheme.f = {
   body_2 = "Iosevka Term Light 14", -- used on text body
   -- for button, don't use a Mono variant because icons are too small
   -- issue: https://github.com/Powerlevel9k/powerlevel9k/issues/430
-  button = "Iosevka Term Medium Nerd Font Complete 14", -- used on text button
+  button = "Iosevka Term Nerd Font Complete 14", -- used on text button
   caption = "Iosevka Bold 12", -- used on annotation
   overline = "Iosevka Regular 10",
 }
