@@ -17,6 +17,11 @@ function root_icon:init(args)
   self.no_margin = args.no_margin or nil -- boolean
   -- base widgets
   self.wicon = font.button(self.icon, self.fg)
+  self.background = wibox.widget {
+    bg = self.fg .. M.e.dp00,
+    shape = helpers.rrect(8),
+    widget = wibox.container.background
+  }
   self.w = self:spec()
 end
 
@@ -27,18 +32,23 @@ end
 
 -- with different level of opacity
 function root_icon:color()
-  self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 50)
+  self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 70)
+  self.background.bg = self.fg .. "00"
   self.w:connect_signal("mouse::enter", function()
-    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 70)
+    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 100)
+    self.background.bg = self.fg .. "0A" -- 4%
   end)
   self.w:connect_signal("mouse::leave", function()
-    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 50)
+    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 70)
+    self.background.bg = self.fg .. "00"
   end)
   self.w:connect_signal("button::press", function()
     self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 100)
+    self.background.bg = self.fg .. "1F" -- 12%
   end)
   self.w:connect_signal("button::release", function()
-    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 50)
+    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 70)
+    self.background.bg = self.fg .. "00"
   end)
 end
 
@@ -75,7 +85,7 @@ function root_icon:spec()
       widget = self:margins()
     },
     --bg = M.x.on_surface .. M.e.dp01,
-    widget = wibox.container.background
+    widget = self.background
   }
 end
 

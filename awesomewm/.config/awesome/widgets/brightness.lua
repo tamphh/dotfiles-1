@@ -46,8 +46,11 @@ function brightness_root:make_text()
 end
 
 function brightness_root:make_slider()
-  local slider = widget.make_a_slider(1, self.bar_colors)
-  local w = widget.box(self.layout, { self.wicon, slider }, 4)
+  local mat_slider = require("util.slider")({ color = M.x.secondary })
+  local slider = wibox.widget { read_only = false, widget = mat_slider }
+  local w = widget.box(self.layout, { self.wicon, slider }, 8)
+  w.forced_height = 48
+
   -- set level
   slider:connect_signal('property::value', function()
     aspawn.with_shell('light -S ' .. slider.value)

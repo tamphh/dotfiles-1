@@ -40,14 +40,25 @@ function mybar:init(s)
 
   -- Add widgets to the wibox
   s.mywibox:setup {
-    widget.box('horizontal', { pad(2), music }), -- left
+    {
+      music, -- left
+      margins = 8,
+      widget = wibox.container.margin
+    },
     { -- middle
-      s.mytaglist,
-      layout = wibox.layout.fixed.horizontal
+      {
+        s.mytaglist,
+        layout = wibox.layout.fixed.horizontal
+      },
+      margins = 2,
+      widget = wibox.container.margin
     },
     { -- right
-      widget.box('horizontal', { layouts, desktop_ctrl, pad(4), textclock }),
-      pad(2),
+      {
+        widget.box('horizontal', { layouts, desktop_ctrl, pad(4), textclock }),
+        margins = 8,
+        widget = wibox.container.margin
+      },
       layout = wibox.layout.fixed.horizontal
     },
     expand ="none",

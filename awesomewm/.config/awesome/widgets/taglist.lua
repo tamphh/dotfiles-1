@@ -14,8 +14,8 @@ local modkey = "Mod4"
 local taglist_root = class()
 
 function taglist_root:init(args)
-  self.bg = beautiful.taglist_bg or M.x.background .. M.e.dp00
-  self.bg_focus = beautiful.taglist_bg_focus or M.x.background .. M.e.dp01
+  self.bg = beautiful.taglist_bg or M.x.on_background .. "00"
+  self.bg_focus = beautiful.taglist_bg_focus or M.x.on_background .. "0A" -- 4%
   self.mode = args.mode or 'line' -- possible values: icon , line , shape , text
   self.want_layout = args.want_layout -- possible values: grid , horizontal , vertical, flex (horiz)
   self.template = self:select_template()
@@ -203,8 +203,7 @@ function taglist_root:template_icon()
             id = "img_tag",
             widget = wibox.widget.imagebox,
           },
-          top = dpi(14), bottom = dpi(14),
-          left = dpi(12), right = dpi(12),
+          margins = dpi(12),
           widget = wibox.container.margin
         },
         nil,

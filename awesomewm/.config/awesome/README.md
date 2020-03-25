@@ -1,3 +1,11 @@
+## About
+A desktop environment following the [Material](https://material.io/) guidelines and more specifically about [dark theme](https://material.io/design/color/dark-theme.html).
++ Reducing eye strain.
++ Reducing the use of light pixels (+ conserve energy/battery life).
++ Enhance accessibility.
+
+Colorscheme try to be legible with the [WCAG 2.0](https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html).
+
 ## Dependencies
 #### Main
 Used on all themes (widgets, shortcut keyboard):

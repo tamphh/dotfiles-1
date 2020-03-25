@@ -28,7 +28,6 @@ theme.border_radius = dpi(8)
 
 theme.titlebars_enabled = true 
 theme.titlebar_title_enabled = true 
-theme.titlebars_imitate_borders = false
 
 -- }}} End TITLEBAR
 

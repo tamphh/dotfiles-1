@@ -98,6 +98,7 @@ function music_player_root:create_popup(w)
     {
       widget.centered(self.cover),
       widget.centered(mpc),
+      spacing = dpi(8),
       layout = wibox.layout.fixed.vertical
     },
     expand = "none",
@@ -180,25 +181,33 @@ function music_player_root:signals()
 end
 
 function music_player_root:make_song()
-  local w = wibox.widget {
-    self.wicon,
-    self.title,
-    layout = wibox.layout.fixed.horizontal
+  local font = require("util.font")
+  local icon = font.button(self.icon[1], self.icon[2])
+  local background = wibox.widget {
+    bg = M.x.error .. "00",
+    shape = helpers.rrect(8),
+    widget = wibox.container.background
   }
+  local w = wibox.widget {
+    {
+      {
+        icon,
+        self.title,
+        spacing = dpi(8),
+        layout = wibox.layout.fixed.horizontal
+      },
+      margins = dpi(12),
+      widget = wibox.container.margin
+    },
+    widget = background
+  }
+  w:connect_signal("mouse::leave", function() background.bg = M.x.error .. "00" end)
+  w:connect_signal("mouse::enter", function() background.bg = M.x.error .. "0A" end)
+  w:connect_signal("button::press", function() background.bg = M.x.error .. "1F" end)
+  w:connect_signal("button::release", function() background.bg = M.x.error .. "00" end)
   self:create_popup(w)
   self.wpopup.x = dpi(4)
   self.wpopup.y = self.wibar_size + dpi(4)
-  w:connect_signal('mouse::enter', function()
-    self.wpopup.visible = true
-  end)
-  w:buttons(gtable.join(
-    awful.button({}, 1, function()
-      self.wpopup.visible = false
-    end),
-    awful.button({}, 3, function()
-      self.wpopup.visible = false
-    end)
-  ))
   self:signals()
   return w
 end

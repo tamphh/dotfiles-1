@@ -51,7 +51,7 @@ function app.feh(path, callback_function)
   local screen = ascreen.focused().geometry
   local s_width = screen.width / 2
   local s_height = screen.height / 2
-  local cmd = "feh --scale-down --auto-zoom --image-bg \""..beautiful.grey.."\" "..path.." -g "..s_width.."x"..s_height
+  local cmd = "feh --scale-down --auto-zoom --image-bg \""..M.x.surface.."\" "..path.." -g "..s_width.."x"..s_height
   aspawn.with_shell(cmd)
   if callback_function ~= nil then
     callback_function()

@@ -68,8 +68,11 @@ function volume_root:make_text()
 end
 
 function volume_root:make_slider()
-  local volume = widget.make_a_slider(15, self.bar_colors)
-  local w = widget.box(self.layout, { self.wicon, volume }, 4)
+  --local volume = widget.make_a_slider(15, self.bar_colors)
+  local mat_slider = require("util.slider")({ color = M.x.secondary })
+  local volume = wibox.widget { read_only = false, widget = mat_slider }
+  local w = widget.box(self.layout, { self.wicon, volume }, 8)
+  w.forced_height = 48
   -- Set value
   volume:connect_signal('property::value', function()
     if env.sound_system == "alsa" then

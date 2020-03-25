@@ -66,7 +66,7 @@ function mybar:init(s)
     format = '<span foreground="'..M.x.on_surface..'" font="22.5">%H:%M</span>',
     refresh = 60,
     widget = wibox.widget.textclock,
-    forced_height = dpi(88),
+    forced_height = dpi(80),
     forced_width = dpi(90)
   }
 
@@ -87,7 +87,7 @@ function mybar:init(s)
           cpu,
           ram,
           disks,
-          spacing = dpi(10),
+          spacing = dpi(6),
           layout = wibox.layout.fixed.vertical
         },
         { -- bottom
@@ -95,12 +95,12 @@ function mybar:init(s)
           vol,
           brightness,
           widget.centered(exit),
-          spacing = 6,
+          spacing = 3,
           layout = wibox.layout.fixed.vertical
         },
         layout = wibox.layout.align.vertical
       },
-      margins = 12,
+      left = 12, right = 12, bottom = 6,
       widget = wibox.container.margin
     },
     bg = M.x.on_surface .. M.e.dp01,
