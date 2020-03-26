@@ -10,6 +10,7 @@ local gshape = require("gears.shape")
 local app = require("util.app")
 local keygrabber = require("awful.keygrabber")
 local font = require("util.font")
+local mat_bg = require("util.mat-background")
 
 local ntags = 10
 
@@ -224,19 +225,6 @@ local function key_grabber(app_tag)
   end
 end
 
-local bg_hover = function()
-  local w = wibox.container.background()
-  w.shape = helpers.rrect(14)
-  w.bg = M.x.surface
-  w:connect_signal("mouse::leave", function(c)
-    w.bg = M.x.surface
-  end)
-  w:connect_signal("mouse::enter", function(c)
-    w.bg = M.x.on_surface .. "0A"
-  end)
-  return w
-end
-
 local function gen_menu(index)
   if not my_apps[index] then return end
   w:reset()
@@ -257,7 +245,7 @@ local function gen_menu(index)
         margins = 10,
         widget = wibox.container.margin
       },
-      widget = bg_hover
+      widget = mat_bg({ color = M.x.on_surface, shape = helpers.rrect(14) })
     })
   end
   key_grabber(my_apps[index])

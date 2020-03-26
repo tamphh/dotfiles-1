@@ -4,14 +4,11 @@ local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 local font = require("util.font")
+local mat_bg = require("util.mat-background")
 
 -- opacity state for button dark theme
 -- https://material.io/design/color/dark-theme.html#states
-local o = { bg={}, fg={} }
-o["bg"]["none"] = "00" -- 0%
-o["bg"]["hovered"] = "0A" -- 4%
-o["bg"]["focused"] = "1F" -- 12%
-
+local o = { fg={} }
 o["fg"]["disable"] = 38
 o["fg"]["enable"] = 87
 o["fg"]["enable_focus"] = 100
@@ -45,10 +42,7 @@ function mat_tabs:create_tabs()
   for k,v in pairs(self.texts) do
     self.wtexts[k] = font.button(v, self.fg, o.fg.disable)
 
-    self.wbgs[k] = wibox.widget {
-      bg = self.bg_overlay .. o.bg.none,
-      widget = wibox.container.background
-    }
+    self.wbgs[k] = mat_bg({ color = self.fg })
 
     self.wlines[k] = wibox.widget {
       bottom = 2,
@@ -86,17 +80,7 @@ function mat_tabs:create_tabs()
 end
 
 function mat_tabs:signals(index, w)
-  w:connect_signal("mouse::leave", function() 
-    self.wbgs[index].bg = self.bg_overlay .. o.bg.none
-  end)
-  w:connect_signal("mouse::enter", function() 
-    self.wbgs[index].bg = self.bg_overlay .. o.bg.hovered
-  end)
-  w:connect_signal("button::release", function() 
-    self.wbgs[index].bg = self.bg_overlay .. o.bg.hovered
-  end)
   w:connect_signal("button::press", function()
-    self.wbgs[index].bg = self.bg_overlay .. o.bg.focused
     self:switch(index)
     self:enable(index)
   end)

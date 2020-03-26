@@ -46,7 +46,6 @@ I do not use many different fonts and tried to keep these dependences as small a
 + `layouts`: Extra layouts displayed in awesome like `monitor_bar`, `start_screen`, `logout`, etc...
 + `modules`: Modules is the default file [rc.lua](https://awesomewm.org/doc/api/sample%20files/rc.lua.html) splited and arrange into several files, you can found keybinds, signals, etc... and their configurations.
 + `titlebars`: Code to create differents titlebars or to hide them.
-+ `taglists`: A old directory, contain only the taglist of the `theme-anonymous`, will be remove one day :) 
 + `utils`: Contains all the reuse code, functions, etc... 
 + `widgets`: All widgets here, each widget are customizable and have multiple forms (text, slider, horizontal bar, ...), i reuse same component for all forms.
 

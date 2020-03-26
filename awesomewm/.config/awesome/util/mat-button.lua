@@ -6,13 +6,7 @@ local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 local font = require("util.font")
-
--- opacity state for button dark theme
--- https://material.io/design/color/dark-theme.html#states
-local o = { bg = {} }
-o["bg"]["none"] = "00" -- 0%
-o["bg"]["hovered"] = "0A" -- 4%
-o["bg"]["focused"] = "1F" -- 12%
+local mat_bg = require("util.mat-background")
 
 local mat_button = class()
 
@@ -52,11 +46,6 @@ function mat_button:init(args)
     shape = helpers.rrect(self.rrect),
     widget = wibox.container.background
   }
-  self.bgoverlay = wibox.widget {
-    bg = self.overlay .. o.bg.none,
-    shape = helpers.rrect(self.rrect),
-    widget = wibox.container.background
-  }
   self.margin = wibox.widget {
     top = 1, bottom = 1,
     left = mat_mode[self.mode].margin.left,
@@ -86,7 +75,7 @@ function mat_button:make_widget()
             image = nil,
             widget = wibox.widget.imagebox
           },
-          widget = self.bgoverlay
+          widget = mat_bg({ color = self.overlay, shape = helpers.rrect(self.rrect) }),
         },
         layout = wibox.layout.stack
       },
@@ -102,7 +91,7 @@ function mat_button:make_widget()
         },
         widget = self.margin
       },
-      widget = self.bgoverlay
+      widget = mat_bg({ color = self.overlay, shape = helpers.rrect(self.rrect) }),
     }
   end
 end
@@ -118,27 +107,22 @@ end
 function mat_button:hover()
   self.wicon.markup = helpers.colorize_text(self.icon, self.fg_icon, mat_mode[self.mode].fg.disabled)
   self.wtext.markup = helpers.colorize_text(self.text, self.fg_text, mat_mode[self.mode].fg.disabled)
-  self.bgoverlay.bg = self.overlay .. o.bg.none
 
   self.w:connect_signal("mouse::leave", function() 
     self.wicon.markup = helpers.colorize_text(self.icon, self.fg_icon, mat_mode[self.mode].fg.disabled)
     self.wtext.markup = helpers.colorize_text(self.text, self.fg_text, mat_mode[self.mode].fg.disabled)
-    self.bgoverlay.bg = self.overlay .. o.bg.none
   end)
   self.w:connect_signal("mouse::enter", function() 
     self.wicon.markup = helpers.colorize_text(self.icon, self.fg_icon, mat_mode[self.mode].fg.focused)
     self.wtext.markup = helpers.colorize_text(self.text, self.fg_text, mat_mode[self.mode].fg.focused)
-    self.bgoverlay.bg = self.overlay .. o.bg.hovered
   end)
   self.w:connect_signal("button::release", function() 
     self.wicon.markup = helpers.colorize_text(self.icon, self.fg_icon, mat_mode[self.mode].fg.hovered)
     self.wtext.markup = helpers.colorize_text(self.text, self.fg_text, mat_mode[self.mode].fg.hovered)
-    self.bgoverlay.bg = self.overlay .. o.bg.hovered
   end)
   self.w:connect_signal("button::press", function()
     self.wicon.markup = helpers.colorize_text(self.icon, self.fg_icon)
     self.wtext.markup = helpers.colorize_text(self.text, self.fg_text)
-    self.bgoverlay.bg = self.overlay .. o.bg.focused
   end)
 end
 

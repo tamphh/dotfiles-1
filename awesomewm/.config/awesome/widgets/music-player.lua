@@ -9,6 +9,7 @@ local icons = require("icons.default")
 local gtable = require("gears.table")
 local font = require("util.font")
 local bicon = require("util.icon")
+local mat_bg = require("util.mat-background")
 
 -- widget for the popup
 local mpc = require("widgets.mpc")({})
@@ -183,11 +184,6 @@ end
 function music_player_root:make_song()
   local font = require("util.font")
   local icon = font.button(self.icon[1], self.icon[2])
-  local background = wibox.widget {
-    bg = M.x.error .. "00",
-    shape = helpers.rrect(8),
-    widget = wibox.container.background
-  }
   local w = wibox.widget {
     {
       {
@@ -199,12 +195,8 @@ function music_player_root:make_song()
       margins = dpi(12),
       widget = wibox.container.margin
     },
-    widget = background
+    widget = mat_bg({ color = M.x.error })
   }
-  w:connect_signal("mouse::leave", function() background.bg = M.x.error .. "00" end)
-  w:connect_signal("mouse::enter", function() background.bg = M.x.error .. "0A" end)
-  w:connect_signal("button::press", function() background.bg = M.x.error .. "1F" end)
-  w:connect_signal("button::release", function() background.bg = M.x.error .. "00" end)
   self:create_popup(w)
   self.wpopup.x = dpi(4)
   self.wpopup.y = self.wibar_size + dpi(4)
