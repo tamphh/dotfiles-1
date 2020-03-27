@@ -2,12 +2,12 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gtable = require("gears.table")
 local beautiful = require("beautiful")
-local gtable = require("gears.table")
 local helpers = require("helpers")
 local change_theme = require("widgets.button_change_theme")
 local font = require("util.font")
 local bicon = require("util.icon")
 local tooltip = require("util.tooltip")
+local menu = require("util.menu")
 
 -- beautiful var
 local wibar_pos = beautiful.wibar_position or "top"
@@ -60,22 +60,24 @@ function layout_root:choose_icon_menu()
 end
 
 function layout_root:create_popup(w)
+  local wmenu = menu({ elements = {
+    { self.icon_startscreen[1], "start screen", " + F1", function()
+      local s = awful.screen.focused()
+      s.start_screen.visible = not s.start_screen.visible
+    end },
+    { self.icon_monitor[1], "monitor", " + F4", function()
+      local s = awful.screen.focused()
+      s.monitor_bar.visible = not s.monitor_bar.visible
+    end },
+    { self.icon_lockscreen[1], "lock", "", function()
+      lock_screen_show()
+    end }
+    }
+  })
   local popup = awful.popup {
-    widget = {
-      {
-        nil,
-        {
-          self:make_icons(),
-          change_theme,
-          layout = wibox.layout.fixed.horizontal
-        },
-        nil,
-        layout = wibox.layout.align.horizontal,
-      },
-      margins = 10,
-      widget = wibox.container.margin
-    },
+    widget = wmenu,
     visible = false,
+    bg = M.x.surface,
     ontop = true,
     hide_on_right_click = true,
     shape = helpers.rrect(10)

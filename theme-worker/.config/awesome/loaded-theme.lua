@@ -31,9 +31,9 @@ mytheme.f = {
   h1 = "Iosevka Light 60", -- used rarely on big icon or big title
   h4 = "Iosevka Regular 32",
   h6 = "Iosevka Regular 20",
-  subtile_1 = "Iosevka Regular 13", -- used on text list
-  body_1 = "Iosevka Term Regular 16", -- used on text body title
-  body_2 = "Iosevka Term Light 14", -- used on text body
+  subtile_1 = "Iosevka Regular 12", -- used on text list
+  body_1 = "Iosevka Term Regular 15", -- used on text body title
+  body_2 = "Iosevka Term Light 13", -- used on text body
   -- for button, don't use a Mono variant because icons are too small
   -- issue: https://github.com/Powerlevel9k/powerlevel9k/issues/430
   button = "Iosevka Term Medium Nerd Font Complete 14", -- used on text button

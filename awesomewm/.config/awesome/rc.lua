@@ -36,6 +36,7 @@ local noti = require("util.noti")
 require("module.notifications")
 require("layouts.start_screen")
 require("layouts.lock_screen")
+require("layouts.navigation-drawer")
 require("module.layout")
 require("module.menu")
 

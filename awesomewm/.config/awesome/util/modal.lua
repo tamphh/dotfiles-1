@@ -5,21 +5,14 @@ local abutton = require("awful.button")
 local gtable = require("gears.table")
 local widget = require("util.widgets")
 
--- hexa code for transparency in percent
--- https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
-local t = {}
-t["32"] = "52"
-t["8"] = "14"
-t["7"] = "12"
-t["5"] = "0D"
-
 local modal = {}
 
 function modal:init()
+  self.height = ascreen.focused().geometry.height
   self.w = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "dock" })
-  self.w.bg = M.x.on_surface .. t["5"]
+  self.w.bg = M.x.on_surface .. M.e.dp01
   self.w.width = ascreen.focused().geometry.width
-  self.w.height = ascreen.focused().geometry.height
+  self.w.height = self.height
   return self.w
 end
 
@@ -32,7 +25,7 @@ function modal:add_buttons(f)
 end
 
 -- place a widget at the center of the focused screen
-function modal:run(w)
+function modal:run_center(w)
   self.w:setup {
     nil,
     {
@@ -55,6 +48,26 @@ function modal:run(w)
       layout = wibox.layout.fixed.vertical
     },
     nil,
+    expand = "none",
+    layout = wibox.layout.align.vertical
+  }
+end
+
+function modal:run_left(w)
+  self.w:setup {
+    nil,
+    {
+      {
+        w,
+        forced_height = self.height,
+        bg = M.x.surface,
+        widget = wibox.container.background
+      },
+      nil,
+      nil,
+      expand = "none",
+      layout = wibox.layout.align.horizontal
+    },
     expand = "none",
     layout = wibox.layout.align.vertical
   }

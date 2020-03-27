@@ -88,4 +88,4 @@ local w = wibox.widget {
   layout = wibox.layout.fixed.horizontal
 }
 
-modal:run(w)
+modal:run_center(w)

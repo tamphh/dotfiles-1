@@ -131,6 +131,13 @@ keys.globalkeys = gtable.join(
   end,
   { description = "show or toggle start_screen", group = "awesome" }),
 
+  awful.key({ modkey }, "F2", function()
+    --local s = awful.screen.focused()
+    --s.start_screen.visible = not s.start_screen.visible
+    nav_drawer.visible = not nav_drawer.visible
+  end,
+  { description = "show or toggle the navigation drawer", group = "awesome" }),
+
   -- Layout manipulation
   awful.key({ modkey, "Shift" }, "j", function() awful.client.swap.byidx(1) end,
   { description = "swap with next client by index", group = "client" }),
