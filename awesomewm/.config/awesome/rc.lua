@@ -34,9 +34,7 @@ env = require("env-config") -- user settings globally
 local noti = require("util.noti")
 
 require("module.notifications")
-require("layouts.start_screen")
 require("layouts.lock_screen")
-require("layouts.navigation-drawer")
 require("module.layout")
 require("module.menu")
 
@@ -65,6 +63,9 @@ awful.screen.connect_for_each_screen(function(s)
 
   -- Monitor bar
   require("layouts.monitor_bar")(s)
+
+  -- Nav drawer
+  require("layouts.navigation-drawer")(s)
 end)
 -- }}}
 

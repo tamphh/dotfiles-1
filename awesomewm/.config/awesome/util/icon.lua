@@ -6,6 +6,7 @@ local wibox = require("wibox")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local mat_bg = require("util.mat-background")
+local mat_fg = require("util.mat-foreground")
 
 local root_icon = class()
 
@@ -17,30 +18,8 @@ function root_icon:init(args)
   self.command = args.command or nil
   self.no_margin = args.no_margin or nil -- boolean
   -- base widgets
-  self.wicon = font.button(self.icon, self.fg)
+  self.wicon = font.button_v2(self.icon)
   self.w = self:spec()
-end
-
-function root_icon:make_widget()
-  self:color()
-  self:action()
-end
-
--- with different level of opacity
-function root_icon:color()
-  self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 70)
-  self.w:connect_signal("mouse::enter", function()
-    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 100)
-  end)
-  self.w:connect_signal("mouse::leave", function()
-    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 70)
-  end)
-  self.w:connect_signal("button::press", function()
-    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 100)
-  end)
-  self.w:connect_signal("button::release", function()
-    self.wicon.markup = helpers.colorize_text(self.icon, self.fg, 70)
-  end)
 end
 
 function root_icon:action()
@@ -68,12 +47,15 @@ function root_icon:spec()
   self.wicon.forced_width = 24
   return wibox.widget {
     {
-      --{
-        self.wicon,
-      --  bg = M.x.on_surface .. M.e.dp02,
-      --  widget = wibox.container.background
-      --},
-      widget = self:margins()
+      {
+        --{
+          self.wicon,
+          --  bg = M.x.on_surface .. M.e.dp02,
+          --  widget = wibox.container.background
+          --},
+          widget = self:margins()
+        },
+        widget = mat_fg({ color = self.fg }),
     },
     --bg = M.x.on_surface .. M.e.dp01,
     widget = mat_bg({ color = self.fg })
@@ -84,7 +66,7 @@ local new_icon = class(root_icon)
 
 function new_icon:init(args)
   root_icon.init(self, args)
-  root_icon.make_widget(self)
+  root_icon.action(self)
   return self.w
 end
 

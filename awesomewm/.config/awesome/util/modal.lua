@@ -7,9 +7,10 @@ local widget = require("util.widgets")
 
 local modal = {}
 
-function modal:init()
+function modal:init(s)
+  self.screen = s or ascreen.focused()
   self.height = ascreen.focused().geometry.height
-  self.w = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "dock" })
+  self.w = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "dock", screen = self.screen })
   self.w.bg = M.x.on_surface .. M.e.dp01
   self.w.width = ascreen.focused().geometry.width
   self.w.height = self.height

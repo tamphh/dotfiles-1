@@ -16,7 +16,7 @@ local layout_root = class()
 
 function layout_root:init(args)
   -- options
-  self.mode = args.mode or "icons" -- possible value: icons , menu
+  self.mode = args.mode or "icons" -- possible value: icons , menu , nav
   self.icon_startscreen = { "", M.x.on_background }
   self.icon_monitor = { "", M.x.on_background }
   self.icon_lockscreen = { "", M.x.on_background }
@@ -31,6 +31,8 @@ end
 function layout_root:make_widget()
   if self.mode == "menu" then
     return self:make_menu()
+  elseif self.mode == "nav" then
+    return self:make_nav()
   else
     return self:make_icons()
   end
@@ -138,6 +140,17 @@ end
 function layout_root:make_menu()
   local w = bicon({ icon = self.icon_menu, fg = M.x.on_background })
   self:create_popup(w)
+  return w
+end
+
+function layout_root:make_nav()
+  local w = bicon({ icon = "", fg = M.x.on_background })
+  w:buttons(gtable.join(
+    awful.button({}, 1, function()
+      local s = awful.screen.focused()
+      s.nav_drawer.visible = not s.nav_drawer.visible 
+    end)
+  ))
   return w
 end
 

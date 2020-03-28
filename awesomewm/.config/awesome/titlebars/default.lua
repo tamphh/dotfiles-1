@@ -12,6 +12,16 @@ beautiful.titlebar_bg = beautiful.titlebar_bg or M.x.background
 beautiful.titlebar_bg_normal = beautiful.titlebar_bg_normal or M.x.background
 local size = beautiful.titlebar_size or nil
 
+local function is_titlebar_off(c)
+  local client_off = { 'Brave-browser', 'Lutris', 'music_n' } -- from the rc.lua
+  for _,v in pairs(client_off) do
+    if v == c.class then
+      return true 
+    end
+  end
+  return false
+end
+
 client.connect_signal("request::titlebars", function(c)
 
   local buttons = gtable.join(
@@ -26,26 +36,29 @@ client.connect_signal("request::titlebars", function(c)
   )
 
   local position = beautiful.titlebar_position or 'top'
-  awful.titlebar(c, { position = position, size = size }) : setup {
-    nil, -- Left
-    { -- Middle
-      { -- Title
-        align  = "center",
-        widget = beautiful.titlebar_title_enabled and awful.titlebar.widget.titlewidget(c) or wibox.widget.textbox()
+
+  if not is_titlebar_off(c) then
+    awful.titlebar(c, { position = position, size = size }) : setup {
+      nil, -- Left
+      { -- Middle
+        { -- Title
+          align  = "center",
+          widget = beautiful.titlebar_title_enabled and awful.titlebar.widget.titlewidget(c) or wibox.widget.textbox()
+        },
+        buttons = buttons,
+        layout  = wibox.layout.flex.horizontal
       },
-      buttons = buttons,
-      layout  = wibox.layout.flex.horizontal
-    },
-    { -- Right
-      awful.titlebar.widget.floatingbutton (c),
-      awful.titlebar.widget.maximizedbutton(c),
-      awful.titlebar.widget.stickybutton   (c),
-      awful.titlebar.widget.ontopbutton    (c),
-      awful.titlebar.widget.closebutton    (c),
-      layout = wibox.layout.fixed.horizontal()
-    },
-    layout = wibox.layout.align.horizontal
-  }
+      { -- Right
+        awful.titlebar.widget.floatingbutton (c),
+        awful.titlebar.widget.maximizedbutton(c),
+        awful.titlebar.widget.stickybutton   (c),
+        awful.titlebar.widget.ontopbutton    (c),
+        awful.titlebar.widget.closebutton    (c),
+        layout = wibox.layout.fixed.horizontal()
+      },
+      layout = wibox.layout.align.horizontal
+    }
+  end
 
   -- bottom bar for ncmpcpp
   if c.class == "music_n" and position ~= 'left' then

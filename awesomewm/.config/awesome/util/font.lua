@@ -34,6 +34,12 @@ function font.h6(text, fg, alpha)
   return make_widget(M.f.h6, text, color, alpha)
 end
 
+function font.subtile_1(text, fg, alpha) 
+  local color = fg or M.x.on_surface
+  local alpha = alpha or M.t.disabled
+  return make_widget(M.f.subtile_1, text, color, alpha)
+end
+
 function font.text_list(text, fg, alpha)
   local color = fg or M.x.on_surface
   local alpha = alpha or 70
@@ -53,10 +59,24 @@ function font.body_text(text, fg, alpha)
   return w
 end
 
+local function void_text(font, text)
+  local w = widget.create_base_text(font)
+  w.text = text
+  return w
+end
+
+function font.body_2(text)
+  return void_text(M.f.body_2, text)
+end
+
 function font.button(text, fg, alpha)
   local color = fg or M.x.on_surface
   local alpha = alpha or 100
   return make_widget(M.f.button, text, color, alpha)
+end
+
+function font.button_v2(text)
+  return void_text(M.f.button, text)
 end
 
 function font.caption(text, fg, alpha)
