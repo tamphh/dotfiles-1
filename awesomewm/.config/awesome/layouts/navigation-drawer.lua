@@ -115,9 +115,17 @@ function nav_drawer:init(s)
           forced_height = 56,
           widget = wibox.container.margin
         },
-        nil,
         { 
           {
+            layout = wibox.layout.fixed.vertical
+          },
+          { -- layout
+            {
+              label_layout,
+              margins = 16,
+              widget = wibox.container.margin
+            },
+            layout,
             layout = wibox.layout.fixed.vertical
           },
           { -- settings
@@ -137,19 +145,11 @@ function nav_drawer:init(s)
             },
             layout = wibox.layout.fixed.vertical
           },
-          { -- layout
-            {
-              label_layout,
-              margins = 16,
-              widget = wibox.container.margin
-            },
-            layout,
-            layout = wibox.layout.fixed.vertical
-          },
           spacing_widget = sep,
           spacing = 1,
           layout = wibox.layout.fixed.vertical
         },
+        nil,
         forced_width = 256,
         layout = wibox.layout.align.vertical
       },

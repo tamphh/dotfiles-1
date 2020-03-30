@@ -4,7 +4,6 @@ local beautiful = require("beautiful")
 local noti = require("util.noti")
 local widget = require("util.widgets")
 local helpers = require("helpers")
-local dpi = beautiful.xresources.apply_dpi
 local gtable = require('gears.table')
 local icons = require("icons.default")
 local font = require("util.font")

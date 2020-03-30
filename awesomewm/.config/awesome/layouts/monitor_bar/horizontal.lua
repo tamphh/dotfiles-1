@@ -1,7 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local widget = require('util.widgets')
 local font = require("util.font")
 

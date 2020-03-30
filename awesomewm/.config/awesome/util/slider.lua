@@ -3,13 +3,11 @@
 local base = require('wibox.widget.base')
 local gtable = require('gears.table')
 local setmetatable = setmetatable
-local dpi = require('beautiful').xresources.apply_dpi
 local widget = require("util.widgets")
 
 -- Commons requirements
 local wibox = require('wibox')
 local gears = require('gears')
-local beautiful = require('beautiful')
 -- Local declarations
 
 local mat_slider = {mt = {}}

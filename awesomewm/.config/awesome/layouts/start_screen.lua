@@ -5,10 +5,10 @@ local beautiful = require("beautiful")
 local widget = require("util.widgets")
 local button = require("util.buttons")
 local font = require("util.font")
-local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 local app = require("util.app")
 local btext = require("util.mat-button")
+local modal = require("util.modal")
 
 local function start_screen_hide()
   local s = awful.screen.focused()
@@ -280,56 +280,43 @@ local startscreen = class()
 
 function startscreen:init(s)
 
-  -- the start_screen
-  s.start_screen = wibox({ visible = false, ontop = true, type = "dock", screen = s })
-  s.start_screen.bg = M.x.surface .. "00"
-  awful.placement.maximize(s.start_screen)
+  s.start_screen = modal:init(s)
 
   s.start_screen:buttons(gtable.join(
     awful.button({}, 3, function() start_screen_hide() end)
   ))
 
-  s.start_screen:setup {
-    nil,
+  local w = wibox.widget {
     {
-      nil,
-      {
-        {
-          boxes(date_widget, 100, 120, 1),
-          boxes(buttons_widget, 100, 376, 1),
-          layout = wibox.layout.fixed.vertical
-        },
-        widget.centered(
-        {
-          boxes(picture_widget, 210, 200, 1),
-          boxes(quote_widget, 210, 200, 1),
-          layout = wibox.layout.fixed.vertical
-        }, "vertical"),
-        {
-          boxes(rss_widgets, feed_width, feed_height, 1),
-          layout = wibox.layout.fixed.vertical
-        },
-        widget.centered(
-        {
-          boxes(todo_widget, 210, 250, 1),
-          boxes(buttons_path_1_widget, 210, 80, 1),
-          boxes(buttons_path_2_widget, 210, 80, 1),
-          layout = wibox.layout.fixed.vertical
-        }, "vertical"),
-        {
-          boxes(buttons_url_widget, 100, 376, 1),
-          layout = wibox.layout.fixed.vertical
-        },
-        layout = wibox.layout.fixed.horizontal
-      },
-      nil,
-      expand = "none",
-      layout = wibox.layout.align.horizontal
+      boxes(date_widget, 100, 120, 1),
+      boxes(buttons_widget, 100, 376, 1),
+      layout = wibox.layout.fixed.vertical
     },
-    nil,
-    expand = "none",
-    layout = wibox.layout.align.vertical
+    widget.centered(
+    {
+      boxes(picture_widget, 210, 200, 1),
+      boxes(quote_widget, 210, 200, 1),
+      layout = wibox.layout.fixed.vertical
+    }, "vertical"),
+    {
+      boxes(rss_widgets, feed_width, feed_height, 1),
+      layout = wibox.layout.fixed.vertical
+    },
+    widget.centered(
+    {
+      boxes(todo_widget, 210, 250, 1),
+      boxes(buttons_path_1_widget, 210, 80, 1),
+      boxes(buttons_path_2_widget, 210, 80, 1),
+      layout = wibox.layout.fixed.vertical
+    }, "vertical"),
+    {
+      boxes(buttons_url_widget, 100, 376, 1),
+      layout = wibox.layout.fixed.vertical
+    },
+    layout = wibox.layout.fixed.horizontal
   }
+
+  modal:run_center(w)
 end
 
 return startscreen

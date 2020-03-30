@@ -12,12 +12,17 @@ mytheme.x = {
   surface = xrdb.color0 or "#000000",
   dark_primary = "#281f2c", -- branded dark surface
 
-  primary = xrdb.color14 or "#52dcba", -- cyan
-  primary_variant = xrdb.color6 or "#009F6C", -- primary saturate (200-500)
-  error = xrdb.color9 or "#CF6673",
+  primary = xrdb.color6 or "#9afff9", -- cyan
+  primary_variant_1 = xrdb.color2 or "#aaff99", -- primary saturate (200-500)
+  primary_variant_2 = xrdb.color4 or "#aaffe9", -- primary saturate (200-500)
   
-  secondary = xrdb.color13 or "#BB86FC", -- magenta
+  secondary = xrdb.color5 or "#daffe9", -- magenta
+  secondary_variant_1 = xrdb.color3 or "#aafa66", -- magenta
+  secondary_variant_2 = xrdb.color13 or "#efea8a", -- magenta
   
+  error = xrdb.color1 or "#ff99bb",
+  error_variant_1 = xrdb.color9 or "#CF6673",
+
   on_background = xrdb.color15 or "#ffffff", -- white
   on_surface = xrdb.color15,  -- white
   on_primary = xrdb.color0, -- black

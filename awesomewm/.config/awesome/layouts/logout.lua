@@ -3,6 +3,7 @@ local awful = require("awful")
 local keygrabber = require("awful.keygrabber")
 local btext = require("util.mat-button")
 local modal = require("util.modal")
+local helpers = require("helpers")
 
 -- keylogger
 local exit_screen_grabber
@@ -81,11 +82,20 @@ end
 modal:add_buttons(exit_screen_hide)
 
 local w = wibox.widget {
-  poweroff,
-  exit,
-  lock,
-  spacing = 12,
-  layout = wibox.layout.fixed.horizontal
+  {
+    {
+      poweroff,
+      exit,
+      lock,
+      spacing = 12,
+      layout = wibox.layout.fixed.horizontal
+    },
+    margins = 20,
+    widget = wibox.container.margin
+  },
+  shape = helpers.rrect(20),
+  bg = M.x.surface,
+  widget = wibox.container.background
 }
 
 modal:run_center(w)

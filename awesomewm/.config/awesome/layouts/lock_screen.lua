@@ -1,7 +1,6 @@
 local awful = require("awful")
 local gshape = require("gears.shape")
 local wibox = require("wibox")
-local dpi = require("beautiful").xresources.apply_dpi
 local naughty = require("naughty")
 local helpers = require("helpers")
 local widget = require("util.widgets")

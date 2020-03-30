@@ -5,7 +5,6 @@ local gtable = require("gears.table")
 local awful = require("awful")
 local naughty = require("naughty")
 local separator = require("util.separators")
-local dpi = require("beautiful").xresources.apply_dpi
 local app = require("util.app")
 
 local widgets = {}

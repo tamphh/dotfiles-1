@@ -1,5 +1,4 @@
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local widget = require("util.widgets")
 local button = require("util.buttons")
 local helpers = require("helpers")

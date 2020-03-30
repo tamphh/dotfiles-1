@@ -4,7 +4,6 @@ local gtable = require("gears.table")
 local widget = require("util.widgets")
 local separator = require("util.separators")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 local font = require("util.font")
 local btext = require("util.mat-button")

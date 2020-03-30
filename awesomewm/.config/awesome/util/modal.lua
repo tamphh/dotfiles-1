@@ -10,7 +10,7 @@ local modal = {}
 function modal:init(s)
   self.screen = s or ascreen.focused()
   self.height = ascreen.focused().geometry.height
-  self.w = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "dock", screen = self.screen })
+  self.w = wibox({ x = 0, y = 0, visible = false, ontop = true, type = "splash", screen = self.screen })
   self.w.bg = M.x.on_surface .. M.e.dp01
   self.w.width = ascreen.focused().geometry.width
   self.w.height = self.height
@@ -39,7 +39,6 @@ function modal:run_center(w)
             widget = wibox.container.margin
           },
           shape = helpers.rrect(18),
-          bg = M.x.surface,
           widget = wibox.container.background
         },
         nil,
@@ -61,7 +60,6 @@ function modal:run_left(w)
       {
         w,
         forced_height = self.height,
-        bg = M.x.surface,
         widget = wibox.container.background
       },
       nil,

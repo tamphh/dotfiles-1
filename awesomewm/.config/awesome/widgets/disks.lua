@@ -2,7 +2,6 @@ local widget = require("util.widgets")
 local helpers = require("helpers")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local sep = require("util.separators")
 local font = require("util.font")
 

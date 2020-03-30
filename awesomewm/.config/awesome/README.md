@@ -1,4 +1,5 @@
 ## About
+Work in progress...  
 A desktop environment following the [Material](https://material.io/) guidelines and more specifically about [dark theme](https://material.io/design/color/dark-theme.html).
 + Reducing eye strain.
 + Reducing the use of light pixels (conserve energy/battery life).

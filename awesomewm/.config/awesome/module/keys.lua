@@ -1,8 +1,6 @@
 local gtable = require("gears.table")
 local awful = require("awful")
 local helpers = require("helpers")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
 local mymainmenu = require("module.menu")
 
 local keys = {}
@@ -132,9 +130,8 @@ keys.globalkeys = gtable.join(
   { description = "show or toggle start_screen", group = "awesome" }),
 
   awful.key({ modkey }, "F2", function()
-    --local s = awful.screen.focused()
-    --s.start_screen.visible = not s.start_screen.visible
-    nav_drawer.visible = not nav_drawer.visible
+    local s = awful.screen.focused()
+    s.nav_drawer.visible = not s.nav_drawer.visible
   end,
   { description = "show or toggle the navigation drawer", group = "awesome" }),
 

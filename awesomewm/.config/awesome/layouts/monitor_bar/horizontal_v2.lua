@@ -1,50 +1,49 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local widget = require('util.widgets')
 local font = require("util.font")
 
 -- for the top
 local ram = require("widgets.ram")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40,
-  title = { "RAM", "#aaff99" },
+  title = { "RAM", M.x.primary_variant_1 },
   bar_colors = "#3e7f80"
 })
 
 local volume = require("widgets.volume")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40, 
-  title = { "VOL", "#daffe9" },
+  title = { "VOL", M.x.secondary_variant_2 },
   bar_colors = "#3e6a80"
 })
 
 local brightness = require("widgets.brightness")({ 
   mode = "progressbar", layout = "vertical", bar_size = 40,
-  title = { "BRI", "#aaffe9" },
+  title = { "BRI", M.x.primary_variant_2 },
   bar_colors = "#473e80"
 })
 
 local battery = require("widgets.battery")({
   mode = "progressbar", layout = "vertical",  bar_size = 40,
-  title = { "BAT", "#9afff9" },
+  title = { "BAT", M.x.primary },
   bar_colors = "#673e80"
 })
 
 -- bottom (monitor bar)
 local cpu = require("widgets.cpu")({ 
-  title = { "CPU", "#ff99bb" },
+  title = { "CPU", M.x.secondary_variant_1 },
   mode = "dotsbar", layout = "vertical"
 })
 
 local disk = require("widgets.disks")({
   mode = "block", layout = "vertical",
-  title = { "FS", "#efea8a" },
+  title = { "FS", M.x.error },
   bar_colors = { "#855789", "#7155a9", "#3f63a0" }
 })
 
 local network = require("widgets.network")({
   mode = "block", layout = "vertical",
-  title = { "NET", "#aafa66" }, title_size = 20,
+  title = { "NET", M.x.secondary }, title_size = 20,
   bar_colors = { M.x.primary , M.x.secondary }
 })
 

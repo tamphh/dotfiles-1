@@ -7,6 +7,7 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Theme handling library
 local beautiful = require("beautiful")
+dpi = beautiful.xresources.apply_dpi -- add dpi globally
 -- Notification library
 local naughty = require("naughty")
 
@@ -34,7 +35,6 @@ env = require("env-config") -- user settings globally
 local noti = require("util.noti")
 
 require("module.notifications")
-require("layouts.lock_screen")
 require("module.layout")
 require("module.menu")
 
@@ -55,17 +55,8 @@ awful.screen.connect_for_each_screen(function(s)
   -- Create the wibox
   require("bars."..M.name)(s)
 
-  -- App drawer bar
-  require("layouts.app_drawer")(s)
-
-  -- Start Screen widget
-  require("layouts.start_screen")(s)
-
-  -- Monitor bar
-  require("layouts.monitor_bar")(s)
-
-  -- Nav drawer
-  require("layouts.navigation-drawer")(s)
+  -- Load extra layouts
+  require("layouts")(s)
 end)
 -- }}}
 

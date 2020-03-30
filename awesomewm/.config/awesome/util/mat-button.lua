@@ -3,7 +3,6 @@ local awful = require("awful")
 local gtable = require("gears.table")
 local widget = require("util.widgets")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local helpers = require("helpers")
 local font = require("util.font")
 local mat_bg = require("util.mat-background")
