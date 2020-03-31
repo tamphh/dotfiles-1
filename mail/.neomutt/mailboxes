@@ -1,4 +1,11 @@
-mailboxes \
-    "+Sheet/INBOX" \
-    "+Gmail/INBOX" \
-    "+Work/INBOX"
+set folder = ~/.mails/gmail
+set spoolfile = "+INBOX"
+set record = ""
+set postponed = "+[Gmail].Drafts"
+set trash = "+[Gmail].Trash"
+named-mailboxes "   Reçus" =INBOX
+named-mailboxes "   Envoyés" ="[Gmail].Sent Mail"
+named-mailboxes "   Brouillons" =[Gmail].Drafts
+named-mailboxes "   Junk" =[Gmail].Spam
+named-mailboxes "   Poubelle" =[Gmail].Trash
+#named-mailboxes " ---------   GMAIL ----------" ="."

@@ -2,6 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local titlebar = require("util.titlebar")
+local mat_fg = require("util.mat-foreground")
 
 beautiful.titlebar_bg_focus = beautiful.titlebar_bg_focus or M.x.background
 beautiful.titlebar_bg = beautiful.titlebar_bg or M.x.background
@@ -14,14 +15,13 @@ client.connect_signal("request::titlebars", function(c)
 
   if not titlebar.is_titlebar_off(c) then
     awful.titlebar(c, { position = position, size = size }) : setup {
-      nil, -- Left
+      nil, -- left
       { -- Middle
-        { -- Title
-          align  = "center",
-          widget = beautiful.titlebar_title_enabled and awful.titlebar.widget.titlewidget(c) or wibox.widget.textbox()
+        {
+          buttons = titlebar.button(c),
+          widget = titlebar.title(c),
         },
-        buttons = titlebar.button(c),
-        layout  = wibox.layout.flex.horizontal
+        widget = mat_fg({ color = M.x.on_background })
       },
       { -- Right
         titlebar.button_minimize(c),
@@ -29,7 +29,7 @@ client.connect_signal("request::titlebars", function(c)
         titlebar.button_close(c),
         layout = wibox.layout.fixed.horizontal
       },
-      expand = "none",
+      --expand = "none",
       layout = wibox.layout.align.horizontal
     }
   end

@@ -2,6 +2,7 @@ local awful = require("awful")
 local gtable = require("gears.table")
 local wibox = require("wibox")
 local btext = require("util.mat-button")
+local beautiful = require("beautiful")
 
 local ncmpcpp = require("widgets.mpc")({ 
   mode = "titlebar", font = M.f.h4, fg = "primary", overlay = "primary"
@@ -71,6 +72,19 @@ function titlebar.button_minimize(c)
     c.minimized = true
   end
   return gen_button(c, '', "secondary", minimize)
+end
+
+function titlebar.title(c)
+  local w
+  local title_enabled = beautiful.titlebar_title_enabled or true
+  if title_enabled then
+    w = awful.titlebar.widget.titlewidget(c)
+    w.font = M.f.subtile_2
+    w:set_align("center")
+  else
+    w = wibox.widget.textbox("")
+  end
+  return w
 end
 
 return titlebar

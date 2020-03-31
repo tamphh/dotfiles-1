@@ -16,13 +16,9 @@ client.connect_signal("request::titlebars", function(c)
   ) : setup {
     nil, -- Left
     { -- Middle
-      { -- Title
-        align = "center",
-        font = t_font,
-        widget = titlebar.is_titlebar_off(c) and wibox.widget.textbox() or awful.titlebar.widget.titlewidget(c)
-      },
+      -- Title
       buttons = titlebar.button(c),
-      layout  = wibox.layout.flex.horizontal
+      widget = titlebar.title(c),
     },
     { -- Right
       titlebar.button_minimize(c),

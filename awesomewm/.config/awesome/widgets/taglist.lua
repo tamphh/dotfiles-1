@@ -5,7 +5,6 @@ local beautiful = require("beautiful")
 local helpers = require("helpers")
 local gears = require("gears")
 local widget = require("util.widgets")
-local naughty = require("naughty")
 
 local modkey = "Mod4"
 
@@ -15,7 +14,7 @@ local taglist_root = class()
 function taglist_root:init(args)
   self.bg = beautiful.taglist_bg or M.x.on_background .. "00"
   self.bg_focus = beautiful.taglist_bg_focus or M.x.on_background .. "0A" -- 4%
-  self.mode = args.mode or 'line' -- possible values: icon , line , shape , rail, text
+  self.mode = args.mode or 'line' -- possible values: icon , line , shape , text
   self.layout = args.layout or 'horizontal' -- possible values: grid , horizontal , vertical, flex (horiz)
   self.template = self:select_template()
   self.buttons = self:make_buttons()
@@ -43,8 +42,6 @@ function taglist_root:select_template()
     return self:template_shape()
   elseif self.mode == 'icon' then
     return self:template_icon()
-  elseif self.mode == 'rail' then
-    return self:template_rail()
   else
     return self:template_text() -- default
   end
@@ -214,54 +211,6 @@ function taglist_root:template_icon()
       nil,
       expand = "none",
       layout = wibox.layout.align.horizontal
-    },
-    id = "img_tag_bg",
-    shape = beautiful.taglist_shape or helpers.rrect(10),
-    bg = self.bg,
-    widget = wibox.container.background,
-    create_callback = function(item, tag, index, _)
-      self:update_icon(item:get_children_by_id('img_tag')[1], tag, index)
-      update_bg(item:get_children_by_id('img_tag_bg')[1])
-    end,
-    update_callback = function(item, tag, index, _)
-      self:update_icon(item:get_children_by_id('img_tag')[1], tag, index)
-      update_bg(item:get_children_by_id('img_tag_bg')[1])
-    end
-  }
-  return t
-end
-
-function taglist_root:template_rail()
-  local function update_bg(w)
-    w:connect_signal("mouse::leave", function(c)
-      w.bg = self.bg
-    end)
-    w:connect_signal("mouse::enter", function(c)
-      w.bg = self.bg_focus
-    end)
-  end
-  local t = {
-    {
-      nil,
-      {
-        nil,
-        {
-          {
-            id = "img_tag",
-            forced_height = 32,
-            forced_width = 32,
-            widget = wibox.widget.imagebox,
-          },
-          margins = dpi(10),
-          widget = wibox.container.margin
-        },
-        nil,
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-      },
-      nil,
-      expand = "none",
-      layout = wibox.layout.align.vertical
     },
     id = "img_tag_bg",
     shape = beautiful.taglist_shape or helpers.rrect(10),
