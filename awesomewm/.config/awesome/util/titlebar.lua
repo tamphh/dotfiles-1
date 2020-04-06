@@ -76,8 +76,7 @@ end
 
 function titlebar.title(c)
   local w
-  local title_enabled = beautiful.titlebar_title_enabled or true
-  if title_enabled then
+  if beautiful.titlebar_title_enabled then
     w = awful.titlebar.widget.titlewidget(c)
     w.font = M.f.subtile_2
     w:set_align("center")

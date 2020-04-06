@@ -1,6 +1,7 @@
 local gtable = require("gears.table")
 local awful = require("awful")
 local wibox = require("wibox")
+local widget = require("util.widgets")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
 
@@ -8,7 +9,7 @@ local helpers = require("helpers")
 local spacing = beautiful.tasklist_spacing or dpi(4)
 local align = beautiful.tasklist_align or "center"
 local fg = beautiful.tasklist_fg_normal or M.x.on_background
-local bg_normal = beautiful.tasklist_bg_normal or M.x.background .. M.e.dp00
+local bg_normal = beautiful.tasklist_bg_normal or M.x.on_background .. M.e.dp00
 local bg_focus = beautiful.tasklist_bg_focus or M.x.on_background .. M.e.dp01
 local bg_urgent = beautiful.tasklist_bg_urgent or M.x.error
 
@@ -47,6 +48,36 @@ function cheer_update(w, c, index)
   else
     w.markup = helpers.colorize_text(w.text, M.x.error, M.t.disabled)
   end
+end
+
+function tasklist_widget:select_template()
+  if beautiful.tasklist_icon_only then
+    return self:template_icon()
+  else
+    return self:template()
+  end
+end
+
+function tasklist_widget:template_icon()
+  local t = {
+    {
+      {
+        id     = "icon_role",
+        forced_width = dpi(24),
+        forced_height = dpi(24),
+        widget = wibox.widget.imagebox
+      },
+      margins = dpi(14),
+      widget = wibox.container.margin
+    },
+    id = "background_role",
+    widget = wibox.container.background,
+    create_callback = function(self, c, index, objects)
+    end,
+    update_callback = function(self, c, index, objects)
+    end,
+  }
+  return t
 end
 
 function tasklist_widget:template()
@@ -105,14 +136,14 @@ function tasklist_widget:new(s)
     screen  = s,
     filter  = awful.widget.tasklist.filter.currenttags,
     buttons = self:buttons(),
-    style = {
+    style = self.style,{
       --fg_normal = fg_normal,
       bg_normal = bg_normal or M.x.background,
       --fg_focus = fg_focus,
       bg_focus = bg_focus or M.x.background,
       align = align,
     },
-    widget_template = self:template()
+    widget_template = self:select_template()
   }
   return widget
 end
