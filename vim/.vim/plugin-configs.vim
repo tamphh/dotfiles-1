@@ -16,24 +16,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 map <F3> :NERDTreeToggle<CR>
 
-"" gnupg.vim, http://www.vim.org/scripts/script.php?script_id=3645
-"" wiki here http://pig-monkey.com/2013/04/password-management-vim-gnupg/
-if has("autocmd")
-  let g:GPGDefaultRecipients=["szorfein@protonmail.com"]
-  let g:GPGFilePattern = '*.\(gpg\|asc\|pgp\)'
-
-  augroup GnuPGExtra
-    exe "autocmd BufReadCmd,FileReadCmd " . g:GPGFilePattern . " call SetGPGOptions()"
-    exe "autocmd CursorHold " . g:GPGFilePattern . " quit"
-  augroup END
-
-  function SetGPGOptions()
-    set filetype=gpgpass
-    set noswapfile
-    set viminfo=
-  endfunction
-endif
-
 " vim-tmux-navigator, https://github.com/christoomey/vim-tmux-navigator#vim-1
 let g:tmux_navigator_no_mappings=1
 nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>

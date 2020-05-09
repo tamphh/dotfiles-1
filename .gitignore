@@ -6,6 +6,5 @@ gnupg/.gnupg/*.d
 gnupg/.gnupg/pub*.*
 gnupg/.gnupg/rand*
 gnupg/.gnupg/trust*
-gnupg/.passwords/*.gpg
 mutt/.mutt/gpg.rc
 nnn/.config/nnn/.history

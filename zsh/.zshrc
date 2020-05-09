@@ -62,30 +62,6 @@ man() {
         command man "$@"
 }
 
-buildfile() {
-    if [[ "$1" == *.* ]]; then
-        echo $1
-    else
-        if [ -e "$1" ]; then
-            echo $1
-        elif [ -e "$1".gpg ]; then
-            echo "$1".gpg
-        else 
-            echo "$1".txt
-        fi
-    fi
-}
-
-# Create new password with : pw newpass.gpg
-# read pass, no need extension : pw newpass
-pw() {
-   cd "$PASSWD"
-   if [ ! -z "$1" ]; then
-      $EDITOR $(buildfile "$1")
-      cd "$OLDPWD"
-   fi
-}
-
 # Function for upload file -> https://transfer.sh/
 # Alias of : curl --upload-file ./hello.txt https://transfer.sh/hello.txt 
 # transfer hello.txt 
