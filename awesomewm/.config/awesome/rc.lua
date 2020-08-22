@@ -15,8 +15,7 @@ local naughty = require("naughty")
 -- return the init function of each class
 local function new(self, ...)
   local instance = setmetatable({}, { __index = self })
-  return instance:init(...) or instance
-end
+  return instance:init(...) or instance end
 
 -- Function to create object in lua - used globally
 function class(base)
@@ -47,16 +46,16 @@ awful.screen.connect_for_each_screen(function(s)
   require("module.wallpaper")(s)
 
   -- add padding on all screens
-  s.padding = beautiful.general_padding
+  s.padding = beautiful.general_padding or 0
 
   -- Each screen has its own tag table.
   require("module.tagnames")(s)
 
-  -- Create the wibox
-  require("bars."..M.name)(s)
-
   -- Load extra layouts
   require("layouts")(s)
+  
+  -- Create the wibox
+  require("bars."..M.name)(s)
 end)
 -- }}}
 
