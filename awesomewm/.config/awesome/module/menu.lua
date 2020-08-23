@@ -2,7 +2,6 @@ local beautiful = require("beautiful")
 local awful = require("awful")
 local gtable = require("gears.table")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local exit_screen = require("layouts.logout")
 -- Enable hotkeys help widget for VIM and other apps
 -- -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -17,8 +16,8 @@ beautiful.menu_bg_focus = M.x.primary
 -- Create a launcher widget and a main menu
 local myawesomemenu = {
   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-  { "manual", terminal .. terminal_args[2] .. "man awesome" },
-  { "edit config", env.editor_cmd .. " " .. awesome.conffile },
+  { "manual", terminal_cmd .. "man awesome" },
+  { "edit config", editor_cmd .. " " .. awesome.conffile },
   { "restart", awesome.restart },
   { "quit", function() exit_screen_show() end}
 }
