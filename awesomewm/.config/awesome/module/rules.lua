@@ -195,7 +195,7 @@ awful.rules.rules = {
 
   { 
     rule = { class = "music*" },
-    properties = { tag = screen[1].tags[2] }
+    properties = { tag = screen[1].tags[5] }
   },
 
   {

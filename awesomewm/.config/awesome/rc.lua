@@ -29,7 +29,7 @@ M = require("loaded-theme") -- material theme globally
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 beautiful.init( theme_dir .. M.name .. "/theme.lua" )
 
-env = require("env-config") -- user settings globally
+pcall(require, "config.env") -- user settings globally
 
 local noti = require("util.noti")
 
