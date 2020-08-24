@@ -3,17 +3,16 @@
 ---------------------------
 
 local theme_assets = require("beautiful.theme_assets")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
+
 local gfs = require("gears.filesystem")
-local gshape = require("gears.shape")
 local themes_path = gfs.get_themes_dir()
-local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.name .. "/layouts/"
-local xrdb = xresources.get_current_theme()
-local wibox = require("wibox")
-local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. M.name .. "/taglist/"
 
 local theme = {}
+
+theme.font          = M.f.overline
+
+theme.bg_normal     = M.x.background
+theme.bg_focus      = M.x.background .. M.e.dp01
 
 theme.border_width  = dpi(1)
 theme.screen_margin = dpi(6)
@@ -95,11 +94,6 @@ theme.taglist_text_color_urgent = {
   M.x.error .. "7B",
 }
 
--- icon_taglist
-theme.ntags = 10
-
-theme.taglist_layout = wibox.layout.fixed.horizontal -- horizontal or vertical
-
 -- }}} TAGLIST END
 
 -- {{{ MENU
@@ -113,7 +107,7 @@ theme.wallpaper = os.getenv("HOME").."/images/"..M.name..".jpg"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-  theme.menu_height, M.x.secondary, M.x.on_secondary
+  theme.menu_height, M.x.primary, M.x.on_primary
 )
 
 -- Define the icon theme for application icons. If not set then the icons

@@ -16,7 +16,7 @@ function nav_drawer_hide()
   s.nav_drawer.visible = false
 end
 
-function naw_drawer_show()
+function nav_drawer_show()
   local s = awful.screen.focused()
   s.nav_drawer.visible = true
 end

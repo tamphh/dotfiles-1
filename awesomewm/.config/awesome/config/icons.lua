@@ -1,4 +1,6 @@
-local icons = {
+local icons = {}
+
+icons.app = {
   xst = "",
   web = "",
   neomutt = "",
@@ -19,6 +21,14 @@ local icons = {
   reddit = "",
   duck = "ﻝ",
   default = ""
+}
+
+icons.widget = {
+  lock = "",
+  launcher = "",
+  exit = ">>",
+  reboot = "ﰇ",
+  poweroff = "⭘"
 }
 
 return icons

@@ -42,7 +42,7 @@ local function make_element(name)
     noti.info("Theme changed, Reload awesome for switch on "..name)
   end
   local element = wibox.widget {
-    widget.centered(widget.imagebox(80, icons[name])),
+    widget.centered(widget.imagebox(80, icons.app[name])),
     font.button(name, M.x.on_surface, M.t.medium),
     layout = wibox.layout.fixed.vertical
   }
