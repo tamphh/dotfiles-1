@@ -10,20 +10,20 @@
 #define theme2  #272244
 #define theme3  #2E2951
 ! FG !
-#define theme4  #d5c3e4
-#define theme5  #e3d2f5
-#define theme6  #f4edfa
+#define theme4  #D6E1FF
+#define theme5  #EBF0FF
+#define theme6  #FAFFFF
 !! Primary, Secondary !!
-#define theme7  #695187
-#define theme8  #8266A3
+#define theme7  #937DB5
+#define theme8  #A997C8
 #define theme9  #4a65a2
 #define theme10 #657EB8
 !! Alert !!
-#define theme11 #6C775F
-#define theme12 #7B886D
+#define theme11 #C3C5AA
+#define theme12 #CDCFBA
 !! Others !!
 #define theme13 #E7D6FF
 #define theme14 #7E8AA0
-#define theme15 #857EA0
+#define theme15 #7a91c7
 
 st.opacity: 250

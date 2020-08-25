@@ -13,6 +13,14 @@ theme.font          = M.f.overline
 
 theme.bg_normal     = M.x.background
 theme.bg_focus      = M.x.background .. M.e.dp01
+theme.bg_urgent     = M.x.error
+theme.bg_minimize   = M.x.background
+theme.bg_systray    = theme.bg_normal
+
+theme.fg_normal     = M.x.on_background .. "C2" -- 76%
+theme.fg_focus      = M.x.on_background
+theme.fg_urgent     = M.x.on_error
+theme.fg_minimize   = M.x.on_background .. "80" -- 50%
 
 theme.border_width  = dpi(1)
 theme.screen_margin = dpi(6)
@@ -37,9 +45,6 @@ theme.wibar_border_radius = dpi(0)
 theme.wibar_height = dpi(40)
 
 -- {{{ TAGLIST
-
--- Nerd Font icon here
-theme.tagnames = {" 1 "," 2 "," 3 "," 4 "," 5 "," 6 "," 7 "," 8 "," 9 "," 10 "}
 
 -- different color on each taglists
 theme.taglist_text_color_empty = {

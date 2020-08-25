@@ -28,7 +28,10 @@ icons.widget = {
   launcher = "",
   exit = ">>",
   reboot = "ﰇ",
-  poweroff = "⭘"
+  poweroff = "⭘",
+  change_theme = "",
+  reload = "",
+  scrot = ""
 }
 
 return icons
