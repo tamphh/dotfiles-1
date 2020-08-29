@@ -21,7 +21,7 @@ function music_root:init()
     fg_icon = M.x.secondary,
     icon = font.icon(""),
     layout = "horizontal",
-    margins = dpi(4)
+    --margins = dpi(4)
   })
   self:gen_popup()
   self:signals()

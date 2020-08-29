@@ -35,8 +35,8 @@ function mybar:init(s)
       require("widgets.button_change_theme"),
       require("widgets.settings")(),
       mytextclock,
-      s.mylayoutbox,
-    },
+      s.mylayoutbox
+    }
   }
 end
 
