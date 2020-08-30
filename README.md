@@ -22,6 +22,7 @@ A list of dependendies can be found [here](https://raw.githubusercontent.com/szo
 - [vim](#vim)
 - [shell](#shell)
 - [wallpapers](#wallpapers)
+- [fonts](#fonts)
 - [screenshots](#screens)
 - [support](#support)
 
@@ -61,6 +62,12 @@ To recover all the wallpapers i used, you need to install `wget` and execute a:
 
 You have to launch this each time a new theme come.  
 It's all for the setup :)
+
+## Fonts
+For awesomewm, i use [RobotoMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/RobotoMono), [Iosevka Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka), [SpaceMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SpaceMono) and [MaterialDesign icons](https://github.com/Templarian/MaterialDesign-Webfont).  
+To install all the fonts (in `~/.local/share/fonts`), you can use my script too, for archlinux, you may prefer the install with AUR instead.
+
+    ./install --fonts
 
 ## Screens
 
