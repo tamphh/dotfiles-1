@@ -142,7 +142,7 @@ grab_fonts() {
   (cd $DIR_FONT \
     && rm -rf font-mat*.tar.gz \
     && rm -rf $PN_MATERIAL* \
-    && curl -L -o font-material.tar.gz "https://github.com/Templarian/$PN_MATERIAL/archive/v$PV_MATERIAL.tar.gz" \
+    && curl -s -L -o font-material.tar.gz "https://github.com/Templarian/$PN_MATERIAL/archive/v$PV_MATERIAL.tar.gz" \
     && tar xvf font-material.tar.gz \
     && mv $PN_MATERIAL-$PV_MATERIAL/fonts/materialdesignicons-webfont.ttf $DIR_FONT \
     && rm -rf $PN_MATERIAL*

@@ -73,7 +73,11 @@ To install all the fonts (in `~/.local/share/fonts`), you can use my script too,
 
 ### Awm
 
-**Last**:`themes/worker` **term**: xst, **vim-color**: [darkest-space](https://github.com/szorfein/darkest-space), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
+**Last**:`themes/sci` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
+
+![sci screenshot](https://raw.githubusercontent.com/szorfein/unix-portfolio/master/sci/logout.png)
+
+`themes/worker` **term**: xst, **vim-color**: [darkest-space](https://github.com/szorfein/darkest-space), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
 
 | monitor bar | app drawer |
 | --- | --- |
@@ -96,9 +100,6 @@ To install all the fonts (in `~/.local/share/fonts`), you can use my script too,
 
 `themes/anonymous` [term]: *xst* [vim-color] [darkest-space](https://github.com/szorfein/darkest-space), [font] [Nerd Font Iosevka](http://nerdfonts.com/#downloads).   
 ![Anonymous screenshot](https://github.com/szorfein/unix-portfolio/blob/master/anonymous/music.png "anonymous")  
-
-`themes/connected` **term**: xst, **vim-color**: [gruvbox material](https://github.com/sainnhe/gruvbox-material), **font**: [Nerd Roboto Mono](http://nerdfonts.com/#downloads).   
-![Connected screenshot](https://github.com/szorfein/unix-portfolio/blob/master/connected/ncmpcpp.png "connected")  
 
 ### Subtlewm
 

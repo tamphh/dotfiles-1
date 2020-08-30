@@ -56,7 +56,7 @@ local function make_element(name)
 end
 
 local popup_anonymous = make_element("anonymous")
-local popup_connected = make_element("connected")
+local popup_sci = make_element("sci")
 local popup_miami = make_element("miami")
 local popup_machine = make_element("machine")
 local popup_morpho = make_element("morpho")
@@ -81,11 +81,11 @@ local popup_widget = wibox.widget {
       },
       {
         popup_anonymous,
-        popup_connected,
         popup_machine,
         popup_miami,
         popup_morpho,
         popup_worker,
+        popup_sci,
         forced_num_rows = 2,
         forced_num_cols = 3,
         spacing = 10,
