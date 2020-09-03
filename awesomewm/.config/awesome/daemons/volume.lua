@@ -32,7 +32,7 @@ end
 
 local function emit_volume_info_pulse()
   spawn.easy_async("pacmd list-sinks", function(stdout)
-    local volume = stdout:match('(%d+)%%')
+    local volume = stdout:match('(%d+)%% /')
     local is_muted = stdout:match('Mute:(%s+)[yes]') and 1 or 0
 
     if not volume then
