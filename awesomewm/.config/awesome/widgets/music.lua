@@ -34,7 +34,7 @@ function music_root:gen_popup()
       {
         {
           self.progress,
-          self.cover,
+          --self.cover,
           layout = wibox.layout.fixed.vertical
         },
         {
