@@ -27,7 +27,7 @@ A list of dependendies can be found [here](https://raw.githubusercontent.com/szo
 - [support](#support)
 
 ## Installation for the last theme
-There are two way to install the last [themes/sci](#screens):
+There are two way to install the last [themes/sci](#screens)
 + Fully scripted with [Chezmoi](https://www.chezmoi.io/), follow the instruction [here](https://github.com/szorfein/dots).
 + Or manually by following the [wiki page](https://github.com/szorfein/dotfiles/wiki/theme-awesome).
 

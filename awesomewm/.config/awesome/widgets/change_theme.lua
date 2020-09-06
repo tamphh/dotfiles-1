@@ -11,6 +11,7 @@ local app = require("util.app")
 local ufont = require("utils.font")
 local iicon = require("config.icons")
 local button = require("utils.button")
+local mat_text = require("utils.material.text")
 
 -- add a little margin to avoid the popup pasted on the wibar
 local padding = beautiful.widget_popup_padding or 1
@@ -37,23 +38,14 @@ local function make_element(name)
     )
     noti.info("Theme changed, Reload awesome for switch on "..name)
   end
-  local element = wibox.widget {
-    widget.centered(widget.imagebox(90, icons[name])),
-    font.button(name, M.x.on_surface, M.t.medium),
-    layout = wibox.layout.fixed.vertical
-  }
   local w = button({
-    command = change_script, fg_icon = M.x.on_surface, icon = element
+    command = change_script,
+    fg_icon = M.x.on_surface,
+    icon = widget.centered(widget.imagebox(90, icons[name])),
+    text = ufont.button(name)
   })
   return w
 end
-
-local popup_anonymous = make_element("anonymous")
-local popup_miami = make_element("miami")
-local popup_machine = make_element("machine")
-local popup_morpho = make_element("morpho")
-local popup_worker = make_element("worker")
-local popup_sci = make_element("sci")
 
 local w_position -- the position of the popup depend of the wibar
 w_position = widget.check_popup_position(beautiful.wibar_position)
@@ -64,7 +56,10 @@ local popup_widget = wibox.widget {
       {
         {
           nil,
-          font.h6("Change theme", M.x.on_surface, M.t.high),
+          {
+            ufont.h6("Change theme"),
+            widget = mat_text({ lv = "high" })
+          },
           rld,
           expand = "none",
           layout = wibox.layout.align.horizontal
@@ -73,12 +68,12 @@ local popup_widget = wibox.widget {
         widget = wibox.container.margin
       },
       {
-        popup_anonymous,
-        popup_machine,
-        popup_miami,
-        popup_morpho,
-        popup_worker,
-        popup_sci,
+        make_element("anonymous"),
+        make_element("machine"),
+        make_element("miami"),
+        make_element("morpho"),
+        make_element("worker"),
+        make_element("sci"),
         forced_num_rows = 2,
         forced_num_cols = 3,
         spacing = 10,
@@ -109,7 +104,7 @@ local popup = awful.popup {
 popup:bind_to_widget(w)
 w:buttons(table.join(
 awful.button({}, 3, function()
-  w.visible = false
+  popup.visible = false
 end)
 ))
 
