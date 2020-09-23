@@ -158,6 +158,9 @@ banner() {
       "-z, --zsh    Download and install dependencies of zsh"
 
     printf "%s\n" \
+      "-i, --images    Download all the wallpapers."
+
+    printf "%s\n" \
       "-v, --vim    Download and install all the vim colorscheme"
 
     printf "%s\n" \
