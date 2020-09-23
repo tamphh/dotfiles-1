@@ -80,7 +80,7 @@ To install all the fonts (in `~/.local/share/fonts`), you can use my script too,
 
 **Last**:`themes/lines` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
 
-![lines screenshot](https://raw.githubusercontent.com/szorfein/unix-portfolio/master/sci/monitor.png)
+![lines screenshot](https://github.com/szorfein/unix-portfolio/raw/master/lines/monitor.png)
 
 `themes/sci` **term**: xst, **vim-color**: [sci](https://github.com/szorfein/sci.vim), **font**: [Iosevka Term Nerd Font](http://nerdfonts.com/#downloads).
 
