@@ -69,7 +69,10 @@ function mat_button:init_contained()
       shape = helper.rrect(self.rrect),
       widget = wibox.container.background
     },
-    margins = self.margins,
+    left = self.margins,
+    right = self.margins,
+    top = self.margins / 3,
+    bottom = self.margins / 3,
     widget = wibox.container.margin
   }
 end
