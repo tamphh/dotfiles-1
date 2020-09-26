@@ -63,16 +63,16 @@ function mat_button:init_contained()
           fg = self.fg_icon,
           widget = wibox.container.background
         },
-        widget = self.margin
+        left = self.margins,
+        right = self.margins,
+        top = self.margins / 3,
+        bottom = self.margins / 3,
+        widget = wibox.container.margin
       },
       bg = self.bg .. "CC", -- 80%
       shape = helper.rrect(self.rrect),
       widget = wibox.container.background
     },
-    left = self.margins,
-    right = self.margins,
-    top = self.margins / 3,
-    bottom = self.margins / 3,
     widget = wibox.container.margin
   }
 end
