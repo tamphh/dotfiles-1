@@ -244,10 +244,7 @@ local function update_history()
       fg_icon = M.x.secondary,
       fg_text = M.x.on_surface,
       icon = ufont.button(""),
-      text = wibox.widget {
-        ufont.body_2(v),
-        widget = mat_text({})
-      },
+      text = ufont.body_2(v),
       margins = dpi(4),
       spacing = dpi(8),
       command = f,

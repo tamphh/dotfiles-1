@@ -22,8 +22,8 @@ function mat_button:init(args)
   -- options
   self.icon = args.icon or font.button("")
   self.text = args.text or font.button("")
-  self.fg_text = args.fg_text or M.x.on_surface
   self.fg_icon = args.fg_icon or M.x.on_surface
+  self.fg_text = args.fg_text or self.fg_icon
   self.bg = args.bg or M.x.primary -- used only on mode "contained"
   self.layout = args.layout or "vertical"
   self.rrect = args.rrect or 10
@@ -98,7 +98,10 @@ function mat_button:init_text()
       {
         {
           self.icon,
-          self.text,
+          {
+            self.text,
+            widget = mat_fg({ color = self.fg_text }),
+          },
           spacing = self.spacing,
           layout = wibox.layout.fixed[self.layout],
         },
